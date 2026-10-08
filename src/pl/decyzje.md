@@ -251,3 +251,13 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Tempo przewijania** przeszło na skalę wykładniczą: od trzech minut dwunastu sekund do trzynastu sekund na cały rejs, domyślnie minuta czterdzieści pięć. Poprzednia skala była i za szybka, i za ciasna.
 
 **Suwaki i pola wyboru** dostały mosiężną prowadnicę i radełkowany guzik, w tej samej konwencji co tarcza szyfrowa i wskaźniki. Pozostały natywnymi polami formularza, więc obsługa klawiaturą i czytnikiem ekranu jest nietknięta.
+
+## 2026-10-09 — Cykl 21: karta kursowa na rzeczywistej linii brzegowej
+
+**Zarzut był słuszny:** kontury kreślone z kilkunastu punktów z pamięci wyglądały karykaturalnie i w serwisie, który przy każdym twierdzeniu podaje źródło, były obcym ciałem.
+
+**Rozwiązanie:** linia brzegowa pochodzi z danych Natural Earth, w domenie publicznej, pobieranych jako zależność i przetwarzanych przy budowaniu. Skrypt przycina je do okna karty, rzutuje tą samą odwzorowaniem co reszta mapy, odrzuca kontury ledwie muskające ramkę i przerzedza punkty bliższe niż dwa piksele. Z jedenastu tysięcy punktów zostaje trzydzieści cztery kontury i trzydzieści dziewięć kilobajtów ścieżki, czyli dwanaście po kompresji — mieści się w budżecie wagi strony z dużym zapasem.
+
+**Dane pochodne nie wchodzą do repozytorium.** Plik z konturami powstaje przy każdym budowaniu, tak samo jak zminifikowana biblioteka efemeryd i warianty znaku graficznego.
+
+**Stylizacja kartograficzna:** morze w odcieniu papieru, ląd w ochrze z grawerowaną kreską brzegu i miękkim cieniem wzdłuż niej, nazwy portów i podziałki w szeryfowej kursywie zamiast w kroju maszynowym, podziałka sześciuset mil morskich w pustym polu oceanu, róża wiatrów z rumbami. Reszta — trasa, pozycja rzeczywista i dwie wyliczone z zegarów — bez zmian.

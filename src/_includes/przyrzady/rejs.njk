@@ -83,14 +83,18 @@
   <p class="plansza-opis">{{ s.rejs.mapaOpis }}</p>
   <svg viewBox="0 0 760 430" class="wide karta" role="img" aria-describedby="o-mapa">
     <desc id="o-mapa">{{ s.rejs.opisMapy }}</desc>
-    <rect x="40" y="40" width="680" height="330" fill="var(--plyta-jasna)" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
+    <rect x="40" y="40" width="680" height="330" fill="var(--morze)" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
     <defs><clipPath id="ramkaKarty"><rect x="40" y="40" width="680" height="330"/></clipPath></defs>
     <g id="siatka"></g>
     <g id="roza" clip-path="url(#ramkaKarty)"></g>
-    <g id="lady" clip-path="url(#ramkaKarty)"></g>
+    <g clip-path="url(#ramkaKarty)">
+      <path class="lad-cien" d="{{ wybrzeza.d }}"/>
+      <path class="lad" d="{{ wybrzeza.d }}"/>
+    </g>
     <polyline id="trasa" fill="none" stroke="var(--mosiadz-ciemny)" stroke-width="1.4" stroke-dasharray="5 4" clip-path="url(#ramkaKarty)"/>
     <g id="porty"></g>
     <g id="pozycje" clip-path="url(#ramkaKarty)"></g>
+    <g id="podzialkaMil"></g>
   </svg>
   <p class="dim małe">{{ s.rejs.mapaLegenda }}</p>
 </section>

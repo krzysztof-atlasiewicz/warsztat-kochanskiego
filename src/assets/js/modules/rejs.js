@@ -25,26 +25,15 @@ export default function init(root) {
   const mx = (lon) => M.x0 + ((M.x1 - M.x0) * (lon - M.lonA)) / (M.lonB - M.lonA);
   const my = (lat) => M.y0 + ((M.y1 - M.y0) * (M.latA - lat)) / (M.latA - M.latB);
 
-  // Kontury orientacyjne, wykreślone z kilkunastu punktów wybrzeża.
-  const LADY = {
-    europa: [[-4.5,48.4],[-1.15,46.16],[-1.2,44.6],[-3.0,43.4],[-8.4,43.4],[-9.1,38.7],[-9.0,37.0],[-5.4,36.0]],
-    afryka: [[-5.8,35.8],[-7.6,33.6],[-9.8,30.0],[-12.9,27.9],[-15.9,23.7],[-17.0,20.9],[-16.5,17.0],[-17.4,14.7],[-16.0,12.5],[-13.7,9.5],[-10.8,6.3],[-7.5,4.6],[-4.0,5.3],[-0.2,5.5],[3.4,6.4]],
-    ameryka: [[-61.5,10.7],[-61.0,8.6],[-58.2,6.8],[-55.0,6.0],[-52.33,4.94],[-51.0,2.0],[-50.0,0.0],[-48.5,-1.5]],
-    wyspy: [
-      [[-16.6,28.3],[-15.6,28.0],[-13.6,29.0]],
-      [[-25.0,16.8],[-23.6,15.0],[-22.9,16.6]]
-    ]
-  };
-
   (function kartaStala() {
     const g = $("siatka");
     for (let lon = -60; lon <= 0; lon += 10) {
       g.append(el("line", { x1: mx(lon), y1: M.y0, x2: mx(lon), y2: M.y1, stroke: "var(--rule-soft)", "stroke-width": "0.6" }));
-      g.append(el("text", { class: "t", x: mx(lon), y: M.y1 + 16, "text-anchor": "middle" }, `${Math.abs(lon)}°${lon < 0 ? "W" : ""}`));
+      g.append(el("text", { class: "t napis-karty", x: mx(lon), y: M.y1 + 16, "text-anchor": "middle" }, `${Math.abs(lon)}°${lon < 0 ? "W" : ""}`));
     }
     for (let lat = 0; lat <= 50; lat += 10) {
       g.append(el("line", { x1: M.x0, y1: my(lat), x2: M.x1, y2: my(lat), stroke: "var(--rule-soft)", "stroke-width": "0.6" }));
-      g.append(el("text", { class: "t", x: M.x0 - 8, y: my(lat) + 4, "text-anchor": "end" }, `${lat}°N`));
+      g.append(el("text", { class: "t napis-karty", x: M.x0 - 8, y: my(lat) + 4, "text-anchor": "end" }, `${lat}°N`));
     }
     const r = $("roza"), cx = mx(-18), cy = my(28);
     for (let i = 0; i < 16; i++) {
@@ -55,30 +44,29 @@ export default function init(root) {
       }));
     }
     r.append(el("circle", { cx, cy, r: 26, fill: "none", stroke: "var(--mosiadz-ciemny)", "stroke-width": "0.8", opacity: "0.6" }));
+    const sk = $("podzialkaMil");
+    const dlugoscStopnia = mx(0) - mx(-1);          // szerokość jednego stopnia w pikselach
+    const mile = 600;                                // mila morska to minuta łuku południka
+    const szer = (mile / 60) * dlugoscStopnia;
+    const y = M.y1 - 26, x = M.x0 + 190;
+    sk.append(el("line", { x1: x, y1: y, x2: x + szer, y2: y, stroke: "var(--mosiadz-ciemny)", "stroke-width": "1.4" }));
+    for (let i = 0; i <= 5; i++) {
+      const xi = x + (szer * i) / 5;
+      sk.append(el("line", { x1: xi, y1: y - 4, x2: xi, y2: y + 4, stroke: "var(--mosiadz-ciemny)", "stroke-width": "1.1" }));
+    }
+    for (let i = 0; i < 5; i += 2)
+      sk.append(el("rect", { x: x + (szer * i) / 5, y: y - 3, width: szer / 5, height: 6, fill: "var(--mosiadz-ciemny)", opacity: "0.65" }));
+    sk.append(el("text", { class: "t napis-karty", x: x + szer / 2, y: y + 20, "text-anchor": "middle" }, n.skalaMil || ""));
+
     r.append(el("path", { d: `M ${cx} ${cy - 34} L ${cx + 6} ${cy} L ${cx} ${cy + 10} L ${cx - 6} ${cy} Z`, fill: "var(--mosiadz-ciemny)", opacity: "0.75" }));
 
-    const ladyG = $("lady");
-    for (const [nazwa, linia] of Object.entries(LADY)) {
-      if (nazwa === "wyspy") {
-        for (const grupa of linia)
-          ladyG.append(el("polyline", {
-            points: grupa.map(([lo, la]) => `${mx(lo).toFixed(1)},${my(la).toFixed(1)}`).join(" "),
-            fill: "none", stroke: "var(--ink-soft)", "stroke-width": "1.6", "stroke-linecap": "round"
-          }));
-        continue;
-      }
-      ladyG.append(el("polyline", {
-        points: linia.map(([lo, la]) => `${mx(lo).toFixed(1)},${my(la).toFixed(1)}`).join(" "),
-        fill: "none", stroke: "var(--ink-soft)", "stroke-width": "1.6", "stroke-linejoin": "round"
-      }));
-    }
     $("trasa").setAttribute("points", TRASA.map(([lo, la]) => `${mx(lo).toFixed(1)},${my(la).toFixed(1)}`).join(" "));
 
     const p = $("porty");
     for (const [lon, lat, nazwa, kot] of [[REJS.lonA, REJS.latA, n.laRochelle, "start"], [REJS.lonB, REJS.latB, n.kajenna, "end"]]) {
       p.append(el("circle", { cx: mx(lon), cy: my(lat), r: 3.5, fill: "var(--ink)" }));
       p.append(el("text", {
-        class: "t", x: mx(lon) + (kot === "start" ? -8 : 8), y: my(lat) - 8,
+        class: "t napis-karty port", x: mx(lon) + (kot === "start" ? -8 : 8), y: my(lat) - 8,
         "text-anchor": kot === "start" ? "end" : "start"
       }, nazwa || ""));
     }
@@ -188,14 +176,14 @@ export default function init(root) {
       const px = mx(lon);
       const przyKrawedzi = px > M.x1 - 150;
       g.append(el("text", {
-        class: "t", x: przyKrawedzi ? px - 10 : px + 10, y: my(p.szerokosc) + dy,
+        class: "t napis-karty", x: przyKrawedzi ? px - 10 : px + 10, y: my(p.szerokosc) + dy,
         "text-anchor": przyKrawedzi ? "end" : "start", fill: kolor
       }, podpis));
     };
     znacznik(p.kmWahadlo, "var(--sun)", `${n.wahadlo}: ${pl(p.kmWahadlo)} km`, -8);
     znacznik(p.kmSprezyna, "var(--verd)", `${n.sprezyna}: ${pl(p.kmSprezyna)} km`, 16);
     g.append(el("circle", { cx: mx(p.dlugosc), cy: my(p.szerokosc), r: 5, fill: "var(--ink)" }));
-    g.append(el("text", { class: "t", x: mx(p.dlugosc) - 8, y: my(p.szerokosc) + 4, "text-anchor": "end" }, n.tuJestes || ""));
+    g.append(el("text", { class: "t napis-karty", x: mx(p.dlugosc) - 8, y: my(p.szerokosc) + 4, "text-anchor": "end" }, n.tuJestes || ""));
 
     // wykres narastania błędu
     const max = Math.max(PROG * 1.6, koniec.kmWahadlo, koniec.kmSprezyna) * 1.08;

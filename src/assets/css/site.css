@@ -197,3 +197,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb{outline:2px solid var(--ve
 input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--verd);outline-offset:2px}
 input[type=checkbox]{accent-color:var(--mosiadz-ciemny);width:1.05rem;height:1.05rem}
 .ctl output{font-variant-numeric:tabular-nums}
+:root{--morze:#E4E6DF;--lad:#E7DFC8;--lad-kreska:#8A6B2F}
+@media (prefers-color-scheme:dark){:root{--morze:#151C20;--lad:#242B26;--lad-kreska:#6E5A2E}}
+.karta .lad{fill:var(--lad);stroke:var(--lad-kreska);stroke-width:0.9;stroke-linejoin:round}
+.karta .lad-cien{fill:none;stroke:var(--lad-kreska);stroke-width:5;stroke-opacity:0.18;stroke-linejoin:round}
+.karta .napis-karty{font-family:var(--serif);font-size:13px;font-style:italic;letter-spacing:.01em}
+.karta .napis-karty.port{font-size:14px;fill:var(--ink)}
