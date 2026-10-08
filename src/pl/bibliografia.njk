@@ -1,0 +1,21 @@
+---
+tytul: Źródła
+layout: layouts/base.njk
+jezyk: pl
+para: bibliografia
+permalink: /pl/zrodla/
+---
+<h1>Źródła</h1>
+<p>Rejestr druków i opracowań, na których opiera się serwis. Pozycje z ustalonym skanem są w tekście podlinkowane automatycznie; pozycje bez ustalonego skanu pojawiają się jako zwykły tekst, żeby nie powstał odnośnik prowadzący donikąd.</p>
+{%- for id, z in zrodla %}
+<div class="agenda-poz" id="{{ id }}">
+  <h3>{{ z.autor }}, <em>{{ z.tytul }}</em></h3>
+  <p>{% if z.w %}{{ z.w }}{% if z.tom %} {{ z.tom }}{% endif %}, {% endif %}{{ z.rok }}{% if z.strony %}, s. {{ z.strony }}{% endif %}</p>
+  {%- if z.url %}
+  <p><a href="{{ z.url }}" rel="noopener">{{ z.instytucja }}</a> · {{ z.licencja }}</p>
+  {%- else %}
+  <p><span class="status">skan nieustalony</span></p>
+  {%- endif %}
+  {%- if z.uwaga %}<p class="dim">{{ z.uwaga }}</p>{% endif %}
+</div>
+{%- endfor %}

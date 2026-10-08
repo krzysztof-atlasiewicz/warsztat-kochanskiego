@@ -1,0 +1,41 @@
+{
+  "acta-1685": {
+    "autor": "Adam Adamandy Kochański",
+    "tytul": "Observationes cyclometricae ad facilitandam praxin accomodatae",
+    "w": "Acta Eruditorum",
+    "rok": 1685,
+    "tom": 4,
+    "strony": "394–398",
+    "instytucja": "Wellcome Library / Internet Archive",
+    "url": "https://archive.org/details/s1id13206510/page/394/mode/2up",
+    "licencja": "Public Domain Mark 1.0",
+    "frazy": ["Acta Eruditorum"],
+    "uwaga": "Skan rocznika 1685. Odnośnik otwiera się na stronie 394. Egzemplarz ma odnotowany błąd paginacji w dalszej części tomu, więc otwarcie trzeba sprawdzić wzrokowo przed powołaniem się na konkretną stronę."
+  },
+  "fuks-2015": {
+    "autor": "Henryk Fukś",
+    "tytul": "Observationes Cyclometricae by Adam Adamandy Kochański — Latin text with annotated English translation",
+    "w": "Antiquitates Mathematicae",
+    "rok": 2015,
+    "tom": 9,
+    "strony": "31–65",
+    "instytucja": "arXiv",
+    "url": "https://arxiv.org/abs/1106.1808",
+    "licencja": "do ustalenia",
+    "frazy": [],
+    "uwaga": "Równoległy tekst łaciński i przekład angielski z przypisami. Gotowa warstwa transkrypcji dla modułu cyrkla — do wykorzystania po ustaleniu warunków licencyjnych."
+  },
+  "technica-curiosa": {
+    "autor": "Caspar Schott (księga IX autorstwa Kochańskiego)",
+    "tytul": "Technica curiosa, ks. IX: Mirabilis chronometrica",
+    "w": null,
+    "rok": 1664,
+    "tom": null,
+    "strony": null,
+    "instytucja": null,
+    "url": null,
+    "licencja": null,
+    "frazy": ["Technica curiosa"],
+    "uwaga": "Skan nieustalony. Pozycja A2 agendy badawczej."
+  }
+}

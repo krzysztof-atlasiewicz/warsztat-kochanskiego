@@ -1,0 +1,22 @@
+---
+tytul: Agenda badawcza
+layout: layouts/base.njk
+jezyk: pl
+para: agenda
+permalink: /pl/agenda/
+---
+<h1>Czego jeszcze nie wiemy</h1>
+<p>Ten serwis jest modelem roboczym. Poniższe pytania pozostają otwarte, a odpowiedź na każde z nich zmieni coś konkretnego na konkretnej stronie. Lista jest jawna, bo tak wygląda praca nad przeszłością — i bo pokazanie luk jest uczciwsze niż ich zasypanie domysłem.</p>
+<p>Każda zmiana naniesiona pod wpływem źródła trafia do publicznego rejestru zmian.</p>
+
+{%- for p in agenda.pozycje %}
+<div class="agenda-poz" id="{{ p.id }}">
+  <h3>{{ p.id }}. {{ p.pytanie }}</h3>
+  <p><span class="status">{{ p.status }}</span></p>
+  <p>{{ p.dlaczego }}</p>
+  <p><strong>Dotyczy:</strong> {{ p.dotyczy }}</p>
+  <p><strong>Co się zmieni:</strong> {{ p.zmieni }}</p>
+  <p><strong>Gdzie szukać:</strong> {{ p.zrodlo | podlinkuj | safe }}</p>
+  <p class="agenda-miejsca">{%- for m in p.miejsca %}{% for s in collections.all %}{% if s.data.para == m and s.data.jezyk == jezyk %}<a href="{{ s.url }}#pytanie-{{ p.id }}">Zobacz w miejscu, którego dotyczy: {{ s.data.tytul }}</a> {% endif %}{% endfor %}{% endfor %}</p>
+</div>
+{%- endfor %}

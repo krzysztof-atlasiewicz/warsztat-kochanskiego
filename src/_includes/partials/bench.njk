@@ -1,0 +1,7 @@
+<nav class="bench" aria-label="{{ 'Przyrządy' if jezyk == 'pl' else 'Instruments' }}">
+  {%- for p in collections.przyrzady %}{% if p.data.jezyk == jezyk %}
+  <a href="{{ p.url }}"{% if p.url == page.url %} aria-current="page"{% endif %}>
+    <span class="y">{{ p.data.rok }}</span>{{ p.data.przyrzad }}
+  </a>
+  {%- endif %}{% endfor %}
+</nav>

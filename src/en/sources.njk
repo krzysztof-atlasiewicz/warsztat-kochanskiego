@@ -1,0 +1,21 @@
+---
+tytul: Sources
+layout: layouts/base.njk
+jezyk: en
+para: bibliografia
+permalink: /en/sources/
+---
+<h1>Sources</h1>
+<p>The register of printed works and scholarship the site rests on. Entries with a located scan are linked automatically in the text; entries without one appear as plain text, so that no link ever leads nowhere.</p>
+{%- for id, z in zrodla %}
+<div class="agenda-poz" id="{{ id }}">
+  <h3>{{ z.autor }}, <em>{{ z.tytul }}</em></h3>
+  <p>{% if z.w %}{{ z.w }}{% if z.tom %} {{ z.tom }}{% endif %}, {% endif %}{{ z.rok }}{% if z.strony %}, pp. {{ z.strony }}{% endif %}</p>
+  {%- if z.url %}
+  <p><a href="{{ z.url }}" rel="noopener">{{ z.instytucja }}</a> · {{ z.licencja }}</p>
+  {%- else %}
+  <p><span class="status">scan not located</span></p>
+  {%- endif %}
+  {%- if z.uwaga %}<p class="dim">{{ z.uwaga }}</p>{% endif %}
+</div>
+{%- endfor %}

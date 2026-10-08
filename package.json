@@ -1,0 +1,30 @@
+{
+  "name": "warsztat-kochanskiego",
+  "version": "0.1.0",
+  "description": "Serwis interaktywny o Adamie Adamandym Kochanskim",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "libs": "node scripts/copy-libs.mjs",
+    "build": "npm run libs && eleventy",
+    "dev": "npm run libs && eleventy --serve",
+    "test": "vitest run",
+    "a11y": "npm run build && npx --yes http-server _site -p 8080 --silent & sleep 3 && npx --yes pa11y-ci --threshold 0 --sitemap http://localhost:8080/sitemap.xml",
+    "deploy": "npm run build && wrangler deploy",
+    "cykl": "npm run build && node pdca/cykl.mjs",
+    "podglad": "npm run build && node scripts/podglad.mjs",
+    "lekarz": "bash bin/lekarz.sh"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "esbuild": "^0.28.2",
+    "jsdom": "^26.0.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "astronomy-engine": "^2.1.19"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

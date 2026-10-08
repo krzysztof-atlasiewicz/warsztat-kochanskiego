@@ -1,0 +1,19 @@
+---
+pagination:
+  data: collections.przyrzady
+  size: 1
+  alias: p
+permalink: "{{ p.url }}osadzenie/"
+layout: layouts/osadzenie.njk
+eleventyExcludeFromCollections: true
+---
+<article class="przyrzad osadzone" data-modul="{{ p.data.modul }}">
+  <h1>{{ p.data.naglowek }}</h1>
+  <p class="wersja-status">{{ i18n[p.data.jezyk].status }} <a href="{{ i18n[p.data.jezyk].agendaUrl }}" target="_top">{{ i18n[p.data.jezyk].statusLink }}</a>.</p>
+  {{ p.templateContent | safe }}
+  <section class="rownowaznik">
+    <h2>{{ i18n[p.data.jezyk].rownowaznikNaglowek }}</h2>
+    {{ p.data.rownowaznik | safe }}
+  </section>
+  <p class="zrodlo-osadzenia"><a href="{{ p.url }}" target="_top">Warsztat Kochańskiego</a></p>
+</article>

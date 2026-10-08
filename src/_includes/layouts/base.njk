@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ jezyk or 'pl' }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ tytul }} — {{ site.tytul }}</title>
+<meta name="para" content="{{ para }}">
+<meta name="description" content="{{ opis or i18n[jezyk].opis }}">
+{%- for inny in collections.all %}{% if inny.data.para == para and inny.data.jezyk and inny.data.jezyk != jezyk %}
+<link rel="alternate" hreflang="{{ inny.data.jezyk }}" href="{{ inny.url }}">
+{%- endif %}{% endfor %}
+{%- if para %}<link rel="alternate" hreflang="{{ jezyk }}" href="{{ page.url }}">{% endif %}
+<link rel="stylesheet" href="/assets/css/fonty.css?v={{ "/assets/css/fonty.css" | odcisk }}">
+<link rel="stylesheet" href="/assets/css/site.css?v={{ "/assets/css/site.css" | odcisk }}">
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+<div class="wrap">
+{% if not goly %}
+<header class="szyld">
+  <a class="marka" href="/{{ jezyk }}/">{{ site.tytul }}</a>
+  <nav class="jez" aria-label="Język">
+    {%- for j in site.jezyki %}<a href="{{ j.prefix }}/"{% if j.kod == jezyk %} aria-current="true"{% endif %}>{{ j.nazwa }}</a>{% endfor %}
+  </nav>
+</header>
+{% include "partials/bench.njk" %}
+{% endif %}
+<p class="wersja-status">{{ i18n[jezyk].status }} <a href="{{ i18n[jezyk].agendaUrl }}">{{ i18n[jezyk].statusLink }}</a>.</p>
+<main id="tresc">
+{{ content | safe }}
+</main>
+{% if not goly %}
+<footer>
+  <p>{{ i18n[jezyk].stopka | safe }}</p>
+  <p><a href="{{ i18n[jezyk].agendaUrl }}">{{ i18n[jezyk].zrodlaLink }}</a>
+  {%- if jezyk == "pl" %} · <a href="/pl/zrodla/">źródła</a> · <a href="/pl/decyzje/">rejestr decyzji</a> · <a href="/pl/zmiany/">rejestr zmian</a> · <a href="/pl/biografia/">biografia</a>{% endif %}</p>
+</footer>
+{% endif %}
+</div>
+<script type="module" src="/assets/js/bootstrap.js?v={{ "/assets/js/bootstrap.js" | odcisk }}"></script>
+</body>
+</html>

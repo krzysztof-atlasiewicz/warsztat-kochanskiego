@@ -1,0 +1,54 @@
+{% set s = i18n[jezyk] %}
+<div class="stage">
+<svg viewBox="0 0 380 200" role="img" aria-describedby="o-okret">
+<desc id="o-okret">{{ s.rejs.opisOkret }}</desc>
+<g class="okret">
+<path d="M 96 150 L 284 150 L 268 176 L 112 176 Z" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<line x1="96" y1="150" x2="284" y2="150" stroke="var(--ink)" stroke-width="1.4"/>
+<rect x="142" y="34" width="96" height="116" fill="none" stroke="var(--ink)" stroke-width="1"/>
+<circle cx="190" cy="62" r="21" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<line x1="190" y1="62" x2="190" y2="47" stroke="var(--ink)" stroke-width="1.3"/>
+<g class="wahadlo">
+<line x1="190" y1="92" x2="190" y2="132" stroke="var(--ink-soft)" stroke-width="1.1"/>
+<circle cx="190" cy="136" r="6.5" fill="var(--verd)"/>
+</g>
+<circle cx="190" cy="92" r="1.8" fill="var(--ink)"/>
+</g>
+</svg>
+</div>
+
+<div class="stage">
+<svg class="wide" viewBox="0 0 700 300" role="img" aria-describedby="o-wykres">
+<desc id="o-wykres">{{ s.rejs.opisWykres }}</desc>
+<line x1="70" y1="190" x2="670" y2="190" stroke="var(--rule)" stroke-width="1"/>
+<line x1="70" y1="30" x2="70" y2="190" stroke="var(--rule)" stroke-width="1"/>
+<line id="prog" x1="70" y1="188" x2="670" y2="188" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 4"/>
+<text id="progL" class="t" x="676" y="191">56 km</text>
+<polyline id="eWahadlo" fill="none" stroke="var(--sun)" stroke-width="1.8"/>
+<polyline id="eSprezyna" fill="none" stroke="var(--verd)" stroke-width="1.8"/>
+<line id="znacznik" x1="70" y1="26" x2="70" y2="275" stroke="var(--ink)" stroke-width="1"/>
+<text class="t" x="70" y="20" fill="var(--sun)">{{ s.rejs.wahadlo }}</text>
+<text class="t" x="140" y="20" fill="var(--verd)">{{ s.rejs.sprezyna }}</text>
+<text id="yMax" class="t" x="64" y="34" text-anchor="end">—</text>
+<text class="t" x="64" y="193" text-anchor="end">0</text>
+<polyline id="profil" fill="none" stroke="var(--ink-soft)" stroke-width="1.4"/>
+<text class="t" x="70" y="292">{{ s.rejs.start }}</text>
+<text class="t" x="670" y="292" text-anchor="end">{{ s.rejs.meta }}</text>
+</svg>
+</div>
+
+<div class="ctl"><label for="dzien">{{ s.rejs.dzien }}</label><input type="range" id="dzien" min="0" max="64" step="1" value="0"><output id="dzienO">0</output></div>
+<div class="ctl"><label for="kolysanie">{{ s.rejs.morze }}</label><input type="range" id="kolysanie" min="0" max="14" step="1" value="5"><output id="kolysanieO">5°</output></div>
+<p><label><input type="checkbox" id="kompensacja"> {{ s.rejs.kompensacja }}</label></p>
+
+<dl class="read" aria-live="polite">
+<div><dt>{{ s.rejs.szerokosc }}</dt><dd id="szer">—</dd></div>
+<div><dt>{{ s.rejs.temperatura }}</dt><dd id="temp">—</dd></div>
+<div><dt>{{ s.rejs.dryfW }}</dt><dd id="dw">—</dd></div>
+<div><dt>{{ s.rejs.dryfS }}</dt><dd id="ds">—</dd></div>
+</dl>
+<dl class="read" aria-live="polite">
+<div><dt>{{ s.rejs.bladW }}</dt><dd id="kw">—</dd></div>
+<div><dt>{{ s.rejs.bladS }}</dt><dd id="ks">—</dd></div>
+</dl>
+<p id="stop" class="note uwaga hide">{{ s.rejs.stop }}</p>

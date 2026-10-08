@@ -1,0 +1,202 @@
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { gzipSync } from "node:zlib";
+import { join } from "node:path";
+
+const czytaj = (p) => readFileSync(p, "utf8");
+const agenda = JSON.parse(czytaj("pdca/agenda.json"));
+const zrodla = JSON.parse(czytaj("src/_data/zrodla.json"));
+const STATUSY = ["otwarta", "w toku", "zamknięta", "nierozstrzygalna"];
+// Kontrole, których niespełnienie jest zgłaszane, ale nie zatrzymuje cyklu.
+export const OSTRZEZENIA = new Set(["kroje"]);
+const stronyZ = (kat) => readdirSync(kat).filter((f) => /\.(njk|md)$/.test(f)).map((f) => join(kat, f));
+const stronyZrodlowe = stronyZ("src/pl").map((p) => p.replace("src/pl/", ""));
+const zbudowane = () => {
+  try { statSync("_site"); } catch { return []; }
+  const out = [];
+  const chodz = (d) => readdirSync(d).forEach((f) => {
+    const p = join(d, f);
+    statSync(p).isDirectory() ? chodz(p) : p.endsWith(".html") && out.push(p);
+  });
+  chodz("_site");
+  return out;
+};
+
+const KONTROLE = {
+  oznaczenia() {
+    const bledy = [];
+    for (const f of stronyZrodlowe) {
+      const t = czytaj(join("src/pl", f));
+      if (!t.includes("modul:")) continue;
+      if (!t.includes("tagi:")) bledy.push(`${f}: brak oznaczeń źródło/rekonstrukcja/interpretacja`);
+      if (!t.includes("rownowaznik:")) bledy.push(`${f}: brak równoważnika tekstowego`);
+      if (/rekonstrukcj/i.test(t) && !/note uwaga/.test(t))
+        bledy.push(`${f}: rekonstrukcja bez wyróżnionego zastrzeżenia w treści`);
+    }
+    return bledy;
+  },
+
+  agenda() {
+    const bledy = [];
+    const strony = zbudowane()
+      .map((p) => ({ plik: p, tresc: czytaj(p) }))
+      .filter((s) => !s.plik.includes("osadzenie"))
+      .map((s) => ({ ...s, para: s.tresc.match(/<meta name="para" content="([^"]*)"/)?.[1] }))
+      .filter((s) => s.para);
+
+    for (const p of agenda.pozycje) {
+      for (const pole of ["pytanie", "dlaczego", "zmieni", "zrodlo", "status", "dotyczy", "miejsca"])
+        if (!p[pole] || (Array.isArray(p[pole]) && !p[pole].length))
+          bledy.push(`${p.id}: brak pola ${pole}`);
+      if (!STATUSY.includes(p.status))
+        bledy.push(`${p.id}: status „${p.status}" spoza słownika (${STATUSY.join(", ")})`);
+      if (!p.miejsca) continue;
+
+      for (const m of p.miejsca) {
+        const cele = strony.filter((s) => s.para === m);
+        if (!cele.length) {
+          bledy.push(`${p.id}: wskazuje miejsce „${m}", któremu nie odpowiada żadna strona`);
+          continue;
+        }
+        for (const c of cele)
+          if (!c.tresc.includes(`id="pytanie-${p.id}"`))
+            bledy.push(`${p.id}: nie jest osadzone w miejscu, którego dotyczy — ${c.plik}`);
+      }
+    }
+
+    // w drugą stronę: żadne osadzone pytanie nie może być sierotą
+    for (const s of strony)
+      for (const m of s.tresc.matchAll(/id="pytanie-([A-Z]\d+)"/g))
+        if (!agenda.pozycje.some((p) => p.id === m[1]))
+          bledy.push(`${s.plik}: osadzone pytanie ${m[1]} nie istnieje w rejestrze`);
+
+    return bledy;
+  },
+
+  status() {
+    const bledy = [];
+    for (const p of zbudowane()) {
+      const t = czytaj(p);
+      if (t.includes("http-equiv=\"refresh\"")) continue;
+      if (p.endsWith("_site/404.html")) continue; // strona błędu nie jest treścią serwisu
+      if (!/wersja-status/.test(t)) bledy.push(`${p}: brak widocznego oznaczenia statusu wersji`);
+    }
+    return bledy;
+  },
+
+  // Waga realna: HTML plus wszystkie zasoby, które strona faktycznie zaciąga,
+  // liczona po kompresji — tak, jak trafia do przeglądarki.
+  budzet() {
+    const LIMIT = 150 * 1024;
+    const spakuj = (p) => gzipSync(readFileSync(p)).length;
+    const bledy = [];
+    for (const p of zbudowane()) {
+      const t = czytaj(p);
+      if (t.includes("http-equiv=\"refresh\"")) continue;
+      let suma = spakuj(p);
+      const zasoby = new Set();
+      for (const m of t.matchAll(/(?:href|src)="(\/assets\/[^"?]+)/g)) zasoby.add(m[1]);
+      const modul = t.match(/data-modul="([^"]+)"/)?.[1];
+      if (modul) {
+        zasoby.add(`/assets/js/modules/${modul}.js`);
+        zasoby.add("/assets/js/modules/matematyka.js");
+        if (modul === "gnomon") zasoby.add("/assets/js/lib/astronomy.js");
+      }
+      for (const z of zasoby) {
+        const plik = join("_site", z);
+        try { suma += spakuj(plik); } catch { bledy.push(`${p}: brak zasobu ${z}`); }
+      }
+      if (suma > LIMIT)
+        bledy.push(`${p}: ${Math.round(suma / 1024)} kB po kompresji przekracza budżet ${LIMIT / 1024} kB`);
+    }
+    return bledy;
+  },
+
+  zrodla() {
+    const bledy = [];
+    for (const [id, z] of Object.entries(zrodla)) {
+      for (const pole of ["autor", "tytul", "rok", "frazy", "uwaga"])
+        if (z[pole] === undefined) bledy.push(`${id}: brak pola ${pole}`);
+      if (z.url && !z.licencja) bledy.push(`${id}: odnośnik bez podanej licencji`);
+    }
+    // Każda wzmianka o dziele, które ma ustalony skan, musi na tej stronie prowadzić do niego.
+    for (const p of zbudowane()) {
+      if (p.includes("/zrodla/") || p.includes("/sources/")) continue;
+      const t = czytaj(p);
+      const tekst = t.replace(/<[^>]+>/g, " ");
+      for (const [id, z] of Object.entries(zrodla)) {
+        if (!z.url || !z.frazy?.length) continue;
+        for (const fraza of z.frazy)
+          if (tekst.includes(fraza) && !t.includes(z.url))
+            bledy.push(`${p}: wzmianka „${fraza}" bez odnośnika do źródła ${id}`);
+      }
+    }
+    return bledy;
+  },
+
+  kroje() {
+    const katalog = "src/assets/fonts";
+    const wymagane = ["EBGaramond.woff2", "EBGaramond-Italic.woff2", "IBMPlexMono.woff2"];
+    let obecne = [];
+    try { obecne = readdirSync(katalog); } catch { /* brak katalogu */ }
+    return wymagane.filter((f) => !obecne.includes(f))
+      .map((f) => `brak pliku kroju ${katalog}/${f} — serwis działa na kroju zastępczym`);
+  },
+
+  jezyki() {
+    const bledy = [];
+    const zbierz = (kat) => stronyZ(kat).map((p) => {
+      const t = czytaj(p);
+      return { plik: p, para: t.match(/^para:\s*(\S+)/m)?.[1], tylko: /^tylkoJeden:\s*true/m.test(t) };
+    });
+    const pl = zbierz("src/pl"), en = zbierz("src/en");
+    for (const a of [...pl, ...en])
+      if (!a.para && !a.tylko) bledy.push(`${a.plik}: brak klucza para ani deklaracji tylkoJeden`);
+    for (const a of pl.filter((x) => x.para && !x.tylko))
+      if (!en.some((b) => b.para === a.para))
+        bledy.push(`${a.plik}: brak odpowiednika angielskiego (para: ${a.para})`);
+    for (const b of en.filter((x) => x.para && !x.tylko))
+      if (!pl.some((a) => a.para === b.para))
+        bledy.push(`${b.plik}: brak odpowiednika polskiego (para: ${b.para})`);
+    return bledy;
+  },
+
+  osadzenia() {
+    const bledy = [];
+    for (const p of zbudowane()) {
+      if (!/class="przyrzad"/.test(czytaj(p))) continue;
+      const cel = p.replace(/index\.html$/, "osadzenie/index.html");
+      try { statSync(cel); } catch { bledy.push(`${p}: brak wersji osadzalnej`); }
+    }
+    return bledy;
+  },
+
+  linki() {
+    const bledy = [];
+    for (const p of zbudowane()) {
+      for (const m of czytaj(p).matchAll(/href="(\/[^"#?]*)"/g)) {
+        const cel = m[1];
+        if (cel.startsWith("/assets")) continue;
+        const kandydaci = [join("_site", cel), join("_site", cel, "index.html"), join("_site", cel.replace(/\/$/, "") + ".html")];
+        if (!kandydaci.some((k) => { try { return statSync(k).isFile(); } catch { return false; } }))
+          bledy.push(`${p}: martwy odsyłacz ${cel}`);
+      }
+    }
+    return bledy;
+  }
+};
+
+export function uruchom(nazwy = Object.keys(KONTROLE)) {
+  return nazwy.map((n) => ({ kontrola: n, bledy: KONTROLE[n](), ostrzezenie: OSTRZEZENIA.has(n) }));
+}
+
+if (process.argv[1]?.endsWith("kontrole.mjs")) {
+  const wyniki = uruchom();
+  let zle = 0;
+  for (const w of wyniki) {
+    const ok = w.bledy.length === 0;
+    if (!ok && !w.ostrzezenie) zle++;
+    console.log(`${ok ? "OK  " : w.ostrzezenie ? "UWAGA" : "BŁĄD"} ${w.kontrola}`);
+    w.bledy.forEach((b) => console.log(`       ${b}`));
+  }
+  process.exit(zle ? 1 : 0);
+}

@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+---
+<article class="przyrzad" data-modul="{{ modul }}">
+  <h1>{{ naglowek }}</h1>
+  <p class="tagi">
+    {%- for t in tagi %}<span class="tag {{ t.typ }}">{{ t.etykieta }}</span>{% endfor %}
+  </p>
+  {{ content | safe }}
+  <section class="rownowaznik">
+    <h2>{{ i18n[jezyk].rownowaznikNaglowek }}</h2>
+    {{ rownowaznik | safe }}
+  </section>
+  <nav class="sciezka" aria-label="{{ 'Ścieżka' if jezyk == 'pl' else 'Path' }}">
+  {%- for p in collections.przyrzady %}{% if p.data.jezyk == jezyk %}
+    {%- if p.data.kolejnosc == kolejnosc - 1 %}<a class="wstecz" href="{{ p.url }}">← {{ p.data.przyrzad }}</a>{% endif %}
+    {%- if p.data.kolejnosc == kolejnosc + 1 %}<a class="dalej" href="{{ p.url }}">{{ p.data.przyrzad }} →</a>{% endif %}
+  {%- endif %}{% endfor %}
+  </nav>
+</article>

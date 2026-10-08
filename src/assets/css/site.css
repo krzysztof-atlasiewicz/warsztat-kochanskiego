@@ -1,0 +1,82 @@
+:root{
+  --paper:#DFE3DE; --plate:#EFF1ED; --ink:#16202B; --ink-soft:#4A5A64;
+  --rule:#A7B0A8; --rule-soft:#C4CBC4; --verd:#2F6B63; --sun:#8A6B2F;
+  --serif:"EB Garamond","Iowan Old Style",Palatino,Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141A1E;--plate:#1C2429;--ink:#DDE3DD;--ink-soft:#9AA8A6;
+        --rule:#3C494E;--rule-soft:#2A353A;--verd:#6FB3A6;--sun:#C79B4A}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62}
+.wrap{max-width:62rem;margin:0 auto;padding:2rem 1.25rem 5rem}
+.skip{position:absolute;left:-9999px}
+.skip:focus{position:static;display:inline-block;padding:.5rem}
+.szyld{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.marka{font-size:1.2rem;text-decoration:none;color:var(--ink)}
+.jez a{margin-left:.75rem;font-size:.9rem;color:var(--ink-soft)}
+.jez a[aria-current]{color:var(--ink)}
+h1{font-size:clamp(1.9rem,6vw,2.9rem);line-height:1.05;font-weight:400;letter-spacing:-.02em;margin:.5rem 0}
+h2{font-size:1.4rem;font-weight:400;margin:2rem 0 .4rem}
+.bench{display:flex;overflow-x:auto;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:1.5rem 0 0}
+.bench a{flex:1 0 auto;min-width:8.5rem;padding:.85rem;border-right:1px solid var(--rule-soft);color:var(--ink-soft);text-decoration:none;font-size:.95rem}
+.bench a:last-child{border-right:0}
+.bench a[aria-current]{background:var(--plate);color:var(--ink);box-shadow:inset 0 -3px 0 var(--verd)}
+.bench .y{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em}
+.tagi{margin:.25rem 0 1rem}
+.tag{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;padding:.2rem .5rem;border:1px solid var(--rule);color:var(--ink-soft);margin-right:.35rem}
+.tag.zrodlo{border-color:var(--verd);color:var(--verd)}
+.tag.rekonstrukcja{border-color:var(--sun);color:var(--sun)}
+.stage{background:var(--plate);border:1px solid var(--rule-soft);padding:1.1rem;margin:1.5rem 0}
+svg{display:block;width:100%;height:auto;max-width:540px;margin-inline:auto}
+svg.wide{max-width:720px}
+.t{font-family:var(--mono);font-size:11px;fill:var(--ink-soft)}
+.tb{font-family:var(--mono);font-size:12px;fill:var(--ink)}
+.ctl{display:flex;align-items:center;gap:.9rem;margin:.55rem 0}
+.ctl label{flex:0 0 8rem;font-size:.9rem;color:var(--ink-soft)}
+.ctl input[type=range]{flex:1;accent-color:var(--verd);min-width:0}
+.ctl output{flex:0 0 5rem;text-align:right;font-family:var(--mono);font-size:.88rem;font-variant-numeric:tabular-nums}
+button{font-family:inherit;font-size:.95rem;background:none;color:var(--ink);border:1px solid var(--rule);padding:.5rem .9rem;cursor:pointer}
+button:hover{border-color:var(--verd);color:var(--verd)}
+:focus-visible{outline:2px solid var(--verd);outline-offset:2px}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:1px;background:var(--rule-soft);border:1px solid var(--rule-soft);margin:1.25rem 0}
+.read div{background:var(--plate);padding:.85rem .95rem}
+.read dt{font-size:.78rem;color:var(--ink-soft)}
+.read dd{margin:0;font-family:var(--mono);font-size:1.25rem;font-variant-numeric:tabular-nums}
+.read dd small{font-family:var(--serif);font-size:.8rem;color:var(--ink-soft)}
+.note{border-left:2px solid var(--verd);padding-left:.9rem;margin:1.25rem 0;color:var(--ink-soft);font-size:.95rem}
+.note.uwaga{border-left-color:var(--sun)}
+.ciph{font-family:var(--mono);letter-spacing:.08em;word-break:break-word}
+.hit{color:var(--verd)}
+.hide{display:none}
+.rownowaznik{border-top:1px solid var(--rule);margin-top:2.5rem;padding-top:1rem;color:var(--ink-soft);font-size:.95rem}
+footer{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1.5rem;color:var(--ink-soft);font-size:.92rem}
+@media (prefers-reduced-motion:no-preference){
+  .okret{animation:rock 3.4s ease-in-out infinite;transform-box:view-box;transform-origin:190px 152px}
+  .wahadlo{animation:swing 1.6s ease-in-out infinite;transform-box:view-box;transform-origin:190px 92px}
+  @keyframes rock{0%,100%{transform:rotate(calc(var(--rk,4) * -1deg))}50%{transform:rotate(calc(var(--rk,4) * 1deg))}}
+  @keyframes swing{0%,100%{transform:rotate(calc(var(--sw,3) * -1deg))}50%{transform:rotate(calc(var(--sw,3) * 1deg))}}
+}
+.wersja-status{background:var(--plate);border:1px solid var(--sun);border-left-width:3px;padding:.7rem .9rem;margin:1.25rem 0 0;font-size:.9rem;color:var(--ink-soft)}
+.wersja-status a{color:var(--verd)}
+.agenda-poz{border-top:1px solid var(--rule-soft);padding-top:1rem;margin-top:1.5rem}
+.agenda-poz h3{margin:0 0 .35rem;font-size:1.05rem}
+.agenda-poz .status{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;border:1px solid var(--rule);padding:.15rem .45rem}
+.sciezka{display:flex;justify-content:space-between;gap:1rem;margin-top:2rem;border-top:1px solid var(--rule-soft);padding-top:1rem;font-size:.95rem}
+.sciezka a{color:var(--verd)}
+.sciezka .dalej{margin-left:auto}
+body.osadzenie .wrap{padding:1rem}
+body.osadzenie h1{font-size:1.5rem}
+.zrodlo-osadzenia{margin-top:1.5rem;font-size:.85rem;color:var(--ink-soft)}
+.zrodlo-osadzenia a{color:var(--verd)}
+.pytanie{border:1px solid var(--sun);border-left-width:3px;background:var(--plate);padding:.9rem 1rem;margin:1.25rem 0}
+.pytanie p{margin:.35rem 0;font-size:.93rem}
+.pytanie-nag{font-family:var(--mono);font-size:.72rem!important;letter-spacing:.1em;color:var(--sun);text-transform:uppercase}
+.pytanie-nag .znak{display:inline-block;border:1px solid var(--sun);border-radius:50%;width:1.1em;height:1.1em;line-height:1.05em;text-align:center;margin-right:.3rem}
+.pytanie .dotyczy{color:var(--ink-soft);text-transform:none;letter-spacing:0}
+.pytanie-tresc{font-size:1rem!important;color:var(--ink)}
+.pytanie-stopka .status{margin-right:.5rem}
+.pytanie-stopka a{color:var(--verd)}
+.agenda-miejsca a{color:var(--verd);font-size:.9rem}
+a.zrodlo{color:var(--verd);text-decoration-style:dotted;text-underline-offset:.2em}

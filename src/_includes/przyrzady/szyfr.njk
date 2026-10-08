@@ -1,0 +1,20 @@
+{% set s = i18n[jezyk] %}
+<div class="stage">
+<svg viewBox="0 0 380 226" role="img" aria-describedby="o-szyfr">
+<desc id="o-szyfr">{{ s.szyfr.opis }}</desc>
+<polygon points="184,3 196,3 190,14" fill="var(--ink)"/>
+<circle cx="190" cy="108" r="98" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<circle cx="190" cy="108" r="74" fill="none" stroke="var(--rule-soft)" stroke-width="1"/>
+<circle id="pierscien" cx="190" cy="108" r="46" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<g id="litery"></g>
+<text id="srodek" class="tb" x="190" y="112" text-anchor="middle">3</text>
+</svg>
+</div>
+
+<div class="ctl"><label for="obrot">{{ s.szyfr.obrot }}</label><input type="range" id="obrot" min="0" max="25" step="1" value="3"><output id="obrotO">3</output></div>
+<p class="ciph" id="szyfrogram"></p>
+<p class="ciph" id="odczyt" aria-live="polite"></p>
+
+<div id="rozwiazane" class="hide">
+<p class="note">{{ s.szyfr.rozwiazane }}</p>
+</div>

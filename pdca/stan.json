@@ -1,0 +1,87 @@
+{
+  "faza": "A",
+  "wersja": "0.9-dev",
+  "cykl": 4,
+  "bramka": {
+    "id": "GA",
+    "warunki": [
+      {
+        "id": "GA1",
+        "opis": "Redaktor merytoryczny zaakceptował całość tekstu",
+        "typ": "ludzki",
+        "spelniony": false,
+        "ostatniWynik": "czeka na człowieka"
+      },
+      {
+        "id": "GA2",
+        "opis": "Żadne twierdzenie o pierwszeństwie bez zastrzeżenia",
+        "typ": "ludzki",
+        "spelniony": false,
+        "ostatniWynik": "czeka na człowieka"
+      },
+      {
+        "id": "GA3",
+        "opis": "Każdy element rekonstruowany oznaczony w miejscu wystąpienia",
+        "typ": "automat",
+        "kontrola": "oznaczenia",
+        "ostatniWynik": "spełniony"
+      },
+      {
+        "id": "GA4",
+        "opis": "Agenda badawcza kompletna i powiązana z modułami",
+        "typ": "automat",
+        "kontrola": "agenda",
+        "ostatniWynik": "spełniony"
+      },
+      {
+        "id": "GA5",
+        "opis": "Status wersji widoczny na każdej stronie",
+        "typ": "automat",
+        "kontrola": "status",
+        "ostatniWynik": "spełniony"
+      },
+      {
+        "id": "GA6",
+        "opis": "Testy i budowa przechodzą",
+        "typ": "automat",
+        "kontrola": "budowa",
+        "ostatniWynik": "spełniony"
+      },
+      {
+        "id": "GA7",
+        "opis": "Budżet wagi strony dotrzymany",
+        "typ": "automat",
+        "kontrola": "budzet",
+        "ostatniWynik": "spełniony"
+      },
+      {
+        "id": "GA8",
+        "opis": "Każdy przyrząd ma wersję w obu językach",
+        "typ": "automat",
+        "kontrola": "jezyki",
+        "ostatniWynik": "spełniony"
+      },
+      {
+        "id": "GA9",
+        "opis": "Każdy przyrząd ma wersję osadzalną",
+        "typ": "automat",
+        "kontrola": "osadzenia",
+        "ostatniWynik": "spełniony"
+      },
+      {
+        "id": "GA10",
+        "opis": "Kroje pisma osadzone w repozytorium",
+        "typ": "automat",
+        "kontrola": "kroje",
+        "ostatniWynik": "ostrzeżenie"
+      },
+      {
+        "id": "GA11",
+        "opis": "Wzmianki o źródłach z ustalonym skanem są podlinkowane",
+        "typ": "automat",
+        "kontrola": "zrodla"
+      }
+    ]
+  },
+  "ostatniCykl": "2026-09-14"
+}

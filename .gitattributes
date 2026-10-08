@@ -1,0 +1,6 @@
+# Pod WSL pliki muszą mieć końce linii LF, inaczej skrypty w bin/ nie uruchomią się
+# z błędem "bad interpreter: /bin/bash^M".
+* text=auto eol=lf
+*.woff2 binary
+*.png binary
+*.jpg binary

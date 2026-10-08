@@ -1,0 +1,77 @@
+{
+  "wersja": "0.9",
+  "pozycje": [
+    {
+      "id": "A1",
+      "pytanie": "Jaka jest rzeczywista deklinacja ściany alkierza południowo-wschodniego i jaki typ wskazówki ma zegar wilanowski?",
+      "dlaczego": "Model zakłada ścianę dokładnie południową i gnomon prostopadły. Rzeczywista deklinacja przesuwa wszystkie krzywe.",
+      "zmieni": "Geometrię krzywych przesileń i równonocy w module gnomonu.",
+      "zrodlo": "Dokumentacja konserwatorska, Muzeum Pałacu Króla Jana III",
+      "status": "otwarta",
+      "miejsca": [
+        "gnomon"
+      ],
+      "dotyczy": "krzywe przesileń i równonocy oraz położenie cienia na ścianie"
+    },
+    {
+      "id": "A2",
+      "pytanie": "Jaką postać ma zapis szyfrowy konstrukcji wahaczy magnetycznych w księdze IX Technica curiosa?",
+      "dlaczego": "Obecny szyfr przesuwający jest rekonstrukcją metody, nie odczytem oryginału.",
+      "zmieni": "Moduł szyfru z rekonstrukcji na pracę ze źródłem.",
+      "zrodlo": "Egzemplarz Technica curiosa, Würzburg 1664",
+      "status": "otwarta",
+      "miejsca": [
+        "szyfr"
+      ],
+      "dotyczy": "tekst na tarczy szyfrowej i schemat wahacza"
+    },
+    {
+      "id": "A3",
+      "pytanie": "Czy propozycja z 1659 roku dotyczyła sprężyny spiralnej regulującej balans, czy innego rozwiązania?",
+      "dlaczego": "Od tego zależy siła twierdzenia o pierwszeństwie wobec Huygensa.",
+      "zmieni": "Sformułowania w module rejsu; obecnie celowo ostrożne.",
+      "zrodlo": "Opracowania biograficzne, korespondencja",
+      "status": "otwarta",
+      "miejsca": [
+        "rejs"
+      ],
+      "dotyczy": "zdanie o pierwszeństwie wobec Huygensa we wstępie przyrządu"
+    },
+    {
+      "id": "A4",
+      "pytanie": "Czy Kochański uzasadniał konstrukcję cyklometryczną względami warsztatowymi?",
+      "dlaczego": "Teza o przybliżeniu zaprojektowanym do wykonania jest obecnie naszą interpretacją.",
+      "zmieni": "Status oznaczenia w module cyrkla: interpretacja albo źródło.",
+      "zrodlo": "Acta Eruditorum 1685, Observationes cyclometricae",
+      "status": "otwarta",
+      "miejsca": [
+        "cyrkiel"
+      ],
+      "dotyczy": "teza o przybliżeniu zaprojektowanym do wykonania"
+    },
+    {
+      "id": "A5",
+      "pytanie": "Która data przybycia na dwór Jana III jest poprawna: 1678, 1679 czy 1680?",
+      "dlaczego": "Opracowania podają trzy różne daty.",
+      "zmieni": "Oś czasu w biografii.",
+      "zrodlo": "Katalogi personalne prowincji jezuickiej",
+      "status": "otwarta",
+      "miejsca": [
+        "biografia"
+      ],
+      "dotyczy": "wiersz osi czasu z datą przybycia na dwór"
+    },
+    {
+      "id": "A6",
+      "pytanie": "Czy Chronos na medalionie zegara wilanowskiego trzyma kosę czy kłos zboża?",
+      "dlaczego": "Opisy ikonograficzne się różnią.",
+      "zmieni": "Warstwę ikonograficzną modułu gnomonu.",
+      "zrodlo": "Fotografia, dokumentacja konserwatorska",
+      "status": "otwarta",
+      "miejsca": [
+        "gnomon"
+      ],
+      "dotyczy": "warstwa ikonograficzna — medalion z Chronosem"
+    }
+  ]
+}

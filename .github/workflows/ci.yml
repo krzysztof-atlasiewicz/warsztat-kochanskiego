@@ -1,0 +1,24 @@
+name: build
+on: [push, pull_request]
+jobs:
+  sprawdz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: "npm" }
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - name: cykl PDCA
+        run: npm run cykl
+      - name: audyt dostępności
+        run: |
+          npx --yes http-server _site -p 8080 &
+          sleep 3
+          npx --yes pa11y-ci --threshold 0 \
+            http://localhost:8080/pl/ \
+            http://localhost:8080/pl/cyrkiel/ \
+            http://localhost:8080/pl/wahadlo/ \
+            http://localhost:8080/pl/szyfr/ \
+            http://localhost:8080/pl/gnomon/
