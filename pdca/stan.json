@@ -98,6 +98,12 @@
         "opis": "Wzory zapisane w MathML, nie znakiem pierwiastka",
         "typ": "automat",
         "kontrola": "wzory"
+      },
+      {
+        "id": "GA15",
+        "opis": "Długa pamięć podręczna tylko dla plików z odciskiem treści",
+        "typ": "automat",
+        "kontrola": "pamiec"
       }
     ]
   },

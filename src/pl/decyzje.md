@@ -143,3 +143,13 @@ Wzory zapisane znakiem pierwiastka łamały się w składzie. Przeszły na MathM
 **Granica rekonstrukcji bez zmian:** nadal nie wiemy, jakiego rodzaju zapisu Kochański faktycznie użył. Pozycja A2 agendy pozostaje otwarta, a jej opis uściślono: narzędzie zostanie, zmieni się tylko zapis, który wczytuje.
 
 **Testy:** osiem nowych, w tym złamanie zapisu łacińskiego z 1664 roku oraz tekstów polskiego i angielskiego. Łącznie 36.
+
+## 2026-10-08 — Cykl 13: pamięć podręczna modułów
+
+**Zdarzenie:** po wdrożeniu nowego narzędzia szyfrującego tarcza pozostawała pusta, a pola nie reagowały na pisanie. Nic się nie uruchamiało i nie pojawiał się żaden komunikat.
+
+**Przyczyna:** moduły ładowane leniwie nie mają odcisku treści w adresie, bo importuje je kod, nie znacznik w HTML. Dostawały jednak godzinną pamięć podręczną. Przeglądarka pobierała świeży dokument i świeży moduł przyrządu, ale stary moduł obliczeniowy — bez funkcji, których nowy przyrząd od niego wymaga. Import nie przechodzi wtedy na etapie wiązania, więc moduł nie wykonuje ani jednej instrukcji i zabezpieczenie w loaderze, które miało wyświetlić komunikat, też nie zdąża zadziałać.
+
+**Rozstrzygnięcie:** długa pamięć podręczna przysługuje wyłącznie plikom pobieranym z odciskiem treści w adresie — arkuszom stylów, krojom i modułowi startowemu. Reszta kodu jest sprawdzana przy każdym wejściu.
+
+**Skutek:** kontrola `pamiec` porównuje reguły z pliku nagłówków z tym, jak strony faktycznie pobierają zasoby, i zgłasza każdy plik oznaczony jako niezmienny, a pobierany bez odcisku. Ma test negatywny. Warunek bramki GA15.

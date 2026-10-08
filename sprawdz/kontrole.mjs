@@ -177,6 +177,41 @@ const KONTROLE = {
     return bledy;
   },
 
+  // Długa pamięć podręczna wolno tylko dla plików, które strony pobierają
+  // z odciskiem treści w adresie. Reszta musi być sprawdzana przy wejściu.
+  pamiec() {
+    const bledy = [];
+    let naglowki;
+    try { naglowki = czytaj("_site/_headers"); } catch { return ["brak pliku _site/_headers"]; }
+
+    const strony = zbudowane().map((p) => czytaj(p)).join("\n");
+    const zOdciskiem = new Set();
+    for (const m of strony.matchAll(/(?:href|src)="(\/assets\/[^"?]+)\?v=/g)) zOdciskiem.add(m[1]);
+
+    let sciezka = null;
+    for (const linia of naglowki.split("\n")) {
+      const l = linia.trim();
+      if (l.startsWith("/")) { sciezka = l; continue; }
+      if (!/immutable/.test(l) || !sciezka) continue;
+      if (sciezka.endsWith("*")) {
+        const przedrostek = sciezka.slice(0, -1);
+        const objete = [...zOdciskiem].filter((x) => x.startsWith(przedrostek));
+        const wszystkie = [...strony.matchAll(/(?:href|src)="(\/assets\/[^"?]+)/g)]
+          .map((m) => m[1]).filter((x) => x.startsWith(przedrostek));
+        for (const x of new Set(wszystkie))
+          if (!objete.includes(x)) bledy.push(`_headers: ${sciezka} jest „immutable", a ${x} jest pobierany bez odcisku ?v=`);
+      } else if (!zOdciskiem.has(sciezka)) {
+        bledy.push(`_headers: ${sciezka} jest „immutable", a strony pobierają go bez odcisku ?v=`);
+      }
+    }
+
+    // Moduły są importowane z kodu, nie z HTML, więc nigdy nie mają odcisku.
+    if (!/\/assets\/js\/\*\s*\n\s*Cache-Control:[^\n]*no-cache/.test(naglowki))
+      bledy.push("_headers: moduły pod /assets/js/* muszą mieć no-cache — nie da się im nadać odcisku");
+
+    return bledy;
+  },
+
   ikony() {
     const bledy = [];
     const pliki = ["favicon.svg", "ikony/favicon-32.png", "ikony/favicon.ico", "ikony/apple-touch-icon.png"];
