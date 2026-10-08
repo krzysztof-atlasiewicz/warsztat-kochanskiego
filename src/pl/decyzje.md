@@ -106,7 +106,7 @@ Każda decyzja merytoryczna: data, treść, uzasadnienie, skutek. Dokument publi
 
 Odnośnik do skanu wyprowadzał czytelnika z serwisu. Skan otwiera się teraz w okienku nad stroną, z paskiem opisu bibliograficznego i odsyłaczem do pełnej wersji w nowej karcie. Odnośnik pozostał zwykłym odnośnikiem — bez skryptu, przy otwarciu w nowej karcie i przy kliknięciu środkowym przyciskiem działa jak dotąd. Zasady bezpieczeństwa treści rozszerzono o ramkę z archive.org i o nic więcej.
 
-Rysunek konstrukcji zajmował ułamek dostępnego pola. Układ współrzędnych powiększono dwukrotnie, do obszaru 760 na 540, przy niezmienionym rozmiarze opisów.
+Rysunek konstrukcji zajmował ułamek dostępnego pola. Układ współrzędnych powiększono dwukrotnie, a następnie skadrowano do samej zawartości: ramka 595 na 378 obejmuje rysunek z marginesem od dziewięciu do dwudziestu jednostek, czyli wypełnienie 94 procent w obu osiach. Powiększenie bez kadrowania nie wystarczyło — zostawało puste pole nad rysunkiem, bo pierwotna ramka była wyższa niż cokolwiek, co się w niej znajdowało.
 
 Przycisk „Dalej" na ostatnim kroku sugerował ciąg dalszy. Oba przyciski są teraz wygaszane na krańcach.
 
