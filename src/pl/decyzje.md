@@ -88,7 +88,7 @@ Każda decyzja merytoryczna: data, treść, uzasadnienie, skutek. Dokument publi
 
 **Znalezione przy okazji:** Henryk Fukś, równoległy tekst łaciński z przekładem angielskim i przypisami (*Antiquitates Mathematicae* 9:31–65, 2015, preprint na arXiv). To gotowa warstwa transkrypcji, której w projekcie brakowało. Wpisana do rejestru ze statusem licencji „do ustalenia" — nie wykorzystujemy jej, dopóki warunki nie będą znane.
 
-**Zasada:** pozycja bez ustalonego skanu renderuje się jako zwykły tekst, nie jako odnośnik. *Technica curiosa* nie ma jeszcze zlokalizowanego skanu i pozostaje tekstem — pozycja A2 agendy.
+**Zasada:** pozycja bez ustalonego skanu renderuje się jako zwykły tekst, nie jako odnośnik. [*Technica curiosa*](https://archive.org/details/gri_pgasparissch00scho) nie ma jeszcze zlokalizowanego skanu i pozostaje tekstem — pozycja A2 agendy.
 
 ## 2026-10-08 — Cykl 8: konfiguracja wdrożenia pod kontrolą
 
@@ -163,3 +163,21 @@ Wzory zapisane znakiem pierwiastka łamały się w składzie. Przeszły na MathM
 **Rozstrzygnięcie:** żadne dwie reguły nie mogą obejmować tego samego pliku. Moduł startowy traci długą pamięć podręczną — waży poniżej kilobajta, więc sprawdzanie go przy wejściu nic nie kosztuje, a brak wyjątku usuwa całą klasę takich pomyłek.
 
 **Skutek:** kontrola `pamiec` wykrywa teraz również zachodzące wzorce, nie tylko brak odcisku treści. Test negatywny: przywrócenie usuniętej reguły zostaje zgłoszone.
+
+## 2026-10-08 — Cykl 15: skan Technica curiosa i czytelność szyfru
+
+**Odnalezione źródło:** pełny skan tomu *Technica curiosa* z 1664 roku, egzemplarz Getty Research Institute w Internet Archive, domena publiczna. Wzmianki o dziele są teraz podlinkowane tak samo jak „Acta Eruditorum", a skan otwiera się w okienku nad stroną.
+
+**Poprawka faktograficzna:** dotąd podawaliśmy miejsce wydania jako Würzburg. Schott tam pracował, ale druk ukazał się w Norymberdze. Poprawione na obu stronach modułu.
+
+**Uściślenie pozycji A2:** pytanie przestaje brzmieć „gdzie znaleźć skan", a zaczyna „na której stronie tego skanu zaczyna się księga IX i jaką postać ma w niej zapis szyfrowy". Kwerenda zrobiła się węższa i wykonalna.
+
+**Czytelność mechanizmu — trzy zmiany:**
+
+Pasek odwzorowania pod tarczą pokazuje tę samą tarczę rozwiniętą w linię: górny wiersz to litery wiadomości, dolny litery zapisu. Kolumny liter faktycznie występujących w wiadomości są wyróżnione, a kliknięcie kolumny podświetla tę parę również na tarczy i wypisuje ją słownie. Dotąd związek między obracanym pierścieniem a tekstem w polach nie był widoczny wcale.
+
+Przyciski dostały opisy w dymkach — co dokładnie robią i, w przypadku odnośnika, czego nie przenoszą.
+
+Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąco z wpisanego zapisu, nie na przykładzie: liczba liter, najczęstsza litera zapisu, najczęstsza litera języka, wynikający z nich pierwszy kandydat, ranking trzech najlepszych obrotów z ocenami i odczyt.
+
+**Rzecz, której nie ukrywamy:** przy zapisie z 1664 roku pierwszy kandydat wskazuje obrót 25, a prawidłowy jest 12. Pojedyncza litera myli przy krótkim tekście, ocena całego odczytu już nie. Wykład dopisuje to zdanie sam, kiedy kandydat przegrywa — metoda pokazana wraz z jej zawodnością uczy więcej niż metoda pokazana wyłącznie na przykładzie, w którym akurat działa.

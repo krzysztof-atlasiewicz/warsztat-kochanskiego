@@ -13,6 +13,12 @@
 
 <div class="ctl"><label for="obrot">{{ s.szyfr.obrot }}</label><input type="range" id="obrot" min="0" max="25" step="1" value="0"><output id="obrotO">0</output></div>
 
+<div class="odwzorowanie">
+  <p class="dim małe">{{ s.szyfr.paskiOpis }}</p>
+  <div id="pasek" class="pasek" role="group" aria-label="{{ s.szyfr.paskiOpis }}"></div>
+  <p id="para" class="para" aria-live="polite"></p>
+</div>
+
 <div class="szyfr-pola">
   <p class="pole">
     <label for="jawny">{{ s.szyfr.jawny }}</label>
@@ -32,12 +38,17 @@
       <option value="la" selected>{{ s.szyfr.lacina }}</option>
     </select>
   </label>
-  <button id="lam">{{ s.szyfr.lam }}</button>
-  <button id="kopiuj">{{ s.szyfr.kopiuj }}</button>
-  <button id="odnosnik">{{ s.szyfr.odnosnik }}</button>
-  <button id="historyczny">{{ s.szyfr.historyczny }}</button>
+  <button id="lam" title="{{ s.szyfr.opisy.lam }}">{{ s.szyfr.lam }}</button>
+  <button id="kopiuj" title="{{ s.szyfr.opisy.kopiuj }}">{{ s.szyfr.kopiuj }}</button>
+  <button id="odnosnik" title="{{ s.szyfr.opisy.odnosnik }}">{{ s.szyfr.odnosnik }}</button>
+  <button id="historyczny" title="{{ s.szyfr.opisy.historyczny }}">{{ s.szyfr.historyczny }}</button>
 </div>
 <p id="komunikat" class="dim" aria-live="polite"></p>
+
+<details class="wyprowadzenie" id="kroki">
+  <summary>{{ s.szyfr.krokiTytul }}</summary>
+  <ol id="krokiLista"></ol>
+</details>
 
 <div id="rozwiazane" class="hide">
 <p class="note">{{ s.szyfr.rozwiazane }}</p>

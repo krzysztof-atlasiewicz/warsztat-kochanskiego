@@ -15,10 +15,10 @@
     },
     {
       "id": "A2",
-      "pytanie": "Jaką postać ma zapis szyfrowy konstrukcji wahaczy magnetycznych w księdze IX Technica curiosa?",
-      "dlaczego": "Obecny szyfr przesuwający jest rekonstrukcją metody, nie odczytem oryginału.",
+      "pytanie": "Na której stronie skanu zaczyna się księga IX i jaką postać ma w niej zapis szyfrowy konstrukcji wahaczy magnetycznych?",
+      "dlaczego": "Mamy pełny skan tomu, ale nie odnalezione miejsce. Obecny szyfr przesuwający jest rekonstrukcją metody, nie odczytem oryginału.",
       "zmieni": "Moduł szyfru z rekonstrukcji metody na pracę ze źródłem: narzędzie zostaje, zmienia się zapis, który wczytuje.",
-      "zrodlo": "Egzemplarz Technica curiosa, Würzburg 1664",
+      "zrodlo": "Technica curiosa, Norymberga 1664 — skan Getty Research Institute",
       "status": "otwarta",
       "miejsca": [
         "szyfr"

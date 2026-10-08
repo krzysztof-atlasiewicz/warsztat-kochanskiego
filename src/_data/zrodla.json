@@ -29,18 +29,19 @@
     "uwaga": "Równoległy tekst łaciński i przekład angielski z przypisami. Gotowa warstwa transkrypcji dla modułu cyrkla — do wykorzystania po ustaleniu warunków licencyjnych."
   },
   "technica-curiosa": {
-    "autor": "Caspar Schott (księga IX autorstwa Kochańskiego)",
-    "tytul": "Technica curiosa, ks. IX: Mirabilis chronometrica",
+    "autor": "Caspar Schott (księga IX autorstwa Adama Adamandego Kochańskiego)",
+    "tytul": "Technica curiosa, sive Mirabilia artis, libris XII comprehensa",
     "w": null,
     "rok": 1664,
     "tom": null,
     "strony": null,
-    "instytucja": null,
-    "url": null,
-    "licencja": null,
+    "instytucja": "Getty Research Institute / Internet Archive",
+    "url": "https://archive.org/details/gri_pgasparissch00scho",
+    "osadzenie": "https://archive.org/embed/gri_pgasparissch00scho",
+    "licencja": "domena publiczna",
     "frazy": [
       "Technica curiosa"
     ],
-    "uwaga": "Skan nieustalony. Pozycja A2 agendy badawczej."
+    "uwaga": "Pełny skan tomu, egzemplarz Getty Research Institute. Druk ukazał się w Norymberdze u Endterów, choć Schott pracował w Würzburgu. Nie ustaliliśmy jeszcze, na której stronie tego skanu zaczyna się księga IX ani jaką postać ma w niej zapis szyfrowy — pozycja A2 agendy."
   }
 }
