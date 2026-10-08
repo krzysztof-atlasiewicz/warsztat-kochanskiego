@@ -193,3 +193,15 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Forma:** tarcza przeszła na konwencję przyrządu warsztatowego — mosiężna oprawa z radełkowaną krawędzią, grawerowana płyta z czterema wkrętami, podziałka między literami, gilosz pod piastą, wskazówka na ruchomym pierścieniu pokazująca, o ile jest przekręcony. Litery zapisu w kroju szeryfowym, litery wiadomości kursywą — różnica pierścieni jest teraz widoczna bez czytania opisu. Paleta reaguje na ciemny motyw.
 
 **Rzecz do zapamiętania przy renderowaniu podglądów:** rasteryzator nie rozwiązuje zmiennych CSS w atrybutach, więc obrazek wychodzi czarny, dopóki nie podstawi się wartości wprost. Nie jest to usterka serwisu, tylko pułapka narzędzia.
+
+## 2026-10-08 — Cykl 17: kwerenda w skanie Technica curiosa (pozycja A2)
+
+**Co ustalono.** Księga IX „Mirabilia Chronometrica" zaczyna się na stronie drukowanej 620 i sięga mniej więcej strony 720; w skanie odpowiada temu strona około 748. Odnośnik na stronie modułu otwiera się teraz dokładnie w tym miejscu. Znany jest też pełny spis jedenastu rozdziałów księgi, od rodzajów mechanizmów i wahadeł po horometry wieczne.
+
+**Czego nie udało się potwierdzić, i to jest ważniejsze.** Przeszukanie pełnego tekstu tego egzemplarza nie znalazło w księdze IX ani zapisu szyfrowego, ani konstrukcji wahacza magnetycznego. Spis rozdziałów księgi IX nie zawiera niczego o kryptografii — jedyny taki rozdział w całym dziele to księga VII, rozdział VI, „De Cryptographia, seu occulta scriptione", strona 542. Jedyna wzmianka o magnesie w księdze chronometrycznej dotyczy ukrytego magnesu przesuwającego wskaźnik po podziałce, nie wahacza regulującego bieg zegara. Nazwisko Kochańskiego nie pada w rozpoznanym tekście ani razu.
+
+**Waga tego ustalenia.** Twierdzenie ze strony modułu — że Kochański podał w księdze IX konstrukcję wahaczy magnetycznych w postaci zaszyfrowanej — nie znajduje potwierdzenia w źródle, do którego sami odsyłamy. Nie jest obalone: rozpoznanie tekstu siedemnastowiecznego druku jest mocno zniekształcone, więc brak trafień nie dowodzi nieobecności. Ale od tej chwili jest to twierdzenie zawieszone, nie oparte.
+
+**Co z tym robimy.** Pozycja A2 przechodzi w stan „w toku" i zostaje rozdzielona: pierwsza część pytania jest rozstrzygnięta, druga przeformułowana na „czy zapis w ogóle jest w księdze IX". Ustalenia są publikowane w agendzie, żeby czytelnik widział stan wiedzy, a nie tylko pytanie. Treść modułu pozostaje bez zmian do decyzji redaktora merytorycznego — poprawianie twierdzenia historycznego nie jest czynnością, którą wolno wykonać przy okazji kwerendy.
+
+**Następny krok:** przejrzenie wzrokowe stron 620–720 skanu. Tego nie da się zrobić wyszukiwaniem pełnotekstowym.

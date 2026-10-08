@@ -16,6 +16,12 @@ permalink: /en/agenda/
   <p><strong>Concerns:</strong> {{ p.dotyczy }}</p>
   <p><strong>What will change:</strong> {{ p.zmieni }}</p>
   <p><strong>Where to look:</strong> {{ p.zrodlo | podlinkuj | safe }}</p>
+  {%- if p.ustalenia %}
+  <div class="ustalenia">
+    <p><strong>What has been established:</strong></p>
+    <ul>{% for u in p.ustalenia %}<li>{{ u }}</li>{% endfor %}</ul>
+  </div>
+  {%- endif %}
   <p class="agenda-miejsca">{%- for m in p.miejsca %}{% for s in collections.all %}{% if s.data.para == m and s.data.jezyk == jezyk %}<a href="{{ s.url }}#pytanie-{{ p.id }}">See it where it applies: {{ s.data.tytul }}</a> {% endif %}{% endfor %}{% endfor %}</p>
 </div>
 {%- endfor %}

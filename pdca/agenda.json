@@ -15,15 +15,22 @@
     },
     {
       "id": "A2",
-      "pytanie": "Na której stronie skanu zaczyna się księga IX i jaką postać ma w niej zapis szyfrowy konstrukcji wahaczy magnetycznych?",
-      "dlaczego": "Mamy pełny skan tomu, ale nie odnalezione miejsce. Obecny szyfr przesuwający jest rekonstrukcją metody, nie odczytem oryginału.",
-      "zmieni": "Moduł szyfru z rekonstrukcji metody na pracę ze źródłem: narzędzie zostaje, zmienia się zapis, który wczytuje.",
-      "zrodlo": "Technica curiosa, Norymberga 1664 — skan Getty Research Institute",
-      "status": "otwarta",
+      "pytanie": "Czy zapis szyfrowy konstrukcji wahaczy magnetycznych faktycznie znajduje się w księdze IX — i jaką ma postać?",
+      "dlaczego": "Pierwsza część pytania została rozstrzygnięta: księga IX zaczyna się na stronie drukowanej 620. Druga nie — przeszukanie pełnego tekstu egzemplarza nie potwierdziło obecności zapisu szyfrowego w tej księdze.",
+      "zmieni": "Albo moduł szyfru przejdzie z rekonstrukcji metody na pracę ze źródłem, albo trzeba będzie poprawić twierdzenie na stronie — zapis może pochodzić z innego miejsca dzieła albo z innego przekazu.",
+      "zrodlo": "Technica curiosa, Norymberga 1664 — skan Getty Research Institute, księga IX od strony 620",
+      "status": "w toku",
       "miejsca": [
         "szyfr"
       ],
-      "dotyczy": "zapis wczytywany przyciskiem „Wczytaj zapis z 1664\" i jego odczyt na tarczy"
+      "dotyczy": "zapis wczytywany przyciskiem „Wczytaj zapis z 1664\" i jego odczyt na tarczy",
+      "ustalenia": [
+        "Księga IX „Mirabilia Chronometrica” obejmuje strony drukowane 620–720, co odpowiada mniej więcej stronie 748 skanu. Spis rozdziałów: I. rodzaje mechanizmów (620), II. o wahadłach (622), III. miary chronometryczne (624), IV. siły napędowe (638), V. wskaźniki optyczne (651), VI. sygnały akustyczne (668), VII. ozdoby i dodatki (677), VIII. zegary osobliwe (690), IX. zegary podręczne, X. nowe horometry (703), XI. horometry wieczne (713).",
+        "W spisie rozdziałów księgi IX nie ma rozdziału o kryptografii. Jedyny taki rozdział w całym dziele to księga VII, rozdział VI „De Cryptographia, seu occulta scriptione”, strona drukowana 542.",
+        "Nazwisko Kochańskiego nie pojawia się w rozpoznanym tekście ani razu. Zgadza się to z przekazem, że dzieło firmował Schott, ale rozpoznanie tekstu jest na tyle słabe, że samo w sobie niczego nie dowodzi.",
+        "Jedyna wzmianka o magnesie w księdze IX dotyczy ukrytego magnesu przesuwającego wskaźnik po podziałce („ducetur ab occulto magnete”, około strony drukowanej 661), a nie wahacza regulującego bieg zegara.",
+        "Zastrzeżenie: rozpoznanie tekstu tego druku jest mocno zniekształcone, więc brak trafień nie jest dowodem nieobecności. Rozstrzygnięcie wymaga przejrzenia stron 620–720 wzrokowo."
+      ]
     },
     {
       "id": "A3",
