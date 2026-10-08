@@ -92,6 +92,12 @@
         "opis": "Znak graficzny obecny i podpięty na każdej stronie",
         "typ": "automat",
         "kontrola": "ikony"
+      },
+      {
+        "id": "GA14",
+        "opis": "Wzory zapisane w MathML, nie znakiem pierwiastka",
+        "typ": "automat",
+        "kontrola": "wzory"
       }
     ]
   },

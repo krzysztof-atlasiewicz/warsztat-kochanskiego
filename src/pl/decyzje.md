@@ -123,3 +123,11 @@ Wzory zapisane znakiem pierwiastka łamały się w składzie. Przeszły na MathM
 **Wykonanie:** jedno źródło w SVG, z wariantem dla ciemnego motywu. Warianty rastrowe — PNG 32 i 180 oraz ICO z osadzonym PNG — powstają przy każdym budowaniu ze źródła, więc znak i jego odbitki nie mogą się rozejść. Pliki rastrowe nie wchodzą do repozytorium, bo są wytwarzane.
 
 **Skutek:** kontrola `ikony` sprawdza obecność czterech plików i podpięcie znaku na każdej zbudowanej stronie, łącznie z wersjami osadzalnymi. Warunek bramki GA13.
+
+## 2026-10-08 — Cykl 11: wzory w opisie tekstowym
+
+**Decyzja:** opis tekstowy przyrządu, czyli równoważnik dla osób niekorzystających z rysunku, też przechodzi na MathML.
+
+**Uzasadnienie:** zapis znakiem pierwiastka łamał się w składzie, a czytnik ekranu odczytywał go jako pojedynczy znak, nie jako działanie. Równoważnik tekstowy, który jest gorzej czytelny niż to, co zastępuje, mija się z celem.
+
+**Skutek:** kontrola `wzory` zgłasza każdy znak pierwiastka pozostały w gotowej stronie poza elementami MathML. Ma test negatywny: celowo wstawiony znak zostaje wykryty, również w wersji osadzalnej. Warunek bramki GA14.

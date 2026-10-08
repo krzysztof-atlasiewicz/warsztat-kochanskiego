@@ -164,6 +164,19 @@ const KONTROLE = {
     return bledy;
   },
 
+  wzory() {
+    const bledy = [];
+    for (const p of zbudowane()) {
+      const t = czytaj(p);
+      if (t.includes("http-equiv=\"refresh\"")) continue;
+      // Pierwiastek zapisany znakiem łamie się w składzie i nie jest odczytywany
+      // przez czytniki ekranu jako działanie — wzory mają być w MathML.
+      if (/\u221a/.test(t.replace(/<math[\s\S]*?<\/math>/g, "")))
+        bledy.push(`${p}: wzór zapisany znakiem √ zamiast w MathML`);
+    }
+    return bledy;
+  },
+
   ikony() {
     const bledy = [];
     const pliki = ["favicon.svg", "ikony/favicon-32.png", "ikony/favicon.ico", "ikony/apple-touch-icon.png"];
