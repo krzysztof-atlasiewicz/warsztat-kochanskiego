@@ -205,6 +205,23 @@ const KONTROLE = {
       }
     }
 
+    // Przy kilku pasujących wzorcach Cloudflare skleja nagłówki zamiast nadpisywać,
+    // więc plik dostaje dwie sprzeczne dyrektywy i wygrywa ta ostrzejsza.
+    const reguly = [];
+    let biezaca = null;
+    for (const linia of naglowki.split("\n")) {
+      const l = linia.trim();
+      if (l.startsWith("#") || !l) continue;
+      if (l.startsWith("/")) { biezaca = l; continue; }
+      if (/^Cache-Control:/i.test(l) && biezaca) reguly.push(biezaca);
+    }
+    const pasuje = (wzorzec, sciezka) =>
+      wzorzec.endsWith("*") ? sciezka.startsWith(wzorzec.slice(0, -1)) : wzorzec === sciezka;
+    for (const a of reguly)
+      for (const b of reguly)
+        if (a !== b && pasuje(a, b.replace(/\*$/, "")))
+          bledy.push(`_headers: reguły ${a} i ${b} zachodzą na siebie — nagłówki zostaną sklejone`);
+
     // Moduły są importowane z kodu, nie z HTML, więc nigdy nie mają odcisku.
     if (!/\/assets\/js\/\*\s*\n\s*Cache-Control:[^\n]*no-cache/.test(naglowki))
       bledy.push("_headers: moduły pod /assets/js/* muszą mieć no-cache — nie da się im nadać odcisku");

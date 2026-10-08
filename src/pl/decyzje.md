@@ -153,3 +153,13 @@ Wzory zapisane znakiem pierwiastka łamały się w składzie. Przeszły na MathM
 **Rozstrzygnięcie:** długa pamięć podręczna przysługuje wyłącznie plikom pobieranym z odciskiem treści w adresie — arkuszom stylów, krojom i modułowi startowemu. Reszta kodu jest sprawdzana przy każdym wejściu.
 
 **Skutek:** kontrola `pamiec` porównuje reguły z pliku nagłówków z tym, jak strony faktycznie pobierają zasoby, i zgłasza każdy plik oznaczony jako niezmienny, a pobierany bez odcisku. Ma test negatywny. Warunek bramki GA15.
+
+## 2026-10-08 — Cykl 14: zachodzące reguły nagłówków
+
+**Zdarzenie:** po poprawce moduł startowy otrzymywał nagłówek `public, no-cache, public, max-age=31536000, immutable` — dwie sprzeczne dyrektywy naraz.
+
+**Przyczyna:** przy kilku pasujących wzorcach Cloudflare skleja nagłówki, zamiast pozwolić bardziej szczegółowej regule nadpisać ogólniejszą. Reguła dla `/assets/js/*` i osobna dla `/assets/js/bootstrap.js` zachodziły na siebie.
+
+**Rozstrzygnięcie:** żadne dwie reguły nie mogą obejmować tego samego pliku. Moduł startowy traci długą pamięć podręczną — waży poniżej kilobajta, więc sprawdzanie go przy wejściu nic nie kosztuje, a brak wyjątku usuwa całą klasę takich pomyłek.
+
+**Skutek:** kontrola `pamiec` wykrywa teraz również zachodzące wzorce, nie tylko brak odcisku treści. Test negatywny: przywrócenie usuniętej reguły zostaje zgłoszone.

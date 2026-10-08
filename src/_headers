@@ -3,18 +3,18 @@
   Referrer-Policy: no-referrer
   Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self'; script-src 'self'; frame-src https://archive.org; frame-ancestors *
 
-# Pliki z odciskiem treści w adresie (?v=) mogą leżeć w pamięci podręcznej dowolnie długo.
+# Reguły nie mogą na siebie zachodzić: przy kilku pasujących wzorcach Cloudflare
+# skleja nagłówki zamiast nadpisywać, więc plik dostaje dwie sprzeczne dyrektywy.
+
+# Pobierane z odciskiem treści w adresie (?v=) — mogą leżeć dowolnie długo.
 /assets/css/*
   Cache-Control: public, max-age=31536000, immutable
 
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Moduły ładowane leniwie nie mają odcisku w adresie, więc muszą być sprawdzane
-# przy każdym wejściu. Inaczej nowa strona trafia na stary moduł i przyrząd
-# przestaje się uruchamiać, bez żadnego komunikatu.
+# Kod jest importowany przez inny kod, więc modułom nie da się nadać odcisku.
+# Sprawdzany przy każdym wejściu — inaczej nowa strona trafia na stary moduł
+# i przyrząd nie uruchamia się wcale, bez żadnego komunikatu.
 /assets/js/*
   Cache-Control: public, no-cache
-
-/assets/js/bootstrap.js
-  Cache-Control: public, max-age=31536000, immutable
