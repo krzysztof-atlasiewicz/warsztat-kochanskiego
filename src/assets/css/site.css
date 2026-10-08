@@ -170,3 +170,30 @@ math{font-size:1.05em}
 .rzad-przyrzadow svg{max-width:180px}
 .rzad-przyrzadow figcaption{font-family:var(--mono);font-size:1rem;margin-top:.3rem}
 .rzad-przyrzadow .dim{font-family:var(--serif);font-size:.85rem}
+
+/* ── suwaki w konwencji przyrządu: mosiężna prowadnica i radełkowany guzik ── */
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:1.6rem;cursor:grab}
+input[type=range]:active{cursor:grabbing}
+input[type=range]::-webkit-slider-runnable-track{
+  height:8px;border-radius:4px;
+  background:linear-gradient(var(--plyta-ciemna),var(--plyta-jasna));
+  border:1px solid var(--mosiadz-ciemny);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.18)}
+input[type=range]::-moz-range-track{
+  height:8px;border-radius:4px;
+  background:linear-gradient(var(--plyta-ciemna),var(--plyta-jasna));
+  border:1px solid var(--mosiadz-ciemny)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:22px;height:22px;margin-top:-8px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,var(--mosiadz-jasny),var(--mosiadz-ciemny));
+  border:1px solid var(--mosiadz-ciemny);
+  box-shadow:0 1px 2px rgba(0,0,0,.3),inset 0 0 0 3px var(--plyta-jasna),inset 0 0 0 4px var(--mosiadz-ciemny)}
+input[type=range]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,var(--mosiadz-jasny),var(--mosiadz-ciemny));
+  border:1px solid var(--mosiadz-ciemny);
+  box-shadow:0 1px 2px rgba(0,0,0,.3),inset 0 0 0 3px var(--plyta-jasna)}
+input[type=range]:focus-visible::-webkit-slider-thumb{outline:2px solid var(--verd);outline-offset:2px}
+input[type=range]:focus-visible::-moz-range-thumb{outline:2px solid var(--verd);outline-offset:2px}
+input[type=checkbox]{accent-color:var(--mosiadz-ciemny);width:1.05rem;height:1.05rem}
+.ctl output{font-variant-numeric:tabular-nums}

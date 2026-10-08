@@ -1,9 +1,9 @@
-import { przebiegRejsu, dataDnia, REJS } from "./matematyka.js";
+import { przebiegRejsu, dataDnia, REJS, TRASA } from "./matematyka.js";
 
 const NS = "http://www.w3.org/2000/svg";
 const X0 = 90, X1 = 700, Y0 = 46, Y1 = 240;        // wykres błędu
 const PROG = 56;                                    // pół stopnia długości geograficznej
-const M = { x0: 40, x1: 720, y0: 40, y1: 370, lonA: -62, lonB: 8, latA: 52, latB: 0 };
+const M = { x0: 40, x1: 720, y0: 40, y1: 370, lonA: -64, lonB: 6, latA: 52, latB: -4 };
 const WSK_MAX = 400;                                // górna granica podziałki wskaźników
 
 export default function init(root) {
@@ -24,6 +24,17 @@ export default function init(root) {
   // ── karta kursowa: siatka, róża wiatrów, porty ───────────────────────────
   const mx = (lon) => M.x0 + ((M.x1 - M.x0) * (lon - M.lonA)) / (M.lonB - M.lonA);
   const my = (lat) => M.y0 + ((M.y1 - M.y0) * (M.latA - lat)) / (M.latA - M.latB);
+
+  // Kontury orientacyjne, wykreślone z kilkunastu punktów wybrzeża.
+  const LADY = {
+    europa: [[-4.5,48.4],[-1.15,46.16],[-1.2,44.6],[-3.0,43.4],[-8.4,43.4],[-9.1,38.7],[-9.0,37.0],[-5.4,36.0]],
+    afryka: [[-5.8,35.8],[-7.6,33.6],[-9.8,30.0],[-12.9,27.9],[-15.9,23.7],[-17.0,20.9],[-16.5,17.0],[-17.4,14.7],[-16.0,12.5],[-13.7,9.5],[-10.8,6.3],[-7.5,4.6],[-4.0,5.3],[-0.2,5.5],[3.4,6.4]],
+    ameryka: [[-61.5,10.7],[-61.0,8.6],[-58.2,6.8],[-55.0,6.0],[-52.33,4.94],[-51.0,2.0],[-50.0,0.0],[-48.5,-1.5]],
+    wyspy: [
+      [[-16.6,28.3],[-15.6,28.0],[-13.6,29.0]],
+      [[-25.0,16.8],[-23.6,15.0],[-22.9,16.6]]
+    ]
+  };
 
   (function kartaStala() {
     const g = $("siatka");
@@ -46,13 +57,30 @@ export default function init(root) {
     r.append(el("circle", { cx, cy, r: 26, fill: "none", stroke: "var(--mosiadz-ciemny)", "stroke-width": "0.8", opacity: "0.6" }));
     r.append(el("path", { d: `M ${cx} ${cy - 34} L ${cx + 6} ${cy} L ${cx} ${cy + 10} L ${cx - 6} ${cy} Z`, fill: "var(--mosiadz-ciemny)", opacity: "0.75" }));
 
-    $("trasa").setAttribute("x1", mx(REJS.lonA)); $("trasa").setAttribute("y1", my(REJS.latA));
-    $("trasa").setAttribute("x2", mx(REJS.lonB)); $("trasa").setAttribute("y2", my(REJS.latB));
+    const ladyG = $("lady");
+    for (const [nazwa, linia] of Object.entries(LADY)) {
+      if (nazwa === "wyspy") {
+        for (const grupa of linia)
+          ladyG.append(el("polyline", {
+            points: grupa.map(([lo, la]) => `${mx(lo).toFixed(1)},${my(la).toFixed(1)}`).join(" "),
+            fill: "none", stroke: "var(--ink-soft)", "stroke-width": "1.6", "stroke-linecap": "round"
+          }));
+        continue;
+      }
+      ladyG.append(el("polyline", {
+        points: linia.map(([lo, la]) => `${mx(lo).toFixed(1)},${my(la).toFixed(1)}`).join(" "),
+        fill: "none", stroke: "var(--ink-soft)", "stroke-width": "1.6", "stroke-linejoin": "round"
+      }));
+    }
+    $("trasa").setAttribute("points", TRASA.map(([lo, la]) => `${mx(lo).toFixed(1)},${my(la).toFixed(1)}`).join(" "));
 
     const p = $("porty");
     for (const [lon, lat, nazwa, kot] of [[REJS.lonA, REJS.latA, n.laRochelle, "start"], [REJS.lonB, REJS.latB, n.kajenna, "end"]]) {
       p.append(el("circle", { cx: mx(lon), cy: my(lat), r: 3.5, fill: "var(--ink)" }));
-      p.append(el("text", { class: "t", x: mx(lon) + (kot === "start" ? 8 : 8), y: my(lat) - 8 }, nazwa || ""));
+      p.append(el("text", {
+        class: "t", x: mx(lon) + (kot === "start" ? -8 : 8), y: my(lat) - 8,
+        "text-anchor": kot === "start" ? "end" : "start"
+      }, nazwa || ""));
     }
   })();
 
@@ -221,9 +249,15 @@ export default function init(root) {
   ["dzien", "kolysanie"].forEach((id) => $(id).addEventListener("input", rysuj));
   $("kompensacja").addEventListener("change", rysuj);
   $("tempo").addEventListener("input", () => {
-    $("tempoO").textContent = podstaw(n.tempoOdczyt, { s: (REJS.dni * msNaDzien() / 1000).toFixed(0) });
+    $("tempoO").textContent = czasRejsu();
   });
-  const msNaDzien = () => 320 - Number($("tempo").value) * 25;
+  function czasRejsu() {
+    const sek = Math.round((REJS.dni * msNaDzien()) / 1000);
+    return sek >= 60
+      ? podstaw(n.tempoMin, { m: Math.floor(sek / 60), s: String(sek % 60).padStart(2, "0") })
+      : podstaw(n.tempoSek, { s: sek });
+  }
+  const msNaDzien = () => Math.round(2600 * Math.pow(0.74, Number($("tempo").value) - 1));
 
   let bieg = null;
   $("rejsStart").addEventListener("click", () => {
@@ -239,6 +273,6 @@ export default function init(root) {
     bieg = setInterval(krok, msNaDzien());
   });
 
-  $("tempoO").textContent = podstaw(n.tempoOdczyt, { s: (REJS.dni * msNaDzien() / 1000).toFixed(0) });
+  $("tempoO").textContent = czasRejsu();
   rysuj();
 }

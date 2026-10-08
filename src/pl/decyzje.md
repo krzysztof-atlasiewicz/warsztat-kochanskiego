@@ -235,3 +235,19 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Tempo przewijania jako nastawa**, nie stała w kodzie. Poprzednia wartość była zgadywanką.
 
 **Usterka znaleziona przy okazji:** oś obrotu okrętu i wahadła wskazywała punkt ze starego rysunku, przez co okręt kołysał się wokół miejsca poza własnym kadłubem i wyglądał, jakby się przewracał. Poprawione razem z przebudową.
+
+## 2026-10-09 — Cykl 20: trasa, źródło Richera i obsługa
+
+**Znalezione źródło pierwotne.** Jean Richer opisał wyprawę sam: *Observations astronomiques et physiques faites en l'isle de Caïenne*, wydane w pamiętnikach Akademii Królewskiej Nauk. Skan jest w Internet Archive, w domenie publicznej. To stąd pochodzi obserwacja, od której zaczyna się moduł — wahadło sekundowe musiało być w Kajennie krótsze niż w Paryżu. Moduł powołuje się teraz na relację bezpośrednio, tak samo jak cyrkiel na „Acta Eruditorum", a szyfr na *Technica curiosa*.
+
+**Nowa pozycja agendy A7:** skan nie ma rozpoznanego tekstu, więc nie da się go przeszukać i nie wiemy, na której stronie jest ta obserwacja ani jaką dokładnie wartość skrócenia podał Richer. Do przejrzenia wzrokowo, jak księga IX.
+
+**Trasa przestała być odcinkiem.** Rejs biegnie teraz łamaną przez wody iberyjskie, Wyspy Kanaryjskie i Wyspy Zielonego Przylądka, a stamtąd pasatem na zachód — tak jak żeglowano w tym kierunku w XVII wieku. Pozycja w danej dobie wynika z przebytej drogi, nie z różnicy szerokości, a temperatura z szerokości, nie z numeru doby. Skutek jest merytoryczny, nie tylko graficzny: przez pierwsze trzy tygodnie okręt schodzi na południe powoli, więc i błąd narasta wolniej, a potem przyspiesza.
+
+**Zastrzeżenie bez zmian:** trasa jest odtworzona z praktyki żeglarskiej epoki, nie z dziennika pokładowego, i tak jest podpisana pod kartą.
+
+**Kontury wybrzeży** wykreślone z kilkunastu punktów — Zatoka Biskajska, Iberia, wybrzeże Afryki Zachodniej z wybrzuszeniem gwinejskim, Gujany i ujście Amazonki, plus Kanary i Wyspy Zielonego Przylądka. Orientacyjne i tak podpisane.
+
+**Tempo przewijania** przeszło na skalę wykładniczą: od trzech minut dwunastu sekund do trzynastu sekund na cały rejs, domyślnie minuta czterdzieści pięć. Poprzednia skala była i za szybka, i za ciasna.
+
+**Suwaki i pola wyboru** dostały mosiężną prowadnicę i radełkowany guzik, w tej samej konwencji co tarcza szyfrowa i wskaźniki. Pozostały natywnymi polami formularza, więc obsługa klawiaturą i czytnikiem ekranu jest nietknięta.

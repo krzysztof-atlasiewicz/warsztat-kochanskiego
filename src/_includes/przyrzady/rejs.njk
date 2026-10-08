@@ -20,7 +20,7 @@
     </svg>
     <div class="kalendarz-sterowanie">
       <div class="ctl"><label for="dzien" title="{{ s.rejs.opisy.dzien }}">{{ s.rejs.dzien }}</label><input type="range" id="dzien" min="0" max="74" step="1" value="74"><output id="dzienO">74</output></div>
-      <div class="ctl"><label for="tempo" title="{{ s.rejs.opisy.tempo }}">{{ s.rejs.tempo }}</label><input type="range" id="tempo" min="1" max="12" step="1" value="5"><output id="tempoO">—</output></div>
+      <div class="ctl"><label for="tempo" title="{{ s.rejs.opisy.tempo }}">{{ s.rejs.tempo }}</label><input type="range" id="tempo" min="1" max="10" step="1" value="3"><output id="tempoO">—</output></div>
       <p><button id="rejsStart" title="{{ s.rejs.opisy.odbij }}">{{ s.rejs.odbij }}</button></p>
     </div>
   </div>
@@ -87,11 +87,12 @@
     <defs><clipPath id="ramkaKarty"><rect x="40" y="40" width="680" height="330"/></clipPath></defs>
     <g id="siatka"></g>
     <g id="roza" clip-path="url(#ramkaKarty)"></g>
-    <line id="trasa" x1="0" y1="0" x2="0" y2="0" stroke="var(--rule)" stroke-width="1" stroke-dasharray="4 4"/>
+    <g id="lady" clip-path="url(#ramkaKarty)"></g>
+    <polyline id="trasa" fill="none" stroke="var(--mosiadz-ciemny)" stroke-width="1.4" stroke-dasharray="5 4" clip-path="url(#ramkaKarty)"/>
     <g id="porty"></g>
     <g id="pozycje" clip-path="url(#ramkaKarty)"></g>
-    <text class="t" x="40" y="398">{{ s.rejs.mapaLegenda }}</text>
   </svg>
+  <p class="dim małe">{{ s.rejs.mapaLegenda }}</p>
 </section>
 
 <section class="plansza">

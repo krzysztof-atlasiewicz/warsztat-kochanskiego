@@ -79,6 +79,18 @@
         "gnomon"
       ],
       "dotyczy": "warstwa ikonograficzna — medalion z Chronosem"
+    },
+    {
+      "id": "A7",
+      "pytanie": "Na której stronie relacji Richera opisane jest skrócenie wahadła sekundowego w Kajennie i jaka dokładnie wartość została podana?",
+      "dlaczego": "Moduł powołuje się na tę obserwację, a opieramy się na opracowaniach, nie na samej relacji. Skan nie ma rozpoznanego tekstu, więc nie da się go przeszukać.",
+      "zmieni": "Odnośnik otworzy się na właściwej stronie, a podana w module wartość skrócenia zyska oparcie w źródle.",
+      "zrodlo": "Observations astronomiques et physiques faites en l'isle de Caïenne, Mémoires de l'Académie Royale des Sciences t. VII",
+      "dotyczy": "zdanie o obserwacji Richera we wstępie przyrządu",
+      "miejsca": [
+        "rejs"
+      ],
+      "status": "otwarta"
     }
   ]
 }

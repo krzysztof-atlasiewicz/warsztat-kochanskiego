@@ -6,22 +6,60 @@ export function grawitacja(stopnie) {
 }
 
 // Rejs Jeana Richera: wyjście z La Rochelle 8 lutego 1672, przybycie do Kajenny
-// 22 kwietnia 1672 — siedemdziesiąt cztery dni. Długości geograficzne portów
-// potrzebne są do karty kursowej; trasa jest uproszczona do odcinka.
+// 22 kwietnia 1672 — siedemdziesiąt cztery dni.
 export const REJS = {
   latA: 46.16, lonA: -1.15, latB: 4.94, lonB: -52.33,
   dni: 74, tempA: 9.8, tempB: 27.8,
   wyplyniecie: "1672-02-08"
 };
-export const dlugoscDnia = (d) => REJS.lonA + (REJS.lonB - REJS.lonA) * (d / REJS.dni);
+
+// Trasa odtworzona z żeglarskiej praktyki epoki: zejście wzdłuż Półwyspu
+// Iberyjskiego, Wyspy Kanaryjskie, Wyspy Zielonego Przylądka i dopiero stamtąd
+// przejście na zachód pasatem. Nie jest to zapis z dziennika pokładowego.
+export const TRASA = [
+  [-1.15, 46.16], [-9.5, 43.2], [-14.0, 36.5], [-16.5, 28.5],
+  [-23.5, 15.5], [-32.0, 10.5], [-42.0, 7.0], [-52.33, 4.94]
+];
+
+const odcinek = (a, b) => {
+  const sr = ((a[1] + b[1]) / 2) * Math.PI / 180;
+  return Math.hypot((b[0] - a[0]) * Math.cos(sr), b[1] - a[1]);
+};
+const NARASTAJACO = TRASA.reduce((acc, p, i) => {
+  acc.push(i === 0 ? 0 : acc[i - 1] + odcinek(TRASA[i - 1], p));
+  return acc;
+}, []);
+export const DLUGOSC_TRASY = NARASTAJACO[NARASTAJACO.length - 1];
+
+// Położenie okrętu w danej dobie: punkt na trasie odłożony proporcjonalnie
+// do przebytej drogi, nie do różnicy szerokości.
+export function pozycjaDnia(d) {
+  const cel = (Math.min(Math.max(d, 0), REJS.dni) / REJS.dni) * DLUGOSC_TRASY;
+  for (let i = 1; i < TRASA.length; i++) {
+    if (cel <= NARASTAJACO[i] || i === TRASA.length - 1) {
+      const f = (cel - NARASTAJACO[i - 1]) / (NARASTAJACO[i] - NARASTAJACO[i - 1]);
+      const g = Math.min(Math.max(f, 0), 1);
+      return {
+        dlugosc: TRASA[i - 1][0] + (TRASA[i][0] - TRASA[i - 1][0]) * g,
+        szerokosc: TRASA[i - 1][1] + (TRASA[i][1] - TRASA[i - 1][1]) * g
+      };
+    }
+  }
+  return { dlugosc: REJS.lonB, szerokosc: REJS.latB };
+}
+
+export const szerokoscDnia = (d) => pozycjaDnia(d).szerokosc;
+export const dlugoscDnia = (d) => pozycjaDnia(d).dlugosc;
+// Temperatura wynika z szerokości, nie z numeru doby.
+export const temperaturaSzerokosci = (lat) =>
+  REJS.tempA + (REJS.tempB - REJS.tempA) * (REJS.latA - lat) / (REJS.latA - REJS.latB);
+export const temperaturaDnia = (d) => temperaturaSzerokosci(szerokoscDnia(d));
+
 export function dataDnia(d) {
   const t = new Date(Date.UTC(1672, 1, 8));
   t.setUTCDate(t.getUTCDate() + d);
   return t;
 }
-
-export const szerokoscDnia = (d) => REJS.latA + (REJS.latB - REJS.latA) * (d / REJS.dni);
-export const temperaturaDnia = (d) => REJS.tempA + (REJS.tempB - REJS.tempA) * (d / REJS.dni);
 
 export function przebiegRejsu({ kolysanie = 5, kompensacja = false } = {}) {
   const th = ((3 + kolysanie) * Math.PI) / 180;
@@ -32,10 +70,10 @@ export function przebiegRejsu({ kolysanie = 5, kompensacja = false } = {}) {
   let cp = 0, cs = 0;
   const wynik = [];
   for (let d = 0; d <= REJS.dni; d++) {
-    const la = szerokoscDnia(d), tp = temperaturaDnia(d);
+    const poz = pozycjaDnia(d), la = poz.szerokosc, tp = temperaturaSzerokosci(la);
     const f = 0.4638 * Math.cos((la * Math.PI) / 180);
     wynik.push({
-      dzien: d, szerokosc: la, dlugosc: dlugoscDnia(d), temperatura: tp,
+      dzien: d, szerokosc: la, dlugosc: poz.dlugosc, temperatura: tp,
       kmWahadlo: Math.abs(cp) * f, kmSprezyna: Math.abs(cs) * f,
       dryfWahadlo: 86400 * ((Math.sqrt(g0 / grawitacja(la)) - 1) + (th * th - th0 * th0) / 16) + 0.5 * (tp - t0),
       dryfSprezyna: kT * (tp - t0)

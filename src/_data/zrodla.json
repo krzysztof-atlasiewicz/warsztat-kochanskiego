@@ -43,5 +43,19 @@
       "Technica curiosa"
     ],
     "uwaga": "Pełny skan tomu, egzemplarz Getty Research Institute. Druk ukazał się w Norymberdze u Endterów, choć Schott pracował w Würzburgu. Księga IX „Mirabilia Chronometrica” zaczyna się na stronie drukowanej 620, czyli około 748 skanu — odnośnik otwiera się w tym miejscu. Zapis szyfrowy nie został w tym egzemplarzu odnaleziony; szczegóły w pozycji A2 agendy."
+  },
+  "richer-1729": {
+    "autor": "Jean Richer",
+    "tytul": "Observations astronomiques et physiques faites en l'isle de Caïenne",
+    "w": "Mémoires de l'Académie Royale des Sciences",
+    "rok": 1729,
+    "tom": 7,
+    "strony": null,
+    "instytucja": "Internet Archive",
+    "url": "https://archive.org/details/richer-mmoiresdelacad-07pari",
+    "osadzenie": "https://archive.org/embed/richer-mmoiresdelacad-07pari",
+    "licencja": "Public Domain Mark 1.0",
+    "frazy": [],
+    "uwaga": "Własna relacja Richera z wyprawy do Kajenny, wydana w zbiorze pamiętników Akademii. To tutaj opisane jest skrócenie wahadła sekundowego względem Paryża — obserwacja, od której zaczyna się moduł. Skan nie ma rozpoznanego tekstu, więc strony tej obserwacji jeszcze nie ustaliliśmy; pozycja A7 agendy."
   }
 }
