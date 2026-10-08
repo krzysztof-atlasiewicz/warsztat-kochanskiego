@@ -164,6 +164,21 @@ const KONTROLE = {
     return bledy;
   },
 
+  ikony() {
+    const bledy = [];
+    const pliki = ["favicon.svg", "ikony/favicon-32.png", "ikony/favicon.ico", "ikony/apple-touch-icon.png"];
+    for (const f of pliki) {
+      try { statSync(join("_site/assets", f)); }
+      catch { bledy.push(`brak pliku znaku _site/assets/${f} — uruchom npm run libs`); }
+    }
+    for (const p of zbudowane()) {
+      const t = czytaj(p);
+      if (t.includes("http-equiv=\"refresh\"") || p.endsWith("_site/404.html")) continue;
+      if (!/rel="icon"[^>]*favicon\.svg/.test(t)) bledy.push(`${p}: strona nie podpina znaku`);
+    }
+    return bledy;
+  },
+
   kroje() {
     const katalog = "src/assets/fonts";
     const wymagane = ["EBGaramond.woff2", "EBGaramond-Italic.woff2", "IBMPlexMono.woff2"];

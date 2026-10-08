@@ -86,6 +86,12 @@
         "opis": "Konfiguracja wdrożenia zgadza się z adresem serwisu",
         "typ": "automat",
         "kontrola": "wdrozenie"
+      },
+      {
+        "id": "GA13",
+        "opis": "Znak graficzny obecny i podpięty na każdej stronie",
+        "typ": "automat",
+        "kontrola": "ikony"
       }
     ]
   },

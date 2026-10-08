@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Warsztat Kochańskiego">
+<title>Okrąg zamieniony w odcinek</title>
+<style>
+  :root { color-scheme: light dark; }
+  .tlo  { fill: #DFE3DE; }
+  .ink  { stroke: #16202B; }
+  .sun  { stroke: #8A6B2F; }
+  @media (prefers-color-scheme: dark) {
+    .tlo { fill: #141A1E; }
+    .ink { stroke: #DDE3DD; }
+    .sun { stroke: #C79B4A; }
+  }
+</style>
+<rect class="tlo" width="32" height="32" rx="4"/>
+<g fill="none" stroke-width="2" stroke-linecap="round">
+  <circle class="ink" cx="11" cy="17" r="7.5"/>
+  <line class="ink" x1="3" y1="25" x2="29" y2="25"/>
+  <line class="sun" x1="11" y1="9.5" x2="27" y2="25"/>
+</g>
+</svg>

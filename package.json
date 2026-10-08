@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "libs": "node scripts/copy-libs.mjs",
+    "libs": "node scripts/copy-libs.mjs && node scripts/ikony.mjs",
     "build": "npm run libs && eleventy",
     "dev": "npm run libs && eleventy --serve",
     "test": "vitest run",
@@ -19,6 +19,7 @@
     "@11ty/eleventy": "^3.0.0",
     "esbuild": "^0.28.2",
     "jsdom": "^26.0.0",
+    "sharp": "^0.35.5",
     "vitest": "^3.0.0"
   },
   "dependencies": {

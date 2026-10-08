@@ -113,3 +113,13 @@ Przycisk „Dalej" na ostatnim kroku sugerował ciąg dalszy. Oba przyciski są 
 Wzory zapisane znakiem pierwiastka łamały się w składzie. Przeszły na MathML, obsługiwany natywnie przez przeglądarki, bez zewnętrznej biblioteki.
 
 **Uzupełnienie treści:** brakowało wyprowadzenia wzoru z konstrukcji. Dodano pięciokrokowe wyprowadzenie w obu językach, zwijane, z jawnym zastrzeżeniem, że rachunek jest nasz — Kochański podał konstrukcję i wynik, nie tę algebrę.
+
+## 2026-10-08 — Cykl 10: znak graficzny
+
+**Decyzja:** znakiem serwisu jest sama konstrukcja Kochańskiego sprowadzona do trzech elementów — okrąg styczny do prostej i odcinek biegnący od szczytu okręgu do punktu na tej prostej.
+
+**Uzasadnienie:** znak ma działać przy szesnastu pikselach, więc nie może przedstawiać cyrkla, zegara ani portretu. Okrąg, prosta i odcinek to dokładnie to, o czym jest cały serwis: zamiana krzywej na długość, którą da się odmierzyć. Czytelne w rozmiarze zakładki, a dla kogoś, kto widział moduł cyrkla, rozpoznawalne jako jego streszczenie.
+
+**Wykonanie:** jedno źródło w SVG, z wariantem dla ciemnego motywu. Warianty rastrowe — PNG 32 i 180 oraz ICO z osadzonym PNG — powstają przy każdym budowaniu ze źródła, więc znak i jego odbitki nie mogą się rozejść. Pliki rastrowe nie wchodzą do repozytorium, bo są wytwarzane.
+
+**Skutek:** kontrola `ikony` sprawdza obecność czterech plików i podpięcie znaku na każdej zbudowanej stronie, łącznie z wersjami osadzalnymi. Warunek bramki GA13.
