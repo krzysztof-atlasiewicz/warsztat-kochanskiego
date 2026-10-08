@@ -89,3 +89,13 @@ Każda decyzja merytoryczna: data, treść, uzasadnienie, skutek. Dokument publi
 **Znalezione przy okazji:** Henryk Fukś, równoległy tekst łaciński z przekładem angielskim i przypisami (*Antiquitates Mathematicae* 9:31–65, 2015, preprint na arXiv). To gotowa warstwa transkrypcji, której w projekcie brakowało. Wpisana do rejestru ze statusem licencji „do ustalenia" — nie wykorzystujemy jej, dopóki warunki nie będą znane.
 
 **Zasada:** pozycja bez ustalonego skanu renderuje się jako zwykły tekst, nie jako odnośnik. *Technica curiosa* nie ma jeszcze zlokalizowanego skanu i pozostaje tekstem — pozycja A2 agendy.
+
+## 2026-10-08 — Cykl 8: konfiguracja wdrożenia pod kontrolą
+
+**Zdarzenie:** nadpisanie katalogu projektu nowym archiwum skasowało ustawienia, które istniały wyłącznie na maszynie roboczej — deklarację domeny własnej, datę zgodności i adres serwisu. Wdrożenie przeszło, ale pod adresem roboczym `workers.dev`, a mapa witryny wskazywała adres zastępczy.
+
+**Drugi błąd, w poprawce:** klucze `workers_dev` i `preview_urls` dopisane na koniec pliku trafiły do tabeli `[assets]`, bo w TOML klucz po nagłówku tabeli należy do niej. Wrangler zgłosił to jako nieznane pola, a wyłączenie adresu roboczego zadziałało tylko dlatego, że taka jest wartość domyślna — konfiguracja nie deklarowała niczego.
+
+**Wniosek:** ustawienia wdrożenia nie mogą istnieć wyłącznie na jednej maszynie. Wszystkie trafiły do repozytorium.
+
+**Skutek:** kontrola `wdrozenie` sprawdza, czy `workers_dev` i `preview_urls` są wyłączone i stoją na poziomie głównym pliku, czy zadeklarowana jest domena własna, oraz czy adres w danych serwisu zgadza się z domeną wdrożenia. Ta ostatnia zgodność jest sednem — to jej brak sprawił, że mapa witryny wskazywała gdzie indziej, niż serwis stoi. Kontrola ma test negatywny: klucz umieszczony w złej tabeli zostaje wykryty.

@@ -80,6 +80,12 @@
         "opis": "Wzmianki o źródłach z ustalonym skanem są podlinkowane",
         "typ": "automat",
         "kontrola": "zrodla"
+      },
+      {
+        "id": "GA12",
+        "opis": "Konfiguracja wdrożenia zgadza się z adresem serwisu",
+        "typ": "automat",
+        "kontrola": "wdrozenie"
       }
     ]
   },

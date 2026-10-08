@@ -133,6 +133,37 @@ const KONTROLE = {
     return bledy;
   },
 
+  wdrozenie() {
+    const bledy = [];
+    let konf;
+    try { konf = czytaj("wrangler.toml"); } catch { return ["brak pliku wrangler.toml"]; }
+
+    // Klucz podany po nagłówku tabeli trafia do tej tabeli, nie na poziom główny.
+    const naPoziomieGlownym = (klucz) => {
+      const i = konf.indexOf(`${klucz} =`);
+      if (i < 0) return false;
+      return !/\n\[/.test(konf.slice(0, i));
+    };
+    for (const k of ["workers_dev", "preview_urls"]) {
+      if (!konf.includes(`${k} =`)) bledy.push(`wrangler.toml: brak ${k} — wdrożenie zależy od wartości domyślnej`);
+      else if (!naPoziomieGlownym(k)) bledy.push(`wrangler.toml: ${k} stoi po nagłówku tabeli, więc trafia do niej zamiast na poziom główny`);
+      else if (!new RegExp(`${k}\\s*=\\s*false`).test(konf)) bledy.push(`wrangler.toml: ${k} nie jest wyłączone`);
+    }
+
+    const domena = konf.match(/pattern\s*=\s*"([^"]+)"/)?.[1];
+    if (!domena) bledy.push("wrangler.toml: brak zadeklarowanej domeny własnej");
+    if (!/custom_domain\s*=\s*true/.test(konf)) bledy.push("wrangler.toml: domena nie jest oznaczona jako custom_domain");
+
+    // Adres w danych serwisu musi zgadzać się z domeną wdrożenia — inaczej
+    // mapa witryny i robots.txt wskażą gdzie indziej niż serwis stoi.
+    const adres = czytaj("src/_data/site.js").match(/adres:[^"]*"([^"]+)"/)?.[1];
+    if (!adres) bledy.push("src/_data/site.js: nie udało się odczytać adresu serwisu");
+    else if (/example/.test(adres)) bledy.push(`src/_data/site.js: adres zastępczy ${adres}`);
+    else if (domena && !adres.includes(domena)) bledy.push(`adres serwisu ${adres} nie zgadza się z domeną wdrożenia ${domena}`);
+
+    return bledy;
+  },
+
   kroje() {
     const katalog = "src/assets/fonts";
     const wymagane = ["EBGaramond.woff2", "EBGaramond-Italic.woff2", "IBMPlexMono.woff2"];
