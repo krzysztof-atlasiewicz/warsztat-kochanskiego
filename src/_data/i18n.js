@@ -30,7 +30,9 @@ export default {
       opisWykres: "Skumulowany błąd pozycji obu zegarów w kolejnych dniach rejsu oraz profil szerokości geograficznej trasy."
     },
     szyfr: {
-      obrot: "Obrót",
+      obrot: "Obrót pierścienia",
+      sterowanie: "Chwyć pierścień i obróć go, przewiń nad nim kółkiem myszy albo — po ustawieniu na nim kursora klawiaturą — użyj strzałek. Liczba w środku pokazuje, o ile pozycji pierścień jest przekręcony.",
+      wartoscTarczy: "przekręcony o {n} pozycji",
       jawny: "Wiadomość",
       jawnyPodpowiedz: "Wpisz tekst, a obok pojawi się zapis szyfrowy",
       zapis: "Zapis szyfrowy",
@@ -63,6 +65,7 @@ export default {
         schowekNie: "Przeglądarka nie udostępniła schowka — zaznacz tekst i skopiuj ręcznie.",
         wczytano: "Wczytano zapis z księgi IX. Klucz to liczba godzin na tarczy.",
         zOdnosnika: "Zapis wczytany z odnośnika. Klucza w nim nie ma — spróbuj go złamać.",
+        wartoscTarczy: "przekręcony o {n} pozycji",
         para: "{a} w wiadomości zapisuje się jako {b} — o {n} pozycji dalej na tarczy.",
         paraOpis: "{a} zapisuje się jako {b}",
         paraBrak: "Podświetlone kolumny to litery, które faktycznie występują w twojej wiadomości.",
@@ -117,7 +120,9 @@ export default {
       opisWykres: "Cumulative position error of both clocks over the days of the voyage, with the latitude profile of the route."
     },
     szyfr: {
-      obrot: "Rotation",
+      obrot: "Ring rotation",
+      sterowanie: "Grab the ring and turn it, scroll over it with the mouse wheel, or focus it with the keyboard and use the arrow keys. The number in the centre is how many positions the ring is turned by.",
+      wartoscTarczy: "turned by {n} positions",
       jawny: "Message",
       jawnyPodpowiedz: "Type here and the cipher text appears beside it",
       zapis: "Cipher text",
@@ -150,6 +155,7 @@ export default {
         schowekNie: "The browser refused clipboard access — select the text and copy it by hand.",
         wczytano: "Loaded the record from book IX. The key is the number of hours on a dial.",
         zOdnosnika: "Cipher text loaded from a link. The key is not in it — try breaking it.",
+        wartoscTarczy: "turned by {n} positions",
         para: "{a} in the message is written as {b} — {n} positions further round the dial.",
         paraOpis: "{a} is written as {b}",
         paraBrak: "The highlighted columns are the letters that actually occur in your message.",

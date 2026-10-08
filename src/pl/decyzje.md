@@ -181,3 +181,15 @@ Przyciski dostały opisy w dymkach — co dokładnie robią i, w przypadku odno�
 Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąco z wpisanego zapisu, nie na przykładzie: liczba liter, najczęstsza litera zapisu, najczęstsza litera języka, wynikający z nich pierwszy kandydat, ranking trzech najlepszych obrotów z ocenami i odczyt.
 
 **Rzecz, której nie ukrywamy:** przy zapisie z 1664 roku pierwszy kandydat wskazuje obrót 25, a prawidłowy jest 12. Pojedyncza litera myli przy krótkim tekście, ocena całego odczytu już nie. Wykład dopisuje to zdanie sam, kiedy kandydat przegrywa — metoda pokazana wraz z jej zawodnością uczy więcej niż metoda pokazana wyłącznie na przykładzie, w którym akurat działa.
+
+## 2026-10-08 — Cykl 16: tarcza obracana wprost
+
+**Decyzja:** suwak pod tarczą znika. Pierścień obraca się przez chwycenie go wskaźnikiem, przewinięcie kółkiem myszy albo strzałkami po ustawieniu na nim kursora klawiaturą.
+
+**Uzasadnienie:** suwak był obcym elementem w przyrządzie, który z definicji jest kołem. Obracanie poziomego paska, żeby obrócić tarczę, wymagało od użytkownika przekładu, którego tu nie powinno być.
+
+**Dostępność:** tarcza ma rolę suwaka, wartość i opis słowny aktualizowany przy każdym ruchu, więc czytnik ekranu zapowiada „przekręcony o dwanaście pozycji" zamiast odczytywać liczbę bez kontekstu. Obsługa strzałkami, PageUp i PageDown, Home i End. Ani jedna funkcja nie wymaga myszy.
+
+**Forma:** tarcza przeszła na konwencję przyrządu warsztatowego — mosiężna oprawa z radełkowaną krawędzią, grawerowana płyta z czterema wkrętami, podziałka między literami, gilosz pod piastą, wskazówka na ruchomym pierścieniu pokazująca, o ile jest przekręcony. Litery zapisu w kroju szeryfowym, litery wiadomości kursywą — różnica pierścieni jest teraz widoczna bez czytania opisu. Paleta reaguje na ciemny motyw.
+
+**Rzecz do zapamiętania przy renderowaniu podglądów:** rasteryzator nie rozwiązuje zmiennych CSS w atrybutach, więc obrazek wychodzi czarny, dopóki nie podstawi się wartości wprost. Nie jest to usterka serwisu, tylko pułapka narzędzia.

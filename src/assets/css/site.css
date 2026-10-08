@@ -121,3 +121,25 @@ math{font-size:1.05em}
 .litera{cursor:pointer}
 .litera.wyrozniona{font-weight:600}
 #krokiLista li{margin:.45rem 0;font-size:.95rem}
+
+/* ── tarcza szyfrowa w konwencji przyrządu warsztatowego ───────────────── */
+:root{
+  --mosiadz-jasny:#D8BE86; --mosiadz-ciemny:#8A6B2F;
+  --plyta-jasna:#EDEBE4;   --plyta-ciemna:#D9DBD2;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --mosiadz-jasny:#9A7D3C; --mosiadz-ciemny:#C79B4A;
+    --plyta-jasna:#232B30;   --plyta-ciemna:#161D21;
+  }
+}
+.tarcza-zegarmistrzowska{max-width:420px;cursor:grab;touch-action:none;user-select:none}
+.tarcza-zegarmistrzowska.ciagniety{cursor:grabbing}
+.tarcza-zegarmistrzowska:focus-visible{outline:2px solid var(--verd);outline-offset:3px}
+.tarcza-zegarmistrzowska .litera{font-family:var(--serif);font-size:15px;cursor:pointer}
+.tarcza-zegarmistrzowska .litera.zewnetrzna{fill:var(--ink)}
+.tarcza-zegarmistrzowska .litera.wewnetrzna{fill:var(--sun);font-style:italic}
+.tarcza-zegarmistrzowska .litera.wyrozniona{fill:var(--verd);font-weight:600}
+.srodek-liczba{font-family:var(--mono);font-size:17px;fill:var(--plyta-jasna)}
+@media (prefers-color-scheme:dark){ .srodek-liczba{fill:var(--ink)} }
+.tarcza-podpowiedz{margin:.6rem 0 0}
