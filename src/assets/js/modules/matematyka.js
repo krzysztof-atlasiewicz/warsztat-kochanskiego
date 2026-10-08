@@ -5,7 +5,20 @@ export function grawitacja(stopnie) {
   return 9.780327 * (1 + 0.0053024 * Math.sin(p) ** 2 - 0.0000058 * Math.sin(2 * p) ** 2);
 }
 
-export const REJS = { latA: 46.16, latB: 4.94, dni: 64, tempA: 9.8, tempB: 27.8 };
+// Rejs Jeana Richera: wyjście z La Rochelle 8 lutego 1672, przybycie do Kajenny
+// 22 kwietnia 1672 — siedemdziesiąt cztery dni. Długości geograficzne portów
+// potrzebne są do karty kursowej; trasa jest uproszczona do odcinka.
+export const REJS = {
+  latA: 46.16, lonA: -1.15, latB: 4.94, lonB: -52.33,
+  dni: 74, tempA: 9.8, tempB: 27.8,
+  wyplyniecie: "1672-02-08"
+};
+export const dlugoscDnia = (d) => REJS.lonA + (REJS.lonB - REJS.lonA) * (d / REJS.dni);
+export function dataDnia(d) {
+  const t = new Date(Date.UTC(1672, 1, 8));
+  t.setUTCDate(t.getUTCDate() + d);
+  return t;
+}
 
 export const szerokoscDnia = (d) => REJS.latA + (REJS.latB - REJS.latA) * (d / REJS.dni);
 export const temperaturaDnia = (d) => REJS.tempA + (REJS.tempB - REJS.tempA) * (d / REJS.dni);
@@ -22,7 +35,7 @@ export function przebiegRejsu({ kolysanie = 5, kompensacja = false } = {}) {
     const la = szerokoscDnia(d), tp = temperaturaDnia(d);
     const f = 0.4638 * Math.cos((la * Math.PI) / 180);
     wynik.push({
-      dzien: d, szerokosc: la, temperatura: tp,
+      dzien: d, szerokosc: la, dlugosc: dlugoscDnia(d), temperatura: tp,
       kmWahadlo: Math.abs(cp) * f, kmSprezyna: Math.abs(cs) * f,
       dryfWahadlo: 86400 * ((Math.sqrt(g0 / grawitacja(la)) - 1) + (th * th - th0 * th0) / 16) + 0.5 * (tp - t0),
       dryfSprezyna: kT * (tp - t0)

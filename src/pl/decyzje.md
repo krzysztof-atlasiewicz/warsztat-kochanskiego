@@ -221,3 +221,17 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Rejs się odbywa.** Przycisk przewija 64 dni, a suwak startuje na końcu trasy, nie na dniu zerowym — dotąd użytkownik widział na wejściu same zera i nie miał powodu niczego dotykać.
 
 **Dymki** przy każdej nastawie i każdym odczycie.
+
+## 2026-10-09 — Cykl 19: moduł rejsu jako zestaw przyrządów
+
+**Zmiana podejścia.** Dane liczbowe zastąpiono przyrządami, z których każdy ma własny nagłówek i zdanie wyjaśniające, co pokazuje i dlaczego to istotne. Moduł przestaje być tabelą z wykresem, a staje się pokładem okrętu.
+
+**Rejs osadzony w rzeczywistych datach.** Richer wyszedł z La Rochelle 8 lutego 1672 i dobił do Kajenny 22 kwietnia — siedemdziesiąt cztery doby, nie sześćdziesiąt cztery, jak zakładał dotychczasowy model. Kartka kalendarza pokazuje faktyczną datę każdej doby.
+
+**Karta kursowa zamiast liczby kilometrów.** Czarny punkt to rzeczywiste położenie okrętu, kółka to pozycje wyliczone z każdego z zegarów. Przesunięcie następuje wyłącznie wzdłuż równoleżnika i to jest sedno: szerokość geograficzną wyznacza się ze Słońca, więc błąd zegara nie rusza jej wcale. Kierunek przesunięcia też nie jest dowolny — zegar spóźniony każe nawigatorowi sądzić, że jest bliżej Europy, niż jest naprawdę.
+
+**Przyrządy.** Termometr słupkowy, dwa wskaźniki tarczowe dobowej odchyłki w konwencji mosiężnej oprawy, z podziałką zagęszczoną przy zerze, żeby małe wartości pozostały czytelne. Galeon z zegarem wahadłowym w nadbudówce rufowej, pokazanym w przekroju; wysokość fali i przechył pokładu reagują na nastawę stanu morza, który dostał też nazwy stanów zamiast samych stopni.
+
+**Tempo przewijania jako nastawa**, nie stała w kodzie. Poprzednia wartość była zgadywanką.
+
+**Usterka znaleziona przy okazji:** oś obrotu okrętu i wahadła wskazywała punkt ze starego rysunku, przez co okręt kołysał się wokół miejsca poza własnym kadłubem i wyglądał, jakby się przewracał. Poprawione razem z przebudową.
