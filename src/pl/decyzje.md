@@ -99,3 +99,17 @@ Każda decyzja merytoryczna: data, treść, uzasadnienie, skutek. Dokument publi
 **Wniosek:** ustawienia wdrożenia nie mogą istnieć wyłącznie na jednej maszynie. Wszystkie trafiły do repozytorium.
 
 **Skutek:** kontrola `wdrozenie` sprawdza, czy `workers_dev` i `preview_urls` są wyłączone i stoją na poziomie głównym pliku, czy zadeklarowana jest domena własna, oraz czy adres w danych serwisu zgadza się z domeną wdrożenia. Ta ostatnia zgodność jest sednem — to jej brak sprawił, że mapa witryny wskazywała gdzie indziej, niż serwis stoi. Kontrola ma test negatywny: klucz umieszczony w złej tabeli zostaje wykryty.
+
+## 2026-10-08 — Cykl 9: poprawki modułu cyrkla
+
+**Uwagi z przeglądu wdrożonej strony i ich rozstrzygnięcia:**
+
+Odnośnik do skanu wyprowadzał czytelnika z serwisu. Skan otwiera się teraz w okienku nad stroną, z paskiem opisu bibliograficznego i odsyłaczem do pełnej wersji w nowej karcie. Odnośnik pozostał zwykłym odnośnikiem — bez skryptu, przy otwarciu w nowej karcie i przy kliknięciu środkowym przyciskiem działa jak dotąd. Zasady bezpieczeństwa treści rozszerzono o ramkę z archive.org i o nic więcej.
+
+Rysunek konstrukcji zajmował ułamek dostępnego pola. Układ współrzędnych powiększono dwukrotnie, do obszaru 760 na 540, przy niezmienionym rozmiarze opisów.
+
+Przycisk „Dalej" na ostatnim kroku sugerował ciąg dalszy. Oba przyciski są teraz wygaszane na krańcach.
+
+Wzory zapisane znakiem pierwiastka łamały się w składzie. Przeszły na MathML, obsługiwany natywnie przez przeglądarki, bez zewnętrznej biblioteki.
+
+**Uzupełnienie treści:** brakowało wyprowadzenia wzoru z konstrukcji. Dodano pięciokrokowe wyprowadzenie w obu językach, zwijane, z jawnym zastrzeżeniem, że rachunek jest nasz — Kochański podał konstrukcję i wynik, nie tę algebrę.

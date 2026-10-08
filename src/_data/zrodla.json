@@ -9,8 +9,11 @@
     "instytucja": "Wellcome Library / Internet Archive",
     "url": "https://archive.org/details/s1id13206510/page/394/mode/2up",
     "licencja": "Public Domain Mark 1.0",
-    "frazy": ["Acta Eruditorum"],
-    "uwaga": "Skan rocznika 1685. Odnośnik otwiera się na stronie 394. Egzemplarz ma odnotowany błąd paginacji w dalszej części tomu, więc otwarcie trzeba sprawdzić wzrokowo przed powołaniem się na konkretną stronę."
+    "frazy": [
+      "Acta Eruditorum"
+    ],
+    "uwaga": "Skan rocznika 1685. Odnośnik otwiera się na stronie 394. Egzemplarz ma odnotowany błąd paginacji w dalszej części tomu, więc otwarcie trzeba sprawdzić wzrokowo przed powołaniem się na konkretną stronę.",
+    "osadzenie": "https://archive.org/embed/s1id13206510/page/394/mode/2up"
   },
   "fuks-2015": {
     "autor": "Henryk Fukś",
@@ -35,7 +38,9 @@
     "instytucja": null,
     "url": null,
     "licencja": null,
-    "frazy": ["Technica curiosa"],
+    "frazy": [
+      "Technica curiosa"
+    ],
     "uwaga": "Skan nieustalony. Pozycja A2 agendy badawczej."
   }
 }

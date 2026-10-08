@@ -34,7 +34,8 @@ export default function (eleventyConfig) {
     if (!z.url) return napis;
     const opis = [z.autor, z.tytul, z.w, z.rok, z.strony ? `s. ${z.strony}` : null]
       .filter(Boolean).join(", ");
-    return `<a class="zrodlo" href="${z.url}" rel="noopener" title="${opis}">${napis}</a>`;
+    const osadz = z.osadzenie ? ` data-osadzenie="${z.osadzenie}" data-opis="${opis}"` : "";
+    return `<a class="zrodlo" href="${z.url}" rel="noopener" title="${opis}"${osadz}>${napis}</a>`;
   });
 
   // Automatyczne podlinkowanie wzmianek w tekście pochodzącym z danych.

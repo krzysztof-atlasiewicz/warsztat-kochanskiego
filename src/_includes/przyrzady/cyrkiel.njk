@@ -1,32 +1,32 @@
 {% set s = i18n[jezyk] %}
 <div class="stage">
-<svg viewBox="0 0 380 300" role="img" aria-describedby="o-cyrkiel">
+<svg class="duza" viewBox="0 0 760 540" role="img" aria-describedby="o-cyrkiel">
 <desc id="o-cyrkiel">{{ s.cyrkiel.opis }}</desc>
-<circle id="k1" cx="100" cy="150" r="70" fill="none" stroke="var(--ink)" stroke-width="1.1"/>
-<line id="k1b" x1="100" y1="80" x2="100" y2="220" stroke="var(--rule)" stroke-width="1" stroke-dasharray="3 3"/>
-<circle cx="100" cy="150" r="2.2" fill="var(--ink-soft)"/>
-<circle id="ptB" cx="100" cy="80" r="2.8" fill="var(--ink)"/>
-<circle id="ptA" cx="100" cy="220" r="2.8" fill="var(--ink)"/>
-<text class="t" x="86" y="76">B</text><text class="t" x="86" y="238">A</text><text class="t" x="108" y="146">O</text>
-<line id="k2" x1="40" y1="220" x2="345" y2="220" stroke="var(--ink)" stroke-width="1" opacity="0"/>
-<line id="k3" x1="100" y1="150" x2="59.6" y2="220" stroke="var(--verd)" stroke-width="1.2" opacity="0"/>
-<path id="k3a" d="M 100 185 A 35 35 0 0 1 82.5 180" fill="none" stroke="var(--verd)" stroke-width="1" opacity="0"/>
-<text id="k3l" class="t" x="104" y="198" opacity="0">30°</text>
-<circle id="ptC" cx="59.6" cy="220" r="2.8" fill="var(--verd)" opacity="0"/>
-<text id="lC" class="t" x="50" y="238" opacity="0">C</text>
-<line id="k4" x1="59.6" y1="220" x2="269.6" y2="220" stroke="var(--verd)" stroke-width="2.2" opacity="0"/>
-<line id="k4a" x1="129.6" y1="214" x2="129.6" y2="226" stroke="var(--verd)" stroke-width="1" opacity="0"/>
-<line id="k4b" x1="199.6" y1="214" x2="199.6" y2="226" stroke="var(--verd)" stroke-width="1" opacity="0"/>
-<circle id="ptD" cx="269.6" cy="220" r="2.8" fill="var(--verd)" opacity="0"/>
-<text id="lD" class="t" x="264" y="238" opacity="0">D</text>
-<text id="l3r" class="t" x="155" y="252" opacity="0">3r</text>
-<line id="k5" x1="100" y1="80" x2="269.6" y2="220" stroke="var(--sun)" stroke-width="2.2" opacity="0"/>
-<text id="l5" class="tb" x="196" y="128" opacity="0" fill="var(--sun)">BD ≈ πr</text>
+<circle id="k1" cx="200" cy="300" r="140" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+<line id="k1b" x1="200" y1="160" x2="200" y2="440" stroke="var(--rule)" stroke-width="1.4" stroke-dasharray="5 5"/>
+<circle cx="200" cy="300" r="4" fill="var(--ink-soft)"/>
+<circle id="ptB" cx="200" cy="160" r="5" fill="var(--ink)"/>
+<circle id="ptA" cx="200" cy="440" r="5" fill="var(--ink)"/>
+<text class="t" x="172" y="152">B</text><text class="t" x="172" y="476">A</text><text class="t" x="216" y="292">O</text>
+<line id="k2" x1="80" y1="440" x2="690" y2="440" stroke="var(--ink)" stroke-width="1.4" opacity="0"/>
+<line id="k3" x1="200" y1="300" x2="119.2" y2="440" stroke="var(--verd)" stroke-width="1.8" opacity="0"/>
+<path id="k3a" d="M 200 370 A 70 70 0 0 1 165 360" fill="none" stroke="var(--verd)" stroke-width="1.4" opacity="0"/>
+<text id="k3l" class="t" x="208" y="396" opacity="0">30°</text>
+<circle id="ptC" cx="119.2" cy="440" r="5" fill="var(--verd)" opacity="0"/>
+<text id="lC" class="t" x="100" y="476" opacity="0">C</text>
+<line id="k4" x1="119.2" y1="440" x2="539.2" y2="440" stroke="var(--verd)" stroke-width="3.2" opacity="0"/>
+<line id="k4a" x1="259.2" y1="428" x2="259.2" y2="452" stroke="var(--verd)" stroke-width="1.4" opacity="0"/>
+<line id="k4b" x1="399.2" y1="428" x2="399.2" y2="452" stroke="var(--verd)" stroke-width="1.4" opacity="0"/>
+<circle id="ptD" cx="539.2" cy="440" r="5" fill="var(--verd)" opacity="0"/>
+<text id="lD" class="t" x="528" y="476" opacity="0">D</text>
+<text id="l3r" class="t" x="310" y="504" opacity="0">3r</text>
+<line id="k5" x1="200" y1="160" x2="539.2" y2="440" stroke="var(--sun)" stroke-width="3.2" opacity="0"/>
+<text id="l5" class="tb" x="392" y="256" opacity="0" fill="var(--sun)">BD ≈ πr</text>
 </svg>
 </div>
 
-<p><button id="cofnij">{{ s.cyrkiel.cofnij }}</button> <button id="dalej">{{ s.cyrkiel.dalej }}</button></p>
-<p id="opis" data-kroki='{{ s.cyrkiel.krok | dump }}' aria-live="polite">{{ s.cyrkiel.krok[0] }}</p>
+<p class="kroki-sterowanie"><button id="cofnij">{{ s.cyrkiel.cofnij }}</button> <button id="dalej">{{ s.cyrkiel.dalej }}</button></p>
+<p id="opis" data-kroki='{{ s.cyrkiel.krok | dump }}' aria-live="polite">{{ s.cyrkiel.krok[0] | safe }}</p>
 
 <div id="panel" class="hide">
 <div class="ctl"><label for="promien">{{ s.cyrkiel.promien }}</label><input type="range" id="promien" min="10" max="2000" step="10" value="150"><output id="promienO">150 mm</output></div>
@@ -35,3 +35,4 @@
 <div><dt>{{ s.cyrkiel.prawdziwe }}</dt><dd id="w2">—</dd></div>
 <div><dt>{{ s.cyrkiel.blad }}</dt><dd id="w3">—</dd></div>
 </dl>
+</div>

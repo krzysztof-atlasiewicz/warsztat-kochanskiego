@@ -15,7 +15,7 @@ export default {
              "Krok 2 z 5 — styczna do okręgu w punkcie A.",
              "Krok 3 z 5 — ramię kąta 30° przy środku O przecina styczną w punkcie C.",
              "Krok 4 z 5 — od C odkładamy na stycznej trzy promienie i otrzymujemy punkt D.",
-             "Krok 5 z 5 — odcinek BD ma długość r·√(40/3 − 2√3), czyli niemal dokładnie πr."],
+             'Krok 5 z 5 — odcinek BD ma długość <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>·</mo><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt></math>, czyli niemal dokładnie πr.'],
       promien: "Promień", konstrukcja: "Konstrukcja BD", prawdziwe: "Prawdziwe πr", blad: "Błąd",
       opis: "Okrąg o promieniu r, styczna w punkcie A, ramię kąta trzydziestu stopni wyznaczające punkt C, trzy promienie odłożone do punktu D oraz odcinek BD."
     },
@@ -59,7 +59,7 @@ export default {
              "Step 2 of 5 — the tangent to the circle at point A.",
              "Step 3 of 5 — a 30° ray from centre O meets the tangent at point C.",
              "Step 4 of 5 — three radii laid off along the tangent from C give point D.",
-             "Step 5 of 5 — segment BD measures r·√(40/3 − 2√3), almost exactly πr."],
+             'Step 5 of 5 — segment BD measures <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>·</mo><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt></math>, almost exactly πr.'],
       promien: "Radius", konstrukcja: "Construction BD", prawdziwe: "True πr", blad: "Error",
       opis: "A circle of radius r, a tangent at point A, a thirty-degree ray fixing point C, three radii laid off to point D, and the segment BD."
     },

@@ -5,6 +5,8 @@ const rejestr = {
   gnomon: () => import("./modules/gnomon.js")
 };
 
+import("./zrodla.js").then((m) => m.default()).catch((e) => console.error("zrodla", e));
+
 for (const el of document.querySelectorAll("[data-modul]")) {
   const nazwa = el.dataset.modul;
   const wczytaj = rejestr[nazwa];

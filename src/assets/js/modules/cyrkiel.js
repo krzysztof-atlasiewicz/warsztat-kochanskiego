@@ -15,7 +15,9 @@ export default function init(root) {
   function pokaz() {
     KROKI.forEach((grupa, i) =>
       grupa.forEach((id) => $(id)?.setAttribute("opacity", i <= krok ? "1" : "0")));
-    $("opis").textContent = OPISY[krok];
+    $("opis").innerHTML = OPISY[krok];
+    $("cofnij").disabled = krok === 0;
+    $("dalej").disabled = krok === OPISY.length - 1;
     $("panel").classList.toggle("hide", krok !== 4);
   }
   function licz() {
