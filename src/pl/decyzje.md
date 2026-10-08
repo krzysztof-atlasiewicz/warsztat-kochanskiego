@@ -131,3 +131,15 @@ Wzory zapisane znakiem pierwiastka łamały się w składzie. Przeszły na MathM
 **Uzasadnienie:** zapis znakiem pierwiastka łamał się w składzie, a czytnik ekranu odczytywał go jako pojedynczy znak, nie jako działanie. Równoważnik tekstowy, który jest gorzej czytelny niż to, co zastępuje, mija się z celem.
 
 **Skutek:** kontrola `wzory` zgłasza każdy znak pierwiastka pozostały w gotowej stronie poza elementami MathML. Ma test negatywny: celowo wstawiony znak zostaje wykryty, również w wersji osadzalnej. Warunek bramki GA14.
+
+## 2026-10-08 — Cykl 12: szyfr jako narzędzie dwukierunkowe
+
+**Decyzja:** moduł szyfru przestaje być pokazem jednego zapisu, a staje się działającym narzędziem — szyfruje i odszyfrowuje dowolny tekst, łamie zapis bez znajomości klucza i pozwala przesłać komuś sam szyfrogram odnośnikiem.
+
+**Uzasadnienie:** dotychczasowa wersja pozwalała wyłącznie obrócić pierścień i odsłonić jedno przygotowane zdanie. Użytkownik oglądał metodę, zamiast jej użyć — a cała koncepcja serwisu opiera się na tym, że najpierw się próbuje, potem czyta.
+
+**Co doszło merytorycznie:** łamanie przez analizę częstości liter, z profilami dla polskiego, angielskiego i łaciny w pisowni klasycznej. To nie jest gadżet, tylko puenta modułu: szyfr przesuwający daje się złamać bez zgadywania, więc nie służył trwałemu ukryciu wynalazku, lecz zabezpieczeniu pierwszeństwa do chwili ujawnienia. Odnośnik przenosi zapis, ale nie klucz — ta asymetria jest sednem całej praktyki.
+
+**Granica rekonstrukcji bez zmian:** nadal nie wiemy, jakiego rodzaju zapisu Kochański faktycznie użył. Pozycja A2 agendy pozostaje otwarta, a jej opis uściślono: narzędzie zostanie, zmieni się tylko zapis, który wczytuje.
+
+**Testy:** osiem nowych, w tym złamanie zapisu łacińskiego z 1664 roku oraz tekstów polskiego i angielskiego. Łącznie 36.

@@ -17,13 +17,13 @@
       "id": "A2",
       "pytanie": "Jaką postać ma zapis szyfrowy konstrukcji wahaczy magnetycznych w księdze IX Technica curiosa?",
       "dlaczego": "Obecny szyfr przesuwający jest rekonstrukcją metody, nie odczytem oryginału.",
-      "zmieni": "Moduł szyfru z rekonstrukcji na pracę ze źródłem.",
+      "zmieni": "Moduł szyfru z rekonstrukcji metody na pracę ze źródłem: narzędzie zostaje, zmienia się zapis, który wczytuje.",
       "zrodlo": "Egzemplarz Technica curiosa, Würzburg 1664",
       "status": "otwarta",
       "miejsca": [
         "szyfr"
       ],
-      "dotyczy": "tekst na tarczy szyfrowej i schemat wahacza"
+      "dotyczy": "zapis wczytywany przyciskiem „Wczytaj zapis z 1664\" i jego odczyt na tarczy"
     },
     {
       "id": "A3",

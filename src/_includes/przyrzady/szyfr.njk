@@ -7,13 +7,37 @@
 <circle cx="190" cy="108" r="74" fill="none" stroke="var(--rule-soft)" stroke-width="1"/>
 <circle id="pierscien" cx="190" cy="108" r="46" fill="none" stroke="var(--rule)" stroke-width="1"/>
 <g id="litery"></g>
-<text id="srodek" class="tb" x="190" y="112" text-anchor="middle">3</text>
+<text id="srodek" class="tb" x="190" y="112" text-anchor="middle">0</text>
 </svg>
 </div>
 
-<div class="ctl"><label for="obrot">{{ s.szyfr.obrot }}</label><input type="range" id="obrot" min="0" max="25" step="1" value="3"><output id="obrotO">3</output></div>
-<p class="ciph" id="szyfrogram"></p>
-<p class="ciph" id="odczyt" aria-live="polite"></p>
+<div class="ctl"><label for="obrot">{{ s.szyfr.obrot }}</label><input type="range" id="obrot" min="0" max="25" step="1" value="0"><output id="obrotO">0</output></div>
+
+<div class="szyfr-pola">
+  <p class="pole">
+    <label for="jawny">{{ s.szyfr.jawny }}</label>
+    <textarea id="jawny" rows="3" spellcheck="false" placeholder="{{ s.szyfr.jawnyPodpowiedz }}"></textarea>
+  </p>
+  <p class="pole">
+    <label for="szyfrogram">{{ s.szyfr.zapis }}</label>
+    <textarea id="szyfrogram" rows="3" spellcheck="false" class="ciph"></textarea>
+  </p>
+</div>
+
+<div class="row szyfr-dzialania" data-napisy='{{ s.szyfr.napisy | dump }}'>
+  <label class="wybor"><span>{{ s.szyfr.jezykAnalizy }}</span>
+    <select id="jezykAnalizy">
+      <option value="pl">{{ s.szyfr.polski }}</option>
+      <option value="en">{{ s.szyfr.angielski }}</option>
+      <option value="la" selected>{{ s.szyfr.lacina }}</option>
+    </select>
+  </label>
+  <button id="lam">{{ s.szyfr.lam }}</button>
+  <button id="kopiuj">{{ s.szyfr.kopiuj }}</button>
+  <button id="odnosnik">{{ s.szyfr.odnosnik }}</button>
+  <button id="historyczny">{{ s.szyfr.historyczny }}</button>
+</div>
+<p id="komunikat" class="dim" aria-live="polite"></p>
 
 <div id="rozwiazane" class="hide">
 <p class="note">{{ s.szyfr.rozwiazane }}</p>

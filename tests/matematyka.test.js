@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { KOCHANSKI, grawitacja, przebiegRejsu, przesun, JAWNY, KLUCZ, REJS }
+import { KOCHANSKI, grawitacja, przebiegRejsu, przesun, JAWNY, KLUCZ, REJS,
+  uprosc, szyfruj, odszyfruj, najlepszePrzesuniecie, ocenyPrzesuniec }
   from "../src/assets/js/modules/matematyka.js";
 
 describe("przybliżenie Kochańskiego", () => {
@@ -60,5 +61,36 @@ describe("szyfr", () => {
   });
   it("nie zdradza tekstu przy błędnym kluczu", () => {
     expect(przesun(przesun(JAWNY, KLUCZ), -11)).not.toBe(JAWNY);
+  });
+});
+
+describe("narzędzie szyfrujące", () => {
+  it("szyfruje i odszyfrowuje w obie strony", () => {
+    const w = "Zegar sloneczny w Wilanowie";
+    expect(odszyfruj(szyfruj(w, 7), 7)).toBe(uprosc(w));
+  });
+  it("sprowadza polskie znaki do liter podstawowych", () => {
+    expect(uprosc("Żółw ćma")).toBe("ZOLW CMA");
+  });
+  it("zachowuje spacje i znaki przestankowe", () => {
+    expect(szyfruj("AB, CD!", 1)).toBe("BC, DE!");
+  });
+  it("przesunięcie 0 i 26 nie zmieniają tekstu", () => {
+    expect(szyfruj("WARSZTAT", 0)).toBe("WARSZTAT");
+    expect(szyfruj("WARSZTAT", 26)).toBe("WARSZTAT");
+  });
+  it("łamie zapis łaciński, wskazując klucz 12", () => {
+    expect(najlepszePrzesuniecie(przesun(JAWNY, KLUCZ), "la").przesuniecie).toBe(KLUCZ);
+  });
+  it("łamie tekst polskiej długości jednego zdania", () => {
+    const w = uprosc("Konstrukcja ogloszona w Acta Eruditorum w roku tysiac szescset osiemdziesiatym piatym");
+    expect(najlepszePrzesuniecie(szyfruj(w, 19), "pl").przesuniecie).toBe(19);
+  });
+  it("łamie tekst angielski", () => {
+    const w = uprosc("The sundial on the garden front shows three different hours at once");
+    expect(najlepszePrzesuniecie(szyfruj(w, 5), "en").przesuniecie).toBe(5);
+  });
+  it("zwraca dwadzieścia sześć ocen", () => {
+    expect(ocenyPrzesuniec("ABC", "pl")).toHaveLength(26);
   });
 });

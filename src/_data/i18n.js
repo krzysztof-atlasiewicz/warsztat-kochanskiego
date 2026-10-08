@@ -31,6 +31,22 @@ export default {
     },
     szyfr: {
       obrot: "Obrót",
+      jawny: "Wiadomość",
+      jawnyPodpowiedz: "Wpisz tekst, a obok pojawi się zapis szyfrowy",
+      zapis: "Zapis szyfrowy",
+      jezykAnalizy: "Język analizy",
+      polski: "polski", angielski: "angielski", lacina: "łacina",
+      lam: "Złam szyfr", kopiuj: "Skopiuj zapis", odnosnik: "Skopiuj odnośnik",
+      historyczny: "Wczytaj zapis z 1664",
+      napisy: {
+        zlamane: "Najlepsze dopasowanie przy przesunięciu {n}. Analiza częstości liter wystarcza, żeby złamać ten szyfr bez znajomości klucza.",
+        pusto: "Pole zapisu jest puste — nie ma czego łamać.",
+        skopiowano: "Zapis skopiowany do schowka.",
+        odnosnikGotowy: "Odnośnik skopiowany. Zapis jedzie w adresie, klucz nie — ten trzeba przekazać osobno.",
+        schowekNie: "Przeglądarka nie udostępniła schowka — zaznacz tekst i skopiuj ręcznie.",
+        wczytano: "Wczytano zapis z księgi IX. Klucz to liczba godzin na tarczy.",
+        zOdnosnika: "Zapis wczytany z odnośnika. Klucza w nim nie ma — spróbuj go złamać."
+      },
       opis: "Dwa współśrodkowe pierścienie liter; zewnętrzny nieruchomy, wewnętrzny obraca się.",
       rozwiazane: "Siła magnetyczna rządzi wahaczem zegara. Ta sama myśl co w module o wahadle, tylko pięć lat później i zapisana tak, żeby nikt jej nie podebrał."
     },
@@ -75,6 +91,22 @@ export default {
     },
     szyfr: {
       obrot: "Rotation",
+      jawny: "Message",
+      jawnyPodpowiedz: "Type here and the cipher text appears beside it",
+      zapis: "Cipher text",
+      jezykAnalizy: "Language of analysis",
+      polski: "Polish", angielski: "English", lacina: "Latin",
+      lam: "Break the cipher", kopiuj: "Copy the cipher text", odnosnik: "Copy a link",
+      historyczny: "Load the 1664 record",
+      napisy: {
+        zlamane: "Best fit at a rotation of {n}. Letter-frequency analysis is enough to break this cipher without knowing the key.",
+        pusto: "The cipher field is empty — nothing to break.",
+        skopiowano: "Cipher text copied to the clipboard.",
+        odnosnikGotowy: "Link copied. The cipher text travels in the address; the key does not — pass that along separately.",
+        schowekNie: "The browser refused clipboard access — select the text and copy it by hand.",
+        wczytano: "Loaded the record from book IX. The key is the number of hours on a dial.",
+        zOdnosnika: "Cipher text loaded from a link. The key is not in it — try breaking it."
+      },
       opis: "Two concentric rings of letters; the outer one fixed, the inner one turning.",
       rozwiazane: "Magnetic force governs the balance of the clock. The same idea as in the pendulum instrument, five years later, written so that nobody could take it."
     },

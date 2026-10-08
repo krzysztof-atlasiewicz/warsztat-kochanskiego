@@ -98,3 +98,13 @@ math{font-size:1.05em}
 .wyprowadzenie[open] summary{margin-bottom:.6rem}
 .wyprowadzenie ol{padding-left:1.2rem}
 .wyprowadzenie li{margin:.5rem 0;font-size:.95rem}
+.szyfr-pola{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:1rem;margin:1.25rem 0}
+.szyfr-pola .pole{margin:0}
+.szyfr-pola label{display:block;font-size:.85rem;color:var(--ink-soft);margin-bottom:.3rem}
+.szyfr-pola textarea{width:100%;background:var(--plate);color:var(--ink);border:1px solid var(--rule);padding:.6rem .7rem;font-family:inherit;font-size:1rem;line-height:1.5;resize:vertical}
+.szyfr-pola textarea.ciph{font-family:var(--mono);font-size:.95rem;letter-spacing:.06em}
+.szyfr-pola textarea.hit{border-color:var(--verd);color:var(--verd)}
+.szyfr-dzialania{align-items:center}
+.wybor{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--ink-soft)}
+.wybor select{font-family:inherit;font-size:.9rem;background:var(--plate);color:var(--ink);border:1px solid var(--rule);padding:.35rem .4rem}
+#komunikat{min-height:1.5em;font-size:.9rem}

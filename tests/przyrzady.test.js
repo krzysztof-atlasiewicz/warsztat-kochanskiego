@@ -7,7 +7,8 @@ const STRONY = [
   { plik: "_site/en/compass/index.html", modul: "cyrkiel", sprawdz: ["w1", "w2", "w3"] },
   { plik: "_site/pl/wahadlo/index.html", modul: "rejs", sprawdz: ["kw", "ks", "szer"] },
   { plik: "_site/en/pendulum/index.html", modul: "rejs", sprawdz: ["kw", "ks", "szer"] },
-  { plik: "_site/pl/szyfr/index.html", modul: "szyfr", sprawdz: ["odczyt", "szyfrogram"] },
+  { plik: "_site/pl/szyfr/index.html", modul: "szyfr", sprawdz: ["jawny", "szyfrogram"] },
+  { plik: "_site/en/cipher/index.html", modul: "szyfr", sprawdz: ["jawny", "szyfrogram"] },
   { plik: "_site/pl/gnomon/index.html", modul: "gnomon", sprawdz: ["rowne", "wloskie", "babilonskie"] },
   { plik: "_site/en/gnomon/index.html", modul: "gnomon", sprawdz: ["rowne", "wloskie", "babilonskie"] }
 ];
@@ -28,8 +29,9 @@ describe.skipIf(!zbudowane)("przyrządy na zbudowanych stronach", () => {
       for (const id of s.sprawdz) {
         const el = root.querySelector(`#${id}`);
         expect(el, `brak elementu #${id}`).toBeTruthy();
-        expect(el.textContent.trim(), `#${id} pozostał pusty`).not.toBe("");
-        expect(el.textContent.trim(), `#${id} nie został wypełniony`).not.toBe("—");
+        const tresc = ("value" in el && el.tagName !== "DIV" ? el.value : el.textContent).trim();
+        expect(tresc, `#${id} pozostał pusty`).not.toBe("");
+        expect(tresc, `#${id} nie został wypełniony`).not.toBe("—");
       }
     });
   }
