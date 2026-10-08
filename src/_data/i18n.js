@@ -21,13 +21,41 @@ export default {
     },
     rejs: {
       dzien: "Dzień rejsu", morze: "Stan morza", kompensacja: "Kompensacja temperatury sprężyny",
+      odbij: "Odbij od brzegu", zatrzymaj: "Zatrzymaj",
       szerokosc: "Szerokość", temperatura: "Temperatura",
       dryfW: "Dryf wahadła", dryfS: "Dryf sprężyny",
       bladW: "Błąd pozycji — wahadło", bladS: "Błąd pozycji — sprężyna",
-      wahadlo: "wahadło", sprezyna: "sprężyna", start: "La Rochelle", meta: "Kajenna",
+      wahadlo: "wahadło", sprezyna: "sprężyna", prog: "próg nagrody",
+      start: "La Rochelle", meta: "Kajenna",
+      osBledu: "o ile kilometrów pomylisz pozycję",
+      osSzerokosci: "szerokość geograficzna okrętu",
+      osDni: "kolejne dni rejsu",
+      linijkaOpis: "Gdzie naprawdę jesteś, a gdzie według każdego z zegarów. Zielone pole przy zerze to dokładność, za którą wyznaczono nagrodę.",
+      gdzieNaprawde: "tu jesteś",
+      celNagrody: "próg 56 km",
+      opisy: {
+        dzien: "Przesuwa okręt wzdłuż trasy. Im dalej na południe, tym słabsze przyciąganie ziemskie i tym cieplej.",
+        morze: "Przechył pokładu na fali. Rozhuśtane wahadło zatacza szerszy łuk i przez to chodzi wolniej.",
+        kompensacja: "Dodaje do sprężyny układ znoszący wpływ temperatury — rozwiązanie, które pojawiło się dopiero u Harrisona, dziewięćdziesiąt lat później.",
+        odbij: "Przewija cały rejs od pierwszego do sześćdziesiątego czwartego dnia.",
+        dryf: "O ile sekund na dobę zegar spóźnia się lub śpieszy względem stanu z portu wyjścia.",
+        blad: "O ile kilometrów pomylisz się co do własnego położenia, licząc pozycję z takiego zegara."
+      },
+      rachunekTytul: "Skąd biorą się kilometry z sekund",
+      napisy: {
+        rachunek0: "Przesuń dzień rejsu albo odbij od brzegu — w porcie zegary są jeszcze zgodne i nie ma czego liczyć.",
+        rachunek1: "Po {d} dniach zegar wahadłowy rozminął się z czasem portu wyjścia o {s} sekund.",
+        rachunek2: "Ziemia obraca się o pełne 360 stopni w ciągu doby, czyli 86 400 sekund. Każda sekunda błędu zegara to 1/240 stopnia długości geograficznej.",
+        rachunek3: "Ten błąd odpowiada więc {st} stopnia długości geograficznej.",
+        rachunek4: "Na szerokości {lat} stopnia jeden stopień długości to około {km} kilometrów.",
+        rachunek5: "Stąd pomyłka co do pozycji: {km} kilometrów. Nagrodę wyznaczono za dokładność {prog} kilometrów.",
+        skala: "skala do {km} km",
+        odbij: "Odbij od brzegu", zatrzymaj: "Zatrzymaj"
+      },
       stop: "Przy takim stanie morza wychwyt gubi impuls. Wahadło staje i zegar przestaje mierzyć cokolwiek.",
       opisOkret: "Skrzynia zegara na pokładzie okrętu przechylającego się na fali.",
-      opisWykres: "Skumulowany błąd pozycji obu zegarów w kolejnych dniach rejsu oraz profil szerokości geograficznej trasy."
+      opisWykres: "Wykres narastającego błędu pozycji obu zegarów w kolejnych dniach rejsu, z progiem nagrody, oraz pasek szerokości geograficznej trasy.",
+      opisLinijki: "Linijka z prawdziwą pozycją po lewej i znacznikami obu zegarów w odległości odpowiadającej ich błędowi."
     },
     szyfr: {
       obrot: "Obrót pierścienia",
@@ -111,13 +139,41 @@ export default {
     },
     rejs: {
       dzien: "Day at sea", morze: "Sea state", kompensacja: "Temperature compensation of the spring",
+      odbij: "Cast off", zatrzymaj: "Stop",
       szerokosc: "Latitude", temperatura: "Temperature",
       dryfW: "Pendulum drift", dryfS: "Spring drift",
       bladW: "Position error — pendulum", bladS: "Position error — spring",
-      wahadlo: "pendulum", sprezyna: "spring", start: "La Rochelle", meta: "Cayenne",
+      wahadlo: "pendulum", sprezyna: "spring", prog: "prize threshold",
+      start: "La Rochelle", meta: "Cayenne",
+      osBledu: "how far out your position would be, km",
+      osSzerokosci: "latitude of the ship",
+      osDni: "days at sea",
+      linijkaOpis: "Where you really are, and where each clock puts you. The green band at zero is the accuracy the prize was set for.",
+      gdzieNaprawde: "you are here",
+      celNagrody: "56 km threshold",
+      opisy: {
+        dzien: "Moves the ship along the route. The further south, the weaker gravity and the warmer it gets.",
+        morze: "How far the deck rolls. A wider swing makes the pendulum run slower.",
+        kompensacja: "Adds a mechanism cancelling the spring's temperature sensitivity — the solution that only arrived with Harrison, ninety years later.",
+        odbij: "Runs the whole voyage from the first to the sixty-fourth day.",
+        dryf: "How many seconds a day the clock gains or loses against the time it kept in port.",
+        blad: "How far out your own position would be if you worked it out from this clock."
+      },
+      rachunekTytul: "How seconds turn into kilometres",
+      napisy: {
+        rachunek0: "Move the day slider or cast off — in port the clocks still agree and there is nothing to work out.",
+        rachunek1: "After {d} days the pendulum clock is {s} seconds out against the time of the port of departure.",
+        rachunek2: "The Earth turns a full 360 degrees in a day, that is 86,400 seconds. Every second of clock error is 1/240 of a degree of longitude.",
+        rachunek3: "So this error amounts to {st} degrees of longitude.",
+        rachunek4: "At latitude {lat} degrees, one degree of longitude is about {km} kilometres.",
+        rachunek5: "Hence the error in position: {km} kilometres. The prize was set for an accuracy of {prog} kilometres.",
+        skala: "scale to {km} km",
+        odbij: "Cast off", zatrzymaj: "Stop"
+      },
       stop: "At this sea state the escapement loses its impulse. The pendulum stops and the clock measures nothing at all.",
       opisOkret: "A clock case on the deck of a ship rolling in a swell.",
-      opisWykres: "Cumulative position error of both clocks over the days of the voyage, with the latitude profile of the route."
+      opisWykres: "A chart of the growing position error of both clocks over the days of the voyage, with the prize threshold, and a strip showing the latitude of the route.",
+      opisLinijki: "A ruler with the true position at the left and a marker for each clock at a distance matching its error."
     },
     szyfr: {
       obrot: "Ring rotation",

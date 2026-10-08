@@ -205,3 +205,19 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Co z tym robimy.** Pozycja A2 przechodzi w stan „w toku" i zostaje rozdzielona: pierwsza część pytania jest rozstrzygnięta, druga przeformułowana na „czy zapis w ogóle jest w księdze IX". Ustalenia są publikowane w agendzie, żeby czytelnik widział stan wiedzy, a nie tylko pytanie. Treść modułu pozostaje bez zmian do decyzji redaktora merytorycznego — poprawianie twierdzenia historycznego nie jest czynnością, którą wolno wykonać przy okazji kwerendy.
 
 **Następny krok:** przejrzenie wzrokowe stron 620–720 skanu. Tego nie da się zrobić wyszukiwaniem pełnotekstowym.
+
+## 2026-10-08 — Cykl 18: moduł rejsu przestaje być zagadką
+
+**Zarzut:** z modułu w ogóle nie wynikało, o co chodzi. Słusznie — brakowało w nim przesłanki, bez której reszta jest zbiorem wykresów bez tematu.
+
+**Dodana przesłanka.** Wstęp stawia teraz problem wprost: szerokość geograficzną wyznaczysz z wysokości Słońca, długości nie wyznaczysz z niczego na niebie. Potrzebny jest zegar pokazujący godzinę portu wyjścia, a skoro Ziemia obraca się o 360 stopni na dobę, każda sekunda błędu zegara to ćwierć minuty łuku. Bez tego zdania wykres błędu w kilometrach nie znaczył nic.
+
+**Osie przestały być anonimowe.** Pionowa mówi „o ile kilometrów pomylisz pozycję", pozioma ma podziałkę dni z nazwami portów, pasek szerokości geograficznej dostał własny opis i własną skalę, a próg nagrody ma podpis przy linii. Nad wykresem legenda z próbkami kolorów zamiast dwóch słów wrzuconych w róg.
+
+**Linijka pozycji.** Nowy pasek pokazuje rzecz, która dotąd była wyłącznie liczbą w tabelce: gdzie naprawdę jest okręt, gdzie stawia go każdy z zegarów i jak wąskie jest pole dokładności, za które wyznaczono nagrodę. Przy wyłączonej kompensacji to pole jest ledwie widoczną kreską przy zerze — i to jest właściwa puenta, nie wada rysunku.
+
+**Rachunek krok po kroku**, na bieżących liczbach: sekundy rozbieżności, przeliczenie na stopnie, długość stopnia na aktualnej szerokości, kilometry, porównanie z progiem. Ta sama konwencja co w module szyfru.
+
+**Rejs się odbywa.** Przycisk przewija 64 dni, a suwak startuje na końcu trasy, nie na dniu zerowym — dotąd użytkownik widział na wejściu same zera i nie miał powodu niczego dotykać.
+
+**Dymki** przy każdej nastawie i każdym odczycie.

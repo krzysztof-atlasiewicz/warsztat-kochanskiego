@@ -146,3 +146,10 @@ math{font-size:1.05em}
 .ustalenia{border-left:2px solid var(--verd);padding-left:.9rem;margin:.8rem 0;font-size:.93rem;color:var(--ink-soft)}
 .ustalenia ul{padding-left:1.1rem;margin:.3rem 0}
 .ustalenia li{margin:.35rem 0}
+.okret-rysunek{max-width:360px}
+.legenda{display:flex;flex-wrap:wrap;gap:.3rem 1.1rem;align-items:center;font-size:.85rem;color:var(--ink-soft);margin:0 0 .6rem}
+.probka{display:inline-block;width:1.4rem;height:0;border-top:2px solid var(--rule);margin-right:.35rem;vertical-align:middle}
+.probka-wahadlo{border-color:var(--sun)}
+.probka-sprezyna{border-color:var(--verd)}
+.probka-prog{border-top-style:dashed;border-color:var(--rule)}
+#rachunekLista li{margin:.45rem 0;font-size:.95rem}
