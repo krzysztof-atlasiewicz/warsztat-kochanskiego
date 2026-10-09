@@ -14,11 +14,11 @@
 <link rel="icon" href="/assets/ikony/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="shortcut icon" href="/assets/ikony/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/ikony/apple-touch-icon.png">
-<!-- Jeden wiersz w nagłówku, zanim cokolwiek się narysuje: dzięki niemu arkusz
-     wie od pierwszej klatki, że skrypt działa, i od razu chowa karty poza
-     pierwszą. Bez tego strona rysowała się ze wszystkimi kartami naraz,
-     a po starcie modułu kurczyła się o dwie trzecie — stąd podskok. -->
-<script>document.documentElement.classList.add("js")</script>
+<!-- Zanim cokolwiek się narysuje: arkusz ma od pierwszej klatki wiedzieć, że
+     skrypt działa. Osobny plik, nie wiersz w dokumencie — polityka
+     bezpieczeństwa treści („script-src 'self'") blokuje skrypty wpisane
+     wprost w stronę, więc taki wiersz działał u nas, a na serwerze nie. -->
+<script src="/assets/js/wczesnie.js"></script>
 <!-- Kroje pobierane z góry, zanim przeglądarka dojdzie do arkusza: razem
      z „font-display:optional" znaczy to, że strona rysuje się od razu
      właściwym pismem albo — przy bardzo wolnym łączu i pustej pamięci

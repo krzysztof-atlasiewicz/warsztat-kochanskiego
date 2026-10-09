@@ -341,15 +341,26 @@ describe.skipIf(!zbudowane)("pierwszy rysunek strony", () => {
   });
 
   for (const plik of ["_site/pl/cyrkiel/index.html", "_site/en/compass/index.html"]) {
-    it(`${plik} — klasa „js" nadawana przed arkuszem, nie po nim`, () => {
+    it(`${plik} — klasa „js" nadawana przed arkuszem i z osobnego pliku`, () => {
       const h = readFileSync(plik, "utf8");
-      const skrypt = h.indexOf('classList.add("js")');
+      const skrypt = h.indexOf('src="/assets/js/wczesnie.js"');
       const styl = h.indexOf('href="/assets/css/site.css');
-      expect(skrypt, "brak wiersza nadającego klasę js").toBeGreaterThan(-1);
+      expect(skrypt, "brak skryptu nadającego klasę js").toBeGreaterThan(-1);
       expect(skrypt, "klasa js nadawana dopiero po arkuszu").toBeLessThan(styl);
-      expect(h.slice(0, skrypt).includes("<body"), "wiersz stoi poza nagłówkiem").toBe(false);
+      expect(h.slice(0, skrypt).includes("<body"), "skrypt stoi poza nagłówkiem").toBe(false);
+      // Wpisany wprost w stronę zostałby na serwerze zablokowany przez politykę
+      // bezpieczeństwa treści — i tak było przez pięć cykli, bez żadnego śladu.
+      expect(h, "skrypt wpisany wprost w stronę zamiast osobnego pliku")
+        .not.toMatch(/<script(?![^>]*\ssrc=)[^>]*>[\s\S]*?<\/script>/);
     });
   }
+
+  it("skrypt nadający klasę js robi dokładnie to i nic więcej", () => {
+    const k = readFileSync("src/assets/js/wczesnie.js", "utf8");
+    expect(k, "skrypt wczesny nie nadaje klasy").toMatch(/classList\.add\("js"\)/);
+    expect(k.split("\n").filter((w) => w.trim() && !w.trim().startsWith("//")).length,
+      "skrypt wczesny ma robić jedną rzecz — blokuje rysowanie strony").toBe(1);
+  });
 });
 
 // Przejście między krokami konstrukcji nie może zmieniać wysokości strony:

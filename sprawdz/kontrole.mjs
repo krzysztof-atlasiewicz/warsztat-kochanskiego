@@ -343,6 +343,32 @@ const KONTROLE = {
       }
     }
     return bledy;
+  },
+
+  // Polityka bezpieczenstwa tresci serwisu ma „script-src 'self'" i „style-src
+  // 'self'": skrypt albo styl wpisany wprost w strone jest na serwerze
+  // blokowany, choc u siebie, bez tej polityki, dziala bez zarzutu. Taki wiersz
+  // potrafi wiec przejsc wszystkie proby i umrzec dopiero po wdrozeniu, cicho.
+  // Ta kontrola pilnuje, zeby zbudowane strony nie zawieraly niczego, czego
+  // polityka nie przepusci — i zeby sama polityka nie zmiekla niepostrzezenie.
+  polityka() {
+    const bledy = [];
+    const naglowki = czytaj("_site/_headers");
+    const csp = /Content-Security-Policy:([^\n]*)/.exec(naglowki)?.[1] || "";
+    if (!csp) return [`_site/_headers: brak polityki bezpieczeństwa treści`];
+    for (const dyrektywa of ["script-src 'self'", "style-src 'self'"])
+      if (!csp.includes(dyrektywa)) bledy.push(`_site/_headers: polityka nie zawiera „${dyrektywa}"`);
+    const scislyKod = csp.includes("script-src 'self'") && !csp.includes("'unsafe-inline'");
+    for (const p of zbudowane()) {
+      const t = czytaj(p);
+      if (scislyKod && /<script(?![^>]*\ssrc=)[^>]*>[\s\S]*?<\/script>/.test(t))
+        bledy.push(`${p}: skrypt wpisany wprost w stronę — polityka go zablokuje`);
+      if (csp.includes("style-src 'self'") && !csp.includes("'unsafe-inline'") && / style="/.test(t))
+        bledy.push(`${p}: atrybut style w znaczniku — polityka go zablokuje`);
+      for (const m of t.matchAll(/<script[^>]*\ssrc="([^"]+)"/g))
+        if (!m[1].startsWith("/")) bledy.push(`${p}: skrypt spoza serwisu ${m[1]}`);
+    }
+    return bledy;
   }
 };
 
