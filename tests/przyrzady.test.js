@@ -313,8 +313,20 @@ describe.skipIf(!zbudowane)("pierwszy rysunek strony", () => {
   it("arkusz chowa karty poza pierwszą, zanim moduł zdąży wystartować", () => {
     expect(arkusz, "brak reguły chowającej kolejne karty przed gotowością")
       .toMatch(/html\.js \.zakladki:not\(\.gotowe\) ~ \.karta-przyrzadu ~ \.karta-przyrzadu\{display:none\}/);
-    expect(arkusz, "pasek zakładek nie jest już wiązany z obecnością skryptu")
-      .toMatch(/html:not\(\.js\) \.zakladki\{display:none\}/);
+  });
+
+  // HTML i arkusz leżą w pamięci podręcznej niezależnie, więc przeglądarka
+  // potrafi mieć nowy arkusz i stary dokument bez wiersza nadającego „js".
+  // Widoczność paska zakładek nie może od tego wiersza zależeć — raz już
+  // zależała i pasek zniknął wszystkim, którzy mieli stronę w pamięci.
+  it("widoczność paska zależy od modułu, nie od wiersza w nagłówku", () => {
+    expect(arkusz, "pasek chowany przy braku klasy js — stary dokument straci zakładki")
+      .not.toMatch(/html:not\(\.js\)[^{]*\.zakladki\{[^}]*display:none/);
+    expect(arkusz, "brak reguły wiążącej pasek z gotowością modułu")
+      .toMatch(/\.zakladki:not\(\.gotowe\)\{display:none\}/);
+    // Nagłówki kart też znikają dopiero wtedy, gdy pasek je zastąpi.
+    expect(arkusz, "nagłówki kart chowane bez względu na gotowość paska")
+      .toMatch(/\.zakladki\.gotowe ~ \.karta-przyrzadu \.tytul-karty\{display:none\}/);
   });
 
   for (const plik of ["_site/pl/cyrkiel/index.html", "_site/en/compass/index.html"]) {

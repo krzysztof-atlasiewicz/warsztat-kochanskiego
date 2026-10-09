@@ -434,11 +434,19 @@ svg.sciana{max-width:none;width:100%}
 /* Bez skryptu pasek zakładek byłby martwy, więc pokazuje się dopiero, gdy
    skrypt go obsłuży; do tego czasu każda karta ma własny nagłówek. */
 /* Bez skryptu karty stoją jedna pod drugą z własnymi nagłówkami, a paska
-   zakładek nie ma. Ze skryptem jest odwrotnie — i musi tak być od pierwszej
-   klatki, nie dopiero po załadowaniu modułu, bo inaczej strona najpierw
-   rysuje się ze wszystkimi kartami, a potem kurczy i podskakuje. */
-html:not(.js) .zakladki{display:none}
-html.js .zakladki ~ .karta-przyrzadu .tytul-karty{display:none}
+   zakładek nie ma — to wersja awaryjna i ma działać sama z siebie.
+   Reguły poniżej są ułożone tak, żeby każda psuła się bezpiecznie: HTML
+   i arkusz leżą w pamięci podręcznej niezależnie od siebie, więc przeglądarka
+   potrafi mieć nowy arkusz i stary dokument bez wiersza nadającego klasę „js".
+   Widoczność paska zależy wyłącznie od tego, czy moduł wystartował — przy
+   starym dokumencie wracamy po prostu do zachowania sprzed poprawki. */
+.zakladki:not(.gotowe){display:none}
+.zakladki.gotowe ~ .karta-przyrzadu .tytul-karty{display:none}
+/* Gdy wiersz w nagłówku jest, wiemy od pierwszej klatki, że skrypt żyje:
+   pasek zajmuje wtedy swoje miejsce od razu (tylko niewidoczny), a karty poza
+   pierwszą są schowane, zanim moduł zdąży je schować sam. Stąd brak podskoku. */
+html.js .zakladki:not(.gotowe){display:flex;visibility:hidden}
+html.js .zakladki:not(.gotowe) ~ .karta-przyrzadu .tytul-karty{display:none}
 html.js .zakladki:not(.gotowe) ~ .karta-przyrzadu ~ .karta-przyrzadu{display:none}
 .tytul-karty{font-size:1.25rem;font-weight:400;margin:1.8rem 0 .4rem;
   border-top:1px solid var(--rule-soft);padding-top:1rem}
