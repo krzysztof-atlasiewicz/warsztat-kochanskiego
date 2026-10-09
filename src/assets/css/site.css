@@ -9,6 +9,12 @@
         --rule:#3C494E;--rule-soft:#2A353A;--verd:#6FB3A6;--sun:#C79B4A}
 }
 *{box-sizing:border-box}
+/* Miejsce na pasek przewijania rezerwowane zawsze. Bez tego strona, która
+   w pierwszej chwili mieści się w oknie, a po dorysowaniu przyrządu już nie,
+   dostaje pasek w locie: szerokość treści maleje o kilkanaście punktów, tekst
+   łamie się na nowo i wszystko drgnie. Na systemach z paskiem nakładanym
+   nie kosztuje to nic. */
+html{overflow-y:scroll;scrollbar-gutter:stable}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.62}
 .wrap{max-width:62rem;margin:0 auto;padding:2rem 1.25rem 5rem}
 .skip{position:absolute;left:-9999px}
@@ -209,7 +215,7 @@ math{font-size:1.05em}
 .pulpit .dymek{background:var(--paper)}
 /* Na wąskim ekranie ściana zmalałaby do nieczytelnych cyfr — zamiast tego
    zachowuje minimalną szerokość i przewija się w poziomie. */
-.przewijalna{overflow-x:auto;overscroll-behavior-x:contain}
+.przewijalna{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-gutter:stable}
 .przewijalna > svg{min-width:620px}
 .pulpit .rzad-przyrzadow{margin:1.2rem 0 .4rem}
 .pulpit .read{margin:.8rem 0}
@@ -328,7 +334,9 @@ svg.sciana{max-width:none;width:100%}
    z narzuconym wierszem wskakiwał na pierwszą kolumnę i wypychał kalendarz. */
 .przyrzady-rejs .pulpit-sterowniki{grid-template-columns:minmax(14rem,16rem) 7rem minmax(15rem,1fr) minmax(11rem,14rem)}
 .przyrzady-rejs .nastawniki .ctl label{flex:0 0 5.6rem}
-.przyrzady-rejs .nastawniki .ctl output{flex:0 0 4.6rem}
+/* Odczyt stanu morza bywa dwuwierszowy, a przed startem modulu jest kreska.
+   Rezerwujemy dwa wiersze, zeby rzad nie urosl pod widzem. */
+.przyrzady-rejs .nastawniki .ctl output{flex:0 0 4.6rem;min-height:3.8em}
 .przyrzady-rejs .blok-daty{grid-column:1}
 .przyrzady-rejs .blok-kola{grid-column:2;align-self:center;justify-self:center}
 .przyrzady-rejs .blok-okretu{grid-column:3}
@@ -377,6 +385,10 @@ svg.sciana{max-width:none;width:100%}
 .pola-daty{display:flex;gap:.3rem;justify-content:center;margin:.3rem 0 0}
 .pola-daty select{font-size:.8rem}
 .przyrzad.z-bebnami .pola-daty{display:none}
+/* Ze skryptem pola wyboru ustepuja bebenkom od pierwszej klatki, nie dopiero
+   gdy modul sie zlozy: inaczej kolumna kalendarza kurczy sie wtedy
+   o dwadziescia kilka punktow i cala sciana ponizej podskakuje. */
+html.js .pola-daty{display:none}
 .beben-pole{fill:var(--plyta-ciemna);stroke:none}
 .beben-walec{fill:url(#walecCien);pointer-events:none}
 .beben-obwodka{fill:none;stroke:var(--mosiadz-ciemny);stroke-width:1}

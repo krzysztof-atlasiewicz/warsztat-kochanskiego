@@ -575,3 +575,15 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Ruch układu po wejściu na stronę, przed poprawką i po niej** (największe przesunięcie dowolnego z czterech punktów pomiarowych): cyrkiel 21 punktów → 0, wahadło 70 → 0, szyfr 46 → 2, gnomon 22 → 0. Na gnomonie nie rusza się już nic.
 
 **Trzy nowe testy** (103 zamiast 100): arkusz krojów nie może zawierać `font-display:swap` i musi mieć sześć deklaracji `optional`, każda strona musi zamawiać z góry sześć plików kroju z poprawnym `crossorigin`, a pasek szyfru i wiersz pary liter muszą rezerwować wysokość.
+
+## 2026-10-10 — Cykl 45: resztki ruchu zmierzone przyrządem, nie okiem
+
+**Zmieniono narzędzie pomiaru.** Dotąd porównywaliśmy wysokość dokumentu w dwóch chwilach, co pokazuje sumę, ale nie mówi, co się rusza. Teraz czyta się wprost wskaźnik niestabilności układu, który przeglądarka liczy sama i podaje wraz z elementami, które drgnęły, i o ile. Pomiar prowadzony przy zimnej pamięci podręcznej i dławionym łączu — tak, jak to wygląda w oknie prywatnym, a nie przy nagrzanym serwerze.
+
+**Trzy znalezione źródła, wszystkie tej samej natury:** element, który przed startem modułu zajmuje inną wysokość niż po nim.
+
+1. **Pola wyboru daty na gnomonie.** Przed złożeniem bębenków stały pod kartką w pełnej okazałości, a klasa chowająca je pojawiała się dopiero wtedy, gdy moduł skończył pracę. Kolumna kalendarza kurczyła się wówczas o dwadzieścia cztery punkty i cała ściana poniżej podskakiwała. Teraz ustępują bębenkom od pierwszej klatki.
+2. **Odczyt stanu morza na wahadle.** „5° · lekka fala" łamie się w wąskiej kolumnie na trzy wiersze, a przed startem modułu stoi tam kreska w jednym. Rząd rósł o szesnaście punktów. Zarezerwowano trzy wiersze.
+3. **Pasek przewijania.** Strona, która w pierwszej chwili mieści się w oknie, a po dorysowaniu przyrządu już nie, dostaje pasek w locie: szerokość treści maleje o kilkanaście punktów i cały tekst łamie się na nowo. Miejsce na pasek jest teraz rezerwowane zawsze, także w przewijanym w poziomie polu ściany.
+
+**Wskaźnik niestabilności układu po poprawkach:** cyrkiel 0, wahadło 0, szyfr 0, gnomon 0,0005 bez wskazania konkretnego elementu. Próg uznawany za dobry to 0,1 — jesteśmy dwieście razy poniżej na najgorszej ze stron.
