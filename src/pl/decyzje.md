@@ -513,3 +513,13 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Żadne oznaczenie nie zostało usunięte ani osłabione.** Typy `zrodlo` i `rekonstrukcja` są te same, zastrzeżenia w treści stron nietknięte, kontrola `oznaczenia` przechodzi. Zmiana jest redakcyjna: ta sama rzecz powiedziana tak, żeby dało się ją przeczytać.
 
 **Test pilnuje kształtu pary** (89 testów bez zmian co do liczby, trzy nowe warunki w istniejącym): pierwszy chip musi być oznaczeniem źródła i brzmieć „ze źródła" albo „from the source", drugi musi zaczynać się od „nasze:" albo „ours:" i mieć dalszy ciąg. Sprawdzono też, że drugie człony są różne na wszystkich czterech stronach — bo gdyby były takie same, wróciłby dokładnie ten zarzut, od którego cała rzecz się zaczęła.
+
+## 2026-10-09 — Cykl 40: przełącznik języka jak na stronie głównej fundacji
+
+**Zamiast listy dwóch języków — jeden nastawnik.** Dotąd w szyldzie stały obok siebie „polski" i „English", z czego jedna pozycja zawsze oznaczała stronę, na której się właśnie jest. Teraz stoi tam jeden element: na stronie polskiej „ENGLISH", na angielskiej „POLSKI" — grotesk maszynowy, wersaliki, światło międzyliterowe 0,12 em, cienka obwódka, po najechaniu patyna. Dokładnie tak, jak na stronie głównej fundacji; oba serwisy mają od tego ten sam szyld.
+
+**U nas jest to odnośnik, nie guzik.** Na stronie głównej fundacji przełączenie języka podmienia teksty w miejscu, więc musi być guzikiem. Warsztat ma dla każdej wersji osobne adresy, więc przełącznik jest zwykłym odnośnikiem z `hreflang` — działa bez skryptu, da się otworzyć w nowej karcie i wpisać do zakładek. Wygląda tak samo, zachowuje się jak odnośnik, bo nim jest.
+
+**Cel odnośnika bez zmian:** nadal prowadzi na stronę główną drugiej wersji językowej, nie na odpowiednik bieżącej strony. Przejście z gnomonu po polsku na gnomon po angielsku wymaga jeszcze jednego kliknięcia — to osobna sprawa, do zrobienia przy okazji, bo każda strona ma już klucz `para` wiążący ją z odpowiednikiem.
+
+**Cztery nowe testy** (93 zamiast 89): na stronie przyrządu i na stronie głównej, w obu wersjach, przełącznik ma być dokładnie jeden, nazywać język docelowy, prowadzić pod właściwy adres i nieść `hreflang`.

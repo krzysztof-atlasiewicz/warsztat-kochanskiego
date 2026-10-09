@@ -280,3 +280,27 @@ describe.skipIf(!zbudowane)("oznaczenia i zakładki", () => {
       expect(k.style.minHeight, "karta nie została wyrównana do najwyższej").toBe("900px");
   });
 });
+
+// Przełącznik języka ma być jednym nastawnikiem wskazującym język docelowy —
+// tak jak na stronie głównej fundacji — a nie listą, w której jedna pozycja
+// i tak jest bieżąca.
+describe.skipIf(!zbudowane)("przełącznik języka", () => {
+  for (const [plik, napis, cel] of [
+    ["_site/pl/gnomon/index.html", "English", "/en/"],
+    ["_site/en/gnomon/index.html", "polski", "/pl/"],
+    ["_site/pl/index.html", "English", "/en/"],
+    ["_site/en/index.html", "polski", "/pl/"]
+  ]) {
+    it(`${plik} — jeden nastawnik prowadzący na „${napis}"`, () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const odnosniki = [...document.querySelectorAll(".jez a")];
+      expect(odnosniki.length, "przełącznik dalej wylicza oba języki").toBe(1);
+      const a = odnosniki[0];
+      expect(a.classList.contains("przelacz-jezyk"), "nastawnik bez swojej klasy").toBe(true);
+      expect(a.textContent.trim(), "nastawnik nie nazywa języka docelowego").toBe(napis);
+      expect(a.getAttribute("href"), "nastawnik prowadzi nie tam").toBe(cel);
+      expect(a.getAttribute("hreflang"), "brak oznaczenia języka odnośnika").toBeTruthy();
+    });
+  }
+});

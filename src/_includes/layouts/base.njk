@@ -24,7 +24,7 @@
 <header class="szyld">
   <a class="marka" href="/{{ jezyk }}/">{{ site.tytul }}</a>
   <nav class="jez" aria-label="Język">
-    {%- for j in site.jezyki %}<a href="{{ j.prefix }}/"{% if j.kod == jezyk %} aria-current="true"{% endif %}>{{ j.nazwa }}</a>{% endfor %}
+    {%- for j in site.jezyki %}{% if j.kod != jezyk %}<a class="przelacz-jezyk" href="{{ j.prefix }}/" lang="{{ j.kod }}" hreflang="{{ j.kod }}">{{ j.nazwa }}</a>{% endif %}{% endfor %}
   </nav>
 </header>
 {% include "partials/bench.njk" %}
