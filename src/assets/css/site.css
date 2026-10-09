@@ -163,7 +163,7 @@ math{font-size:1.05em}
 /* ── pulpit: nastawniki po lewej, objaśnienia w wolnym polu po prawej ──── */
 .pulpit{background:var(--plate);border:1px solid var(--rule-soft);padding:1.1rem 1.2rem 1.3rem;margin:1.75rem 0}
 .pulpit .plansza-tytul{margin-top:0}
-.pulpit-sterowniki{display:grid;grid-template-columns:auto auto minmax(14rem,1fr);gap:1.1rem 1.6rem;align-items:start;margin:.4rem 0 1.1rem}
+.pulpit-sterowniki{display:grid;grid-template-columns:minmax(14rem,19rem) minmax(14rem,1fr) minmax(13rem,1fr);gap:1.1rem 1.5rem;align-items:start;margin:.4rem 0 1.1rem}
 .blok-objasnien{font-size:.9rem;color:var(--ink-soft);border-left:1px solid var(--rule-soft);padding-left:1.1rem}
 .blok-objasnien p{margin:0 0 .7rem}
 .blok-objasnien p:last-child{margin-bottom:0}
@@ -173,7 +173,9 @@ math{font-size:1.05em}
    zachowuje minimalną szerokość i przewija się w poziomie. */
 .przewijalna{overflow-x:auto;overscroll-behavior-x:contain}
 .przewijalna > svg{min-width:620px}
-@media (max-width:46rem){
+.pulpit .rzad-przyrzadow{margin:1.2rem 0 .4rem}
+.pulpit .read{margin:.8rem 0}
+@media (max-width:58rem){
   .pulpit-sterowniki{grid-template-columns:1fr}
   .blok-objasnien{border-left:0;border-top:1px solid var(--rule-soft);padding:.9rem 0 0}
 }
@@ -271,6 +273,15 @@ svg.sciana{max-width:none;width:100%}
 /* ── zegarek kieszonkowy: tarcza, koronka, dwie pary wskazówek ─────────── */
 .blok-daty,.blok-zegara{margin:0;display:flex;flex-direction:column;align-items:center;gap:.55rem}
 .blok-daty{flex:0 0 160px}
+.blok-okretu{margin:0;display:flex;flex-direction:column;gap:.5rem}
+.blok-okretu .galeon{max-width:100%}
+.nastawniki{width:100%}
+.nastawniki .ctl{gap:.6rem}
+.nastawniki .ctl label{flex:0 0 6.4rem;font-size:.85rem}
+.nastawniki .ctl input[type=range]{flex:1 1 5rem}
+.nastawniki .ctl output{flex:0 0 6rem;font-size:.8rem;line-height:1.25}
+.nastawniki p{margin:.5rem 0 0}
+.pulpit-podtytul{font-size:1rem;font-weight:400;margin:1.4rem 0 .3rem;color:var(--ink-soft)}
 .blok-zegara{flex:0 0 250px}
 .pola-daty{display:grid;grid-template-columns:auto auto;gap:.35rem .5rem;align-items:center}
 .pola-daty .wybor{display:contents}
