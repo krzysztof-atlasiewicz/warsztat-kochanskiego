@@ -5,6 +5,7 @@ przyrzad: Cyrkiel
 rok: 1685
 kolejnosc: 1
 modul: cyrkiel
+kartaPierwsza: konstrukcja
 para: cyrkiel
 permalink: /pl/cyrkiel/
 tagi:
@@ -12,7 +13,7 @@ tagi:
   - { typ: rekonstrukcja, etykieta: interpretacja }
 rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>·</mo><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt></math> ≈ <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3,141533</mn><mo>·</mo><mi>r</mi></math>, czyli krótszy od <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi><mi>r</mi></math> o około sześć milionowych promienia. Przy promieniu 150 mm błąd wynosi 8,9 µm, przy promieniu Ziemi — blisko 380 metrów.</p>'
 ---
-{% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
+{% karta "przyrzad", i18n[jezyk].zakladki.konstrukcja %}
 {% include "przyrzady/cyrkiel.njk" %}
 {% endkarta %}
 
@@ -21,8 +22,8 @@ rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://w
 
 {{ rownowaznik | safe }}
 
-<details class="wyprowadzenie">
-<summary>Skąd bierze się ten wzór</summary>
+<section class="wyprowadzenie">
+<h3 class="tytul-wyprowadzenia">Skąd bierze się ten wzór</h3>
 <p>Przyjmijmy promień <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math> i układ współrzędnych, w którym punkt styczności <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math> leży w początku, środek okręgu w <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mi>r</mi><mo>)</mo></math>, a punkt <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math> w <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mn>2</mn><mi>r</mi><mo>)</mo></math>. Styczna z kroku 2 jest wtedy osią poziomą.</p>
 <ol>
 <li>Ramię kąta <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>30</mn><mo>°</mo></math> przy środku <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>O</mi></math> tworzy trójkąt prostokątny o przyprostokątnej pionowej <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math>, więc <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mi>C</mi><mo>=</mo><mi>r</mi><mo>·</mo><mi>tg</mi><mn>30</mn><mo>°</mo><mo>=</mo><mfrac><mi>r</mi><msqrt><mn>3</mn></msqrt></mfrac></math>, a zatem <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>C</mi><mo>=</mo><mo>(</mo><mo>−</mo><mfrac><mi>r</mi><msqrt><mn>3</mn></msqrt></mfrac><mo>,</mo><mn>0</mn><mo>)</mo></math>.</li>
@@ -32,7 +33,7 @@ rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://w
 <li>Stąd <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>D</mi><mo>=</mo><mi>r</mi><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt><mo>≈</mo><mn>3,141533</mn><mo>·</mo><mi>r</mi></math>, czyli <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi><mi>r</mi></math> z niedomiarem około <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>6</mn><mo>·</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>6</mn></mrow></msup><mo>·</mo><mi>r</mi></math>.</li>
 </ol>
 <p class="dim">Wyprowadzenie jest nasze; Kochański podał konstrukcję i wynik, nie ten rachunek.</p>
-</details>
+</section>
 
 <p class="note">Przy tarczy zegara błąd schodzi poniżej progu obróbki warsztatowej XVII wieku, przy promieniu Ziemi urasta do blisko czterystu metrów.</p>
 <p class="note uwaga">Teza, że jest to przybliżenie zaprojektowane do wykonania, a nie do rachunku, jest naszą interpretacją — Kochański nigdzie nie uzasadnia tak konstrukcji wprost.</p>

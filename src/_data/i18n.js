@@ -10,6 +10,7 @@ export default {
     zakladki: {
       opis: "Części strony przyrządu",
       przyrzad: "Przyrząd",
+      konstrukcja: "Konstrukcja",
       wiemy: "Skąd to wiemy",
       pytania: "Pytania otwarte",
       rejestr: "Zobacz pełny rejestr pytań ze wszystkich przyrządów"
@@ -37,6 +38,8 @@ export default {
       pulpitTytul: "Dwa zegary na jednym okręcie — przesuń dzień rejsu i patrz, jak się rozchodzą",
       pulpitOpis: "Oba zegary wyregulowano w La Rochelle. Od tej chwili tylko się mylą — każdy inaczej. Przesuń dzień rejsu albo odbij od brzegu, a karta kursowa pokaże, gdzie okręt jest naprawdę i gdzie wypadłby, licząc pozycję z każdego z nich.",
       kalendarzTytul: "Który to dzień",
+      termometrDymek: "Termometr nie pokazuje pogody, tylko temperaturę wynikającą z szerokości geograficznej: 9,8 °C na wysokości La Rochelle, 27,8 °C u Kajenny, a między nimi liniowo. To ona napędza błąd obu zegarów — sprężyna reaguje na nią mocno, wahadło ledwie.",
+      sladOpis: "Dwa cieńsze ślady pokazują, gdzie okręt sądziłby, że jest, licząc pozycję z każdego z zegarów; im dłużej trwa rejs, tym dalej odchodzą od przebytej trasy.",
       kalendarzOpis: "Richer wyszedł z La Rochelle 8 lutego 1672 i dobił do Kajenny 22 kwietnia — siedemdziesiąt cztery doby. Kartka pokazuje datę, suwak przesuwa okręt po tej samej trasie.",
       okretTytul: "Okręt i zegar na pokładzie",
       okretOpis: "W rufowej nadbudówce stoi zegar wahadłowy. Im wyższa fala, tym mocniej przechyla się pokład, a wahadło zatacza szerszy łuk — i właśnie dlatego zaczyna chodzić wolniej.",
@@ -198,6 +201,7 @@ export default {
     zakladki: {
       opis: "Parts of the instrument page",
       przyrzad: "Instrument",
+      konstrukcja: "Construction",
       wiemy: "How we know",
       pytania: "Open questions",
       rejestr: "See the full register of questions across all instruments"
@@ -225,6 +229,8 @@ export default {
       pulpitTytul: "Two clocks on one ship — move the day of the voyage and watch them part",
       pulpitOpis: "Both clocks were set in La Rochelle. From that moment they only drift, each in its own way. Move the day of the voyage, or cast off, and the plane chart shows where the ship actually is and where each clock would put it.",
       kalendarzTytul: "Which day it is",
+      termometrDymek: "The thermometer shows no weather, only the temperature that follows from latitude: 9.8 °C off La Rochelle, 27.8 °C off Cayenne, linear in between. That is what drives both clocks astray — strongly for the spring, barely for the pendulum.",
+      sladOpis: "The two thinner tracks show where the ship would believe itself to be, reckoning position from each clock; the longer the voyage, the further they stray from the course actually sailed.",
       kalendarzOpis: "Richer sailed from La Rochelle on 8 February 1672 and reached Cayenne on 22 April — seventy-four days. The leaf shows the date; the slider moves the ship along the same route.",
       okretTytul: "The ship and the clock aboard",
       okretOpis: "A pendulum clock stands in the stern castle. The higher the sea, the more the deck rolls and the wider the pendulum swings — which is exactly why it begins to run slow.",

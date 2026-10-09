@@ -5,6 +5,7 @@ przyrzad: Compass
 rok: 1685
 kolejnosc: 1
 modul: cyrkiel
+kartaPierwsza: konstrukcja
 para: cyrkiel
 permalink: /en/compass/
 tagi:
@@ -12,7 +13,7 @@ tagi:
   - { typ: rekonstrukcja, etykieta: interpretation }
 rownowaznik: '<p>The construction yields a segment of length <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>·</mo><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt></math> ≈ <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3.141533</mn><mo>·</mo><mi>r</mi></math>, short of <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi><mi>r</mi></math> by about six millionths of the radius. At a radius of 150 mm the error is 8.9 µm; at the radius of the Earth it grows to nearly 380 metres.</p>'
 ---
-{% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
+{% karta "przyrzad", i18n[jezyk].zakladki.konstrukcja %}
 {% include "przyrzady/cyrkiel.njk" %}
 {% endkarta %}
 
@@ -21,8 +22,8 @@ rownowaznik: '<p>The construction yields a segment of length <math xmlns="http:/
 
 {{ rownowaznik | safe }}
 
-<details class="wyprowadzenie">
-<summary>Where the formula comes from</summary>
+<section class="wyprowadzenie">
+<h3 class="tytul-wyprowadzenia">Where the formula comes from</h3>
 <p>Take radius <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math> and coordinates in which the point of tangency <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math> sits at the origin, the centre at <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mi>r</mi><mo>)</mo></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math> at <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mn>2</mn><mi>r</mi><mo>)</mo></math>. The tangent from step 2 is then the horizontal axis.</p>
 <ol>
 <li>The <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>30</mn><mo>°</mo></math> ray at the centre gives a right triangle with vertical leg <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math>, so <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mi>C</mi><mo>=</mo><mi>r</mi><mo>·</mo><mi>tan</mi><mn>30</mn><mo>°</mo><mo>=</mo><mfrac><mi>r</mi><msqrt><mn>3</mn></msqrt></mfrac></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>C</mi><mo>=</mo><mo>(</mo><mo>−</mo><mfrac><mi>r</mi><msqrt><mn>3</mn></msqrt></mfrac><mo>,</mo><mn>0</mn><mo>)</mo></math>.</li>
@@ -32,7 +33,7 @@ rownowaznik: '<p>The construction yields a segment of length <math xmlns="http:/
 <li>Hence <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi><mi>D</mi><mo>=</mo><mi>r</mi><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt><mo>≈</mo><mn>3.141533</mn><mo>·</mo><mi>r</mi></math>, short of <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi><mi>r</mi></math> by about <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>6</mn><mo>·</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>6</mn></mrow></msup><mo>·</mo><mi>r</mi></math>.</li>
 </ol>
 <p class="dim">The derivation is ours; Kochański gave the construction and the result, not this calculation.</p>
-</details>
+</section>
 
 <p class="note">On a clock dial the error falls below what a seventeenth-century workshop could machine. At the radius of the Earth it grows to nearly four hundred metres.</p>
 <p class="note uwaga">The claim that this is an approximation designed for making rather than for calculating is our interpretation — Kochański nowhere argues it in those terms.</p>
