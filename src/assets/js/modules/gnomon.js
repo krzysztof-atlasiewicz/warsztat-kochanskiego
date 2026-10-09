@@ -306,18 +306,18 @@ export default function init(root) {
     // kartki nie wyskakiwało nad tym, w co się właśnie celuje.
     const groty = zrob("g", { class: "beben-groty", "data-bez-dymka": "" });
     for (const [bok, kierunek] of [[-1, -1], [1, 1]]) {
-      const ax = bok < 0 ? geo.x - 17 : geo.x + geo.w + 17;
+      const ax = bok < 0 ? geo.x - 11 : geo.x + geo.w + 11;
       const s = bok;                                   // zwrot grotu
       const grot = zrob("g", { class: "beben-grot" });
       // drzewce
-      grot.append(zrob("line", { x1: ax - 9 * s, y1: cy, x2: ax + 6 * s, y2: cy, class: "strzala-drzewce" }));
+      grot.append(zrob("line", { x1: ax - 7 * s, y1: cy, x2: ax + 4 * s, y2: cy, class: "strzala-drzewce" }));
       // grot
-      grot.append(zrob("path", { d: `M ${ax + 3 * s} ${cy - 4} L ${ax + 10 * s} ${cy} L ${ax + 3 * s} ${cy + 4}`,
+      grot.append(zrob("path", { d: `M ${ax + 1 * s} ${cy - 3.4} L ${ax + 7 * s} ${cy} L ${ax + 1 * s} ${cy + 3.4}`,
         class: "strzala-grot" }));
       // lotki
-      grot.append(zrob("path", { d: `M ${ax - 10 * s} ${cy - 4} L ${ax - 5 * s} ${cy} L ${ax - 10 * s} ${cy + 4}`,
+      grot.append(zrob("path", { d: `M ${ax - 7 * s} ${cy - 3.4} L ${ax - 3 * s} ${cy} L ${ax - 7 * s} ${cy + 3.4}`,
         class: "strzala-lotki" }));
-      grot.append(zrob("rect", { x: ax - 12, y: cy - 10, width: 24, height: 20, class: "pole-chwytu" }));
+      grot.append(zrob("rect", { x: ax - 10, y: cy - 10, width: 20, height: 20, class: "pole-chwytu" }));
       grot.addEventListener("click", (e) => { e.stopPropagation(); obroc(kierunek); });
       groty.append(grot);
     }
@@ -328,9 +328,9 @@ export default function init(root) {
   }
   // Nazwy i objaśnienia bierzemy z pól <select>, żeby nie powielać tłumaczeń.
   zbudujBeben("bebenMiesiaca", polaM, polaM.getAttribute("aria-label"),
-    { x: 34, y: 24, w: 90, h: 20, baza: 4, odstep: 12, klasa: "beben-miesiac", goly: true }, polaM.dataset.dymek);
+    { x: 38, y: 24, w: 84, h: 20, baza: 4, odstep: 12, klasa: "beben-miesiac", goly: true }, polaM.dataset.dymek);
   zbudujBeben("bebenDnia", polaD, polaD.getAttribute("aria-label"),
-    { x: 38, y: 60, w: 76, h: 66, baza: 17, odstep: 46, klasa: "beben-dzien" }, polaD.dataset.dymek);
+    { x: 38, y: 60, w: 84, h: 66, baza: 17, odstep: 46, klasa: "beben-dzien" }, polaD.dataset.dymek);
   if (odrysujBebny.length) root.classList.add("z-bebnami");
 
   // ── zegar: tarcza, podziałka, koronka ──────────────────────────────────
