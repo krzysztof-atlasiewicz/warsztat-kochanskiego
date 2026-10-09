@@ -433,3 +433,13 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Wybór dnia i miesiąca wrócił na kartkę.** Dwa pola stoją bezpośrednio pod nią, na wspólnej mosiężnej listwie przyklejonej do jej dolnej krawędzi, bez podpisów — nazwy pól niosą `aria-label` i dymek. Dotąd były osobnym rzędem pod kalendarzem i czytało się je jak formularz obok przyrządu, a nie jak jego część.
 
 **Układ pulpitu ma od tego cyklu własne testy** (58 zamiast 52): legenda musi stać po przełączniku w tym samym bloku, oba pola daty muszą siedzieć na kartce i mieć nazwę dostępną wraz z dymkiem, a Słońce po złożeniu przyrządu musi nieść dymek i pole chwytu. Trzy rzeczy, które najłatwiej rozjechać następną poprawką arkusza stylów.
+
+## 2026-10-09 — Cykl 34: kartka równa zegarkowi, pola wyboru na niej
+
+**Kartka kalendarza była wciśnięta w kwadrat.** Reguła `flex:0 0 150px` w kolumnowym układzie zginanym ustawia nie szerokość, lecz wysokość — kartka dostawała sto pięćdziesiąt punktów wysokości zamiast szerokości, a rysunek chował się w tym kwadracie pomniejszony, z pustymi pasami po bokach. Po poprawce kartka ma szerokość stu pięćdziesięciu punktów i wysokość dwustu dwudziestu czterech, czyli dokładnie tyle co zegarek obok. Ten sam błąd dusił kartkę na stronie wahadła; tam też zniknął.
+
+**Pola wyboru dnia i miesiąca leżą na kartce,** w polu odciętym kreską nad jej dartym dolnym brzegiem — nie pod nią, nie obok niej. Dotąd były listwą doklejoną do dolnej krawędzi i dalej czytały się jak osobny formularz. Teraz data jest jedną rzeczą: wielka liczba, długość dnia i nocy, a pod nimi dwa pola, którymi się ją zmienia.
+
+**Zastrzeżenie o czasie urzędowym** zeszło spod rzędu nastawników do trzeciej kolumny, pod legendę zegarka, oddzielone od niej cienką kreską. To komentarz do tych właśnie trzech liczb — godziny mechanicznej, słonecznej i rozbieżności — a nie do całego pulpitu. Trzy kolumny kończą się teraz na tej samej wysokości, z dokładnością do sześciu punktów.
+
+**Wysokości pilnuje test** (62 zamiast 58): czyta proporcje obu viewBoksów z gotowej strony i szerokości z arkusza stylów, przelicza je na punkty i wymaga, żeby kartka i zegarek różniły się o mniej niż punkt. Sprawdzono, że potrafi zawieść — przy starym viewBoksie zgłasza różnicę 23,4 punktu. Drugi nowy test pilnuje, że zastrzeżenie o czasie urzędowym stoi w kolumnie objaśnień, pod legendą.

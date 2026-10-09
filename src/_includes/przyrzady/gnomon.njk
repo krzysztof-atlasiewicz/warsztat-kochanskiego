@@ -8,18 +8,19 @@
   <div class="pulpit-sterowniki">
 
     <figure class="blok-daty" data-dymek="{{ s.gnomon.dymekKalendarza }}">
-      <svg viewBox="0 0 160 214" class="kartka" role="img" aria-describedby="o-kartka">
+      <svg viewBox="0 0 160 239" class="kartka" role="img" aria-describedby="o-kartka">
         <desc id="o-kartka">{{ s.gnomon.opisKartki }}</desc>
-        <path d="M 10 18 L 150 18 L 150 184 Q 120 194 90 186 Q 55 177 10 188 Z"
+        <path d="M 10 18 L 150 18 L 150 214 Q 120 224 90 216 Q 55 207 10 218 Z"
               fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
         <line x1="10" y1="42" x2="150" y2="42" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
         <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <text id="kalMiesiac" class="t" x="80" y="36" text-anchor="middle">—</text>
-        <text id="kalDzien" class="kartka-liczba" x="80" y="116" text-anchor="middle">—</text>
-        <line x1="34" y1="138" x2="126" y2="138" stroke="var(--rule-soft)" stroke-width="0.8"/>
-        <text id="kalPora" class="t" x="80" y="156" text-anchor="middle">—</text>
-        <text id="kalDzien2" class="t" x="80" y="172" text-anchor="middle">—</text>
+        <text id="kalDzien" class="kartka-liczba" x="80" y="108" text-anchor="middle">—</text>
+        <line x1="34" y1="130" x2="126" y2="130" stroke="var(--rule-soft)" stroke-width="0.8"/>
+        <text id="kalPora" class="t" x="80" y="148" text-anchor="middle">—</text>
+        <text id="kalDzien2" class="t" x="80" y="164" text-anchor="middle">—</text>
+        <line x1="34" y1="176" x2="126" y2="176" stroke="var(--rule-soft)" stroke-width="0.8"/>
       </svg>
       <figcaption class="pola-daty">
         <select id="dzien" aria-label="{{ s.gnomon.dzien }}" data-dymek="{{ s.gnomon.opisy.dzien }}"></select>
@@ -82,9 +83,9 @@
         <span class="para-zegara"><b class="znak-slon"></b><span id="slon">—</span> {{ s.gnomon.slon }}</span>
         <span class="para-zegara"><b class="znak-luk"></b><span id="roznica">—</span> {{ s.gnomon.roznica }}</span>
       </div>
+      <p class="dim małe uwaga-urzedowa">{{ s.gnomon.kiedyUwaga }}</p>
     </div>
   </div>
-  <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>
 
   <div class="przewijalna" data-dymek="{{ s.gnomon.napisy.wybierzRachube }}">
   <svg viewBox="0 0 820 390" class="wide sciana" role="img" aria-describedby="o-sciana">
