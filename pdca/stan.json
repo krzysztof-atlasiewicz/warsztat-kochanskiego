@@ -1,7 +1,7 @@
 {
   "faza": "A",
   "wersja": "0.9-dev",
-  "cykl": 4,
+  "cykl": 5,
   "bramka": {
     "id": "GA",
     "warunki": [
@@ -79,33 +79,38 @@
         "id": "GA11",
         "opis": "Wzmianki o źródłach z ustalonym skanem są podlinkowane",
         "typ": "automat",
-        "kontrola": "zrodla"
+        "kontrola": "zrodla",
+        "ostatniWynik": "spełniony"
       },
       {
         "id": "GA12",
         "opis": "Konfiguracja wdrożenia zgadza się z adresem serwisu",
         "typ": "automat",
-        "kontrola": "wdrozenie"
+        "kontrola": "wdrozenie",
+        "ostatniWynik": "spełniony"
       },
       {
         "id": "GA13",
         "opis": "Znak graficzny obecny i podpięty na każdej stronie",
         "typ": "automat",
-        "kontrola": "ikony"
+        "kontrola": "ikony",
+        "ostatniWynik": "spełniony"
       },
       {
         "id": "GA14",
         "opis": "Wzory zapisane w MathML, nie znakiem pierwiastka",
         "typ": "automat",
-        "kontrola": "wzory"
+        "kontrola": "wzory",
+        "ostatniWynik": "spełniony"
       },
       {
         "id": "GA15",
         "opis": "Długa pamięć podręczna tylko dla plików z odciskiem treści",
         "typ": "automat",
-        "kontrola": "pamiec"
+        "kontrola": "pamiec",
+        "ostatniWynik": "spełniony"
       }
     ]
   },
-  "ostatniCykl": "2026-09-14"
+  "ostatniCykl": "2026-10-08"
 }

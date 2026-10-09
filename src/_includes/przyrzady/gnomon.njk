@@ -1,30 +1,111 @@
 {% set s = i18n[jezyk] %}
-<div class="stage" data-miesiace='{{ s.gnomon.miesiace | dump }}'>
-<svg viewBox="0 0 380 250" role="img" aria-describedby="o-gnomon">
-<desc id="o-gnomon">{{ s.gnomon.opis }}</desc>
-<rect x="24" y="16" width="332" height="218" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<polyline id="przesilenieL" fill="none" stroke="var(--sun)" stroke-width="1" stroke-dasharray="4 3"/>
-<polyline id="rownonoc" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<polyline id="przesilenieZ" fill="none" stroke="var(--verd)" stroke-width="1" stroke-dasharray="4 3"/>
-<polyline id="analemma" fill="none" stroke="var(--verd)" stroke-width="1.6"/>
-<line id="promien2" x1="190" y1="60" x2="190" y2="60" stroke="var(--ink-soft)" stroke-width="1" stroke-dasharray="2 3"/>
-<circle id="grot" cx="190" cy="60" r="4" fill="var(--sun)"/>
-<circle cx="190" cy="60" r="3" fill="var(--ink)"/>
-<text id="brakSlonca" class="t" x="190" y="132" text-anchor="middle" opacity="0">{{ s.gnomon.brakSlonca }}</text>
-</svg>
+
+<div class="przyrzady-gnomon" data-napisy='{{ s.gnomon.napisy | dump }}'>
+
+<section class="plansza">
+  <h3 class="plansza-tytul">{{ s.gnomon.kiedyTytul }}</h3>
+  <p class="plansza-opis">{{ s.gnomon.kiedyOpis }}</p>
+  <div class="kalendarz-rzad">
+    <svg viewBox="0 0 160 190" class="kartka" role="img" aria-describedby="o-kartka">
+      <desc id="o-kartka">{{ s.gnomon.opisKartki }}</desc>
+      <path d="M 10 18 L 150 18 L 150 160 Q 120 170 90 162 Q 55 153 10 164 Z"
+            fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
+      <line x1="10" y1="42" x2="150" y2="42" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
+      <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
+      <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
+      <text id="kalMiesiac" class="t" x="80" y="36" text-anchor="middle">—</text>
+      <text id="kalDzien" class="kartka-liczba" x="80" y="112" text-anchor="middle">—</text>
+      <text id="kalPora" class="t" x="80" y="140" text-anchor="middle">—</text>
+      <text id="kalDzien2" class="t" x="80" y="156" text-anchor="middle">—</text>
+    </svg>
+
+    <svg viewBox="0 0 200 200" class="tarcza-mechaniczna" role="img" aria-describedby="o-tarcza">
+      <desc id="o-tarcza">{{ s.gnomon.opisTarczy }}</desc>
+      <defs>
+        <radialGradient id="mosiadzZ" cx="35%" cy="30%">
+          <stop offset="0" stop-color="var(--mosiadz-jasny)"/><stop offset="1" stop-color="var(--mosiadz-ciemny)"/>
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="95" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
+      <circle cx="100" cy="100" r="86" fill="var(--plyta-jasna)" stroke="var(--mosiadz-ciemny)" stroke-width="1.4"/>
+      <circle cx="100" cy="100" r="62" fill="none" stroke="var(--rule-soft)" stroke-width="0.7"/>
+      <g id="pierscienGodzin"></g>
+      <g id="wskazowki">
+        <line id="wskMinut" x1="100" y1="100" x2="100" y2="30" stroke="var(--ink)" stroke-width="1.6"/>
+        <path id="wskGodzin" d="M 100 100 L 96 62 L 100 46 L 104 62 Z" fill="var(--ink)"/>
+      </g>
+      <circle cx="100" cy="100" r="6" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
+      <circle cx="100" cy="100" r="2" fill="var(--ink)"/>
+    </svg>
+
+    <div class="kalendarz-sterowanie">
+      <div class="ctl"><label for="data" title="{{ s.gnomon.opisy.data }}">{{ s.gnomon.data }}</label><input type="range" id="data" min="1" max="365" step="1" value="172"><output id="dataO">—</output></div>
+      <div class="ctl"><label for="zegar" title="{{ s.gnomon.opisy.zegar }}">{{ s.gnomon.zegar }}</label><input type="range" id="zegar" min="4" max="21" step="0.25" value="12"><output id="zegarO">—</output></div>
+      <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="plansza">
+  <h3 class="plansza-tytul">{{ s.gnomon.scianaTytul }}</h3>
+  <p class="plansza-opis">{{ s.gnomon.scianaOpis }}</p>
+  <p class="legenda">
+    <span class="probka probka-rowne"></span>{{ s.gnomon.rowne }}
+    <span class="probka probka-wloskie"></span>{{ s.gnomon.wloskie }}
+    <span class="probka probka-babilonskie"></span>{{ s.gnomon.babilonskie }}
+    <span class="probka probka-dekl"></span>{{ s.gnomon.krzyweDnia }}
+  </p>
+  <svg viewBox="0 0 820 352" class="wide sciana" role="img" aria-describedby="o-sciana">
+    <desc id="o-sciana">{{ s.gnomon.opis }}</desc>
+    <rect x="0" y="0" width="820" height="352" fill="var(--niebo)"/>
+    <rect x="110" y="78" width="600" height="274" fill="var(--tynk)" stroke="var(--rule)" stroke-width="1"/>
+    <g class="ciosy">
+      <line x1="110" y1="136" x2="710" y2="136"/><line x1="110" y1="196" x2="710" y2="196"/>
+      <line x1="110" y1="256" x2="710" y2="256"/><line x1="110" y1="316" x2="710" y2="316"/>
+    </g>
+    <rect x="104" y="72" width="612" height="16" class="gzyms"/>
+    <rect x="122" y="92" width="576" height="248" fill="none" stroke="var(--rule-soft)" stroke-width="0.8"/>
+    <g id="tarcze"></g>
+    <g id="promienie"></g>
+    <g id="cienie"></g>
+    <g id="slonce"></g>
+    <text id="brakSlonca" class="tb" x="410" y="30" text-anchor="middle" opacity="0">{{ s.gnomon.brakSlonca }}</text>
+  </svg>
+  <p class="dim małe">{{ s.gnomon.scianaLegenda }}</p>
+</section>
+
+<section class="plansza">
+  <h3 class="plansza-tytul">{{ s.gnomon.odczytyTytul }}</h3>
+  <p class="plansza-opis">{{ s.gnomon.odczytyOpis }}</p>
+  <div class="trzy-odczyty">
+    <article class="odczyt odczyt-wloskie">
+      <h4>{{ s.gnomon.wloskie }}</h4>
+      <p class="odczyt-wartosc" id="wloskie" aria-live="polite">—</p>
+      <p class="odczyt-opis">{{ s.gnomon.coToWloskie }}</p>
+    </article>
+    <article class="odczyt odczyt-rowne">
+      <h4>{{ s.gnomon.rowne }}</h4>
+      <p class="odczyt-wartosc" id="rowne" aria-live="polite">—</p>
+      <p class="odczyt-opis">{{ s.gnomon.coToRowne }}</p>
+    </article>
+    <article class="odczyt odczyt-babilonskie">
+      <h4>{{ s.gnomon.babilonskie }}</h4>
+      <p class="odczyt-wartosc" id="babilonskie" aria-live="polite">—</p>
+      <p class="odczyt-opis">{{ s.gnomon.coToBabilonskie }}</p>
+    </article>
+  </div>
+  <p class="note">{{ s.gnomon.poCoTrzy }}</p>
+</section>
+
+<section class="plansza">
+  <h3 class="plansza-tytul">{{ s.gnomon.rozbieznoscTytul }}</h3>
+  <p class="plansza-opis">{{ s.gnomon.rozbieznoscOpis }}</p>
+  <dl class="read" aria-live="polite">
+    <div><dt>{{ s.gnomon.mech }}</dt><dd id="mech">—</dd></div>
+    <div><dt>{{ s.gnomon.slon }}</dt><dd id="slon">—</dd></div>
+    <div><dt>{{ s.gnomon.roznica }}</dt><dd id="roznica">—</dd></div>
+  </dl>
+  <p><button id="przelacz" data-pokaz="{{ s.gnomon.analemmaPokaz }}" data-ukryj="{{ s.gnomon.analemmaUkryj }}" title="{{ s.gnomon.opisy.analemma }}">{{ s.gnomon.analemmaPokaz }}</button></p>
+</section>
+
 </div>
-
-<div class="ctl"><label for="data">{{ s.gnomon.data }}</label><input type="range" id="data" min="1" max="365" step="1" value="172"><output id="dataO">21 cze</output></div>
-<div class="ctl"><label for="zegar">{{ s.gnomon.zegar }}</label><input type="range" id="zegar" min="4" max="21" step="0.25" value="12"><output id="zegarO">12:00</output></div>
-
-<dl class="read" aria-live="polite">
-<div><dt>{{ s.gnomon.rowne }}</dt><dd id="rowne">—</dd></div>
-<div><dt>{{ s.gnomon.wloskie }}</dt><dd id="wloskie">—</dd></div>
-<div><dt>{{ s.gnomon.babilonskie }}</dt><dd id="babilonskie">—</dd></div>
-</dl>
-<dl class="read" aria-live="polite">
-<div><dt>{{ s.gnomon.mech }}</dt><dd id="mech">—</dd></div>
-<div><dt>{{ s.gnomon.slon }}</dt><dd id="slon">—</dd></div>
-<div><dt>{{ s.gnomon.roznica }}</dt><dd id="roznica">—</dd></div>
-</dl>
-<p><button id="przelacz" data-pokaz="{{ s.gnomon.analemmaPokaz }}" data-ukryj="{{ s.gnomon.analemmaUkryj }}">{{ s.gnomon.analemmaPokaz }}</button></p>

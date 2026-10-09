@@ -57,5 +57,31 @@
     "licencja": "Public Domain Mark 1.0",
     "frazy": [],
     "uwaga": "Własna relacja Richera z wyprawy do Kajenny, wydana w zbiorze pamiętników Akademii. To tutaj opisane jest skrócenie wahadła sekundowego względem Paryża — obserwacja, od której zaczyna się moduł. Skan nie ma rozpoznanego tekstu, więc strony tej obserwacji jeszcze nie ustaliliśmy; pozycja A7 agendy."
+  },
+  "widacka-2008": {
+    "autor": "Hanna Widacka",
+    "tytul": "Adam Adamandy Kochański, nadworny matematyk Jana III Sobieskiego",
+    "w": "Pasaż Wiedzy, Muzeum Pałacu Króla Jana III w Wilanowie",
+    "rok": 2008,
+    "tom": null,
+    "strony": null,
+    "instytucja": "Muzeum Pałacu Króla Jana III w Wilanowie",
+    "url": "https://wilanow-palac.pl/pasaz-wiedzy/adam-adamandy-kochanski-nadworny-matematyk-jana-iii-sobieskiego",
+    "licencja": "tekst i fotografia muzeum — wszystkie prawa zastrzeżone, wolno tylko odsyłać",
+    "frazy": [],
+    "uwaga": "Artykuł muzealny z fotografią zegara słonecznego na elewacji ogrodowej (fot. W. Holnicki). Podaje, że Kochański wykonał zegar razem z Heweliuszem, i opisuje medalion: brodaty mężczyzna ze złotym kłosem zboża, skrzydła, tarcza słoneczna, po bokach putta z draperią z miesiącami i znakami zodiaku. Fotografia nie jest na wolnej licencji, więc nie osadzamy jej — zostaje odnośnik."
+  },
+  "fijalkowski-1989": {
+    "autor": "Wojciech Fijałkowski",
+    "tytul": "A little known fact from the work of Adam Kochański at the court of John III at Wilanów",
+    "w": "Studia Wilanowskie",
+    "rok": 1989,
+    "tom": 11,
+    "strony": null,
+    "instytucja": "Muzeum Pałacu Króla Jana III w Wilanowie",
+    "url": "https://wilanow-palac.pl/en/knowledge/a-little-known-fact-from-the-work-of-adam-kochanski-at-the-court-of-john-iii-at-wilanow",
+    "licencja": "skan udostępniony przez muzeum, warunki do ustalenia",
+    "frazy": [],
+    "uwaga": "Jedyne znane nam opracowanie naukowe poświęcone wprost pracy Kochańskiego w Wilanowie. Muzeum udostępnia skan w formacie PDF, ale bez rozpoznanego tekstu, więc treści nie przeczytaliśmy; tytuł podajemy w brzmieniu ze strony anglojęzycznej, polskie brzmienie i paginację trzeba sprawdzić z tomu. Pozycja A8 agendy."
   }
 }
