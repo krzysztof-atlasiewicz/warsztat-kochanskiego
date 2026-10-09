@@ -369,3 +369,29 @@ describe.skipIf(!zbudowane)("kroki konstrukcji cyrkla", () => {
     });
   }
 });
+
+// Podmiana kroju pisma w locie przesuwała każdy wiersz o punkt — i to właśnie
+// czytało się jako miganie przy przechodzeniu między przyrządami.
+describe("kroje bez podmiany w locie", () => {
+  it("arkusz krojów nie dopuszcza podmiany po pierwszym rysunku", () => {
+    const f = readFileSync("src/assets/css/fonty.css", "utf8");
+    expect(f, "kroje dalej podmieniają się w locie").not.toMatch(/font-display:\s*swap/);
+    expect((f.match(/font-display:optional/g) || []).length, "nie wszystkie kroje są zamówione bezzwłocznie").toBe(6);
+  });
+
+  it.skipIf(!zbudowane)("każda strona zamawia kroje z góry", () => {
+    for (const plik of ["_site/pl/cyrkiel/index.html", "_site/en/gnomon/index.html"]) {
+      const h = readFileSync(plik, "utf8");
+      const ile = (h.match(/<link rel="preload" as="font"/g) || []).length;
+      expect(ile, `${plik}: kroje nie są zamawiane z góry`).toBe(6);
+      expect(h, `${plik}: zamówienie kroju bez crossorigin nie zadziała`)
+        .toMatch(/<link rel="preload" as="font" type="font\/woff2" crossorigin href="\/assets\/fonts\/[^"]+\.[0-9a-f]{8}\.woff2">/);
+    }
+  });
+
+  it("pasek odwzorowania i wiersz pary liter rezerwują wysokość", () => {
+    const a = readFileSync("src/assets/css/site.css", "utf8");
+    expect(a, "pasek szyfru nie rezerwuje wysokości").toMatch(/\.pasek\{min-height:/);
+    expect(a, "wiersz pary liter nie rezerwuje wysokości").toMatch(/#para\{min-height:/);
+  });
+});

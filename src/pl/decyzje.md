@@ -563,3 +563,15 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Skok wysokości dokumentu między pierwszym rysunkiem a stanem ustalonym:** cyrkiel 1 punkt (było 149 po samej poprawce kroków), wahadło −46, szyfr 45, gnomon −22. Reszta to przyrządy dorysowujące własną treść poniżej pierwszego ekranu.
 
 **Trzy nowe testy** (100 zamiast 97): moduł cyrkla nie może chować pola wyników przez `hide`, arkusz musi mieć regułę przygaszania i rezerwację miejsca od pierwszej klatki, a w dokumencie pole musi nadal nieść klasę `hide` — żeby bez skryptu pozostało schowane, a nie świeciło martwym suwakiem.
+
+## 2026-10-10 — Cykl 44: miganie przy przechodzeniu między przyrządami to była podmiana kroju
+
+**Zmierzono klatka po klatce, zamiast zgadywać.** Próbka co odrysowanie, przez dwie i pół sekundy od wejścia na stronę, z położeniem paska zakładek, karty, rysunku przyrządu i ścieżki na dole. Wynik był ten sam na każdej z czterech stron: około setnej milisekundy *wszystko* przesuwało się o punkt albo dwa naraz. To nie przyrządy — to chwila, w której przeglądarka zamienia pismo zapasowe na EB Garamond. Każdy wiersz na stronie drgał jednocześnie i właśnie to czytało się jako mignięcie.
+
+**Dwie poprawki naraz.** Kroje są zamawiane z góry, w nagłówku dokumentu, zanim przeglądarka dojdzie do arkusza (`rel="preload"`, wszystkie sześć plików, z nazwami niosącymi odcisk treści branymi z nowego spisu `src/_data/kroje.json`, który wypisuje skrypt obcinający). Do tego `font-display` zmienione ze `swap` na `optional`: jeśli krój nie zdąży na pierwszy rysunek, strona zostaje przy piśmie zapasowym do końca tego wejścia, zamiast przerysowywać się w połowie. Pierwsze nie gwarantuje, drugie gwarantuje — razem dają zwykle właściwe pismo od razu, a nigdy dwóch pism po sobie.
+
+**Pasek odwzorowania w szyfrze rezerwuje wysokość.** Moduł wypełnia go literami dopiero po starcie i strona rosła wtedy o czterdzieści trzy punkty; wiersz pary liter o kolejne trzy.
+
+**Ruch układu po wejściu na stronę, przed poprawką i po niej** (największe przesunięcie dowolnego z czterech punktów pomiarowych): cyrkiel 21 punktów → 0, wahadło 70 → 0, szyfr 46 → 2, gnomon 22 → 0. Na gnomonie nie rusza się już nic.
+
+**Trzy nowe testy** (103 zamiast 100): arkusz krojów nie może zawierać `font-display:swap` i musi mieć sześć deklaracji `optional`, każda strona musi zamawiać z góry sześć plików kroju z poprawnym `crossorigin`, a pasek szyfru i wiersz pary liter muszą rezerwować wysokość.

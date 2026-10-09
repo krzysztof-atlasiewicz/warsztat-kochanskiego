@@ -65,6 +65,11 @@ button:hover{border-color:var(--verd);color:var(--verd)}
 /* Ze skryptem pole wyników cyrkla zajmuje miejsce od pierwszej klatki, choć
    odsłania się dopiero na ostatnim kroku. Bez skryptu zostaje schowane. */
 html.js #panel.hide{display:block;visibility:hidden}
+/* Pasek odwzorowania i wiersz pary liter wypełnia moduł szyfru dopiero po
+   starcie. Rezerwujemy ich wysokość, żeby strona nie urosła pod widzem
+   o czterdzieści kilka punktów w chwili, gdy przyrząd się składa. */
+.pasek{min-height:2.95rem}
+#para{min-height:1.45em}
 .rownowaznik{border-top:1px solid var(--rule);margin-top:2.5rem;padding-top:1rem;color:var(--ink-soft);font-size:.95rem}
 footer{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1.5rem;color:var(--ink-soft);font-size:.92rem}
 @media (prefers-reduced-motion:no-preference){

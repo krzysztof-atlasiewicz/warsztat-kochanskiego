@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, unlink
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import subsetFont from "subset-font";
-import { ZNAKI, KATALOG, RODZINY, ZAKRESY, PLIK_CSS } from "./kroje-dane.mjs";
+import { ZNAKI, KATALOG, RODZINY, ZAKRESY, PLIK_CSS, PLIK_SPIS } from "./kroje-dane.mjs";
 
 const ZRODLA = {
   EBGaramond: { wzor: "@fontsource/eb-garamond/files/eb-garamond-{z}-400-normal.woff2", rodzina: "EB Garamond", styl: "normal", waga: "400 700" },
@@ -36,6 +36,7 @@ mkdirSync(KATALOG, { recursive: true });
 for (const f of readdirSync(KATALOG)) if (f.endsWith(".woff2")) unlinkSync(join(KATALOG, f));
 
 const reguly = [];
+const spis = {};
 let suma = 0;
 for (const rodzina of RODZINY) {
   const k = ZRODLA[rodzina];
@@ -45,16 +46,18 @@ for (const rodzina of RODZINY) {
     const nazwa = `${rodzina}-${zakres}.${odcisk}.woff2`;
     writeFileSync(join(KATALOG, nazwa), dane);
     suma += dane.length;
+    spis[`${rodzina}-${zakres}`] = `/assets/fonts/${nazwa}`;
     reguly.push(`@font-face{
   font-family:"${k.rodzina}";
   src:url("/assets/fonts/${nazwa}") format("woff2");
   font-weight:${k.waga};
   font-style:${k.styl};
-  font-display:swap;
+  font-display:optional;
   unicode-range:${ZAKRES_UNICODE[zakres]};
 }`);
     console.log(`kroje: ${nazwa} — ${(dane.length / 1024).toFixed(1)} kB`);
   }
 }
 writeFileSync(PLIK_CSS, reguly.join("\n") + "\n");
+writeFileSync(PLIK_SPIS, JSON.stringify(spis, null, 2) + "\n");
 console.log(`kroje: razem ${(suma / 1024).toFixed(1)} kB w ${reguly.length} deklaracjach @font-face`);

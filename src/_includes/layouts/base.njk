@@ -19,6 +19,14 @@
      pierwszą. Bez tego strona rysowała się ze wszystkimi kartami naraz,
      a po starcie modułu kurczyła się o dwie trzecie — stąd podskok. -->
 <script>document.documentElement.classList.add("js")</script>
+<!-- Kroje pobierane z góry, zanim przeglądarka dojdzie do arkusza: razem
+     z „font-display:optional" znaczy to, że strona rysuje się od razu
+     właściwym pismem albo — przy bardzo wolnym łączu i pustej pamięci
+     podręcznej — zapasowym, ale nigdy jednym po drugim. Podmiana kroju
+     w locie przesuwała każdy wiersz o punkt i to właśnie migało. -->
+{%- for klucz, plik in kroje %}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="{{ plik }}">
+{%- endfor %}
 <link rel="stylesheet" href="/assets/css/fonty.css?v={{ "/assets/css/fonty.css" | odcisk }}">
 <link rel="stylesheet" href="/assets/css/site.css?v={{ "/assets/css/site.css" | odcisk }}">
 </head>
