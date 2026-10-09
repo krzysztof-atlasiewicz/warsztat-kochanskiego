@@ -243,11 +243,37 @@ svg.sciana{max-width:none;width:100%}
 .probka-babilonskie{border-color:var(--verd)}
 .probka-dekl{border-top-style:dashed;border-color:var(--rule)}
 
-/* ── tarcza zegara mechanicznego ───────────────────────────────────────── */
-.tarcza-mechaniczna{max-width:170px;flex:0 0 170px}
+/* ── zegarek kieszonkowy: tarcza, koronka, dwie pary wskazówek ─────────── */
+.blok-daty,.blok-zegara{margin:0;display:flex;flex-direction:column;align-items:center;gap:.55rem}
+.blok-daty{flex:0 0 160px}
+.blok-zegara{flex:0 0 250px}
+.pola-daty{display:grid;grid-template-columns:auto auto;gap:.35rem .5rem;align-items:center}
+.pola-daty .wybor{display:contents}
+.pola-daty label{text-align:right}
+.pola-daty select{font-variant-numeric:tabular-nums}
+.tarcza-mechaniczna{max-width:200px;touch-action:none;user-select:none}
 .tarcza-mechaniczna .cyfra-zegara{font-family:var(--serif);font-size:15px;fill:var(--ink)}
 .tarcza-mechaniczna .kreska-godzin{stroke:var(--ink);stroke-width:1.4}
 .tarcza-mechaniczna .kreska-minut{stroke:var(--rule);stroke-width:.7}
+.tarcza-chwyt{cursor:grab}
+.tarcza-mechaniczna.nastawiany .tarcza-chwyt,.tarcza-mechaniczna.nastawiany .koronka{cursor:grabbing}
+.koronka{cursor:grab}
+.koronka:focus-visible{outline:2px solid var(--verd);outline-offset:2px}
+.radelko-zab{stroke:var(--mosiadz-ciemny);stroke-width:1.1;stroke-linecap:round}
+.wsk-mech{stroke:var(--ink);stroke-width:1.6}
+.wsk-mech-godz{fill:var(--ink)}
+.wsk-slon{stroke:var(--sun);stroke-width:1.2;stroke-dasharray:4 3}
+.wsk-slon-godz{fill:none;stroke:var(--sun);stroke-width:1.3}
+#lukRoznicy{stroke:var(--verd);stroke-width:3;stroke-linecap:round}
+.napis-roznicy{font-family:var(--mono);font-size:11px;fill:var(--verd)}
+.odczyt-zegara{display:flex;flex-direction:column;gap:.15rem;font-size:.82rem;color:var(--ink-soft);align-self:stretch}
+.para-zegara span[id]{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.para-zegara b{display:inline-block;width:1.4rem;height:0;border-top:2px solid var(--ink);margin-right:.4rem;vertical-align:middle}
+.para-zegara .znak-slon{border-top-style:dashed;border-color:var(--sun)}
+.para-zegara .znak-luk{border-top-width:3px;border-color:var(--verd)}
+.podpowiedz-zegara{margin:0;align-self:stretch}
+.plytka-roznicy{fill:var(--plyta-jasna);stroke:var(--rule-soft);stroke-width:.7}
+.dymek{border:1px solid var(--rule-soft);background:var(--plate);padding:.6rem .8rem;margin:.6rem 0 0;font-size:.9rem;color:var(--ink-soft)}
 
 /* ── trzy odczyty ──────────────────────────────────────────────────────── */
 .trzy-odczyty{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1px;background:var(--rule-soft);border:1px solid var(--rule-soft)}

@@ -6,44 +6,77 @@
   <h3 class="plansza-tytul">{{ s.gnomon.kiedyTytul }}</h3>
   <p class="plansza-opis">{{ s.gnomon.kiedyOpis }}</p>
   <div class="kalendarz-rzad">
-    <svg viewBox="0 0 160 190" class="kartka" role="img" aria-describedby="o-kartka">
-      <desc id="o-kartka">{{ s.gnomon.opisKartki }}</desc>
-      <path d="M 10 18 L 150 18 L 150 160 Q 120 170 90 162 Q 55 153 10 164 Z"
-            fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
-      <line x1="10" y1="42" x2="150" y2="42" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
-      <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
-      <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
-      <text id="kalMiesiac" class="t" x="80" y="36" text-anchor="middle">—</text>
-      <text id="kalDzien" class="kartka-liczba" x="80" y="112" text-anchor="middle">—</text>
-      <text id="kalPora" class="t" x="80" y="140" text-anchor="middle">—</text>
-      <text id="kalDzien2" class="t" x="80" y="156" text-anchor="middle">—</text>
-    </svg>
 
-    <svg viewBox="0 0 200 200" class="tarcza-mechaniczna" role="img" aria-describedby="o-tarcza">
-      <desc id="o-tarcza">{{ s.gnomon.opisTarczy }}</desc>
-      <defs>
-        <radialGradient id="mosiadzZ" cx="35%" cy="30%">
-          <stop offset="0" stop-color="var(--mosiadz-jasny)"/><stop offset="1" stop-color="var(--mosiadz-ciemny)"/>
-        </radialGradient>
-      </defs>
-      <circle cx="100" cy="100" r="95" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
-      <circle cx="100" cy="100" r="86" fill="var(--plyta-jasna)" stroke="var(--mosiadz-ciemny)" stroke-width="1.4"/>
-      <circle cx="100" cy="100" r="62" fill="none" stroke="var(--rule-soft)" stroke-width="0.7"/>
-      <g id="pierscienGodzin"></g>
-      <g id="wskazowki">
-        <line id="wskMinut" x1="100" y1="100" x2="100" y2="30" stroke="var(--ink)" stroke-width="1.6"/>
-        <path id="wskGodzin" d="M 100 100 L 96 62 L 100 46 L 104 62 Z" fill="var(--ink)"/>
-      </g>
-      <circle cx="100" cy="100" r="6" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
-      <circle cx="100" cy="100" r="2" fill="var(--ink)"/>
-    </svg>
+    <figure class="blok-daty">
+      <svg viewBox="0 0 160 190" class="kartka" role="img" aria-describedby="o-kartka">
+        <desc id="o-kartka">{{ s.gnomon.opisKartki }}</desc>
+        <path d="M 10 18 L 150 18 L 150 160 Q 120 170 90 162 Q 55 153 10 164 Z"
+              fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
+        <line x1="10" y1="42" x2="150" y2="42" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
+        <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <text id="kalMiesiac" class="t" x="80" y="36" text-anchor="middle">—</text>
+        <text id="kalDzien" class="kartka-liczba" x="80" y="112" text-anchor="middle">—</text>
+        <text id="kalPora" class="t" x="80" y="140" text-anchor="middle">—</text>
+        <text id="kalDzien2" class="t" x="80" y="156" text-anchor="middle">—</text>
+      </svg>
+      <figcaption class="pola-daty">
+        <span class="wybor"><label for="dzien">{{ s.gnomon.dzien }}</label>
+          <select id="dzien" title="{{ s.gnomon.opisy.dzien }}"></select></span>
+        <span class="wybor"><label for="miesiac">{{ s.gnomon.miesiac }}</label>
+          <select id="miesiac" title="{{ s.gnomon.opisy.miesiac }}"></select></span>
+      </figcaption>
+    </figure>
 
-    <div class="kalendarz-sterowanie">
-      <div class="ctl"><label for="data" title="{{ s.gnomon.opisy.data }}">{{ s.gnomon.data }}</label><input type="range" id="data" min="1" max="365" step="1" value="172"><output id="dataO">—</output></div>
-      <div class="ctl"><label for="zegar" title="{{ s.gnomon.opisy.zegar }}">{{ s.gnomon.zegar }}</label><input type="range" id="zegar" min="4" max="21" step="0.25" value="12"><output id="zegarO">—</output></div>
-      <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>
-    </div>
+    <figure class="blok-zegara">
+      <svg viewBox="0 0 200 224" class="tarcza-mechaniczna" role="img" aria-describedby="o-tarcza">
+        <desc id="o-tarcza">{{ s.gnomon.opisTarczy }}</desc>
+        <defs>
+          <radialGradient id="mosiadzZ" cx="35%" cy="30%">
+            <stop offset="0" stop-color="var(--mosiadz-jasny)"/><stop offset="1" stop-color="var(--mosiadz-ciemny)"/>
+          </radialGradient>
+        </defs>
+
+        <g id="koronka" role="slider" tabindex="0" class="koronka"
+           aria-label="{{ s.gnomon.zegar }}" aria-valuemin="4" aria-valuemax="21" aria-valuenow="12">
+          <circle cx="100" cy="9" r="7" fill="none" stroke="var(--mosiadz-ciemny)" stroke-width="3"/>
+          <rect x="93" y="15" width="14" height="13" rx="2" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
+          <circle cx="100" cy="34" r="13" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
+          <g id="radelko"></g>
+          <circle cx="100" cy="34" r="4" fill="none" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
+        </g>
+
+        <g id="tarczaZegara" class="tarcza-chwyt">
+          <circle cx="100" cy="128" r="88" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
+          <circle cx="100" cy="128" r="80" fill="var(--plyta-jasna)" stroke="var(--mosiadz-ciemny)" stroke-width="1.4"/>
+          <circle cx="100" cy="128" r="52" fill="none" stroke="var(--rule-soft)" stroke-width="0.7"/>
+          <g id="pierscienGodzin"></g>
+          <path id="lukRoznicy" fill="none"/>
+          <g id="wskazowkiSlon">
+            <line id="wskMinutSlon" x1="100" y1="128" x2="100" y2="60" class="wsk-slon"/>
+            <path id="wskGodzinSlon" d="M 100 128 L 96 96 L 100 82 L 104 96 Z" class="wsk-slon-godz"/>
+          </g>
+          <g id="wskazowki">
+            <line id="wskMinut" x1="100" y1="128" x2="100" y2="58" class="wsk-mech"/>
+            <path id="wskGodzin" d="M 100 128 L 95.5 94 L 100 78 L 104.5 94 Z" class="wsk-mech-godz"/>
+          </g>
+          <circle cx="100" cy="128" r="6" fill="url(#mosiadzZ)" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
+          <circle cx="100" cy="128" r="2" fill="var(--ink)"/>
+          <g id="okienkoRoznicy">
+            <rect x="74" y="158" width="52" height="17" rx="3" class="plytka-roznicy"/>
+            <text id="napisRoznicy" class="napis-roznicy" x="100" y="170" text-anchor="middle"></text>
+          </g>
+        </g>
+      </svg>
+      <figcaption class="odczyt-zegara">
+        <span class="para-zegara"><b class="znak-mech"></b><span id="mech">—</span> {{ s.gnomon.mech }}</span>
+        <span class="para-zegara"><b class="znak-slon"></b><span id="slon">—</span> {{ s.gnomon.slon }}</span>
+        <span class="para-zegara"><b class="znak-luk"></b><span id="roznica">—</span> {{ s.gnomon.roznica }}</span>
+      </figcaption>
+      <p class="dim małe podpowiedz-zegara">{{ s.gnomon.jakNastawic }}</p>
+    </figure>
   </div>
+  <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>
 </section>
 
 <section class="plansza">
@@ -100,12 +133,10 @@
 <section class="plansza">
   <h3 class="plansza-tytul">{{ s.gnomon.rozbieznoscTytul }}</h3>
   <p class="plansza-opis">{{ s.gnomon.rozbieznoscOpis }}</p>
-  <dl class="read" aria-live="polite">
-    <div><dt>{{ s.gnomon.mech }}</dt><dd id="mech">—</dd></div>
-    <div><dt>{{ s.gnomon.slon }}</dt><dd id="slon">—</dd></div>
-    <div><dt>{{ s.gnomon.roznica }}</dt><dd id="roznica">—</dd></div>
-  </dl>
-  <p><button id="przelacz" data-pokaz="{{ s.gnomon.analemmaPokaz }}" data-ukryj="{{ s.gnomon.analemmaUkryj }}" title="{{ s.gnomon.opisy.analemma }}">{{ s.gnomon.analemmaPokaz }}</button></p>
+  <p><button id="przelacz" data-pokaz="{{ s.gnomon.analemmaPokaz }}" data-ukryj="{{ s.gnomon.analemmaUkryj }}"
+             aria-describedby="coToAnalemma" aria-pressed="false"
+             title="{{ s.gnomon.opisy.analemma }}">{{ s.gnomon.analemmaPokaz }}</button></p>
+  <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
 </section>
 
 </div>

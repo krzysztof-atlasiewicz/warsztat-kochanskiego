@@ -15,6 +15,10 @@ const TARCZE = {
   rowne: { x0: 324, y0: 182, x1: 496, y1: 302, nx: 410, ny: 196 },
   babilonskie: { x0: 524, y0: 195, x1: 684, y1: 302, nx: 604, ny: 207 }
 };
+// Tarcza zegara kieszonkowego: środek, promienie podziałki i koronka.
+const ZEG = { cx: 100, cy: 128, w: 200, h: 224, rCyfry: 61, rZnacznik: 78, rLuk: 73, kx: 100, ky: 34 };
+const ROK = 2026;
+const DNI_MIESIACA = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const RZYMSKIE = ["XII", "I", "II", "III", "IIII", "V", "VI", "VII", "VIII", "IX", "X", "XI"];
 const NS = "http://www.w3.org/2000/svg";
 
@@ -23,6 +27,14 @@ const zrob = (nazwa, atrybuty, tresc) => {
   for (const k in atrybuty) e.setAttribute(k, atrybuty[k]);
   if (tresc != null) e.textContent = tresc;
   return e;
+};
+const ogranicz = (x, a, b) => Math.min(Math.max(x, a), b);
+// Pola wyboru są zwykłym HTML-em, nie SVG — muszą powstać bez przestrzeni nazw.
+const opcja = (wartosc, napis) => {
+  const o = document.createElement("option");
+  o.value = String(wartosc);
+  o.textContent = napis;
+  return o;
 };
 
 function offsetWarszawa(ms) {
@@ -62,6 +74,13 @@ export function stanNieba(rok, dzienRoku, godzinaZegarowa) {
     wloskie: zachod ? (teraz - czasSloneczny(zachod) + 24) % 24 : null,
     nadHoryzontem: hor.altitude > 0
   };
+}
+
+// Numer dnia w roku modelowym (nieprzestępnym) z miesiąca i dnia miesiąca.
+export function dzienRoku(miesiac, dzien) {
+  let s = 0;
+  for (let i = 0; i < miesiac; i++) s += DNI_MIESIACA[i];
+  return s + dzien;
 }
 
 // Przesunięcie cienia końca pręta dla bieżącego stanu nieba.
@@ -110,8 +129,8 @@ function miejsceNapisu(kawalki, r) {
   const x = naj.kon.x + ((naj.kon.x - naj.drugi.x) / dl) * 13;
   const y = naj.kon.y + ((naj.kon.y - naj.drugi.y) / dl) * 13;
   return {
-    x: Math.min(Math.max(x, r.x0 + 9), r.x1 - 9),
-    y: Math.min(Math.max(y + 4, r.y0 + 13), r.y1 - 4)
+    x: ogranicz(x, r.x0 + 9, r.x1 - 9),
+    y: ogranicz(y + 4, r.y0 + 13, r.y1 - 4)
   };
 }
 
@@ -147,29 +166,100 @@ function rysujTarcze(g, tarcza, rodzaj, linie, napisy) {
 export default function init(root) {
   const $ = (id) => root.querySelector(`#${id}`);
   const N = JSON.parse(root.querySelector("[data-napisy]").dataset.napisy);
-  const ROK = 2026;
   const fi = WILANOW.fi;
   const hhmm = (h) => { const m = Math.round((((h % 24) + 24) % 24) * 60); return `${Math.floor(m / 60) % 24}:${String(m % 60).padStart(2, "0")}`; };
   const godzMin = (h) => `${Math.floor(h)} ${N.godz} ${String(Math.round((h % 1) * 60)).padStart(2, "0")} ${N.min}`;
   const h1 = (x) => (x == null ? "—" : x.toFixed(1).replace(".", ","));
+  const naTarczy = (a, r) => [
+    ZEG.cx + r * Math.sin((a * Math.PI) / 180),
+    ZEG.cy - r * Math.cos((a * Math.PI) / 180)
+  ];
 
-  // ── tarcza zegara mechanicznego ────────────────────────────────────────
+  // ── pola daty ──────────────────────────────────────────────────────────
+  const polaM = $("miesiac"), polaD = $("dzien");
+  N.miesiaceDop.forEach((m, i) => polaM.append(opcja(i, m)));
+  polaM.value = "5";
+  function wypelnijDni() {
+    const ile = DNI_MIESIACA[Number(polaM.value)];
+    const byl = Number(polaD.value) || 21;
+    polaD.replaceChildren();
+    for (let d = 1; d <= ile; d++) polaD.append(opcja(d, String(d)));
+    polaD.value = String(Math.min(byl, ile));
+  }
+  wypelnijDni();
+  polaD.value = "21";
+
+  // ── zegar: tarcza, podziałka, koronka ──────────────────────────────────
+  let godzina = 12;
+  const svgZeg = root.querySelector(".tarcza-mechaniczna");
+  const koronka = $("koronka");
   const pierscien = $("pierscienGodzin");
   for (let i = 0; i < 12; i++) {
-    const a = (i * 30 - 90) * Math.PI / 180;
-    pierscien.append(zrob("text", {
-      x: (100 + 67 * Math.cos(a)).toFixed(1), y: (100 + 67 * Math.sin(a) + 5).toFixed(1),
-      "text-anchor": "middle", class: "cyfra-zegara"
-    }, RZYMSKIE[i]));
+    const a = i * 30;
+    const [x, y] = naTarczy(a, ZEG.rCyfry);
+    pierscien.append(zrob("text", { x: x.toFixed(1), y: (y + 5).toFixed(1), "text-anchor": "middle",
+      class: "cyfra-zegara" }, RZYMSKIE[i]));
   }
   for (let i = 0; i < 60; i++) {
-    const a = (i * 6 - 90) * Math.PI / 180, dl = i % 5 === 0 ? 7 : 3;
-    pierscien.append(zrob("line", {
-      x1: (100 + 86 * Math.cos(a)).toFixed(1), y1: (100 + 86 * Math.sin(a)).toFixed(1),
-      x2: (100 + (86 - dl) * Math.cos(a)).toFixed(1), y2: (100 + (86 - dl) * Math.sin(a)).toFixed(1),
-      class: i % 5 === 0 ? "kreska-godzin" : "kreska-minut"
+    const a = i * 6, dl = i % 5 === 0 ? 7 : 3;
+    const [x1, y1] = naTarczy(a, ZEG.rZnacznik);
+    const [x2, y2] = naTarczy(a, ZEG.rZnacznik - dl);
+    pierscien.append(zrob("line", { x1: x1.toFixed(1), y1: y1.toFixed(1), x2: x2.toFixed(1), y2: y2.toFixed(1),
+      class: i % 5 === 0 ? "kreska-godzin" : "kreska-minut" }));
+  }
+  const radelko = $("radelko");
+  for (let i = 0; i < 16; i++) {
+    const a = (i * 22.5 * Math.PI) / 180;
+    radelko.append(zrob("line", {
+      x1: (ZEG.kx + 9 * Math.cos(a)).toFixed(1), y1: (ZEG.ky + 9 * Math.sin(a)).toFixed(1),
+      x2: (ZEG.kx + 13 * Math.cos(a)).toFixed(1), y2: (ZEG.ky + 13 * Math.sin(a)).toFixed(1),
+      class: "radelko-zab"
     }));
   }
+
+  // Nastawianie: obrót tarczy albo pokręcenie koronką. Pełny obrót to godzina,
+  // tak jak przy nastawianiu zegarka — stąd i zgrubne, i dokładne nastawienie.
+  let ciagniecie = null;
+  const katWskaznika = (e, sx, sy) => {
+    const r = svgZeg.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * ZEG.w;
+    const y = ((e.clientY - r.top) / r.height) * ZEG.h;
+    return (Math.atan2(x - sx, -(y - sy)) * 180) / Math.PI;
+  };
+  const ustawGodzine = (g) => { godzina = ogranicz(g, 4, 21); odswiez(); };
+
+  for (const [el, sx, sy] of [[$("tarczaZegara"), ZEG.cx, ZEG.cy], [koronka, ZEG.kx, ZEG.ky]]) {
+    el.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      svgZeg.setPointerCapture(e.pointerId);
+      ciagniecie = { sx, sy, poprzedni: katWskaznika(e, sx, sy), start: godzina, suma: 0 };
+      svgZeg.classList.add("nastawiany");
+    });
+  }
+  svgZeg.addEventListener("pointermove", (e) => {
+    if (!ciagniecie) return;
+    const a = katWskaznika(e, ciagniecie.sx, ciagniecie.sy);
+    let d = a - ciagniecie.poprzedni;
+    if (d > 180) d -= 360;
+    if (d < -180) d += 360;
+    ciagniecie.suma += d;
+    ciagniecie.poprzedni = a;
+    ustawGodzine(ciagniecie.start + ciagniecie.suma / 360);
+  });
+  const koniec = () => { ciagniecie = null; svgZeg.classList.remove("nastawiany"); };
+  svgZeg.addEventListener("pointerup", koniec);
+  svgZeg.addEventListener("pointercancel", koniec);
+  svgZeg.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    ustawGodzine(godzina + (e.deltaY > 0 ? -1 : 1) / 12);
+  }, { passive: false });
+  koronka.addEventListener("keydown", (e) => {
+    const krok = { ArrowUp: 1 / 12, ArrowRight: 1 / 12, ArrowDown: -1 / 12, ArrowLeft: -1 / 12,
+      PageUp: 1, PageDown: -1 }[e.key];
+    if (krok !== undefined) { e.preventDefault(); ustawGodzine(godzina + krok); return; }
+    if (e.key === "Home") { e.preventDefault(); ustawGodzine(4); }
+    if (e.key === "End") { e.preventDefault(); ustawGodzine(21); }
+  });
 
   // ── stałe linie na ścianie ─────────────────────────────────────────────
   const tarcze = $("tarcze");
@@ -196,22 +286,40 @@ export default function init(root) {
   let analemma = false;
 
   function odswiez() {
-    const dzien = Number($("data").value), godz = Number($("zegar").value);
-    const d0 = new Date(Date.UTC(ROK, 0, dzien));
-    const stan = stanNieba(ROK, dzien, godz);
+    const mies = Number(polaM.value), dm = Number(polaD.value);
+    const dzien = dzienRoku(mies, dm);
+    const stan = stanNieba(ROK, dzien, godzina);
 
     // kartka kalendarza
-    $("dataO").textContent = `${d0.getUTCDate()} ${N.miesiace[d0.getUTCMonth()]}`;
-    $("kalMiesiac").textContent = N.miesiaceDop[d0.getUTCMonth()];
-    $("kalDzien").textContent = String(d0.getUTCDate());
+    $("kalMiesiac").textContent = N.miesiaceDop[mies];
+    $("kalDzien").textContent = String(dm);
     const wsch = wschodSloneczny(fi, stan.deklinacja), zach = zachodSloneczny(fi, stan.deklinacja);
     $("kalPora").textContent = `${N.dzienTrwa} ${godzMin(zach - wsch)}`;
     $("kalDzien2").textContent = `${N.nocTrwa} ${godzMin(24 - (zach - wsch))}`;
 
-    // zegar mechaniczny
-    $("zegarO").textContent = hhmm(godz);
-    $("wskGodzin").setAttribute("transform", `rotate(${(godz % 12) * 30} 100 100)`);
-    $("wskMinut").setAttribute("transform", `rotate(${(godz % 1) * 360} 100 100)`);
+    // zegar: dwie pary wskazówek i łuk rozbieżności między nimi
+    const katG = (h) => ((h % 12) / 12) * 360;
+    $("wskGodzin").setAttribute("transform", `rotate(${katG(godzina)} ${ZEG.cx} ${ZEG.cy})`);
+    $("wskMinut").setAttribute("transform", `rotate(${(godzina % 1) * 360} ${ZEG.cx} ${ZEG.cy})`);
+    $("wskGodzinSlon").setAttribute("transform", `rotate(${katG(stan.rowne)} ${ZEG.cx} ${ZEG.cy})`);
+    $("wskMinutSlon").setAttribute("transform", `rotate(${(stan.rowne % 1) * 360} ${ZEG.cx} ${ZEG.cy})`);
+
+    const a1 = katG(godzina);
+    let d = katG(stan.rowne) - a1;
+    while (d > 180) d -= 360;
+    while (d < -180) d += 360;
+    const [x1, y1] = naTarczy(a1, ZEG.rLuk), [x2, y2] = naTarczy(a1 + d, ZEG.rLuk);
+    $("lukRoznicy").setAttribute("d",
+      `M ${x1.toFixed(1)} ${y1.toFixed(1)} A ${ZEG.rLuk} ${ZEG.rLuk} 0 0 ${d > 0 ? 1 : 0} ${x2.toFixed(1)} ${y2.toFixed(1)}`);
+    const roz = Math.round(Math.abs(stan.rowne - godzina) * 60);
+    $("napisRoznicy").textContent = `${roz} ${N.min}`;
+
+    koronka.setAttribute("aria-valuenow", godzina.toFixed(2));
+    koronka.setAttribute("aria-valuetext", hhmm(godzina));
+
+    $("mech").textContent = hhmm(godzina);
+    $("slon").textContent = hhmm(stan.rowne);
+    $("roznica").textContent = `${roz} ${N.min}`;
 
     // słońce, promienie i cienie
     const c = przesuniecieCienia(stan);
@@ -229,10 +337,9 @@ export default function init(root) {
       if (r.ny - lam * c.dy < 40) lam = (r.ny - 40) / c.dy;
       const sx = r.nx - lam * c.dx, sy = r.ny - lam * c.dy;
 
-      const tarcza = zrob("circle", { cx: sx.toFixed(1), cy: sy.toFixed(1), r: 15, class: "slonce-tarcza" });
-      slonce.append(tarcza);
+      slonce.append(zrob("circle", { cx: sx.toFixed(1), cy: sy.toFixed(1), r: 15, class: "slonce-tarcza" }));
       for (let i = 0; i < 12; i++) {
-        const a = (i * 30) * Math.PI / 180;
+        const a = (i * 30 * Math.PI) / 180;
         slonce.append(zrob("line", {
           x1: (sx + 18 * Math.cos(a)).toFixed(1), y1: (sy + 18 * Math.sin(a)).toFixed(1),
           x2: (sx + 24 * Math.cos(a)).toFixed(1), y2: (sy + 24 * Math.sin(a)).toFixed(1), class: "slonce-promyk"
@@ -261,27 +368,23 @@ export default function init(root) {
     // analemma na tarczy środkowej
     if (analemma) {
       const pkt = [];
-      for (let d = 1; d <= 365; d += 3) {
-        const q = przesuniecieCienia(stanNieba(ROK, d, godz));
+      for (let d2 = 1; d2 <= 365; d2 += 3) {
+        const q = przesuniecieCienia(stanNieba(ROK, d2, godzina));
         if (q) pkt.push({ x: r.nx + q.dx, y: r.ny + q.dy });
       }
       for (const k of przytnij(pkt, r)) cienie.append(zrob("polyline", { points: zapis(k), class: "analemma" }));
     }
 
-    // odczyty
-    // Odczyty podajemy tylko wtedy, gdy cień naprawdę pada na ścianę —
+    // Odczyty tarczowe podajemy tylko wtedy, gdy cień naprawdę pada na ścianę —
     // inaczej liczba stałaby przy tarczy, na której nic nie widać.
     const niema = `— <small>${stan.nadHoryzontem ? N.scianaWCieniu : N.poZachodzieSlonca}</small>`;
     $("rowne").innerHTML = c ? hhmm(stan.rowne) : niema;
     $("wloskie").innerHTML = c ? `${h1(stan.wloskie)} <small>${N.odZachodu}</small>` : niema;
     $("babilonskie").innerHTML = c ? `${h1(stan.babilonskie)} <small>${N.odWschodu}</small>` : niema;
-    $("mech").textContent = hhmm(godz);
-    $("slon").textContent = hhmm(stan.rowne);
-    const roz = (stan.rowne - godz) * 60;
-    $("roznica").innerHTML = `${Math.round(Math.abs(roz))} <small>${N.min}</small>`;
   }
 
-  ["data", "zegar"].forEach((id) => $(id).addEventListener("input", odswiez));
+  polaM.addEventListener("change", () => { wypelnijDni(); odswiez(); });
+  polaD.addEventListener("change", odswiez);
   $("przelacz").addEventListener("click", (e) => {
     analemma = !analemma;
     e.currentTarget.textContent = analemma ? e.currentTarget.dataset.ukryj : e.currentTarget.dataset.pokaz;
