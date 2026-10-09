@@ -36,3 +36,51 @@ describe.skipIf(!zbudowane)("przyrządy na zbudowanych stronach", () => {
     });
   }
 });
+
+// Układ pulpitu gnomonu był przedmiotem osobnych poprawek: legenda zegarka pod
+// przełącznikiem analemmy, wybór dnia i miesiąca na kartce kalendarza, dymek
+// przy samym Słońcu. Te trzy rzeczy łatwo rozjechać przy kolejnej zmianie CSS,
+// więc pilnuje ich test, a nie tylko oko.
+describe.skipIf(!zbudowane)("pulpit gnomonu", () => {
+  for (const plik of ["_site/pl/gnomon/index.html", "_site/en/gnomon/index.html"]) {
+    it(`${plik} — legenda zegarka stoi pod przełącznikiem analemmy`, () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const blok = document.querySelector(".blok-objasnien");
+      expect(blok, "brak bloku objaśnień").toBeTruthy();
+      const przelacznik = blok.querySelector('[role="switch"]');
+      const odczyt = blok.querySelector(".odczyt-zegara");
+      expect(przelacznik, "przełącznik analemmy nie jest w bloku objaśnień").toBeTruthy();
+      expect(odczyt, "legenda zegarka nie jest w bloku objaśnień").toBeTruthy();
+      expect(
+        przelacznik.compareDocumentPosition(odczyt) & Node.DOCUMENT_POSITION_FOLLOWING,
+        "legenda nie stoi po przełączniku"
+      ).toBeTruthy();
+    });
+
+    it(`${plik} — wybór dnia i miesiąca siedzi na kartce kalendarza`, () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const kartka = document.querySelector("figure.blok-daty");
+      expect(kartka, "brak kartki kalendarza").toBeTruthy();
+      const pola = kartka.querySelectorAll(".pola-daty select");
+      expect(pola.length, "oba pola daty mają być na kartce").toBe(2);
+      for (const p of pola) {
+        expect(p.getAttribute("aria-label"), "pole daty bez nazwy dostępnej").toBeTruthy();
+        expect(p.dataset.dymek, "pole daty bez dymka").toBeTruthy();
+      }
+    });
+
+    it(`${plik} — Słońce samo niesie swój dymek i pole chwytu`, async () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const root = document.querySelector("[data-modul]");
+      const m = await import("../src/assets/js/modules/gnomon.js");
+      m.default(root);
+      const slonce = root.querySelector("#slonce");
+      expect(slonce, "brak Słońca").toBeTruthy();
+      expect(slonce.dataset.dymek, "Słońce bez dymka").toMatch(/\S/);
+      expect(slonce.querySelector("circle.pole-chwytu"), "Słońce bez pola chwytu").toBeTruthy();
+    });
+  }
+});

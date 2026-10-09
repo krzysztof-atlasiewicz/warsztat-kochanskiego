@@ -1,4 +1,4 @@
-# Cykl 5 — 2026-10-08
+# Cykl 11 — 2026-10-09
 
 Faza A, wersja 0.9-dev, bramka GA.
 
@@ -33,7 +33,7 @@ Brak. Wszystkie kontrole automatyczne przechodzą.
 ## Popraw — co robimy dalej
 
 1. Kontrole automatyczne czyste. Bramka GA czeka na: GA1, GA2. To decyzje ludzkie — eskalacja do kierownika projektu.
-2. Agenda badawcza: 6 pozycji otwartych (A1, A3, A4, A5, A7, A8).
+2. Agenda badawcza: 4 pozycji otwartych (A1, A3, A4, A7).
 3. Żadna pozycja agendy nie może zostać zamknięta przez agenta. Zamyka ją człowiek, wpisem do rejestru decyzji.
 
 ## Ślad

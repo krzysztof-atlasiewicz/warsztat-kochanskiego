@@ -7,6 +7,9 @@
 // ściana ma swój, każda tarcza na niej swój własny, a wyjście z tarczy wraca
 // do ściany zamiast gasić wszystko.
 const MARGINES = 10;
+// Przy dużych obszarach — ścianie, karcie — dymek pod całym blokiem lądowałby
+// daleko od tego, na co patrzysz, więc idzie za kursorem.
+const DUZY = { szer: 420, wys: 240 };
 
 export default function init() {
   if (!document.querySelector("[data-dymek]")) return;
@@ -18,6 +21,7 @@ export default function init() {
   document.body.append(pole);
 
   let biezacy = null;
+  let kursor = { x: 0, y: 0 };
 
   const ustaw = (el, wymus = false) => {
     if (el === biezacy && !wymus) return;
@@ -25,7 +29,11 @@ export default function init() {
     if (!el) { pole.hidden = true; return; }
     pole.textContent = el.dataset.dymek;
     pole.hidden = false;
-    const r = el.getBoundingClientRect();
+    const rr = el.getBoundingClientRect();
+    const duzy = rr.width > DUZY.szer || rr.height > DUZY.wys;
+    const r = duzy
+      ? { left: kursor.x, right: kursor.x, top: kursor.y, bottom: kursor.y, width: 0, height: 0 }
+      : rr;
     const p = pole.getBoundingClientRect();
     // Pod elementem, a gdy brakuje miejsca — nad nim. Poziomo wyśrodkowany,
     // ale nigdy poza oknem.
@@ -43,7 +51,10 @@ export default function init() {
   const zNajblizszego = (cel) =>
     cel instanceof Element ? cel.closest("[data-dymek]") : null;
 
-  document.addEventListener("pointerover", (e) => ustaw(zNajblizszego(e.target)));
+  document.addEventListener("pointerover", (e) => {
+    kursor = { x: e.clientX, y: e.clientY };
+    ustaw(zNajblizszego(e.target));
+  });
   document.addEventListener("focusin", (e) => ustaw(zNajblizszego(e.target)));
   document.addEventListener("focusout", () => ustaw(null));
   document.addEventListener("click", (e) => ustaw(zNajblizszego(e.target)));

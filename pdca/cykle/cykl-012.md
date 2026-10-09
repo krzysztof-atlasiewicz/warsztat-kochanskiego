@@ -1,4 +1,4 @@
-# Cykl 5 — 2026-10-08
+# Cykl 12 — 2026-10-09
 
 Faza A, wersja 0.9-dev, bramka GA.
 
@@ -13,7 +13,7 @@ Faza A, wersja 0.9-dev, bramka GA.
 - ✓ **GA7** Budżet wagi strony dotrzymany — spełniony
 - ✓ **GA8** Każdy przyrząd ma wersję w obu językach — spełniony
 - ✓ **GA9** Każdy przyrząd ma wersję osadzalną — spełniony
-- ! **GA10** Kroje pisma osadzone w repozytorium — ostrzeżenie
+- ✗ **GA10** Kroje pisma osadzone w repozytorium — niespełniony
 - ✓ **GA11** Wzmianki o źródłach z ustalonym skanem są podlinkowane — spełniony
 - ✓ **GA12** Konfiguracja wdrożenia zgadza się z adresem serwisu — spełniony
 - ✓ **GA13** Znak graficzny obecny i podpięty na każdej stronie — spełniony
@@ -22,18 +22,16 @@ Faza A, wersja 0.9-dev, bramka GA.
 
 ## Ostrzeżenia
 
-- kroje: brak pliku kroju src/assets/fonts/EBGaramond.woff2 — serwis działa na kroju zastępczym
-- kroje: brak pliku kroju src/assets/fonts/EBGaramond-Italic.woff2 — serwis działa na kroju zastępczym
-- kroje: brak pliku kroju src/assets/fonts/IBMPlexMono.woff2 — serwis działa na kroju zastępczym
+Brak.
 
 ## Usterki do naprawy w tym cyklu
 
-Brak. Wszystkie kontrole automatyczne przechodzą.
+- kroje: znak „☭" (U+262D) nie mieści się w obciętym kroju — _site/pl/decyzje/index.html; rozszerz ZNAKI w scripts/kroje-dane.mjs
 
 ## Popraw — co robimy dalej
 
-1. Kontrole automatyczne czyste. Bramka GA czeka na: GA1, GA2. To decyzje ludzkie — eskalacja do kierownika projektu.
-2. Agenda badawcza: 6 pozycji otwartych (A1, A3, A4, A5, A7, A8).
+1. Naprawić usterki powyżej przed dodawaniem nowej treści. Kontrole automatyczne mają priorytet nad rozwojem funkcji.
+2. Agenda badawcza: 4 pozycji otwartych (A1, A3, A4, A7).
 3. Żadna pozycja agendy nie może zostać zamknięta przez agenta. Zamyka ją człowiek, wpisem do rejestru decyzji.
 
 ## Ślad

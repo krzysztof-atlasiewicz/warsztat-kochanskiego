@@ -169,7 +169,8 @@ export default {
         godz: "godz", min: "min", dzienTrwa: "dzień:", nocTrwa: "noc:", poZachodzie: "—",
         odZachodu: "godz. od zachodu", odWschodu: "godz. od wschodu",
         scianaWCieniu: "ściana w cieniu", poZachodzieSlonca: "po zachodzie Słońca",
-        wybierzRachube: "Słońce nad ścianą jest uchwytem: złap je i przesuń, a godzina pójdzie za nim. Z każdej tarczy wystaje prostopadle krótki pręt — widać go od czoła, jako krążek. Cień jego końca czyta się jak na prawdziwej tarczy: szukasz linii, na której cień stoi, i wodzisz po niej wzrokiem aż do cyfry na jej końcu. Najedź na którąkolwiek z trzech tarcz albo jej dotknij, żeby przeczytać, od czego liczy się jej rachuba.",
+        slonceUchwyt: "Słońce jest uchwytem: złap je i przesuń, a godzina pójdzie za nim — wskazówki zegarka obrócą się, a cienie przejdą po trzech tarczach.",
+        wybierzRachube: "Z każdej tarczy wystaje prostopadle krótki pręt — widać go od czoła, jako krążek. Cień jego końca czyta się jak na prawdziwej tarczy: szukasz linii, na której cień stoi, i wodzisz po niej wzrokiem aż do cyfry na jej końcu. Najedź na którąkolwiek z trzech tarcz albo jej dotknij, żeby przeczytać, od czego liczy się jej rachuba.",
         przesilenieLetnie: "przesilenie letnie", rownonoc: "równonoc", przesilenieZimowe: "przesilenie zimowe",
         tarcze: {
           krotkie: { wloskie: "godziny włoskie", rowne: "godziny równe", babilonskie: "godziny babilońskie" },
@@ -355,7 +356,8 @@ export default {
         godz: "h", min: "min", dzienTrwa: "day:", nocTrwa: "night:", poZachodzie: "—",
         odZachodu: "h since sunset", odWschodu: "h since sunrise",
         scianaWCieniu: "the wall is in shade", poZachodzieSlonca: "after sunset",
-        wybierzRachube: "The sun above the wall is a handle: take hold of it and move it, and the hour follows. A short rod stands out of each dial at a right angle — seen end-on, it reads as a disc. The shadow of its tip is read as on a real dial: find the line the shadow stands on and follow it out to the numeral at its end. Hover over any of the three dials, or tap one, to read what its reckoning counts from.",
+        slonceUchwyt: "The sun is a handle: take hold of it and move it, and the hour follows — the watch hands turn and the shadows travel across all three dials.",
+        wybierzRachube: "A short rod stands out of each dial at a right angle — seen end-on, it reads as a disc. The shadow of its tip is read as on a real dial: find the line the shadow stands on and follow it out to the numeral at its end. Hover over any of the three dials, or tap one, to read what its reckoning counts from.",
         przesilenieLetnie: "summer solstice", rownonoc: "equinox", przesilenieZimowe: "winter solstice",
         tarcze: {
           krotkie: { wloskie: "Italian hours", rowne: "equal hours", babilonskie: "Babylonian hours" },
