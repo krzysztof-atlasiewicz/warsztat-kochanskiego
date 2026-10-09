@@ -159,6 +159,24 @@ math{font-size:1.05em}
 .plansza-tytul{font-size:1.05rem;font-weight:400;margin:0 0 .2rem}
 .plansza-opis{font-size:.93rem;color:var(--ink-soft);margin:0 0 .9rem}
 .kalendarz-rzad{display:flex;gap:1.4rem;align-items:flex-start;flex-wrap:wrap}
+
+/* ── pulpit: nastawniki po lewej, objaśnienia w wolnym polu po prawej ──── */
+.pulpit{background:var(--plate);border:1px solid var(--rule-soft);padding:1.1rem 1.2rem 1.3rem;margin:1.75rem 0}
+.pulpit .plansza-tytul{margin-top:0}
+.pulpit-sterowniki{display:grid;grid-template-columns:auto auto minmax(14rem,1fr);gap:1.1rem 1.6rem;align-items:start;margin:.4rem 0 1.1rem}
+.blok-objasnien{font-size:.9rem;color:var(--ink-soft);border-left:1px solid var(--rule-soft);padding-left:1.1rem}
+.blok-objasnien p{margin:0 0 .7rem}
+.blok-objasnien p:last-child{margin-bottom:0}
+.pulpit-stopka{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:.4rem 1.6rem;margin-top:.9rem}
+.pulpit .dymek{background:var(--paper)}
+/* Na wąskim ekranie ściana zmalałaby do nieczytelnych cyfr — zamiast tego
+   zachowuje minimalną szerokość i przewija się w poziomie. */
+.przewijalna{overflow-x:auto;overscroll-behavior-x:contain}
+.przewijalna > svg{min-width:620px}
+@media (max-width:46rem){
+  .pulpit-sterowniki{grid-template-columns:1fr}
+  .blok-objasnien{border-left:0;border-top:1px solid var(--rule-soft);padding:.9rem 0 0}
+}
 .kartka{max-width:150px;flex:0 0 150px}
 .kartka-liczba{font-family:var(--serif);font-size:54px;fill:var(--ink)}
 .kalendarz-sterowanie{flex:1 1 18rem;min-width:16rem}
@@ -316,6 +334,7 @@ svg.sciana{max-width:none;width:100%}
 
 /* ── objaśnienia rachub ────────────────────────────────────────────────── */
 .rzad-objasnien{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin:.9rem 0 .4rem}
+.rzad-objasnien > span{flex:1 0 100%}
 .guzik-tarczy{font-family:inherit;font-size:.86rem;padding:.25rem .6rem;cursor:help;
   background:var(--plate);border:1px solid var(--rule-soft);border-top-width:2px}
 .guzik-tarczy:hover,.guzik-tarczy:focus-visible{background:var(--paper)}
