@@ -257,6 +257,13 @@ describe.skipIf(!zbudowane)("oznaczenia i zakładki", () => {
         expect(t.dataset.dymek, `oznaczenie „${t.textContent}" bez objaśnienia`).toBeTruthy();
         expect(t.dataset.dymek.length, `objaśnienie „${t.textContent}" jest zdawkowe`).toBeGreaterThan(60);
       }
+      // Para czyta się jako zdanie: pierwszy człon stały, drugi nazywa to,
+      // co dopowiadamy od siebie — i na każdej stronie nazywa co innego.
+      expect(tagi[0].classList.contains("zrodlo"), "pierwsze oznaczenie nie jest źródłem").toBe(true);
+      expect(tagi[0].textContent.trim(), "pierwszy człon pary zmienił brzmienie")
+        .toMatch(/^(ze źródła|from the source)$/);
+      expect(tagi[1].textContent.trim(), "drugi człon nie mówi, co jest nasze")
+        .toMatch(/^(nasze|ours): \S/);
     });
   }
 
