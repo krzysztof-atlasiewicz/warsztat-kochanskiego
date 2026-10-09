@@ -12,13 +12,18 @@ export default function init() {
     // wszystkie karty, dopóki jeszcze stoją jedna pod drugą, i zadajemy
     // każdej wysokość najwyższej. Układ strony przestaje wtedy zależeć od
     // tego, która zakładka jest wybrana.
-    const wyrownaj = () => {
+    // „tylkoRosnie" przy powtórnym pomiarze po załadowaniu przyrządów: wtedy
+    // wolno dołożyć wysokości, ale nie odebrać. Strona, którą widz już widzi,
+    // nie ma się pod nim kurczyć — nawet o kilkadziesiąt punktów.
+    const wyrownaj = (tylkoRosnie = false) => {
+      const przed = karty[0].style.minHeight ? parseFloat(karty[0].style.minHeight) : 0;
       for (const k of karty) k.style.minHeight = "";
       const ukryte = karty.map((k) => k.hidden);
       for (const k of karty) k.hidden = false;
       const najwyzsza = Math.max(...karty.map((k) => k.offsetHeight));
       karty.forEach((k, j) => { k.hidden = ukryte[j]; });
-      if (najwyzsza > 0) for (const k of karty) k.style.minHeight = `${Math.ceil(najwyzsza)}px`;
+      const cel = tylkoRosnie ? Math.max(najwyzsza, przed) : najwyzsza;
+      if (cel > 0) for (const k of karty) k.style.minHeight = `${Math.ceil(cel)}px`;
     };
 
     const pokaz = (i, przenies) => {
@@ -51,9 +56,11 @@ export default function init() {
     let oczekuje = 0;
     const przemierz = () => {
       clearTimeout(oczekuje);
-      oczekuje = setTimeout(wyrownaj, 160);
+      oczekuje = setTimeout(() => wyrownaj(tylkoRosnie), 160);
     };
-    window.addEventListener("resize", przemierz);
-    window.addEventListener("load", przemierz);
+    let tylkoRosnie = true;
+    window.addEventListener("load", () => przemierz());
+    // Zmiana szerokości okna to już nowy układ — wtedy wolno też zmniejszyć.
+    window.addEventListener("resize", () => { tylkoRosnie = false; przemierz(); });
   }
 }

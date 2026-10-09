@@ -18,7 +18,11 @@ export default function init(root) {
     $("opis").innerHTML = OPISY[krok];
     $("cofnij").disabled = krok === 0;
     $("dalej").disabled = krok === OPISY.length - 1;
-    $("panel").classList.toggle("hide", krok !== 4);
+    // Pole z suwakiem i odczytami pojawia się dopiero na ostatnim kroku, ale
+    // miejsce zajmuje od początku: inaczej przejście z kroku 4 na 5 wydłużało
+    // stronę o sto pięćdziesiąt punktów i widok podskakiwał.
+    $("panel").classList.remove("hide");
+    $("panel").classList.toggle("przygaszony", krok !== 4);
   }
   function licz() {
     const r = Number($("promien").value);
