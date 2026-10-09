@@ -204,6 +204,109 @@ export default function init(root) {
   wypelnijDni();
   polaD.value = "21";
 
+  // ── bębenki daty ───────────────────────────────────────────────────────
+  // Data nastawia się jak w starym liczniku: walec obraca się o jedną pozycję,
+  // sąsiednie wartości widać przez okienko. Rozwijana lista byłaby tu obcym
+  // ciałem — przyrząd ma nastawniki, nie formularze. Pola <select> zostają
+  // w dokumencie jako wersja bez skryptu i jako nośnik stanu; po zbudowaniu
+  // bębenków znikają z widoku.
+  const odrysujBebny = [], odswiezDodatkowo = [];
+  function zbudujBeben(gid, pole, etykieta, geo, dymek) {
+    const g = $(gid);
+    if (!g) return;
+    const cx = geo.x + geo.w / 2, cy = geo.y + geo.h / 2;
+    const clipId = `okno-${gid}`;
+    const defs = zrob("defs", {});
+    const cp = zrob("clipPath", { id: clipId });
+    cp.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3 }));
+    defs.append(cp);
+    g.append(defs);
+    g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-pole" }));
+    const rolka = zrob("g", { "clip-path": `url(#${clipId})` });
+    g.append(rolka);
+    g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-walec" }));
+    g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-obwodka" }));
+    // Radełkowane krawędzie walca — ten sam język co koronka zegarka.
+    for (const bx of [geo.x + 3, geo.x + geo.w - 3]) {
+      const z = zrob("g", { class: "beben-radelko" });
+      for (let i = 1; i < 6; i++) {
+        const yy = geo.y + (geo.h * i) / 6;
+        z.append(zrob("line", { x1: bx - 2, y1: yy, x2: bx + 2, y2: yy }));
+      }
+      g.append(z);
+    }
+    const sx = geo.x + geo.w + 7;
+    g.append(zrob("path", { d: `M ${sx - 4} ${cy - 3} h 8 l -4 -5 Z`, class: "beben-strzalka" }));
+    g.append(zrob("path", { d: `M ${sx - 4} ${cy + 3} h 8 l -4 5 Z`, class: "beben-strzalka" }));
+
+    g.setAttribute("role", "spinbutton");
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("aria-label", etykieta);
+    // Bębenki powstają po starcie dymków, więc opis dla czytnika ekranu
+    // dopisujemy tu sami; sam dymek działa, bo obsługa jest delegowana.
+    if (dymek) { g.dataset.dymek = dymek; g.setAttribute("aria-description", dymek); }
+
+    const rysuj = () => {
+      rolka.replaceChildren();
+      const i = pole.selectedIndex, o = pole.options;
+      for (let d = -1; d <= 1; d++) {
+        const j = i + d;
+        if (j < 0 || j >= o.length) continue;
+        rolka.append(zrob("text", {
+          x: cx, y: cy + geo.baza + d * geo.odstep, "text-anchor": "middle",
+          class: d ? `${geo.klasa} beben-sasiad` : geo.klasa
+        }, o[j].textContent));
+      }
+      g.setAttribute("aria-valuenow", pole.value);
+      g.setAttribute("aria-valuetext", o[i] ? o[i].textContent : "");
+      g.setAttribute("aria-valuemin", o[0].value);
+      g.setAttribute("aria-valuemax", o[o.length - 1].value);
+    };
+    const obroc = (kroki) => {
+      const i = ogranicz(pole.selectedIndex + kroki, 0, pole.options.length - 1);
+      if (i === pole.selectedIndex) return;
+      pole.selectedIndex = i;
+      pole.dispatchEvent(new Event("change", { bubbles: true }));
+    };
+    g.addEventListener("wheel", (e) => { e.preventDefault(); obroc(e.deltaY > 0 ? 1 : -1); }, { passive: false });
+    g.addEventListener("keydown", (e) => {
+      const k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1, PageDown: 5, PageUp: -5 }[e.key];
+      if (k) { e.preventDefault(); obroc(k); return; }
+      if (e.key === "Home") { e.preventDefault(); obroc(-pole.options.length); }
+      if (e.key === "End") { e.preventDefault(); obroc(pole.options.length); }
+    });
+    let ciagniecie = null;
+    g.addEventListener("pointerdown", (e) => {
+      g.setPointerCapture(e.pointerId);
+      ciagniecie = { y: e.clientY, i: pole.selectedIndex, ruch: false };
+      g.classList.add("beben-obracany");
+    });
+    g.addEventListener("pointermove", (e) => {
+      if (!ciagniecie) return;
+      // Jeden skok walca na dziesięć punktów ekranu, w dół = wartość rośnie.
+      const kroki = Math.round((e.clientY - ciagniecie.y) / -10);
+      if (kroki) ciagniecie.ruch = true;
+      obroc(ciagniecie.i + kroki - pole.selectedIndex);
+    });
+    const koniecObrotu = (e) => {
+      if (!ciagniecie) return;
+      // Samo kliknięcie, bez przeciągnięcia: górna połowa w górę, dolna w dół.
+      if (!ciagniecie.ruch) obroc(e.offsetY != null && e.offsetY < g.getBoundingClientRect().height / 2 ? -1 : 1);
+      ciagniecie = null;
+      g.classList.remove("beben-obracany");
+    };
+    g.addEventListener("pointerup", koniecObrotu);
+    g.addEventListener("pointercancel", () => { ciagniecie = null; g.classList.remove("beben-obracany"); });
+    odrysujBebny.push(rysuj);
+    rysuj();
+  }
+  // Nazwy i objaśnienia bierzemy z pól <select>, żeby nie powielać tłumaczeń.
+  zbudujBeben("bebenMiesiaca", polaM, polaM.getAttribute("aria-label"),
+    { x: 26, y: 24, w: 98, h: 20, baza: 4, odstep: 12, klasa: "beben-miesiac" }, polaM.dataset.dymek);
+  zbudujBeben("bebenDnia", polaD, polaD.getAttribute("aria-label"),
+    { x: 38, y: 60, w: 76, h: 66, baza: 17, odstep: 46, klasa: "beben-dzien" }, polaD.dataset.dymek);
+  if (odrysujBebny.length) root.classList.add("z-bebnami");
+
   // ── zegar: tarcza, podziałka, koronka ──────────────────────────────────
   let godzina = 12;
   const svgZeg = root.querySelector(".tarcza-mechaniczna");
@@ -434,8 +537,11 @@ export default function init(root) {
     ustawOdczyt("rowne", c ? hhmm(stan.rowne) : powod);
     ustawOdczyt("wloskie", c ? h1(stan.wloskie) : powod);
     ustawOdczyt("babilonskie", c ? h1(stan.babilonskie) : powod);
+    for (const f of odswiezDodatkowo) f();
   }
 
+
+  for (const f of odrysujBebny) odswiezDodatkowo.push(f);
   polaM.addEventListener("change", () => { wypelnijDni(); odswiez(); });
   polaD.addEventListener("change", odswiez);
   $("przelacz").addEventListener("click", (e) => {

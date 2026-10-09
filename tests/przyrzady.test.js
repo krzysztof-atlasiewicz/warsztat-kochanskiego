@@ -65,11 +65,11 @@ describe.skipIf(!zbudowane)("pulpit gnomonu", () => {
       expect(kartka, "brak kartki kalendarza").toBeTruthy();
       const pola = kartka.querySelectorAll(".pola-daty select");
       expect(pola.length, "oba pola daty mają być na kartce").toBe(2);
-      // Data na kartce to same pola wyboru — nie rysowany tekst obok nich.
-      expect(kartka.querySelector("select.pole-dnia"), "dzień nie jest polem wyboru").toBeTruthy();
-      expect(kartka.querySelector("select.pole-miesiaca"), "miesiąc nie jest polem wyboru").toBeTruthy();
+      // Data na kartce nie jest rysowanym tekstem obok nastawników.
       expect(kartka.querySelector("#kalDzien"), "został osobny napis z dniem").toBeFalsy();
       expect(kartka.querySelector("#kalMiesiac"), "został osobny napis z miesiącem").toBeFalsy();
+      expect(kartka.querySelector("#bebenDnia"), "brak miejsca na bębenek dnia").toBeTruthy();
+      expect(kartka.querySelector("#bebenMiesiaca"), "brak miejsca na bębenek miesiąca").toBeTruthy();
       for (const p of pola) {
         expect(p.getAttribute("aria-label"), "pole daty bez nazwy dostępnej").toBeTruthy();
         expect(p.dataset.dymek, "pole daty bez dymka").toBeTruthy();
@@ -102,6 +102,23 @@ describe.skipIf(!zbudowane)("pulpit gnomonu", () => {
       const wysKartki = (szer("\\.kartka") * kartka.h) / kartka.w;
       const wysZegara = (szer("\\.tarcza-mechaniczna") * zegar.h) / zegar.w;
       expect(Math.abs(wysKartki - wysZegara), `kartka ${wysKartki} px, zegarek ${wysZegara} px`).toBeLessThan(1);
+    });
+
+    it(`${plik} — datę nastawia bębenek, nie rozwijana lista`, async () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const root = document.querySelector("[data-modul]");
+      const m = await import("../src/assets/js/modules/gnomon.js");
+      m.default(root);
+      expect(root.classList.contains("z-bebnami"), "pola wyboru nie zostały zastąpione").toBe(true);
+      for (const id of ["bebenDnia", "bebenMiesiaca"]) {
+        const b = root.querySelector(`#${id}`);
+        expect(b.getAttribute("role"), `#${id} nie jest nastawnikiem`).toBe("spinbutton");
+        expect(b.getAttribute("aria-valuetext"), `#${id} bez odczytanej wartości`).toMatch(/\S/);
+        expect(b.getAttribute("tabindex"), `#${id} nieosiągalny klawiaturą`).toBe("0");
+        // Wartość bieżąca plus dwie sąsiednie widoczne przez okienko.
+        expect(b.querySelectorAll("text").length, `#${id} nie pokazuje sąsiednich wartości`).toBe(3);
+      }
     });
 
     it(`${plik} — Słońce samo niesie swój dymek i pole chwytu`, async () => {
