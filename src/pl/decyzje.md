@@ -369,3 +369,19 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Karta i wykres przewijają się w poziomie** na wąskim ekranie, tak samo jak ściana w gnomonie.
 
 **Kolumny pulpitu dostały górne ograniczenie szerokości.** Przy trzech kolumnach ustawionych na zawartość dwie pierwsze zabierały całe miejsce, a trzecia wychodziła poza obszar tekstu. Teraz pierwsza ma najwyżej dziewiętnaście znaków szerokości, a dwie pozostałe dzielą resztę po równo.
+
+## 2026-10-09 — Cykl 29: kroje pisma zamiast ostrzeżenia
+
+**Ostrzeżenie wisiało od pierwszego cyklu:** serwis był zaprojektowany na EB Garamond i IBM Plex Mono, ale plików krojów nigdy nie było, więc chodził na krojach zastępczych, a kontrola `kroje` zgłaszała to za każdym razem. Ostrzeżenie, które nic nie zmienia, przestaje być czytane — więc albo kroje wchodzą, albo kontrola wylatuje.
+
+**Weszły kroje.** Źródłem są pakiety `@fontsource/eb-garamond` i `@fontsource/ibm-plex-mono` — oba na licencji SIL OFL, instalowane przez `npm install`, więc nic nie trzeba pobierać ręcznie.
+
+**Obcięte do repertuaru znaków serwisu.** Pełne pliki ważą razem ponad sto kilobajtów, czyli dwie trzecie budżetu strony; po obcięciu do polskiej i angielskiej łacinki z interpunkcją typograficzną zostaje pięćdziesiąt sześć. Repertuar jest zapisany w jednym miejscu i to on, a nie przypadek, decyduje, co w kroju jest.
+
+**Budżet musiał nauczyć się liczyć kroje.** Kontrola wagi sumowała tylko zasoby wymienione w HTML, a kroje pobiera arkusz stylów — czyli pięćdziesiąt sześć kilobajtów przechodziło jej obok nosa. Teraz zagląda do arkuszy i dolicza to, po co sięgają. Najcięższa strona, gnomon, waży po tej zmianie 131 kB przy budżecie 150: zapasu zostało dziewiętnaście kilobajtów i trzeba o tym pamiętać przy kolejnych przyrządach.
+
+**Nazwy plików niosą odcisk treści,** bo nagłówki każą trzymać kroje rok w pamięci podręcznej. Bez odcisku zmiana repertuaru znaków byłaby dla zwracających się przeglądarek niewidoczna przez rok. Kontrola pamięci podręcznej też się tego nauczyła: dotąd uznawała wyłącznie odcisk w adresie (`?v=`), teraz akceptuje również odcisk w nazwie i sprawdza, że każdy zasób pobierany z arkusza jakiś ma.
+
+**Kontrola `kroje` przestała być ostrzeżeniem i zatrzymuje cykl.** Sprawdza trzy rzeczy: że arkusz deklaracji istnieje, że każdy plik, po który sięga, leży na miejscu i ma odcisk w nazwie, oraz — to najważniejsze — że na zbudowanych stronach nie pojawił się znak spoza repertuaru. Wszystkie trzy przypadki zostały wywołane celowo i każdy zawiódł tak, jak miał: znak ☭ wstawiony na próbę do nagłówka został zgłoszony z podaniem strony i punktu kodowego.
+
+**Świadome ustępstwo:** π, ≈ i strzałki nie mają glifów w zakresach łacińskich fontsource i renderują się krojem zastępczym. Lista takich znaków jest wypisana w kodzie, żeby nie wyglądała na przeoczenie.
