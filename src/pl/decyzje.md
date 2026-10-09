@@ -523,3 +523,15 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Cel odnośnika bez zmian:** nadal prowadzi na stronę główną drugiej wersji językowej, nie na odpowiednik bieżącej strony. Przejście z gnomonu po polsku na gnomon po angielsku wymaga jeszcze jednego kliknięcia — to osobna sprawa, do zrobienia przy okazji, bo każda strona ma już klucz `para` wiążący ją z odpowiednikiem.
 
 **Cztery nowe testy** (93 zamiast 89): na stronie przyrządu i na stronie głównej, w obu wersjach, przełącznik ma być dokładnie jeden, nazywać język docelowy, prowadzić pod właściwy adres i nieść `hreflang`.
+
+## 2026-10-10 — Cykl 41: strona nie podskakuje przy przejściu między przyrządami
+
+**Przyczyna:** bez skryptu wszystkie trzy karty stoją jedna pod drugą — i tak ma być, to wersja awaryjna. Ale pasek zakładek chował się dotąd dopiero wtedy, gdy moduł dopisał mu klasę `gotowe`, a karty znikały dopiero wtedy, gdy ten sam moduł ustawił im `hidden`. Między pierwszym rysunkiem a startem modułu strona stała więc w pełnej, trzykrotnej wysokości, po czym kurczyła się do jednej karty. Przy cyrklu było to **1014 punktów** w dół, przy wahadle 125, przy gnomonie 126. Widz czytał to jako podskok treści do góry.
+
+**Poprawka to jeden wiersz w nagłówku dokumentu:** skrypt nadający korzeniowi klasę `js`, wykonywany przed pobraniem arkusza. Arkusz wie od pierwszej klatki, że skrypt działa, więc sam chowa karty poza pierwszą i sam pokazuje pasek zakładek. Moduł zakładek nie zmienia już wysokości strony — tylko przejmuje sterowanie tym, co arkusz ustawił.
+
+**Przy okazji zamieniono kolejność w module:** klasa `gotowe` dopisuje się przed pomiarem wysokości kart, nie po nim. Inaczej arkusz chowałby mierzone karty i wyrównanie z cyklu 38 mierzyłoby same zera.
+
+**Skok wysokości dokumentu między pierwszym rysunkiem a stanem ustalonym** — przed poprawką i po niej: cyrkiel −1014 → +1, wahadło −125 → −69, szyfr −32 → +46, gnomon −126 → −46. Reszta to już same przyrządy dorysowujące się po starcie modułów; kilkadziesiąt punktów nie czyta się jako podskok.
+
+**Trzy nowe testy** (96 zamiast 93): arkusz musi mieć obie reguły wiążące widok z obecnością skryptu, a wiersz nadający klasę `js` musi stać w nagłówku i przed arkuszem — bo postawiony po nim nie zdąży.

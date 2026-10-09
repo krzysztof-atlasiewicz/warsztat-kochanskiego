@@ -14,6 +14,11 @@
 <link rel="icon" href="/assets/ikony/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="shortcut icon" href="/assets/ikony/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/ikony/apple-touch-icon.png">
+<!-- Jeden wiersz w nagłówku, zanim cokolwiek się narysuje: dzięki niemu arkusz
+     wie od pierwszej klatki, że skrypt działa, i od razu chowa karty poza
+     pierwszą. Bez tego strona rysowała się ze wszystkimi kartami naraz,
+     a po starcie modułu kurczyła się o dwie trzecie — stąd podskok. -->
+<script>document.documentElement.classList.add("js")</script>
 <link rel="stylesheet" href="/assets/css/fonty.css?v={{ "/assets/css/fonty.css" | odcisk }}">
 <link rel="stylesheet" href="/assets/css/site.css?v={{ "/assets/css/site.css" | odcisk }}">
 </head>

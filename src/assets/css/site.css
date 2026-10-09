@@ -433,8 +433,13 @@ svg.sciana{max-width:none;width:100%}
 .karta-przyrzadu:focus{outline:none}
 /* Bez skryptu pasek zakładek byłby martwy, więc pokazuje się dopiero, gdy
    skrypt go obsłuży; do tego czasu każda karta ma własny nagłówek. */
-.zakladki:not(.gotowe){display:none}
-.zakladki.gotowe ~ .karta-przyrzadu .tytul-karty{display:none}
+/* Bez skryptu karty stoją jedna pod drugą z własnymi nagłówkami, a paska
+   zakładek nie ma. Ze skryptem jest odwrotnie — i musi tak być od pierwszej
+   klatki, nie dopiero po załadowaniu modułu, bo inaczej strona najpierw
+   rysuje się ze wszystkimi kartami, a potem kurczy i podskakuje. */
+html:not(.js) .zakladki{display:none}
+html.js .zakladki ~ .karta-przyrzadu .tytul-karty{display:none}
+html.js .zakladki:not(.gotowe) ~ .karta-przyrzadu ~ .karta-przyrzadu{display:none}
 .tytul-karty{font-size:1.25rem;font-weight:400;margin:1.8rem 0 .4rem;
   border-top:1px solid var(--rule-soft);padding-top:1rem}
 

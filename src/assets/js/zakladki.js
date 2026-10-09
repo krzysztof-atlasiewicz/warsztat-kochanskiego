@@ -40,8 +40,10 @@ export default function init() {
       });
     });
     pokaz(0, false);
-    wyrownaj();
+    // „gotowe" najpierw, dopiero potem pomiar: dopóki tej klasy nie ma, arkusz
+    // chowa karty poza pierwszą i zmierzylibyśmy same zera.
     pasek.classList.add("gotowe");
+    wyrownaj();
 
     // Po zmianie szerokości okna tekst łamie się inaczej, więc miarę trzeba
     // wziąć na nowo. Przyrządy dorysowują się po starcie modułów, stąd jeszcze

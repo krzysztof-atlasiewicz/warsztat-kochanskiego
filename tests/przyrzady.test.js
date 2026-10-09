@@ -304,3 +304,27 @@ describe.skipIf(!zbudowane)("przełącznik języka", () => {
     });
   }
 });
+
+// Strona przyrządu nie może najpierw narysować się ze wszystkimi kartami,
+// a potem skurczyć — to był ten podskok przy przechodzeniu między przyrządami.
+describe.skipIf(!zbudowane)("pierwszy rysunek strony", () => {
+  const arkusz = readFileSync("src/assets/css/site.css", "utf8");
+
+  it("arkusz chowa karty poza pierwszą, zanim moduł zdąży wystartować", () => {
+    expect(arkusz, "brak reguły chowającej kolejne karty przed gotowością")
+      .toMatch(/html\.js \.zakladki:not\(\.gotowe\) ~ \.karta-przyrzadu ~ \.karta-przyrzadu\{display:none\}/);
+    expect(arkusz, "pasek zakładek nie jest już wiązany z obecnością skryptu")
+      .toMatch(/html:not\(\.js\) \.zakladki\{display:none\}/);
+  });
+
+  for (const plik of ["_site/pl/cyrkiel/index.html", "_site/en/compass/index.html"]) {
+    it(`${plik} — klasa „js" nadawana przed arkuszem, nie po nim`, () => {
+      const h = readFileSync(plik, "utf8");
+      const skrypt = h.indexOf('classList.add("js")');
+      const styl = h.indexOf('href="/assets/css/site.css');
+      expect(skrypt, "brak wiersza nadającego klasę js").toBeGreaterThan(-1);
+      expect(skrypt, "klasa js nadawana dopiero po arkuszu").toBeLessThan(styl);
+      expect(h.slice(0, skrypt).includes("<body"), "wiersz stoi poza nagłówkiem").toBe(false);
+    });
+  }
+});
