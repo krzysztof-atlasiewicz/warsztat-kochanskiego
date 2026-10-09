@@ -535,3 +535,17 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Skok wysokości dokumentu między pierwszym rysunkiem a stanem ustalonym** — przed poprawką i po niej: cyrkiel −1014 → +1, wahadło −125 → −69, szyfr −32 → +46, gnomon −126 → −46. Reszta to już same przyrządy dorysowujące się po starcie modułów; kilkadziesiąt punktów nie czyta się jako podskok.
 
 **Trzy nowe testy** (96 zamiast 93): arkusz musi mieć obie reguły wiążące widok z obecnością skryptu, a wiersz nadający klasę `js` musi stać w nagłówku i przed arkuszem — bo postawiony po nim nie zdąży.
+
+## 2026-10-10 — Cykl 42: naprawa po cyklu 41 — pasek zakładek nie może zależeć od wiersza w nagłówku
+
+**Usterka zgłoszona natychmiast po wdrożeniu:** na wszystkich czterech stronach zniknął pasek zakładek i został sam nagłówek pierwszej karty — „Konstrukcja" przy cyrklu, „Przyrząd" przy pozostałych.
+
+**Przyczyna leży w poprzednim cyklu.** Reguła `html:not(.js) .zakladki{display:none}` wiązała widoczność paska z wierszem nadającym korzeniowi klasę `js`, dopisanym w nagłówku dokumentu. Dokument i arkusz leżą jednak w pamięci podręcznej niezależnie od siebie: kto miał stronę sprzed wdrożenia, a arkusz pobrał nowy — bo arkusz niesie odcisk treści w adresie i zmiana wymusiła pobranie — dostawał nowy arkusz ze starym dokumentem. Stary dokument nie ma tego wiersza, więc reguła chowała pasek na zawsze. Moduł zakładek dopisywał `gotowe`, ale to już niczego nie odwracało.
+
+**Lekcja ogólna:** reguła arkusza nie może wymagać, żeby dokument był tej samej wersji. Każdy warunek oparty o klasę `js` musi psuć się w stronę zachowania sprzed poprawki, nigdy w stronę pustej strony.
+
+**Układ reguł po naprawie.** Widoczność paska zależy wyłącznie od tego, czy moduł wystartował — `.zakladki:not(.gotowe){display:none}`, dokładnie jak przed cyklem 41. Wiersz z klasą `js` daje już tylko przyspieszenie: `html.js .zakladki:not(.gotowe){display:flex;visibility:hidden}` sprawia, że pasek zajmuje swoje miejsce od pierwszej klatki, choć jeszcze go nie widać, a dwie dalsze reguły chowają w tym czasie karty poza pierwszą i ich nagłówki. Przy starym dokumencie żadna z nich nie działa i wracamy do zachowania sprzed poprawki: pasek pojawia się po starcie modułu.
+
+**Sprawdzono trzy przypadki, nie jeden.** Nowy dokument z nowym arkuszem: trzy zakładki widoczne, jedna karta, skok wysokości 1 punkt przy cyrklu, 46 przy wahadle, 29 przy szyfrze, 48 przy gnomonie. Stary dokument (wiersz `js` wycięty z dziewiętnastu plików) z nowym arkuszem: trzy zakładki widoczne, jedna karta — usterka nie występuje. Całkiem bez skryptu: paska nie ma, trzy karty stoją jedna pod drugą, każda ze swoim nagłówkiem.
+
+**Test pilnuje teraz tego, co zawiodło** (97 zamiast 96): arkusz nie może mieć żadnej reguły chowającej pasek przy braku klasy `js`, musi mieć regułę wiążącą pasek z gotowością modułu i musi chować nagłówki kart dopiero wtedy, gdy pasek je zastąpi.
