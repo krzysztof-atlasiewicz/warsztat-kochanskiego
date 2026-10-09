@@ -305,3 +305,17 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Przycisk analemmy dostał wyjaśnienie,** czym analemma w ogóle jest — osobnym akapitem pod przyciskiem, powiązanym z nim przez `aria-describedby`, a nie tylko dymkiem opisującym, co przycisk robi.
 
 **Usterka wyłapana przy okazji:** pola wyboru powstawały w kodzie przez `createElementNS` w przestrzeni nazw SVG, więc przeglądarka tworzyła elementy, które wyglądały jak `option`, ale nie były opcjami listy. Listy były puste, a przyrząd cicho pokazywał 0 stycznia. Stąd nowy test składania numeru dnia z miesiąca i dnia miesiąca.
+
+## 2026-10-09 — Cykl 24: odczyty pod tarczami, lata przestępne w modelu
+
+**Zarzut merytoryczny był trafny.** Model liczył położenie Słońca z numeru dnia w roku, przyjmując rok nieprzestępny. Wychodziły z tego dwie rzeczy: 29 lutego nie dało się w ogóle wybrać, a data kalendarzowa nie była datą, tylko numerem porządkowym. Przyrząd liczy teraz z rzeczywistej daty — rok, miesiąc, dzień — bez pośrednictwa numeru dnia, a rokiem modelowym jest przestępny 2028.
+
+**Zarzut rozbrojony liczbą, nie zapewnieniem.** Ta sama data kalendarzowa wypada w cyklu czteroletnim nieco inaczej względem przesileń. Zmierzyliśmy ile: w okolicach równonocy deklinacja Słońca różni się o około 0,14 stopnia w każdą stronę, wschód i zachód o niecałą minutę, a cień przesuwa się o mniej niż grubość wykreślonej linii; w przesileniach rozrzut jest praktycznie zerowy. Liczby weszły do uwagi pod przyrządem, a test pilnuje, żeby rozrzut deklinacji nie przekroczył ćwierci stopnia — gdyby model kiedyś zaczął liczyć inaczej, kontrola zawiedzie, zamiast cicho rozminąć się z opisem.
+
+**Odczyty zeszły pod tarcze.** Osobna sekcja z trzema kartami zniknęła. Każda tarcza na ścianie ma teraz pod sobą dwie linijki: nazwę rachuby wraz z punktem, od którego liczy — „godziny włoskie — od zachodu”, „godziny równe — od północy”, „godziny babilońskie — od wschodu” — i bieżący odczyt w barwie tej tarczy. Nazewnictwo jest przez to jednolite; wcześniej ta sama rachuba nazywała się raz „zegarem włoskim”, raz „godzinami włoskimi”.
+
+**Wyjaśnienia zostały dymkami.** Trzy akapity o tym, czym jest każda rachuba, siedzą w znaczniku `title` całej tarczy, więc pojawiają się po najechaniu i nie zajmują miejsca w układzie strony. Odczyt, który nie ma pokrycia w cieniu, pokazuje zamiast liczby powód — „ściana w cieniu” albo „po zachodzie Słońca” — kursywą, mniejszym stopniem.
+
+**Przełącznik analemmy stoi przy ścianie,** bo to na ścianie analemma się rysuje. Jest mosiężną dźwignią w konwencji pozostałych przyrządów, zadeklarowaną jako `role="switch"` ze stanem `aria-checked`, z dymkiem opisującym działanie i akapitem wyjaśniającym, czym analemma jest.
+
+**Pozycja A8 przeredagowana.** Pierwotne pytanie — co zawiera artykuł Fijałkowskiego — jest już odpowiedziane. Zostaje to, co nadal otwarte: skąd pochodzi przypisanie zegara Heweliuszowi i czy monografia Starzyńskiego mówi o nim więcej.

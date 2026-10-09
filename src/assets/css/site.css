@@ -231,6 +231,12 @@ svg.sciana{max-width:none;width:100%}
 .sciana .nodus-tuleja{fill:url(#mosiadzZ);stroke:var(--mosiadz-ciemny);stroke-width:1}
 .sciana .nodus-pret{fill:var(--ink)}
 .sciana .napis-tarczy{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft)}
+.sciana .tarcza-sciany{cursor:help}
+.sciana .odczyt-sciany{font-family:var(--mono);font-size:19px;font-variant-numeric:tabular-nums}
+.sciana .odczyt-rowne{fill:var(--ink)}
+.sciana .odczyt-wloskie{fill:var(--sun)}
+.sciana .odczyt-babilonskie{fill:var(--verd)}
+.sciana .odczyt-sciany.odczyt-pusty{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft)}
 .sciana #brakSlonca{font-family:var(--serif);font-style:italic;font-size:15px;fill:var(--ink-soft)}
 .sciana .slonce-tarcza{fill:var(--sun);stroke:var(--mosiadz-ciemny);stroke-width:1}
 .sciana .slonce-promyk{stroke:var(--sun);stroke-width:1.6;stroke-linecap:round}
@@ -238,10 +244,6 @@ svg.sciana{max-width:none;width:100%}
 .sciana .cien-preta{stroke:var(--cien);stroke-width:2.4;stroke-opacity:.6;stroke-linecap:round}
 .sciana .cien-grot{fill:var(--cien)}
 .sciana .analemma{fill:none;stroke:var(--verd);stroke-width:1.4}
-.probka-rowne{border-color:var(--ink-soft)}
-.probka-wloskie{border-color:var(--sun)}
-.probka-babilonskie{border-color:var(--verd)}
-.probka-dekl{border-top-style:dashed;border-color:var(--rule)}
 
 /* ── zegarek kieszonkowy: tarcza, koronka, dwie pary wskazówek ─────────── */
 .blok-daty,.blok-zegara{margin:0;display:flex;flex-direction:column;align-items:center;gap:.55rem}
@@ -275,13 +277,22 @@ svg.sciana{max-width:none;width:100%}
 .plytka-roznicy{fill:var(--plyta-jasna);stroke:var(--rule-soft);stroke-width:.7}
 .dymek{border:1px solid var(--rule-soft);background:var(--plate);padding:.6rem .8rem;margin:.6rem 0 0;font-size:.9rem;color:var(--ink-soft)}
 
-/* ── trzy odczyty ──────────────────────────────────────────────────────── */
-.trzy-odczyty{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1px;background:var(--rule-soft);border:1px solid var(--rule-soft)}
-.odczyt{background:var(--plate);padding:.9rem 1rem;margin:0;border-top:3px solid var(--rule)}
-.odczyt-wloskie{border-top-color:var(--sun)}
-.odczyt-rowne{border-top-color:var(--ink-soft)}
-.odczyt-babilonskie{border-top-color:var(--verd)}
-.odczyt h4{margin:0;font-size:.95rem;font-weight:400;color:var(--ink-soft)}
-.odczyt-wartosc{margin:.1rem 0 .5rem;font-family:var(--mono);font-size:1.7rem;font-variant-numeric:tabular-nums}
-.odczyt-wartosc small{font-family:var(--serif);font-size:.82rem;color:var(--ink-soft);margin-left:.3rem}
+/* ── przełącznik w konwencji mosiężnej dźwigni ─────────────────────────── */
+.rzad-przelacznika{display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;margin:1rem 0 .3rem}
+.przelacznik{display:inline-flex;align-items:center;gap:.6rem;border:0;background:none;padding:.2rem;cursor:pointer;font-family:inherit;font-size:.95rem;color:var(--ink)}
+.przelacznik:hover{border:0;color:var(--verd)}
+.przelacznik:focus-visible{outline:2px solid var(--verd);outline-offset:3px}
+.przelacznik-tor{position:relative;display:inline-block;width:3.4rem;height:1.5rem;border-radius:.75rem;
+  background:linear-gradient(var(--plyta-ciemna),var(--plyta-jasna));
+  border:1px solid var(--mosiadz-ciemny);box-shadow:inset 0 1px 2px rgba(0,0,0,.2)}
+.przelacznik-dzwignia{position:absolute;top:1px;left:1px;width:1.3rem;height:1.3rem;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,var(--mosiadz-jasny),var(--mosiadz-ciemny));
+  border:1px solid var(--mosiadz-ciemny);
+  box-shadow:0 1px 2px rgba(0,0,0,.3),inset 0 0 0 3px var(--plyta-jasna),inset 0 0 0 4px var(--mosiadz-ciemny);
+  transition:left .16s ease}
+.przelacznik[aria-checked="true"] .przelacznik-tor{background:linear-gradient(var(--mosiadz-ciemny),var(--mosiadz-jasny))}
+.przelacznik[aria-checked="true"] .przelacznik-dzwignia{left:calc(100% - 1.45rem)}
+.przelacznik-napis{font-variant:small-caps;letter-spacing:.07em}
+@media (prefers-reduced-motion:reduce){.przelacznik-dzwignia{transition:none}}
+
 .odczyt-opis{margin:0;font-size:.9rem;color:var(--ink-soft)}

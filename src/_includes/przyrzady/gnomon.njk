@@ -82,61 +82,40 @@
 <section class="plansza">
   <h3 class="plansza-tytul">{{ s.gnomon.scianaTytul }}</h3>
   <p class="plansza-opis">{{ s.gnomon.scianaOpis }}</p>
-  <p class="legenda">
-    <span class="probka probka-rowne"></span>{{ s.gnomon.rowne }}
-    <span class="probka probka-wloskie"></span>{{ s.gnomon.wloskie }}
-    <span class="probka probka-babilonskie"></span>{{ s.gnomon.babilonskie }}
-    <span class="probka probka-dekl"></span>{{ s.gnomon.krzyweDnia }}
-  </p>
-  <svg viewBox="0 0 820 352" class="wide sciana" role="img" aria-describedby="o-sciana">
+  <svg viewBox="0 0 820 390" class="wide sciana" role="img" aria-describedby="o-sciana">
     <desc id="o-sciana">{{ s.gnomon.opis }}</desc>
-    <rect x="0" y="0" width="820" height="352" fill="var(--niebo)"/>
-    <rect x="110" y="78" width="600" height="274" fill="var(--tynk)" stroke="var(--rule)" stroke-width="1"/>
+    <rect x="0" y="0" width="820" height="390" fill="var(--niebo)"/>
+    <rect x="110" y="78" width="600" height="312" fill="var(--tynk)" stroke="var(--rule)" stroke-width="1"/>
     <g class="ciosy">
       <line x1="110" y1="136" x2="710" y2="136"/><line x1="110" y1="196" x2="710" y2="196"/>
       <line x1="110" y1="256" x2="710" y2="256"/><line x1="110" y1="316" x2="710" y2="316"/>
     </g>
     <rect x="104" y="72" width="612" height="16" class="gzyms"/>
-    <rect x="122" y="92" width="576" height="248" fill="none" stroke="var(--rule-soft)" stroke-width="0.8"/>
-    <g id="tarcze"></g>
+    <rect x="122" y="92" width="576" height="278" fill="none" stroke="var(--rule-soft)" stroke-width="0.8"/>
+    <g id="tarcze" aria-live="polite"></g>
     <g id="promienie"></g>
     <g id="cienie"></g>
     <g id="slonce"></g>
     <text id="brakSlonca" class="tb" x="410" y="30" text-anchor="middle" opacity="0">{{ s.gnomon.brakSlonca }}</text>
   </svg>
-  <p class="dim małe">{{ s.gnomon.scianaLegenda }}</p>
-</section>
 
-<section class="plansza">
-  <h3 class="plansza-tytul">{{ s.gnomon.odczytyTytul }}</h3>
-  <p class="plansza-opis">{{ s.gnomon.odczytyOpis }}</p>
-  <div class="trzy-odczyty">
-    <article class="odczyt odczyt-wloskie">
-      <h4>{{ s.gnomon.wloskie }}</h4>
-      <p class="odczyt-wartosc" id="wloskie" aria-live="polite">—</p>
-      <p class="odczyt-opis">{{ s.gnomon.coToWloskie }}</p>
-    </article>
-    <article class="odczyt odczyt-rowne">
-      <h4>{{ s.gnomon.rowne }}</h4>
-      <p class="odczyt-wartosc" id="rowne" aria-live="polite">—</p>
-      <p class="odczyt-opis">{{ s.gnomon.coToRowne }}</p>
-    </article>
-    <article class="odczyt odczyt-babilonskie">
-      <h4>{{ s.gnomon.babilonskie }}</h4>
-      <p class="odczyt-wartosc" id="babilonskie" aria-live="polite">—</p>
-      <p class="odczyt-opis">{{ s.gnomon.coToBabilonskie }}</p>
-    </article>
-  </div>
+  <p class="rzad-przelacznika">
+    <button id="przelacz" class="przelacznik" role="switch" aria-checked="false"
+            aria-describedby="coToAnalemma" title="{{ s.gnomon.opisy.analemma }}">
+      <span class="przelacznik-tor" aria-hidden="true"><span class="przelacznik-dzwignia"></span></span>
+      <span class="przelacznik-napis">{{ s.gnomon.analemma }}</span>
+    </button>
+    <span class="dim małe">{{ s.gnomon.legendaCienia }}</span>
+  </p>
+  <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
+
+  <p class="dim małe">{{ s.gnomon.scianaLegenda }}</p>
   <p class="note">{{ s.gnomon.poCoTrzy }}</p>
 </section>
 
 <section class="plansza">
   <h3 class="plansza-tytul">{{ s.gnomon.rozbieznoscTytul }}</h3>
   <p class="plansza-opis">{{ s.gnomon.rozbieznoscOpis }}</p>
-  <p><button id="przelacz" data-pokaz="{{ s.gnomon.analemmaPokaz }}" data-ukryj="{{ s.gnomon.analemmaUkryj }}"
-             aria-describedby="coToAnalemma" aria-pressed="false"
-             title="{{ s.gnomon.opisy.analemma }}">{{ s.gnomon.analemmaPokaz }}</button></p>
-  <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
 </section>
 
 </div>
