@@ -220,3 +220,19 @@ export const liniaGodzinWloskich = (fi, w, k) =>
   liniaNaScianie(fi, w, (d) => k + zachodSloneczny(fi, d) - 24);
 export const liniaGodzinBabilonskich = (fi, w, k) =>
   liniaNaScianie(fi, w, (d) => wschodSloneczny(fi, d) + k);
+
+// Odwrócenie geometrii cienia: z kierunku, w którym widać Słońce nad ścianą,
+// odczytujemy prawdziwy czas słoneczny. Kąt liczony od pionu w górę, dodatni
+// w prawo — dokładnie tak, jak rysowane jest Słońce nad tarczą.
+export const kierunekSlonca = (cien) => (Math.atan2(-cien.dx, cien.dy) * 180) / Math.PI;
+
+export function godzinaZKierunku(fi, wysiegPreta, dekl, kat, krok = 0.02) {
+  let naj = null;
+  for (let t = 3; t <= 21 + 1e-9; t += krok) {
+    const c = cienNodusa(polozenieSlonca(fi, dekl, (t - 12) * 15), wysiegPreta);
+    if (!c) continue;
+    const r = Math.abs(kierunekSlonca(c) - kat);
+    if (!naj || r < naj.r) naj = { t, r };
+  }
+  return naj ? naj.t : null;
+}

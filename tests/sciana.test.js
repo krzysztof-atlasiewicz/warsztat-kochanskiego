@@ -101,3 +101,29 @@ describe("ściana zegarowa", () => {
     expect(w).toBeLessThan(1);
   });
 });
+
+describe("Słońce jako uchwyt czasu", () => {
+  it("kierunek Słońca jednoznacznie wskazuje godzinę, z której powstał", async () => {
+    const { kierunekSlonca, godzinaZKierunku } = await import("../src/assets/js/modules/matematyka.js");
+    for (const dekl of [23.44, 10, 0, -10, -23.44]) {
+      for (const t of [8, 9.5, 11, 12, 13.25, 15, 16.5]) {
+        const c = cienNodusa(polozenieSlonca(fi, dekl, (t - 12) * 15), G);
+        if (!c) continue;
+        const odzyskana = godzinaZKierunku(fi, G, dekl, kierunekSlonca(c));
+        expect(odzyskana, `deklinacja ${dekl}, godzina ${t}`).toBeCloseTo(t, 1);
+      }
+    }
+  });
+
+  it("kierunek Słońca maleje monotonicznie w ciągu dnia", async () => {
+    const { kierunekSlonca } = await import("../src/assets/js/modules/matematyka.js");
+    let poprzedni = Infinity;
+    for (let t = 7; t <= 17; t += 0.5) {
+      const c = cienNodusa(polozenieSlonca(fi, 0, (t - 12) * 15), G);
+      if (!c) continue;
+      const k = kierunekSlonca(c);
+      expect(k, `godzina ${t}`).toBeLessThan(poprzedni);
+      poprzedni = k;
+    }
+  });
+});

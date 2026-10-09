@@ -18,15 +18,12 @@ rownowaznik: "<p>A clock regulated in La Rochelle loses time on the way to Cayen
 
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p><strong>The problem is this.</strong> At sea you can get your latitude from the height of the Sun at noon. Longitude you cannot get from anything in the sky — you need a clock still showing the time at the port you sailed from. The gap between that time and local noon tells you how far east or west you have come. The Earth turns 360 degrees a day, so <strong>every second of clock error is a quarter of a minute of arc</strong> — a few hundred metres at the equator. A clock a minute slow puts the ship tens of kilometres from where it actually is.</p>
+
+{{ rownowaznik | safe }}
 <p>In 1659 Kochański proposes replacing the pendulum with a regulating spring and fixing the number of beats per hour — sixteen years before Huygens's balance spring. Both solutions board the same ship below: Jean Richer's voyage from La Rochelle to Cayenne, 1672. Both clocks were set in the port of departure, and from that moment on they only drift.</p>
 <p>Richer wrote up the voyage himself, in {% zrodlo "richer-1729", "<em>Observations astronomiques et physiques faites en l\u2019isle de Caïenne</em>" %}. That is the source of the observation this instrument starts from: at Cayenne a pendulum beating seconds had to be shorter than at Paris, and the pendulum clock ran slow. The conclusion — that gravity weakens towards the equator and the Earth is flattened at the poles — was a shock to the physics of the day.</p>
 <p class="note">The spring is not better — it moves the problem from gravity to temperature. Compensation had to wait for Harrison, ninety years after Kochański's proposal.</p>
 <p class="note uwaga">The route is simplified to a steady run south and the temperature is derived from latitude rather than a ship's log.</p>
-
-<details class="wyprowadzenie">
-<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
-{{ rownowaznik | safe }}
-</details>
 {% endkarta %}
 
 {% karta "pytania", i18n[jezyk].zakladki.pytania %}

@@ -19,6 +19,8 @@ rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://w
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p>Konstrukcja ogłoszona w {% zrodlo "acta-1685", "„Acta Eruditorum”" %} w 1685 roku. Cyrklem i linijką wyznacza odcinek o długości niemal dokładnie równej połowie obwodu okręgu.</p>
 
+{{ rownowaznik | safe }}
+
 <details class="wyprowadzenie">
 <summary>Skąd bierze się ten wzór</summary>
 <p>Przyjmijmy promień <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math> i układ współrzędnych, w którym punkt styczności <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math> leży w początku, środek okręgu w <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mi>r</mi><mo>)</mo></math>, a punkt <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math> w <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mn>2</mn><mi>r</mi><mo>)</mo></math>. Styczna z kroku 2 jest wtedy osią poziomą.</p>
@@ -34,11 +36,6 @@ rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://w
 
 <p class="note">Przy tarczy zegara błąd schodzi poniżej progu obróbki warsztatowej XVII wieku, przy promieniu Ziemi urasta do blisko czterystu metrów.</p>
 <p class="note uwaga">Teza, że jest to przybliżenie zaprojektowane do wykonania, a nie do rachunku, jest naszą interpretacją — Kochański nigdzie nie uzasadnia tak konstrukcji wprost.</p>
-
-<details class="wyprowadzenie">
-<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
-{{ rownowaznik | safe }}
-</details>
 {% endkarta %}
 
 {% karta "pytania", i18n[jezyk].zakladki.pytania %}
