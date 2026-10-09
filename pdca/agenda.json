@@ -71,14 +71,19 @@
     {
       "id": "A6",
       "pytanie": "Czy Chronos na medalionie zegara wilanowskiego trzyma kosę czy kłos zboża?",
-      "dlaczego": "Opisy ikonograficzne się różnią.",
+      "dlaczego": "Opisy ikonograficzne się różnią. Pierwszy sprawdzony opis muzealny mówi o kłosie, ale opiera się na jednym ujęciu fotograficznym i nie jest opisem konserwatorskim.",
       "zmieni": "Warstwę ikonograficzną modułu gnomonu.",
-      "zrodlo": "Fotografia, dokumentacja konserwatorska",
-      "status": "otwarta",
+      "zrodlo": "Fotografia muzealna (Widacka 2008), dokumentacja konserwatorska Muzeum Pałacu Króla Jana III",
+      "status": "w toku",
       "miejsca": [
         "gnomon"
       ],
-      "dotyczy": "warstwa ikonograficzna — medalion z Chronosem"
+      "dotyczy": "warstwa ikonograficzna — medalion z Chronosem",
+      "ustalenia": [
+        "Artykuł muzealny Hanny Widackiej (Pasaż Wiedzy, 2008) opisuje medalion tak: brodaty mężczyzna trzyma złoty kłos zboża, za nim szare skrzydła, przed nim tarcza słoneczna; po bokach putta podtrzymują draperię z miesiącami i znakami zodiaku. To przemawia za kłosem, nie kosą.",
+        "Ten sam artykuł nie nazywa postaci Chronosem. Identyfikacja ikonograficzna pozostaje więc osobnym pytaniem — kłos i skrzydła pasują równie dobrze do Saturna i do personifikacji Czasu.",
+        "Opis pochodzi z jednego ujęcia fotograficznego, nie z oględzin ani z dokumentacji konserwatorskiej. Atrybut trzymany w dłoni bywa na fotografii z dołu nieczytelny, więc rozstrzygnięcie wymaga zdjęcia z bliska albo karty konserwatorskiej."
+      ]
     },
     {
       "id": "A7",
@@ -91,6 +96,18 @@
         "rejs"
       ],
       "status": "otwarta"
+    },
+    {
+      "id": "A8",
+      "pytanie": "Co o zegarze słonecznym mówi artykuł Wojciecha Fijałkowskiego w Studia Wilanowskie XI (1989) — czy podaje atrybucję, geometrię albo dokumentację powstania?",
+      "dlaczego": "To jedyne znane nam opracowanie naukowe poświęcone wprost pracy Kochańskiego w Wilanowie. Muzeum udostępnia skan, ale bez rozpoznanego tekstu, więc nie da się go przeszukać ani zacytować.",
+      "zmieni": "Może rozstrzygnąć udział Heweliusza i Locciego, a przy odrobinie szczęścia także deklinację ściany i typ wskazówki z pozycji A1.",
+      "zrodlo": "Studia Wilanowskie XI (1989), skan PDF udostępniony przez Muzeum Pałacu Króla Jana III",
+      "status": "otwarta",
+      "miejsca": [
+        "gnomon"
+      ],
+      "dotyczy": "atrybucja zegara i zdanie o współpracy z Heweliuszem"
     }
   ]
 }

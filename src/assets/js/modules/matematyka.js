@@ -148,3 +148,75 @@ export function najlepszePrzesuniecie(szyfrogram, jezyk = "pl") {
   for (let s = 1; s < 26; s++) if (oceny[s] > oceny[naj]) naj = s;
   return { przesuniecie: naj, oceny };
 }
+
+// ── ściana zegarowa: geometria cienia ──────────────────────────────────────
+// Model: ściana dokładnie południowa, pręt (nodus) prostopadły do niej.
+// Oś x biegnie w prawo dla patrzącego na ścianę, oś y w dół.
+
+const STOP = Math.PI / 180;
+export const WILANOW = { fi: 52.165, lambda: 21.09 };
+export const NACHYLENIE_OSI = 23.44;
+
+// Położenie Słońca z szerokości, deklinacji i kąta godzinnego.
+// Azymut liczony od południa, dodatni ku zachodowi.
+export function polozenieSlonca(fi, dekl, kat) {
+  const f = fi * STOP, d = dekl * STOP, h = kat * STOP;
+  const wysokosc = Math.asin(Math.sin(f) * Math.sin(d) + Math.cos(f) * Math.cos(d) * Math.cos(h)) / STOP;
+  const azymut = Math.atan2(Math.sin(h), Math.cos(h) * Math.sin(f) - Math.tan(d) * Math.cos(f)) / STOP;
+  return { wysokosc, azymut };
+}
+
+// Przesunięcie cienia końca pręta względem jego osadzenia w ścianie.
+// Zwraca null, gdy Słońce jest pod horyzontem albo nie oświetla już ściany.
+export function cienNodusa({ wysokosc, azymut }, wysiegPreta) {
+  if (wysokosc <= 0) return null;
+  const a = azymut * STOP;
+  if (Math.cos(a) <= 0.09) return null;
+  return { dx: wysiegPreta * Math.tan(a), dy: (wysiegPreta * Math.tan(wysokosc * STOP)) / Math.cos(a) };
+}
+
+// Kąt godzinny zachodu Słońca w stopniach. Domyślne −0,833° to położenie
+// środka tarczy w chwili, gdy górny brzeg dotyka horyzontu — ta sama umowa,
+// na której oparte są odczyty godzin włoskich i babilońskich.
+export function katZachodu(fi, dekl, horyzont = -0.833) {
+  const c = (Math.sin(horyzont * STOP) - Math.sin(fi * STOP) * Math.sin(dekl * STOP)) /
+            (Math.cos(fi * STOP) * Math.cos(dekl * STOP));
+  if (c >= 1) return 0;
+  if (c <= -1) return 180;
+  return Math.acos(c) / STOP;
+}
+
+export const zachodSloneczny = (fi, dekl) => 12 + katZachodu(fi, dekl) / 15;
+export const wschodSloneczny = (fi, dekl) => 12 - katZachodu(fi, dekl) / 15;
+
+// Linia na ścianie: ślad cienia przy zmiennej deklinacji Słońca i godzinie
+// wyznaczanej dla każdej deklinacji osobno. Tak powstają zarówno linie godzin
+// równych (godzina stała), jak i włoskich i babilońskich (godzina liczona od
+// zachodu albo od wschodu).
+export function liniaNaScianie(fi, wysiegPreta, godzina, krokow = 34) {
+  const pkt = [];
+  for (let i = 0; i <= krokow; i++) {
+    const d = -NACHYLENIE_OSI + (2 * NACHYLENIE_OSI * i) / krokow;
+    const t = godzina(d);
+    if (t == null || !Number.isFinite(t)) continue;
+    const c = cienNodusa(polozenieSlonca(fi, d, (t - 12) * 15), wysiegPreta);
+    if (c) pkt.push({ dekl: d, ...c });
+  }
+  return pkt;
+}
+
+// Krzywa deklinacyjna: ślad cienia w ciągu jednej doby przy stałej deklinacji.
+export function krzywaDeklinacji(fi, wysiegPreta, dekl, krok = 0.1) {
+  const pkt = [];
+  for (let t = 3; t <= 21 + 1e-9; t += krok) {
+    const c = cienNodusa(polozenieSlonca(fi, dekl, (t - 12) * 15), wysiegPreta);
+    if (c) pkt.push({ godzina: t, ...c });
+  }
+  return pkt;
+}
+
+export const liniaGodzinRownych = (fi, w, t) => liniaNaScianie(fi, w, () => t);
+export const liniaGodzinWloskich = (fi, w, k) =>
+  liniaNaScianie(fi, w, (d) => k + zachodSloneczny(fi, d) - 24);
+export const liniaGodzinBabilonskich = (fi, w, k) =>
+  liniaNaScianie(fi, w, (d) => wschodSloneczny(fi, d) + k);

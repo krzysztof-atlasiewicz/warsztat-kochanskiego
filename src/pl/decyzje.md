@@ -261,3 +261,27 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Dane pochodne nie wchodzą do repozytorium.** Plik z konturami powstaje przy każdym budowaniu, tak samo jak zminifikowana biblioteka efemeryd i warianty znaku graficznego.
 
 **Stylizacja kartograficzna:** morze w odcieniu papieru, ląd w ochrze z grawerowaną kreską brzegu i miękkim cieniem wzdłuż niej, nazwy portów i podziałki w szeryfowej kursywie zamiast w kroju maszynowym, podziałka sześciuset mil morskich w pustym polu oceanu, róża wiatrów z rumbami. Reszta — trasa, pozycja rzeczywista i dwie wyliczone z zegarów — bez zmian.
+
+## 2026-10-09 — Cykl 22: ściana zegarowa zamiast wykresu cienia
+
+**Zarzut był słuszny:** moduł gnomonu pokazywał pusty prostokąt z trzema krzywymi i podawał obok trzy liczby. Nie było widać ani Słońca, ani pręta, ani tego, dlaczego z jednego cienia wychodzą trzy różne godziny. Nazwy „zegar włoski" i „zegar babiloński" padały bez wyjaśnienia, czym są.
+
+**Zamiast jednej tarczy — trzy.** Zachowany zegar wilanowski to kompozycja trzech niezależnych tarcz i tak jest teraz narysowany: po lewej godziny włoskie, pośrodku równe, po prawej babilońskie, każda z własną siatką linii, własnym prętem i własnym wieńcem cyfr. Ten sam cień pada na trzy siatki i daje trzy odczyty. Wcześniejszy rysunek odwzorowywał tylko jedną rachubę, co notka historyczna wytykała od początku jako błąd prototypu.
+
+**Linie godzinne liczone, nie rysowane.** Dla każdej godziny — równej, włoskiej i babilońskiej — ślad cienia wyznaczany jest przy zmiennej deklinacji Słońca, od przesilenia do przesilenia. Linie godzin równych wychodzą dokładnie proste, co zgadza się z geometrią; włoskie i babilońskie odchylają się od prostej o ułamek piksela, bo wschód i zachód liczymy z poprawką na refrakcję i promień tarczy słonecznej. Test sprawdza jedno i drugie.
+
+**Najważniejsza kontrola:** cień musi leżeć na tej linii, której numer podaje odczyt. Rysunek i liczby pochodzą z dwóch różnych rachunków — siatka z modelu analitycznego, położenie Słońca z biblioteki efemeryd — więc mogłyby się rozjechać bez żadnego widocznego objawu. Test mierzy odległość punktu cienia od linii o numerze równym odczytowi dla jedenastu par data–godzina; największa odchyłka wynosi 0,74 piksela na tarczy szerokiej stu sześćdziesięciu.
+
+**Słońce i promień.** Nad ścianą stoi Słońce, od niego biegnie kropkowany promień przez pręt tarczy środkowej aż do końca cienia — trzy punkty leżą na jednej prostej, bo Słońce rysowane jest na tym samym promieniu, na którym leży cień. Odległość jest umowna i tak podpisana; kierunek jest prawdziwy. Boczne tarcze dostają równoległe odcinki promienia, bo promienie słoneczne są równoległe.
+
+**Odczyty milkną, gdy ściana jest w cieniu.** Wcześniej liczby stały przy tarczy, na której nic nie było widać: rano w czerwcu Słońce jest już wysoko, ale na północ od linii wschód–zachód, więc ściana południowa pozostaje nieoświetlona. Teraz trzy odczyty tarczowe pokazują wtedy kreskę z adnotacją, a czas słoneczny i rozbieżność z zegarem mechanicznym — które nie zależą od cienia — liczą się dalej.
+
+**Data i godzina dostały przyrządy:** kartka kalendarza z datą oraz długością dnia i nocy, bo właśnie długość dnia jest tym, co godziny włoskie i babilońskie mierzą; obok mosiężna tarcza zegara mechanicznego z cyframi rzymskimi i dwiema wskazówkami.
+
+**„Co to?" doczekało się odpowiedzi.** Każdy z trzech odczytów ma teraz akapit mówiący, od czego liczy się ta rachuba i komu była do czego potrzebna, a osobna nota tłumaczy, po co jednej ścianie trzy naraz. Wyjaśnienie rozbieżności z zegarem mechanicznym zostało poprawione: wymieniało równanie czasu i poprawkę na długość geograficzną, ale pomijało godzinę czasu letniego, przez co podana liczba nie zgadzała się z odczytem przez pół roku.
+
+**Dwa nowe źródła w rejestrze:** artykuł muzealny Hanny Widackiej z fotografią zachowanego zegara oraz artykuł Wojciecha Fijałkowskiego w „Studia Wilanowskie" XI (1989) — jedyne znane nam opracowanie naukowe poświęcone wprost pracy Kochańskiego w Wilanowie. Fotografia nie jest na wolnej licencji, więc zostaje odnośnik bez osadzenia.
+
+**Pozycja A6 przeszła w stan „w toku".** Opis muzealny mówi o złotym kłosie zboża, nie o kosie, co przemawia za jednym z dwóch wariantów — ale opiera się na jednym ujęciu fotograficznym i nie nazywa postaci Chronosem. Pytanie zostaje otwarte, ustalenia dopisane.
+
+**Nowa pozycja agendy A8:** co właściwie zawiera artykuł Fijałkowskiego. Muzeum udostępnia skan, ale bez rozpoznanego tekstu — trzeci już przypadek w tym projekcie, po księdze IX i relacji Richera, gdy źródło jest w zasięgu ręki, a mimo to wymaga ludzkich oczu.

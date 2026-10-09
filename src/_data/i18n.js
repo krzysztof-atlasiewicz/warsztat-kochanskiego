@@ -127,8 +127,44 @@ export default {
       data: "Data", zegar: "Zegar", rowne: "Godziny równe", wloskie: "Zegar włoski", babilonskie: "Zegar babiloński",
       mech: "Zegar mechaniczny", slon: "Czas słoneczny prawdziwy", roznica: "Rozbieżność",
       analemmaPokaz: "Pokaż analemmę", analemmaUkryj: "Ukryj analemmę",
-      brakSlonca: "słońce nie oświetla ściany",
-      opis: "Pionowa ściana z prętem gnomonu, krzywe przesileń i równonocy oraz bieżące położenie cienia.",
+      brakSlonca: "O tej porze Słońce nie oświetla ściany — żadna z trzech tarcz nic nie pokazuje.",
+      
+      krzyweDnia: "droga cienia w ciągu doby",
+      opis: "Ściana z trzema tarczami zegara słonecznego: po lewej godziny włoskie, pośrodku równe, po prawej babilońskie. Nad ścianą Słońce, od niego promień do pręta każdej tarczy, a od pręta cień padający na siatkę linii.",
+      opisKartki: "Kartka kalendarza z datą oraz długością dnia i nocy.",
+      opisTarczy: "Tarcza zegara mechanicznego z cyframi rzymskimi, wskazówką godzinową i minutową.",
+
+      kiedyTytul: "Który to dzień i która godzina",
+      kiedyOpis: "Dwie rzeczy, których zegar słoneczny sam nie wie: data i wskazanie zegara mechanicznego. Kartka i tarcza pokazują, co ustawiły suwaki — ściana obok odpowiada cieniem.",
+      kiedyUwaga: "Zegar mechaniczny chodzi według dzisiejszego czasu urzędowego. Kochański takiego nie miał — to punkt odniesienia dla nas, żeby zobaczyć, o ile rozmija się z nim Słońce.",
+
+      scianaTytul: "Ściana, pręt i cień",
+      scianaOpis: "Z każdej tarczy wystaje prostopadle krótki pręt. Patrzymy na niego od czoła, więc widać go jako krążek. Słońce rzuca cień końca pręta na siatkę linii — i dopiero siatka decyduje, co ten sam cień oznacza. Czyta się tak jak na prawdziwej tarczy: szuka się linii, na której stoi koniec cienia, i wodzi po niej wzrokiem aż do cyfry na jej końcu.",
+      scianaLegenda: "Linie wykreślono dla ściany dokładnie południowej i pręta prostopadłego do niej. Położenie Słońca na rysunku wskazuje kierunek, z którego pada światło; odległość jest umowna, bo Słońce jest nieskończenie daleko.",
+
+      odczytyTytul: "Trzy odczyty z jednego cienia",
+      odczytyOpis: "Ten sam punkt cienia, odczytany na trzech siatkach, daje trzy różne godziny. Żadna z nich nie jest błędna — każda odpowiada na inne pytanie.",
+      coToRowne: "Doba podzielona na dwadzieścia cztery równe części, liczone od północy. To rachuba, którą posługujemy się do dziś. Na zegarze słonecznym daje godzinę słoneczną prawdziwą, a ta rozmija się z zegarem mechanicznym.",
+      coToWloskie: "Rachuba liczona od ostatniego zachodu Słońca: zachód to godzina dwudziesta czwarta, a nowa doba zaczyna się wraz z zapadnięciem zmroku. Odczyt odpowiada wprost na pytanie „ile godzin minęło od zachodu”, a odjęty od dwudziestu czterech — „ile zostało światła”. Dla podróżnego i rzemieślnika było to pytanie ważniejsze niż pora względem północy. W użyciu we Włoszech, Czechach i Polsce jeszcze w XVII wieku.",
+      coToBabilonskie: "Rachuba liczona od wschodu Słońca: wschód to godzina zerowa. Odczyt mówi, ile godzin trwa już dzień. Nazwa pochodzi od rachuby babilońskiej, którą przejęli astronomowie greccy; na zegarach nowożytnych pojawiała się jako uczony dodatek obok godzin równych.",
+      poCoTrzy: "Trzy rachuby na jednej ścianie to nie ozdoba. Zegar postawiono w chwili, gdy godziny równe wypierały rachuby liczone od wschodu i zachodu — tarcza pokazuje oba porządki naraz i pozwala przełożyć jeden na drugi bez rachunku.",
+
+      rozbieznoscTytul: "Dlaczego Słońce nie zgadza się z zegarem",
+      rozbieznoscOpis: "Zegar mechaniczny dzieli dobę na równe części. Słońce nie: raz spieszy, raz się spóźnia, bo Ziemia biegnie po elipsie, a jej oś jest pochylona — to równanie czasu, sięgające kwadransa w obie strony. Do tego Wilanów leży ponad sześć stopni na wschód od południka strefy, co przesuwa odczyt o stałe dwadzieścia cztery minuty, a od wiosny do jesieni dochodzi jeszcze godzina czasu letniego — wynalazek XX-wieczny, którego Kochański nie znał.",
+      opisy: {
+        data: "Przesuwa dzień w roku. Zmienia wysokość Słońca w południe, a z nią całą drogę cienia.",
+        zegar: "Wskazanie zegara mechanicznego, od którego liczymy położenie Słońca.",
+        analemma: "Rysuje na tarczy środkowej ślad cienia o tej samej godzinie zegarowej przez cały rok — ósemkę, z której bierze się równanie czasu."
+      },
+      napisy: {
+        godz: "godz", min: "min", dzienTrwa: "dzień:", nocTrwa: "noc:", poZachodzie: "—",
+        odZachodu: "godz. od zachodu", odWschodu: "godz. od wschodu",
+        scianaWCieniu: "ściana w cieniu", poZachodzieSlonca: "po zachodzie Słońca",
+        przesilenieLetnie: "przesilenie letnie", rownonoc: "równonoc", przesilenieZimowe: "przesilenie zimowe",
+        tarcze: { wloskie: "godziny włoskie", rowne: "godziny równe", babilonskie: "godziny babilońskie" },
+        miesiace: ["sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru"],
+        miesiaceDop: ["stycznia","lutego","marca","kwietnia","maja","czerwca","lipca","sierpnia","września","października","listopada","grudnia"]
+      },
       miesiace: ["sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru"]
     }
   },
@@ -260,8 +296,43 @@ export default {
       data: "Date", zegar: "Clock", rowne: "Equal hours", wloskie: "Italian hours", babilonskie: "Babylonian hours",
       mech: "Mechanical clock", slon: "True solar time", roznica: "Discrepancy",
       analemmaPokaz: "Show the analemma", analemmaUkryj: "Hide the analemma",
-      brakSlonca: "the sun does not light the wall",
-      opis: "A vertical wall with a gnomon rod, the solstice and equinox curves, and the current position of the shadow.",
+      brakSlonca: "At this hour the sun does not light the wall, and none of the three dials shows anything.",
+      krzyweDnia: "path of the shadow across one day",
+      opis: "A wall carrying three sundials: Italian hours on the left, equal hours in the centre, Babylonian hours on the right. The sun above the wall, a ray from it to the rod of each dial, and the shadow of the rod falling on the grid of lines.",
+      opisKartki: "A calendar leaf with the date and the length of day and night.",
+      opisTarczy: "A mechanical clock face with Roman numerals and an hour and a minute hand.",
+
+      kiedyTytul: "Which day, and what the clock says",
+      kiedyOpis: "Two things a sundial cannot know by itself: the date and the reading of a mechanical clock. The leaf and the face show what the sliders have set — the wall beside them answers with a shadow.",
+      kiedyUwaga: "The mechanical clock keeps today's civil time. Kochański had no such thing; it is our own reference, there to show by how much the sun departs from it.",
+
+      scianaTytul: "The wall, the rod and the shadow",
+      scianaOpis: "A short rod stands out of each dial at a right angle. We see it end-on, so it reads as a disc. The sun throws the shadow of its tip onto a grid of lines — and only the grid decides what that one shadow means. You read it as on a real dial: find the line the shadow tip stands on, then follow it out to the numeral at its end.",
+      scianaLegenda: "The lines are drawn for a wall facing due south and a rod perpendicular to it. The sun's place in the drawing gives the direction the light comes from; its distance is a convention, the sun being infinitely far away.",
+
+      odczytyTytul: "Three readings from one shadow",
+      odczytyOpis: "The same point of shadow, read on three grids, gives three different hours. None of them is wrong — each answers a different question.",
+      coToRowne: "The day divided into twenty-four equal parts counted from midnight — the reckoning still in use. On a sundial it gives true solar time, which never quite agrees with a mechanical clock.",
+      coToWloskie: "Counted from the last sunset: sunset is the twenty-fourth hour, and a new day begins as dusk falls. The reading answers directly how many hours have passed since sunset, and subtracted from twenty-four, how much daylight is left — a more useful question for a traveller or a craftsman than the hour since midnight. Still in use in Italy, Bohemia and Poland in the seventeenth century.",
+      coToBabilonskie: "Counted from sunrise: sunrise is hour zero. The reading says how long the day has lasted so far. The name comes from Babylonian practice, taken up by the Greek astronomers; on early modern dials it appeared as a learned companion to the equal hours.",
+      poCoTrzy: "Three reckonings on one wall are not an ornament. The dial was put up just as equal hours were displacing the counts kept from sunrise and sunset — it shows both orders at once and lets one be read off against the other without any calculation.",
+
+      rozbieznoscTytul: "Why the sun disagrees with the clock",
+      rozbieznoscOpis: "A mechanical clock cuts the day into equal parts. The sun does not: it runs fast and slow by turns, because the earth travels an ellipse and its axis is tilted — the equation of time, worth up to a quarter of an hour either way. On top of that Wilanów lies a little over six degrees east of the zone meridian, a fixed shift of twenty-four minutes, and from spring to autumn there is a further hour of summer time, a twentieth-century invention Kochański never knew.",
+      opisy: {
+        data: "Moves the day of the year. It changes the sun's noon altitude, and with it the whole path of the shadow.",
+        zegar: "The reading of the mechanical clock, from which the sun's position is worked out.",
+        analemma: "Traces on the central dial the shadow at the same clock hour right through the year — the figure of eight behind the equation of time."
+      },
+      napisy: {
+        godz: "h", min: "min", dzienTrwa: "day:", nocTrwa: "night:", poZachodzie: "—",
+        odZachodu: "h since sunset", odWschodu: "h since sunrise",
+        scianaWCieniu: "the wall is in shade", poZachodzieSlonca: "after sunset",
+        przesilenieLetnie: "summer solstice", rownonoc: "equinox", przesilenieZimowe: "winter solstice",
+        tarcze: { wloskie: "Italian hours", rowne: "equal hours", babilonskie: "Babylonian hours" },
+        miesiace: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+        miesiaceDop: ["January","February","March","April","May","June","July","August","September","October","November","December"]
+      },
       miesiace: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     }
   }
