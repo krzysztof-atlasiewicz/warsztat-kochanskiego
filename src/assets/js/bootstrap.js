@@ -6,6 +6,7 @@ const rejestr = {
 };
 
 import("./zrodla.js").then((m) => m.default()).catch((e) => console.error("zrodla", e));
+import("./zakladki.js").then((m) => m.default()).catch((e) => console.error("zakladki", e));
 
 for (const el of document.querySelectorAll("[data-modul]")) {
   const nazwa = el.dataset.modul;

@@ -1,16 +1,18 @@
 ---
 layout: layouts/base.njk
 ---
+{% set z = i18n[jezyk].zakladki %}
 <article class="przyrzad" data-modul="{{ modul }}">
   <h1>{{ naglowek }}</h1>
   <p class="tagi">
     {%- for t in tagi %}<span class="tag {{ t.typ }}">{{ t.etykieta }}</span>{% endfor %}
   </p>
+  <div class="zakladki" role="tablist" aria-label="{{ z.opis }}">
+    <button type="button" role="tab" id="z-przyrzad" aria-controls="k-przyrzad" aria-selected="true">{{ z.przyrzad }}</button>
+    <button type="button" role="tab" id="z-wiemy" aria-controls="k-wiemy" aria-selected="false">{{ z.wiemy }}</button>
+    <button type="button" role="tab" id="z-pytania" aria-controls="k-pytania" aria-selected="false">{{ z.pytania }} <span class="licznik">{{ (para | pytaniaMiejsca) | length }}</span></button>
+  </div>
   {{ content | safe }}
-  <section class="rownowaznik">
-    <h2>{{ i18n[jezyk].rownowaznikNaglowek }}</h2>
-    {{ rownowaznik | safe }}
-  </section>
   <nav class="sciezka" aria-label="{{ 'Ścieżka' if jezyk == 'pl' else 'Path' }}">
   {%- for p in collections.przyrzady %}{% if p.data.jezyk == jezyk %}
     {%- if p.data.kolejnosc == kolejnosc - 1 %}<a class="wstecz" href="{{ p.url }}">← {{ p.data.przyrzad }}</a>{% endif %}

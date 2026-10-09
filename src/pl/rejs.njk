@@ -5,7 +5,6 @@ przyrzad: Wahadło
 rok: 1659
 kolejnosc: 2
 modul: rejs
-agenda: [A3]
 para: rejs
 permalink: /pl/wahadlo/
 tagi:
@@ -13,11 +12,24 @@ tagi:
   - { typ: rekonstrukcja, etykieta: model współczesny }
 rownowaznik: "<p>Zegar wyregulowany w La Rochelle traci na trasie do Kajenny na trzy sposoby: słabnie przyciąganie ziemskie, kołysanie zwiększa amplitudę wahadła, rośnie temperatura. Po 64 dniach błąd pozycji sięga kilku tysięcy kilometrów. Zegar sprężynowy jest niewrażliwy na dwa pierwsze czynniki, ale dziesięciokrotnie wrażliwszy na temperaturę. Dopiero kompensacja temperatury sprowadza błąd w okolice progu nagrody za długość geograficzną, wynoszącego pół stopnia, czyli około 56 km.</p>"
 ---
+{% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
+{% include "przyrzady/rejs.njk" %}
+{% endkarta %}
+
+{% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p><strong>Problem brzmi tak.</strong> Na pełnym morzu szerokość geograficzną wyznaczysz z wysokości Słońca w południe. Długości geograficznej nie wyznaczysz z niczego, co widać na niebie — potrzebujesz zegara, który pokazuje, która godzina jest teraz w porcie, z którego wypłynąłeś. Różnica między tą godziną a lokalnym południem mówi, jak daleko na wschód lub zachód zaszedłeś. Ziemia obraca się o 360 stopni na dobę, więc <strong>każda sekunda błędu zegara to ćwierć minuty łuku</strong> — kilkaset metrów na równiku. Zegar, który spóźnia się o minutę, wysadza okręt kilkadziesiąt kilometrów od miejsca, w którym stoi naprawdę.</p>
 <p>W 1659 roku Kochański proponuje zastąpienie wahadła sprężyną regulującą i ustalenie stałej liczby wahnięć na godzinę — szesnaście lat przed balansem ze spiralą Huygensa. Oba rozwiązania wsiadają poniżej na ten sam okręt: wyprawa Jeana Richera z La Rochelle do Kajenny, 1672. Oba zegary wyregulowano w porcie wyjścia i od tej chwili tylko się mylą.</p>
 <p>Richer opisał tę wyprawę sam, w {% zrodlo "richer-1729", "„Observations astronomiques et physiques faites en l’isle de Caïenne”" %}. To stamtąd pochodzi obserwacja, od której zaczyna się ten moduł: w Kajennie wahadło odmierzające sekundę musiało być krótsze niż w Paryżu, a zegar wahadłowy chodził wolniej. Wniosek — że przyciąganie ziemskie słabnie ku równikowi, a Ziemia jest spłaszczona na biegunach — był dla ówczesnej fizyki wstrząsem.</p>
-{% pytanie "A7", jezyk %}
-{% include "przyrzady/rejs.njk" %}
 <p class="note">Sprężyna nie jest lepsza — przenosi problem z grawitacji na temperaturę. Na kompensację trzeba było czekać do Harrisona, dziewięćdziesiąt lat po propozycji Kochańskiego.</p>
 <p class="note uwaga">Trasa uproszczona do jednostajnego marszu na południe, temperatura wyprowadzona z szerokości geograficznej, nie z dziennika pokładowego.</p>
-{% pytanie "A3", jezyk %}
+
+<details class="wyprowadzenie">
+<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
+{{ rownowaznik | safe }}
+</details>
+{% endkarta %}
+
+{% karta "pytania", i18n[jezyk].zakladki.pytania %}
+<p class="dim małe"><a href="/pl/agenda/">{{ i18n[jezyk].zakladki.rejestr }}</a></p>
+{% pytaniaTu para, jezyk %}
+{% endkarta %}

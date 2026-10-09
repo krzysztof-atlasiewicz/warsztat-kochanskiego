@@ -7,6 +7,13 @@ export default {
     stopka: "Oznaczenia: <strong>źródło</strong> — potwierdzone w druku lub opracowaniu; <strong>rekonstrukcja</strong> — odtworzenie metody na podstawie opisu; <strong>interpretacja</strong> — wniosek redakcyjny.",
     zrodlaLink: "Skąd to wiemy i czego nie wiemy",
     rownowaznikNaglowek: "Opis tekstowy przyrządu",
+    zakladki: {
+      opis: "Części strony przyrządu",
+      przyrzad: "Przyrząd",
+      wiemy: "Skąd to wiemy",
+      pytania: "Pytania otwarte",
+      rejestr: "Zobacz pełny rejestr pytań ze wszystkich przyrządów"
+    },
     dalejPrzyrzad: "Następny przyrząd",
     wsteczPrzyrzad: "Poprzedni przyrząd",
     cyrkiel: {
@@ -127,7 +134,7 @@ export default {
       data: "Data", zegar: "Zegar", rowne: "Godziny równe", wloskie: "Zegar włoski", babilonskie: "Zegar babiloński",
       mech: "Zegar mechaniczny", slon: "Czas słoneczny prawdziwy", roznica: "Rozbieżność",
       analemma: "Analemma",
-      legendaCienia: "ślad cienia o tej samej godzinie zegarowej przez cały rok",
+      ktoraRachuba: "Czym jest która rachuba:",
       brakSlonca: "O tej porze Słońce nie oświetla ściany — żadna z trzech tarcz nic nie pokazuje.",
       
       opis: "Ściana z trzema tarczami zegara słonecznego: po lewej godziny włoskie, pośrodku równe, po prawej babilońskie. Nad ścianą Słońce, od niego promień do pręta każdej tarczy, a od pręta cień padający na siatkę linii.",
@@ -158,8 +165,12 @@ export default {
         godz: "godz", min: "min", dzienTrwa: "dzień:", nocTrwa: "noc:", poZachodzie: "—",
         odZachodu: "godz. od zachodu", odWschodu: "godz. od wschodu",
         scianaWCieniu: "ściana w cieniu", poZachodzieSlonca: "po zachodzie Słońca",
+        wybierzRachube: "Najedź na tarczę albo dotknij jej nazwy, żeby przeczytać, od czego liczy się ta rachuba.",
         przesilenieLetnie: "przesilenie letnie", rownonoc: "równonoc", przesilenieZimowe: "przesilenie zimowe",
-        tarcze: { wloskie: "godziny włoskie — od zachodu", rowne: "godziny równe — od północy", babilonskie: "godziny babilońskie — od wschodu" },
+        tarcze: {
+          krotkie: { wloskie: "godziny włoskie", rowne: "godziny równe", babilonskie: "godziny babilońskie" },
+          pelne: { wloskie: "Godziny włoskie — od zachodu", rowne: "Godziny równe — od północy", babilonskie: "Godziny babilońskie — od wschodu" }
+        },
         dymki: {
           wloskie: "Godziny włoskie liczy się od ostatniego zachodu Słońca: zachód to godzina dwudziesta czwarta. Odczyt odjęty od dwudziestu czterech mówi wprost, ile zostało światła — pytanie ważniejsze dla podróżnego i rzemieślnika niż pora względem północy. W użyciu we Włoszech, Czechach i Polsce jeszcze w XVII wieku.",
           rowne: "Doba podzielona na dwadzieścia cztery równe części, liczone od północy — rachuba używana do dziś. Na zegarze słonecznym daje czas słoneczny prawdziwy, który rozmija się z zegarem mechanicznym.",
@@ -179,6 +190,13 @@ export default {
     stopka: "Labels: <strong>source</strong> — attested in print or scholarship; <strong>reconstruction</strong> — method rebuilt from a description; <strong>interpretation</strong> — our own editorial conclusion.",
     zrodlaLink: "How we know this, and what we don't",
     rownowaznikNaglowek: "Text description of the instrument",
+    zakladki: {
+      opis: "Parts of the instrument page",
+      przyrzad: "Instrument",
+      wiemy: "How we know",
+      pytania: "Open questions",
+      rejestr: "See the full register of questions across all instruments"
+    },
     dalejPrzyrzad: "Next instrument",
     wsteczPrzyrzad: "Previous instrument",
     cyrkiel: {
@@ -299,7 +317,7 @@ export default {
       data: "Date", zegar: "Clock", rowne: "Equal hours", wloskie: "Italian hours", babilonskie: "Babylonian hours",
       mech: "Mechanical clock", slon: "True solar time", roznica: "Discrepancy",
       analemma: "Analemma",
-      legendaCienia: "the shadow at the same clock hour right through the year",
+      ktoraRachuba: "What each reckoning is:",
       brakSlonca: "At this hour the sun does not light the wall, and none of the three dials shows anything.",
       opis: "A wall carrying three sundials: Italian hours on the left, equal hours in the centre, Babylonian hours on the right. The sun above the wall, a ray from it to the rod of each dial, and the shadow of the rod falling on the grid of lines.",
       opisKartki: "A calendar leaf with the date and the length of day and night.",
@@ -329,8 +347,12 @@ export default {
         godz: "h", min: "min", dzienTrwa: "day:", nocTrwa: "night:", poZachodzie: "—",
         odZachodu: "h since sunset", odWschodu: "h since sunrise",
         scianaWCieniu: "the wall is in shade", poZachodzieSlonca: "after sunset",
+        wybierzRachube: "Hover over a dial, or tap its name, to read what its reckoning counts from.",
         przesilenieLetnie: "summer solstice", rownonoc: "equinox", przesilenieZimowe: "winter solstice",
-        tarcze: { wloskie: "Italian hours — from sunset", rowne: "equal hours — from midnight", babilonskie: "Babylonian hours — from sunrise" },
+        tarcze: {
+          krotkie: { wloskie: "Italian hours", rowne: "equal hours", babilonskie: "Babylonian hours" },
+          pelne: { wloskie: "Italian hours — from sunset", rowne: "Equal hours — from midnight", babilonskie: "Babylonian hours — from sunrise" }
+        },
         dymki: {
           wloskie: "Italian hours are counted from the last sunset: sunset is the twenty-fourth hour. Subtracted from twenty-four, the reading says how much daylight is left — a more useful question for a traveller or a craftsman than the hour since midnight. Still in use in Italy, Bohemia and Poland in the seventeenth century.",
           rowne: "The day divided into twenty-four equal parts counted from midnight — the reckoning still in use. On a sundial it gives true solar time, which never quite agrees with a mechanical clock.",

@@ -5,7 +5,6 @@ przyrzad: Gnomon
 rok: 1684
 kolejnosc: 4
 modul: gnomon
-agenda: [A1, A6, A8]
 para: gnomon
 permalink: /pl/gnomon/
 tagi:
@@ -13,16 +12,28 @@ tagi:
   - { typ: rekonstrukcja, etykieta: geometria uproszczona }
 rownowaznik: "<p>Zegar wilanowski podaje trzy odczyty z jednego cienia: godziny równe, godziny włoskie liczone od ostatniego zachodu Słońca i babilońskie liczone od wschodu. Czas słoneczny prawdziwy rozmija się w Wilanowie z zegarem mechanicznym przez cały rok — o około dziesięciu do czterdziestu minut, w zależności od daty. Przyrząd pozwala ustawić datę i godzinę zegara, a następnie odczytać położenie cienia na trzech siatkach linii.</p>"
 ---
+{% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
+{% include "przyrzady/gnomon.njk" %}
+{% endkarta %}
+
+{% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p>Na elewacji ogrodowej pałacu w Wilanowie, na alkierzu południowo-wschodnim, około 1684 roku stanął stiukowy zegar słoneczny. Nie jedna tarcza, lecz trzy niezależne: godziny równe pośrodku, po lewej zegar włoski liczony od ostatniego zachodu Słońca, po prawej babiloński liczony od wschodu. Jedno Słońce, jeden pręt, jeden cień — i trzy różne godziny, zależnie od tego, na którą siatkę ten cień padnie.</p>
 
 <p>Że zegary w pałacu w ogóle należały do jego obowiązków, wiadomo z opracowania naukowego: {% zrodlo "fijalkowski-1989", "Wojciech Fijałkowski, „Studia Wilanowskie” XI" %} pisze — za monografią Juliusza Starzyńskiego — że Kochański „was in charge of compasses and clocks for the palace”, czyli zawiadywał pałacowymi kompasami i zegarami, i że był głównym autorem programu ideowego dekoracji elewacji oraz wnętrz. O samym zegarze słonecznym artykuł nie mówi jednak ani słowa i nie wymienia Heweliusza.</p>
 
 <p class="note">Fotografia zachowanego zegara wraz z opisem medalionu: {% zrodlo "widacka-2008", "artykuł Hanny Widackiej w Pasażu Wiedzy muzeum" %}. Zdjęcie nie jest na wolnej licencji, więc otwiera się u wydawcy, w osobnej karcie.</p>
 
-{% include "przyrzady/gnomon.njk" %}
 
 <p class="note uwaga">Model zakłada ścianę dokładnie południową i pręt prostopadły do niej. Rysunek nie odtwarza stiukowej dekoracji zachowanego zegara — pokazuje samą geometrię trzech rachub.</p>
 <p class="note uwaga">Położenie Słońca liczone jest dla roku przestępnego 2028, więc 29 lutego da się wybrać jak każdą inną datę. Ta sama data kalendarzowa wypada jednak w cyklu czteroletnim nieco inaczej względem przesileń: w okolicach równonocy deklinacja Słońca różni się wtedy o około 0,14 stopnia w każdą stronę, wschód i zachód o niecałą minutę, a cień przesuwa się o mniej niż grubość wykreślonej linii. Zegar mechaniczny chodzi według dzisiejszego czasu urzędowego tego roku, z czasem letnim włącznie.</p>
-{% pytanie "A1", jezyk %}
-{% pytanie "A6", jezyk %}
-{% pytanie "A8", jezyk %}
+
+<details class="wyprowadzenie">
+<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
+{{ rownowaznik | safe }}
+</details>
+{% endkarta %}
+
+{% karta "pytania", i18n[jezyk].zakladki.pytania %}
+<p class="dim małe"><a href="/pl/agenda/">{{ i18n[jezyk].zakladki.rejestr }}</a></p>
+{% pytaniaTu para, jezyk %}
+{% endkarta %}

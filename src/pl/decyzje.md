@@ -319,3 +319,21 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Przełącznik analemmy stoi przy ścianie,** bo to na ścianie analemma się rysuje. Jest mosiężną dźwignią w konwencji pozostałych przyrządów, zadeklarowaną jako `role="switch"` ze stanem `aria-checked`, z dymkiem opisującym działanie i akapitem wyjaśniającym, czym analemma jest.
 
 **Pozycja A8 przeredagowana.** Pierwotne pytanie — co zawiera artykuł Fijałkowskiego — jest już odpowiedziane. Zostaje to, co nadal otwarte: skąd pochodzi przypisanie zegara Heweliuszowi i czy monografia Starzyńskiego mówi o nim więcej.
+
+## 2026-10-09 — Cykl 25: zakładki zamiast długiej strony
+
+**Zarzut był słuszny:** żeby dojść do przyrządu, trzeba było przewinąć wstęp, przypisy, dwie uwagi i trzy ramki z pytaniami. Interesująca część leżała w środku, a nie na wierzchu.
+
+**Strona przyrządu ma teraz trzy zakładki:** Przyrząd, Skąd to wiemy, Pytania otwarte. Przyrząd otwiera się jako pierwszy i stoi tuż pod tytułem. Proza, źródła, zastrzeżenia modelu i opis tekstowy zeszły do drugiej zakładki, pytania agendy do trzeciej, z licznikiem przy nazwie. Dotyczy to wszystkich czterech przyrządów w obu językach, nie samego gnomonu.
+
+**Bez skryptu nic nie znika.** Karty są zwykłymi sekcjami dokumentu; skrypt dopiero je zwija i dopiero wtedy odsłania pasek zakładek, żeby nie zostawić martwych przycisków. Przy wyłączonym skrypcie każda karta ma własny nagłówek i wszystkie trzy są widoczne jedna pod drugą — treść nigdy nie wypada z dokumentu, więc wyszukiwarka i czytnik ekranu widzą całość. Pasek obsługuje strzałki, Home i End.
+
+**Pytania przestały być przepisywane ręcznie.** Dotąd strona wymieniała je po identyfikatorach w nagłówku i jeszcze raz w treści, przez co strona wahadła deklarowała jedno pytanie, a osadzała dwa. Teraz lista bierze się wprost z rejestru po polu „miejsca", a licznik przy zakładce liczy to samo. Jedno źródło prawdy zamiast trzech.
+
+**Rejestr pytań ma osobny odnośnik** na początku trzeciej zakładki — do pełnej agendy wszystkich przyrządów.
+
+**Opis tekstowy przyrządu zwinięty** do rozwijanej sekcji w zakładce „Skąd to wiemy". Nie może być samym dymkiem: to równoważnik tekstowy dla czytnika ekranu i dla przeglądarki bez skryptu, więc musi zostać w dokumencie jako tekst.
+
+**Dymki rachub działają na dotyku.** Znacznik `title` w SVG nie pojawia się na ekranie dotykowym i bywa przeoczony myszą, więc wyjaśnienie trafiło do stałego pola pod ścianą, zapalanego najechaniem na tarczę, najechaniem na jej nazwę, dotknięciem albo klawiaturą. Trzy nazwy rachub stoją pod ścianą jako zwykłe przyciski, w barwach swoich tarcz.
+
+**Podpisy pod tarczami skrócone** do samej nazwy, bo wersja z dopiskiem „— od zachodu" nachodziła na sąsiednie tarcze. Punkt, od którego liczy się rachuba, przeniósł się do dymka i do nazwy w przycisku. Z paska przełącznika analemmy zniknął dopisek, który sklejał się z jego nazwą.

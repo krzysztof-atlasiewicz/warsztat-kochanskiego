@@ -5,7 +5,6 @@ przyrzad: Gnomon
 rok: 1684
 kolejnosc: 4
 modul: gnomon
-agenda: [A1, A6, A8]
 para: gnomon
 permalink: /en/gnomon/
 tagi:
@@ -13,16 +12,28 @@ tagi:
   - { typ: rekonstrukcja, etykieta: simplified geometry }
 rownowaznik: "<p>The Wilanów dial gives three readings from a single shadow: equal hours, Italian hours counted from the last sunset, and Babylonian hours counted from sunrise. True solar time at Wilanów never agrees with a mechanical clock — the gap runs between roughly ten and forty minutes across the year. The instrument lets you set a date and a clock reading, then read the shadow off three separate grids of lines.</p>"
 ---
+{% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
+{% include "przyrzady/gnomon.njk" %}
+{% endkarta %}
+
+{% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p>A stucco sundial went up on the garden front of Wilanów Palace, on the south-eastern corner pavilion, around 1684. Not one dial but three: equal hours in the centre, Italian hours on the left counted from the last sunset, Babylonian hours on the right counted from sunrise. One sun, one rod, one shadow — and three different hours, depending on which grid that shadow falls on.</p>
 
 <p>That the palace clocks were his business at all is attested in the scholarship: {% zrodlo "fijalkowski-1989", "Wojciech Fijałkowski, Studia Wilanowskie XI" %} records — after Juliusz Starzyński's monograph — that Kochański “was in charge of compasses and clocks for the palace”, and that he was the main author of the ideological programme of the decoration of the palace elevation and interiors. The article says nothing about the sundial itself, however, and never mentions Hevelius.</p>
 
 <p class="note">A photograph of the surviving dial with a description of its medallion: {% zrodlo "widacka-2008", "an article by Hanna Widacka for the museum" %} (in Polish). The photograph is not freely licensed, so it opens at the publisher's site, in a separate tab.</p>
 
-{% include "przyrzady/gnomon.njk" %}
 
 <p class="note uwaga">The model assumes a wall facing due south and a rod perpendicular to it. The drawing does not reproduce the stucco decoration of the surviving dial — it shows the geometry of the three reckonings alone.</p>
 <p class="note uwaga">The sun's position is computed for the leap year 2028, so 29 February can be chosen like any other date. The same calendar date does fall slightly differently against the solstices across the four-year cycle: near the equinoxes the sun's declination shifts by about 0.14 degrees either way, sunrise and sunset by under a minute, and the shadow by less than the width of a drawn line. The mechanical clock keeps that year's civil time, summer time included.</p>
-{% pytanie "A1", jezyk %}
-{% pytanie "A6", jezyk %}
-{% pytanie "A8", jezyk %}
+
+<details class="wyprowadzenie">
+<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
+{{ rownowaznik | safe }}
+</details>
+{% endkarta %}
+
+{% karta "pytania", i18n[jezyk].zakladki.pytania %}
+<p class="dim małe"><a href="/en/agenda/">{{ i18n[jezyk].zakladki.rejestr }}</a></p>
+{% pytaniaTu para, jezyk %}
+{% endkarta %}

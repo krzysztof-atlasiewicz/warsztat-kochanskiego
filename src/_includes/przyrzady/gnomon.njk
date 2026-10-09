@@ -73,9 +73,9 @@
         <span class="para-zegara"><b class="znak-slon"></b><span id="slon">—</span> {{ s.gnomon.slon }}</span>
         <span class="para-zegara"><b class="znak-luk"></b><span id="roznica">—</span> {{ s.gnomon.roznica }}</span>
       </figcaption>
-      <p class="dim małe podpowiedz-zegara">{{ s.gnomon.jakNastawic }}</p>
     </figure>
   </div>
+  <p class="dim małe">{{ s.gnomon.jakNastawic }}</p>
   <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>
 </section>
 
@@ -99,13 +99,20 @@
     <text id="brakSlonca" class="tb" x="410" y="30" text-anchor="middle" opacity="0">{{ s.gnomon.brakSlonca }}</text>
   </svg>
 
+  <p class="rzad-objasnien">
+    <span class="dim małe">{{ s.gnomon.ktoraRachuba }}</span>
+    <button type="button" class="guzik-tarczy guzik-wloskie" data-tarcza="wloskie"></button>
+    <button type="button" class="guzik-tarczy guzik-rowne" data-tarcza="rowne"></button>
+    <button type="button" class="guzik-tarczy guzik-babilonskie" data-tarcza="babilonskie"></button>
+  </p>
+  <p id="dymekTarczy" class="dymek" aria-live="polite"></p>
+
   <p class="rzad-przelacznika">
     <button id="przelacz" class="przelacznik" role="switch" aria-checked="false"
             aria-describedby="coToAnalemma" title="{{ s.gnomon.opisy.analemma }}">
       <span class="przelacznik-tor" aria-hidden="true"><span class="przelacznik-dzwignia"></span></span>
       <span class="przelacznik-napis">{{ s.gnomon.analemma }}</span>
     </button>
-    <span class="dim małe">{{ s.gnomon.legendaCienia }}</span>
   </p>
   <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
 

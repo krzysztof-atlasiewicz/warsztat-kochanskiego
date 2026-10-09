@@ -143,7 +143,7 @@ function rysujTarcze(rodzic, tarcza, rodzaj, linie, napisy, opisy) {
   const g = zrob("g", { class: `tarcza-sciany tarcza-${rodzaj}` });
   rodzic.append(g);
   // Wyjaśnienie rachuby jako dymek nad całą tarczą — bez rozbudowanego opisu obok.
-  g.append(zrob("title", {}, opisy[rodzaj]));
+  g.append(zrob("title", {}, `${napisy.pelne[rodzaj]} — ${opisy[rodzaj]}`));
   g.append(zrob("rect", { x: r.x0 - 13, y: r.y0 - 13, width: r.x1 - r.x0 + 26, height: r.y1 - r.y0 + 26,
     class: "kartusz" }));
   g.append(zrob("rect", { x: r.x0 - 6, y: r.y0 - 6, width: r.x1 - r.x0 + 12, height: r.y1 - r.y0 + 12,
@@ -168,7 +168,7 @@ function rysujTarcze(rodzic, tarcza, rodzaj, linie, napisy, opisy) {
   n.append(zrob("circle", { cx: r.nx, cy: r.ny, r: 2, class: "nodus-pret" }));
   g.append(n);
   const sx = (r.x0 + r.x1) / 2;
-  g.append(zrob("text", { x: sx, y: r.y1 + 23, "text-anchor": "middle", class: "napis-tarczy" }, napisy[rodzaj]));
+  g.append(zrob("text", { x: sx, y: r.y1 + 23, "text-anchor": "middle", class: "napis-tarczy" }, napisy.krotkie[rodzaj]));
   g.append(zrob("text", { id: rodzaj, x: sx, y: r.y1 + 48, "text-anchor": "middle",
     class: `odczyt-sciany odczyt-${rodzaj}` }, "—"));
 }
@@ -290,6 +290,29 @@ export default function init(root) {
     const kawalki = przytnij(naPkt(r, krzywaDeklinacji(fi, G, dekl)), r);
     for (const k of kawalki)
       tarcze.append(zrob("polyline", { points: zapis(k), class: `krzywa krzywa-${dekl > 0 ? "lato" : dekl < 0 ? "zima" : "rownonoc"}` }));
+  }
+
+  // ── dymki rachub ───────────────────────────────────────────────────────
+  // Znacznik title w SVG nie pojawia się na ekranie dotykowym i bywa
+  // przeoczony, więc wyjaśnienie trafia do stałego pola pod ścianą,
+  // zapalanego najechaniem, dotknięciem albo klawiaturą.
+  const dymek = $("dymekTarczy");
+  const domyslny = N.wybierzRachube;
+  dymek.textContent = domyslny;
+  const pokazOpis = (rodzaj) => { dymek.textContent = `${N.tarcze.pelne[rodzaj]}. ${N.dymki[rodzaj]}`; };
+  const schowajOpis = () => { dymek.textContent = domyslny; };
+  for (const guzik of root.querySelectorAll(".guzik-tarczy")) {
+    const rodzaj = guzik.dataset.tarcza;
+    guzik.textContent = N.tarcze.krotkie[rodzaj];
+    guzik.title = N.dymki[rodzaj];
+    for (const z of ["pointerenter", "focus", "click"]) guzik.addEventListener(z, () => pokazOpis(rodzaj));
+    for (const z of ["pointerleave", "blur"]) guzik.addEventListener(z, schowajOpis);
+  }
+  for (const rodzaj of Object.keys(TARCZE)) {
+    const grupa = root.querySelector(`.tarcza-${rodzaj}`);
+    if (!grupa) continue;
+    grupa.addEventListener("pointerenter", () => pokazOpis(rodzaj));
+    grupa.addEventListener("pointerleave", schowajOpis);
   }
 
   // ── warstwa ruchoma ────────────────────────────────────────────────────
