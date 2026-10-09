@@ -166,6 +166,9 @@ math{font-size:1.05em}
 .pulpit-sterowniki{display:grid;grid-template-columns:minmax(14rem,19rem) minmax(14rem,1fr) minmax(13rem,1fr);gap:1.1rem 1.5rem;align-items:start;margin:.4rem 0 1.1rem}
 .blok-objasnien{font-size:.9rem;color:var(--ink-soft);border-left:1px solid var(--rule-soft);padding-left:1.1rem}
 .blok-objasnien p{margin:0 0 .7rem}
+.przyrzady-gnomon .blok-objasnien{border-left:0;padding-left:0}
+.przyrzady-gnomon .blok-objasnien .dymek{margin-top:0}
+.przyrzady-gnomon .rzad-przelacznika{margin:.8rem 0 0}
 .blok-objasnien p:last-child{margin-bottom:0}
 .pulpit-stopka{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:.4rem 1.6rem;margin-top:.9rem}
 .pulpit .dymek{background:var(--paper)}
