@@ -56,6 +56,15 @@ button:hover{border-color:var(--verd);color:var(--verd)}
 .ciph{font-family:var(--mono);letter-spacing:.08em;word-break:break-word}
 .hit{color:var(--verd)}
 .hide{display:none}
+/* Element przygaszony nie znika z układu — trzyma swoje miejsce, więc jego
+   pojawienie się nie przesuwa niczego poniżej. Bez skryptu zostaje .hide. */
+.przygaszony{visibility:hidden}
+/* Opis kroku bywa jedno- albo dwuwierszowy; rezerwujemy dwa wiersze, żeby
+   przejście między krokami nie przesuwało tego, co pod nim. */
+#opis{min-height:3.25em;margin-top:.4rem}
+/* Ze skryptem pole wyników cyrkla zajmuje miejsce od pierwszej klatki, choć
+   odsłania się dopiero na ostatnim kroku. Bez skryptu zostaje schowane. */
+html.js #panel.hide{display:block;visibility:hidden}
 .rownowaznik{border-top:1px solid var(--rule);margin-top:2.5rem;padding-top:1rem;color:var(--ink-soft);font-size:.95rem}
 footer{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1.5rem;color:var(--ink-soft);font-size:.92rem}
 @media (prefers-reduced-motion:no-preference){
@@ -445,7 +454,7 @@ svg.sciana{max-width:none;width:100%}
 /* Gdy wiersz w nagłówku jest, wiemy od pierwszej klatki, że skrypt żyje:
    pasek zajmuje wtedy swoje miejsce od razu (tylko niewidoczny), a karty poza
    pierwszą są schowane, zanim moduł zdąży je schować sam. Stąd brak podskoku. */
-html.js .zakladki:not(.gotowe){display:flex;visibility:hidden}
+html.js .zakladki:not(.gotowe){display:flex}
 html.js .zakladki:not(.gotowe) ~ .karta-przyrzadu .tytul-karty{display:none}
 html.js .zakladki:not(.gotowe) ~ .karta-przyrzadu ~ .karta-przyrzadu{display:none}
 .tytul-karty{font-size:1.25rem;font-weight:400;margin:1.8rem 0 .4rem;

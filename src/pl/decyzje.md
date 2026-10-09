@@ -549,3 +549,17 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Sprawdzono trzy przypadki, nie jeden.** Nowy dokument z nowym arkuszem: trzy zakładki widoczne, jedna karta, skok wysokości 1 punkt przy cyrklu, 46 przy wahadle, 29 przy szyfrze, 48 przy gnomonie. Stary dokument (wiersz `js` wycięty z dziewiętnastu plików) z nowym arkuszem: trzy zakładki widoczne, jedna karta — usterka nie występuje. Całkiem bez skryptu: paska nie ma, trzy karty stoją jedna pod drugą, każda ze swoim nagłówkiem.
 
 **Test pilnuje teraz tego, co zawiodło** (97 zamiast 96): arkusz nie może mieć żadnej reguły chowającej pasek przy braku klasy `js`, musi mieć regułę wiążącą pasek z gotowością modułu i musi chować nagłówki kart dopiero wtedy, gdy pasek je zastąpi.
+
+## 2026-10-10 — Cykl 43: dwa źródła migania — pasek zakładek i pole wyników cyrkla
+
+**Pasek zakładek mrugał na każdej stronie.** Po cyklu 42 zajmował swoje miejsce od pierwszej klatki, ale był niewidoczny (`visibility:hidden`) aż do startu modułu — więc zamiast podskoku widać było puste pole, które po chwili zapełniało się napisami. Pasek jest w dokumencie w całości, z pierwszą zakładką już zaznaczoną, więc nie ma powodu go chować: pokazuje się od razu, a moduł tylko przejmuje nad nim sterowanie. Przez kilkadziesiąt milisekund kliknięcie nie zadziała — to wymiana lepsza niż mrugnięcie przy każdym przejściu.
+
+**Pole wyników cyrkla rosło o sto pięćdziesiąt punktów.** Suwak promienia i trzy odczyty odsłaniają się dopiero na piątym kroku konstrukcji, ale były dotąd chowane przez `display:none`, więc przejście z kroku czwartego na piąty wydłużało stronę. Teraz pole jest przygaszone, nie usunięte: trzyma swoje miejsce od pierwszej klatki i tylko staje się widoczne. Wysokość dokumentu na wszystkich pięciu krokach: 1648 punktów, bez wyjątku.
+
+**Opis kroku rezerwuje dwa wiersze.** Przy czterech pierwszych krokach mieścił się w jednym, przy piątym łamał się na dwa — stąd jeszcze siedem punktów ruchu, teraz zero.
+
+**Powtórny pomiar wysokości kart po załadowaniu przyrządów może już tylko dołożyć, nie odebrać.** Strona, którą widz ma przed oczami, nie kurczy się pod nim; zmniejszyć wolno dopiero przy zmianie szerokości okna, bo to i tak nowy układ. Kosztem bywa kilkadziesiąt punktów pustego pola na dole.
+
+**Skok wysokości dokumentu między pierwszym rysunkiem a stanem ustalonym:** cyrkiel 1 punkt (było 149 po samej poprawce kroków), wahadło −46, szyfr 45, gnomon −22. Reszta to przyrządy dorysowujące własną treść poniżej pierwszego ekranu.
+
+**Trzy nowe testy** (100 zamiast 97): moduł cyrkla nie może chować pola wyników przez `hide`, arkusz musi mieć regułę przygaszania i rezerwację miejsca od pierwszej klatki, a w dokumencie pole musi nadal nieść klasę `hide` — żeby bez skryptu pozostało schowane, a nie świeciło martwym suwakiem.

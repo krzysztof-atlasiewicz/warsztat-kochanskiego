@@ -340,3 +340,32 @@ describe.skipIf(!zbudowane)("pierwszy rysunek strony", () => {
     });
   }
 });
+
+// Przejście między krokami konstrukcji nie może zmieniać wysokości strony:
+// pole z suwakiem i odczytami odsłania się na ostatnim kroku, ale miejsce
+// zajmuje od początku.
+describe.skipIf(!zbudowane)("kroki konstrukcji cyrkla", () => {
+  const arkusz = readFileSync("src/assets/css/site.css", "utf8");
+  const modul = readFileSync("src/assets/js/modules/cyrkiel.js", "utf8");
+
+  it("pole wyników jest przygaszane, nie usuwane z układu", () => {
+    expect(modul, "moduł dalej chowa pole przez .hide")
+      .not.toMatch(/classList\.toggle\("hide"/);
+    expect(modul, "brak przygaszania pola wyników")
+      .toMatch(/classList\.toggle\("przygaszony", krok !== 4\)/);
+    expect(arkusz, "brak reguły trzymającej miejsce przygaszonego pola")
+      .toMatch(/\.przygaszony\{visibility:hidden\}/);
+    expect(arkusz, "pole wyników nie rezerwuje miejsca od pierwszej klatki")
+      .toMatch(/html\.js #panel\.hide\{display:block;visibility:hidden\}/);
+    expect(arkusz, "opis kroku nie rezerwuje dwóch wierszy")
+      .toMatch(/#opis\{min-height:/);
+  });
+
+  for (const plik of ["_site/pl/cyrkiel/index.html", "_site/en/compass/index.html"]) {
+    it(`${plik} — bez skryptu pole wyników pozostaje schowane`, () => {
+      const h = readFileSync(plik, "utf8");
+      expect(h, "pole wyników bez klasy hide byłoby widoczne bez skryptu")
+        .toMatch(/<div id="panel" class="hide">/);
+    });
+  }
+});
