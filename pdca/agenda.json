@@ -58,15 +58,19 @@
     },
     {
       "id": "A5",
-      "pytanie": "Która data przybycia na dwór Jana III jest poprawna: 1678, 1679 czy 1680?",
-      "dlaczego": "Opracowania podają trzy różne daty.",
+      "pytanie": "Która data przybycia na dwór Jana III jest poprawna: 1677, 1678, 1679 czy 1680?",
+      "dlaczego": "Opracowania podają różne daty, a lektura artykułu Fijałkowskiego dorzuciła czwartą.",
       "zmieni": "Oś czasu w biografii.",
       "zrodlo": "Katalogi personalne prowincji jezuickiej",
-      "status": "otwarta",
+      "status": "w toku",
       "miejsca": [
         "biografia"
       ],
-      "dotyczy": "wiersz osi czasu z datą przybycia na dwór"
+      "dotyczy": "wiersz osi czasu z datą przybycia na dwór",
+      "ustalenia": [
+        "Fijałkowski (Studia Wilanowskie XI, s. 40) pisze, że Kochański przybył na dwór Jana III w Wilanowie w 1677 roku, gdy pałac był w budowie, i że król korzystał z jego usług przy dekoracji rezydencji w latach 1681–1686.",
+        "Data 1677 nie pojawiała się dotąd w żadnym ze sprawdzonych opracowań. Możliwe, że część źródeł datuje nie przybycie, lecz formalne objęcie funkcji dworskiej — to rozróżnienie trzeba sprawdzić w katalogach personalnych prowincji."
+      ]
     },
     {
       "id": "A6",
@@ -100,14 +104,22 @@
     {
       "id": "A8",
       "pytanie": "Co o zegarze słonecznym mówi artykuł Wojciecha Fijałkowskiego w Studia Wilanowskie XI (1989) — czy podaje atrybucję, geometrię albo dokumentację powstania?",
-      "dlaczego": "To jedyne znane nam opracowanie naukowe poświęcone wprost pracy Kochańskiego w Wilanowie. Muzeum udostępnia skan, ale bez rozpoznanego tekstu, więc nie da się go przeszukać ani zacytować.",
+      "dlaczego": "To jedyne znane nam opracowanie naukowe poświęcone wprost pracy Kochańskiego w Wilanowie. Skan udostępniony przez muzeum nie ma rozpoznanego tekstu, więc odczytaliśmy go wzrokowo; część pytania jest już rozstrzygnięta, część nie.",
       "zmieni": "Może rozstrzygnąć udział Heweliusza i Locciego, a przy odrobinie szczęścia także deklinację ściany i typ wskazówki z pozycji A1.",
       "zrodlo": "Studia Wilanowskie XI (1989), skan PDF udostępniony przez Muzeum Pałacu Króla Jana III",
-      "status": "otwarta",
+      "status": "w toku",
       "miejsca": [
         "gnomon"
       ],
-      "dotyczy": "atrybucja zegara i zdanie o współpracy z Heweliuszem"
+      "dotyczy": "atrybucja zegara i zdanie o współpracy z Heweliuszem",
+      "ustalenia": [
+        "Artykuł zajmuje strony 40–41 tomu XI. Nie mówi o zegarze słonecznym wprost, nie opisuje jego geometrii i ani razu nie wymienia Heweliusza. Atrybucji zegara nie rozstrzyga.",
+        "Rozstrzyga natomiast rzecz dla tego modułu ważniejszą: Kochański „zawiadywał kompasami i zegarami pałacowymi” oraz podsunął program dekoracyjny biblioteki królewskiej. Fijałkowski przytacza to za Juliuszem Starzyńskim, który zajął się tą stroną działalności Kochańskiego pół wieku wcześniej w monografii Wilanowa.",
+        "Kochański był, według Fijałkowskiego, głównym autorem programu ideowego dekoracji elewacji i wnętrz pałacu. To przemawia za tym, że warstwa ikonograficzna zegara — postać z atrybutem, zodiak, putta — jest jego pomysłem, a nie samego sztukatora. Wiąże się z pozycją A6.",
+        "Przybycie na dwór Jana III: 1677, gdy pałac był w budowie. Usługi przy dekoracji rezydencji: 1681–1686. Pierwsza data nie zgadza się z żadnym z trzech wariantów w pozycji A5.",
+        "Budowniczym pałacu artykuł nazywa Agostina Locciego, nie Augustyna — to ta sama osoba, ale nasze notatki używają spolszczenia.",
+        "Pozostaje otwarte: skąd pochodzi przypisanie zegara Heweliuszowi i czy monografia Starzyńskiego mówi o zegarze słonecznym więcej niż Fijałkowski."
+      ]
     }
   ]
 }

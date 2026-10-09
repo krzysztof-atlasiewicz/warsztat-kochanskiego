@@ -135,7 +135,7 @@ export default {
       opisTarczy: "Tarcza zegara mechanicznego z cyframi rzymskimi, wskazówką godzinową i minutową.",
 
       kiedyTytul: "Który to dzień i która godzina",
-      kiedyOpis: "Dwie rzeczy, których zegar słoneczny sam nie wie: data i wskazanie zegara mechanicznego. Kartka i tarcza pokazują, co ustawiły suwaki — ściana obok odpowiada cieniem.",
+      kiedyOpis: "Dwie rzeczy, których zegar słoneczny sam nie wie: data i wskazanie zegara mechanicznego. Wybierz dzień i miesiąc, nastaw zegarek koronką — ściana obok odpowie cieniem. Na tarczy widać od razu obie godziny: ciemne wskazówki to zegar mechaniczny, kreskowane mosiężne — czas słoneczny prawdziwy, a zielony łuk między nimi to rozbieżność.",
       kiedyUwaga: "Zegar mechaniczny chodzi według dzisiejszego czasu urzędowego. Kochański takiego nie miał — to punkt odniesienia dla nas, żeby zobaczyć, o ile rozmija się z nim Słońce.",
 
       scianaTytul: "Ściana, pręt i cień",
@@ -151,10 +151,13 @@ export default {
 
       rozbieznoscTytul: "Dlaczego Słońce nie zgadza się z zegarem",
       rozbieznoscOpis: "Zegar mechaniczny dzieli dobę na równe części. Słońce nie: raz spieszy, raz się spóźnia, bo Ziemia biegnie po elipsie, a jej oś jest pochylona — to równanie czasu, sięgające kwadransa w obie strony. Do tego Wilanów leży ponad sześć stopni na wschód od południka strefy, co przesuwa odczyt o stałe dwadzieścia cztery minuty, a od wiosny do jesieni dochodzi jeszcze godzina czasu letniego — wynalazek XX-wieczny, którego Kochański nie znał.",
+      dzien: "Dzień", miesiac: "Miesiąc",
+      jakNastawic: "Nastaw czas, kręcąc koronką albo samą tarczą — pełny obrót to godzina. Koronka przyjmuje też strzałki (po pięć minut) i klawisze Page Up / Page Down (po godzinie).",
+      coToAnalemma: "Analemma to ślad, jaki zostawia cień obserwowany codziennie o tej samej godzinie zegarowej przez cały rok. Nie wraca w to samo miejsce, tylko zatacza wydłużoną ósemkę — bo Ziemia biegnie po elipsie, a jej oś jest pochylona. Szerokość tej ósemki to właśnie równanie czasu.",
       opisy: {
-        data: "Przesuwa dzień w roku. Zmienia wysokość Słońca w południe, a z nią całą drogę cienia.",
-        zegar: "Wskazanie zegara mechanicznego, od którego liczymy położenie Słońca.",
-        analemma: "Rysuje na tarczy środkowej ślad cienia o tej samej godzinie zegarowej przez cały rok — ósemkę, z której bierze się równanie czasu."
+        dzien: "Dzień miesiąca. Razem z miesiącem wyznacza wysokość Słońca w południe, a ta — całą drogę cienia.",
+        miesiac: "Miesiąc. Po jego zmianie lista dni skraca się albo wydłuża do długości tego miesiąca.",
+        analemma: "Rysuje na tarczy środkowej ślad cienia o tej samej godzinie zegarowej przez cały rok. Analemma to ta wydłużona ósemka: pokazuje naraz, o ile Słońce spóźnia się i spieszy w ciągu roku."
       },
       napisy: {
         godz: "godz", min: "min", dzienTrwa: "dzień:", nocTrwa: "noc:", poZachodzie: "—",
@@ -303,7 +306,7 @@ export default {
       opisTarczy: "A mechanical clock face with Roman numerals and an hour and a minute hand.",
 
       kiedyTytul: "Which day, and what the clock says",
-      kiedyOpis: "Two things a sundial cannot know by itself: the date and the reading of a mechanical clock. The leaf and the face show what the sliders have set — the wall beside them answers with a shadow.",
+      kiedyOpis: "Two things a sundial cannot know by itself: the date and the reading of a mechanical clock. Pick a day and a month, set the watch by its crown — the wall beside it answers with a shadow. The face carries both hours at once: dark hands for the mechanical clock, dashed brass ones for true solar time, and the green arc between them is the gap.",
       kiedyUwaga: "The mechanical clock keeps today's civil time. Kochański had no such thing; it is our own reference, there to show by how much the sun departs from it.",
 
       scianaTytul: "The wall, the rod and the shadow",
@@ -319,10 +322,13 @@ export default {
 
       rozbieznoscTytul: "Why the sun disagrees with the clock",
       rozbieznoscOpis: "A mechanical clock cuts the day into equal parts. The sun does not: it runs fast and slow by turns, because the earth travels an ellipse and its axis is tilted — the equation of time, worth up to a quarter of an hour either way. On top of that Wilanów lies a little over six degrees east of the zone meridian, a fixed shift of twenty-four minutes, and from spring to autumn there is a further hour of summer time, a twentieth-century invention Kochański never knew.",
+      dzien: "Day", miesiac: "Month",
+      jakNastawic: "Set the time by turning the crown or the dial itself — one full turn is an hour. The crown also takes the arrow keys (five minutes each) and Page Up / Page Down (an hour each).",
+      coToAnalemma: "An analemma is the track left by the shadow watched at the same clock hour every day for a year. It does not return to the same spot but describes a long figure of eight — because the earth travels an ellipse and its axis is tilted. The width of that figure is the equation of time.",
       opisy: {
-        data: "Moves the day of the year. It changes the sun's noon altitude, and with it the whole path of the shadow.",
-        zegar: "The reading of the mechanical clock, from which the sun's position is worked out.",
-        analemma: "Traces on the central dial the shadow at the same clock hour right through the year — the figure of eight behind the equation of time."
+        dzien: "Day of the month. With the month it fixes the sun's noon altitude, and that fixes the whole path of the shadow.",
+        miesiac: "Month. Changing it shortens or lengthens the list of days to match.",
+        analemma: "Traces on the central dial the shadow at the same clock hour right through the year. The analemma is that long figure of eight: it shows at a glance how far the sun runs slow and fast across the year."
       },
       napisy: {
         godz: "h", min: "min", dzienTrwa: "day:", nocTrwa: "night:", poZachodzie: "—",

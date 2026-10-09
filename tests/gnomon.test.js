@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { stanNieba } from "../src/assets/js/modules/gnomon.js";
+import { stanNieba, dzienRoku } from "../src/assets/js/modules/gnomon.js";
 
 describe("gnomon wilanowski", () => {
   it("w południe letnie Słońce stoi wysoko", () => {
@@ -46,5 +46,18 @@ describe("gnomon wilanowski", () => {
     const dlugosc = zachodSloneczny - wschodSloneczny;
     expect(dlugosc).toBeGreaterThan(16.5);
     expect(dlugosc).toBeLessThan(17);
+  });
+
+  it("dzień i miesiąc składają się na numer dnia w roku", () => {
+    expect(dzienRoku(0, 1)).toBe(1);
+    expect(dzienRoku(5, 21)).toBe(172);
+    expect(dzienRoku(11, 31)).toBe(365);
+    expect(dzienRoku(1, 28)).toBe(59);
+  });
+
+  it("21 czerwca wypada w przesilenie: Słońce najwyżej w całym roku", () => {
+    const poludnie = (d) => stanNieba(2026, d, 13).wysokosc;
+    expect(poludnie(dzienRoku(5, 21))).toBeGreaterThan(poludnie(dzienRoku(4, 21)));
+    expect(poludnie(dzienRoku(5, 21))).toBeGreaterThan(poludnie(dzienRoku(6, 21)));
   });
 });

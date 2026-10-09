@@ -1,7 +1,7 @@
 {
   "faza": "A",
   "wersja": "0.9-dev",
-  "cykl": 5,
+  "cykl": 6,
   "bramka": {
     "id": "GA",
     "warunki": [
@@ -112,5 +112,5 @@
       }
     ]
   },
-  "ostatniCykl": "2026-10-08"
+  "ostatniCykl": "2026-10-09"
 }

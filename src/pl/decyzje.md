@@ -285,3 +285,23 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Pozycja A6 przeszła w stan „w toku".** Opis muzealny mówi o złotym kłosie zboża, nie o kosie, co przemawia za jednym z dwóch wariantów — ale opiera się na jednym ujęciu fotograficznym i nie nazywa postaci Chronosem. Pytanie zostaje otwarte, ustalenia dopisane.
 
 **Nowa pozycja agendy A8:** co właściwie zawiera artykuł Fijałkowskiego. Muzeum udostępnia skan, ale bez rozpoznanego tekstu — trzeci już przypadek w tym projekcie, po księdze IX i relacji Richera, gdy źródło jest w zasięgu ręki, a mimo to wymaga ludzkich oczu.
+
+## 2026-10-09 — Cykl 23: artykuł Fijałkowskiego przeczytany, zegar nastawiany koronką
+
+**Skan doczytany wzrokowo.** Artykuł Wojciecha Fijałkowskiego ze „Studia Wilanowskie" XI nie ma rozpoznanego tekstu, więc strony przekonwertowano na obraz i odczytano. To dwie strony tekstu (40–41) i dwie tablice. O zegarze słonecznym nie mówi ani słowa i ani razu nie wymienia Heweliusza — atrybucji zegara nie rozstrzyga.
+
+**Rozstrzyga natomiast rzecz dla tego modułu ważniejszą:** Kochański „was in charge of compasses and clocks for the palace" — zawiadywał pałacowymi kompasami i zegarami — a także był, według Fijałkowskiego, głównym autorem programu ideowego dekoracji elewacji i wnętrz. Fijałkowski przytacza to za monografią Juliusza Starzyńskiego. Pierwsze zdanie weszło na stronę z odnośnikiem; drugie wiąże się z pozycją A6, bo przemawia za tym, że warstwa ikonograficzna zegara jest pomysłem Kochańskiego, nie samego sztukatora.
+
+**Dwie pozycje agendy ruszyły z miejsca.** A8 przeszła w stan „w toku" z sześcioma ustaleniami i jednym nowym tropem: monografia Starzyńskiego. A5 również — artykuł podaje rok przybycia na dwór 1677, czyli czwartą datę, której nie było w żadnym ze sprawdzonych dotąd opracowań. Pytanie zostało odpowiednio przeredagowane.
+
+**Odnośniki bez osadzenia otwierają się w osobnej karcie.** Dotąd skan z ustalonym osadzeniem otwierał się w okienku nad stroną, a źródło bez osadzenia — w tym samym oknie, co wyrzucało czytelnika z przyrządu. Teraz skrót szablonowy dokłada takim odnośnikom `target="_blank"`.
+
+**Data: osobno dzień, osobno miesiąc.** Suwak od 1 do 365 zastąpiły dwa pola wyboru, jak w zwykłym formularzu. Po zmianie miesiąca lista dni skraca się do jego długości, a wybrany dzień jest przycinany — 31 stycznia po przejściu na luty staje się 28 lutego. Rok modelowy jest nieprzestępny i tak jest policzony.
+
+**Zegar nastawia się koronką.** Zamiast suwaka stoi zegarek kieszonkowy z uchem, kabłąkiem i radełkowaną koronką. Czas zmienia się przez pokręcenie koronką albo obrót samej tarczy — pełny obrót to godzina, więc tym samym ruchem dostaje się nastawienie zgrubne i dokładne. Koronka jest polem typu „slider" z obsługą strzałek, Page Up i Page Down oraz Home i End, i melduje czytnikowi ekranu bieżącą godzinę.
+
+**Rozbieżność przeniesiona na tarczę.** Zegar mechaniczny, czas słoneczny prawdziwy i różnica między nimi nie stoją już w osobnej tabelce obok. Tarcza nosi dwie pary wskazówek — ciemne dla zegara, kreskowane mosiężne dla Słońca — zielony łuk między wskazówkami godzinowymi i okienko z liczbą minut. Podpis pod ilustracją powtarza te trzy wartości tekstem, z próbkami kresek, żeby odczyt nie zależał wyłącznie od koloru.
+
+**Przycisk analemmy dostał wyjaśnienie,** czym analemma w ogóle jest — osobnym akapitem pod przyciskiem, powiązanym z nim przez `aria-describedby`, a nie tylko dymkiem opisującym, co przycisk robi.
+
+**Usterka wyłapana przy okazji:** pola wyboru powstawały w kodzie przez `createElementNS` w przestrzeni nazw SVG, więc przeglądarka tworzyła elementy, które wyglądały jak `option`, ale nie były opcjami listy. Listy były puste, a przyrząd cicho pokazywał 0 stycznia. Stąd nowy test składania numeru dnia z miesiąca i dnia miesiąca.
