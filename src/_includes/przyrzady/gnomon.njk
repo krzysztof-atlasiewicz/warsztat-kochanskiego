@@ -10,11 +10,23 @@
     <figure class="blok-daty" data-dymek="{{ s.gnomon.dymekKalendarza }}">
       <svg viewBox="0 0 160 239" class="kartka" role="img" aria-describedby="o-kartka">
         <desc id="o-kartka">{{ s.gnomon.opisKartki }}</desc>
+        <defs>
+          <!-- Cieniowanie walca: ciemniej przy górnej i dolnej krawędzi okienka,
+               żeby bębenek czytał się jako obracany krążek, a nie płaskie pole. -->
+          <linearGradient id="walecCien" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2c2415" stop-opacity="0.26"/>
+            <stop offset="0.24" stop-color="#2c2415" stop-opacity="0"/>
+            <stop offset="0.76" stop-color="#2c2415" stop-opacity="0"/>
+            <stop offset="1" stop-color="#2c2415" stop-opacity="0.26"/>
+          </linearGradient>
+        </defs>
         <path d="M 10 18 L 150 18 L 150 214 Q 120 224 90 216 Q 55 207 10 218 Z"
               fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
         <line x1="10" y1="46" x2="150" y2="46" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
         <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <g id="bebenMiesiaca"></g>
+        <g id="bebenDnia"></g>
         <line x1="34" y1="154" x2="126" y2="154" stroke="var(--rule-soft)" stroke-width="0.8"/>
         <text id="kalPora" class="t" x="80" y="174" text-anchor="middle">—</text>
         <text id="kalDzien2" class="t" x="80" y="192" text-anchor="middle">—</text>

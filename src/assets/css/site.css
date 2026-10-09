@@ -321,23 +321,28 @@ svg.sciana{max-width:none;width:100%}
   .przyrzady-rejs .blok-objasnien,.przyrzady-rejs .blok-wykresu{grid-column:auto;grid-row:auto}
 }
 .blok-zegara{flex:0 0 250px}
-/* Data na kartce JEST polem wyboru: nazwa miesiąca w nagłówku i wielka liczba
-   dnia to dwa znaczniki <select> położone dokładnie tam, gdzie wcześniej stał
-   rysowany tekst. Nie ma osobnego formularza pod kartką ani obok niej.
+/* Data na kartce nastawia się bębenkami, jak w starym liczniku: walec obraca
+   się o jedną pozycję, sąsiednie wartości widać przez okienko. Rozwijana lista
+   byłaby tu obcym ciałem — przyrząd ma nastawniki, nie formularze. Pola
+   <select> zostają w dokumencie jako wersja bez skryptu i jako nośnik stanu;
+   po zbudowaniu bębenków chowa je klasa .z-bebnami.
    Kartka ma wysokość zegarka (150 × 224 px przy proporcji viewBoksa 160:239),
    więc oba nastawniki stoją w rzędzie równo. */
 .blok-daty{flex:0 0 160px;gap:0;position:relative}
-.pola-daty{display:contents}
-.pola-daty select{position:absolute;left:50%;transform:translateX(-50%);
-  appearance:none;-webkit-appearance:none;border:0;border-bottom:1px dashed var(--mosiadz-ciemny);
-  color:var(--ink);text-align:center;text-align-last:center;cursor:pointer;
-  background:transparent no-repeat right .1rem center/7px 4.5px;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 4.5'><path d='M0 0h7L3.5 4.5z' fill='%238a7a52'/></svg>")}
-.pola-daty select:focus-visible{outline:2px solid var(--verd);outline-offset:2px}
-select.pole-miesiaca{top:9.4%;width:auto;font-family:var(--mono);font-size:11px;
-  color:var(--ink-soft);padding:0 11px 1px;border-bottom:0}
-select.pole-dnia{top:26.5%;width:auto;font-family:var(--serif);font-size:50px;line-height:1.08;
-  font-variant-numeric:tabular-nums;padding:0 15px 2px;border-bottom-style:dotted}
+.pola-daty{display:flex;gap:.3rem;justify-content:center;margin:.3rem 0 0}
+.pola-daty select{font-size:.8rem}
+.przyrzad.z-bebnami .pola-daty{display:none}
+.beben-pole{fill:var(--plyta-ciemna);stroke:none}
+.beben-walec{fill:url(#walecCien);pointer-events:none}
+.beben-obwodka{fill:none;stroke:var(--mosiadz-ciemny);stroke-width:1}
+.beben-radelko line{stroke:var(--mosiadz-ciemny);stroke-width:.8;opacity:.75}
+.beben-strzalka{fill:var(--mosiadz-ciemny)}
+.beben-sasiad{opacity:.28}
+.beben-miesiac{font-family:var(--mono);font-size:11px;fill:var(--ink-soft)}
+.beben-dzien{font-family:var(--serif);font-size:50px;fill:var(--ink)}
+#bebenMiesiaca,#bebenDnia{cursor:grab;touch-action:none;user-select:none}
+#bebenMiesiaca.beben-obracany,#bebenDnia.beben-obracany{cursor:grabbing}
+#bebenMiesiaca:focus-visible,#bebenDnia:focus-visible{outline:2px solid var(--verd);outline-offset:2px}
 .tarcza-mechaniczna{max-width:200px;touch-action:none;user-select:none}
 .tarcza-mechaniczna .cyfra-zegara{font-family:var(--serif);font-size:15px;fill:var(--ink)}
 .tarcza-mechaniczna .kreska-godzin{stroke:var(--ink);stroke-width:1.4}

@@ -453,3 +453,13 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Usterka specyficzności przy okazji:** reguła wspólna `.pola-daty select` (klasa plus typ) wygrywała z regułami szczegółowymi `.pole-miesiaca` i `.pole-dnia` (sama klasa), więc obwódka i tło nie dawały się nadpisać. Rozwiązane podniesieniem szczegółowych do `select.pole-…`, nie zaś przez `!important`.
 
 **Sprawdzono działanie, nie tylko wygląd:** po przestawieniu na luty lista dni ma dwadzieścia dziewięć pozycji, 29 lutego daje się wybrać, długość dnia schodzi z 16 godz 46 min na 10 godz 51 min, a czas słoneczny prawdziwy z 11:22 na 12:12. Test pilnuje, że dzień i miesiąc są polami wyboru i że nie został po nich żaden osobny napis.
+
+## 2026-10-09 — Cykl 36: data nastawiana bębenkiem, bez rozwijanej listy
+
+**Rozwijana lista wypadła z kartki.** Pole `select` przy pięćdziesięciopunktowej liczbie rozwijało systemową listę trzydziestu jeden pozycji wysoką na cały ekran — obce ciało w przyrządzie i zasłonięcie całej planszy. Datę nastawia się teraz dwoma bębenkami: walec obraca się o jedną pozycję, przez okienko widać wartość bieżącą i po skrawku sąsiednich, a przy prawej krawędzi stoją dwa drobne groty. Krawędzie walca są radełkowane tym samym rysunkiem co koronka zegarka, więc oba nastawniki mówią jednym językiem.
+
+**Bębenek chodzi na cztery sposoby:** przeciągnięciem w pionie (jedna pozycja na dziesięć punktów), kółkiem myszy, kliknięciem w górną albo dolną połowę okienka i z klawiatury — strzałki po jednej pozycji, Page Up / Page Down po pięć, Home i End na krańce. Dla czytnika ekranu jest to `spinbutton` z wartością bieżącą, zakresem i opisem.
+
+**Pola `select` zostają w dokumencie,** schowane dopiero wtedy, gdy skrypt zbuduje bębenki. Bez skryptu kartka pokazuje dwa zwykłe pola wyboru pod spodem i data dalej daje się ustawić; bębenki są wzbogaceniem, nie warunkiem działania. Są też nośnikiem stanu — bębenek nie trzyma własnej liczby, tylko obraca `selectedIndex` i rozsyła zdarzenie `change`, więc reszta przyrządu nie wie o zmianie sposobu nastawiania.
+
+**Sprawdzono ruch, nie tylko wygląd:** dwa naciśnięcia strzałki w dół przestawiają dzień z 21 na 23, strzałka w górę na bębenku miesiąca cofa z maja na kwiecień i skraca dzień z 16 godz 46 min na 16 godz 07 min, kółko myszy przesuwa o jedną pozycję. Test wymaga, żeby oba bębenki były `spinbutton`ami osiągalnymi klawiaturą, miały odczytaną wartość i pokazywały trzy wartości naraz — bieżącą i dwie sąsiednie.
