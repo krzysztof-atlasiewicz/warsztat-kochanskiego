@@ -5,7 +5,6 @@ przyrzad: Cipher
 rok: 1664
 kolejnosc: 3
 modul: szyfr
-agenda: [A2]
 para: szyfr
 permalink: /en/cipher/
 tagi:
@@ -13,9 +12,23 @@ tagi:
   - { typ: rekonstrukcja, etykieta: reconstruction }
 rownowaznik: "<p>The cipher disc shifts the alphabet by a chosen number of positions. At a shift of twelve the text reads as a Latin sentence stating that magnetic force governs the balance of the clock. Both cipher and text are a reconstruction of the method, not a reading of the original.</p>"
 ---
+{% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
+{% include "przyrzady/szyfr.njk" %}
+{% endkarta %}
+
+{% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p>Book IX of Caspar Schott's {% zrodlo "technica-curiosa", "<em>Technica curiosa</em>" %} (Nuremberg 1664) is the first systematic treatment of clockmaking in Europe. Kochański set out the construction of magnetic balances there in cipher, in a work published under another man's name.</p>
 <p>The dial below is a tool, not a demonstration. Turn the ring to read the 1664 record loaded into it — the key is the number of hours on a dial. You can also type a message of your own and encipher it the other way, then send someone the cipher text alone by link, without the key.</p>
 <p>The "Break the cipher" button shows why this kind of record gave no lasting security: count how often each letter appears in a candidate reading and compare with the frequencies typical of the language, and the key falls out without guesswork. For Kochański and his correspondents the cipher was never meant to hide the invention for good, only to secure priority until the author chose to disclose it.</p>
-{% include "przyrzady/szyfr.njk" %}
 <p class="note uwaga">The shift cipher and the Latin text are a reconstruction of the method, not a reading of the original. We do not know what kind of record Kochański actually used.</p>
-{% pytanie "A2", jezyk %}
+
+<details class="wyprowadzenie">
+<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
+{{ rownowaznik | safe }}
+</details>
+{% endkarta %}
+
+{% karta "pytania", i18n[jezyk].zakladki.pytania %}
+<p class="dim małe"><a href="/en/agenda/">{{ i18n[jezyk].zakladki.rejestr }}</a></p>
+{% pytaniaTu para, jezyk %}
+{% endkarta %}

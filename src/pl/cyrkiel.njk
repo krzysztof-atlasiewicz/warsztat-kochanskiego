@@ -5,7 +5,6 @@ przyrzad: Cyrkiel
 rok: 1685
 kolejnosc: 1
 modul: cyrkiel
-agenda: [A4]
 para: cyrkiel
 permalink: /pl/cyrkiel/
 tagi:
@@ -13,8 +12,12 @@ tagi:
   - { typ: rekonstrukcja, etykieta: interpretacja }
 rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>·</mo><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt></math> ≈ <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3,141533</mn><mo>·</mo><mi>r</mi></math>, czyli krótszy od <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi><mi>r</mi></math> o około sześć milionowych promienia. Przy promieniu 150 mm błąd wynosi 8,9 µm, przy promieniu Ziemi — blisko 380 metrów.</p>'
 ---
-<p>Konstrukcja ogłoszona w {% zrodlo "acta-1685", "„Acta Eruditorum”" %} w 1685 roku. Cyrklem i linijką wyznacza odcinek o długości niemal dokładnie równej połowie obwodu okręgu.</p>
+{% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
 {% include "przyrzady/cyrkiel.njk" %}
+{% endkarta %}
+
+{% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
+<p>Konstrukcja ogłoszona w {% zrodlo "acta-1685", "„Acta Eruditorum”" %} w 1685 roku. Cyrklem i linijką wyznacza odcinek o długości niemal dokładnie równej połowie obwodu okręgu.</p>
 
 <details class="wyprowadzenie">
 <summary>Skąd bierze się ten wzór</summary>
@@ -31,4 +34,14 @@ rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://w
 
 <p class="note">Przy tarczy zegara błąd schodzi poniżej progu obróbki warsztatowej XVII wieku, przy promieniu Ziemi urasta do blisko czterystu metrów.</p>
 <p class="note uwaga">Teza, że jest to przybliżenie zaprojektowane do wykonania, a nie do rachunku, jest naszą interpretacją — Kochański nigdzie nie uzasadnia tak konstrukcji wprost.</p>
-{% pytanie "A4", jezyk %}
+
+<details class="wyprowadzenie">
+<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
+{{ rownowaznik | safe }}
+</details>
+{% endkarta %}
+
+{% karta "pytania", i18n[jezyk].zakladki.pytania %}
+<p class="dim małe"><a href="/pl/agenda/">{{ i18n[jezyk].zakladki.rejestr }}</a></p>
+{% pytaniaTu para, jezyk %}
+{% endkarta %}

@@ -57,9 +57,13 @@ export default function (eleventyConfig) {
     return out;
   });
 
-  eleventyConfig.addShortcode("pytanie", (id, jezyk = "pl") => {
-    const p = agenda.pozycje.find((x) => x.id === id);
-    if (!p) throw new Error(`Nieznana pozycja agendy: ${id}`);
+  // Zakładka strony przyrządu. Bez skryptu wszystkie trzy zostają widoczne
+  // jedna pod drugą, więc treść nigdy nie znika z dokumentu.
+  eleventyConfig.addPairedShortcode("karta", (tresc, nazwa, tytul) =>
+    `<section class="karta-przyrzadu" id="k-${nazwa}" role="tabpanel" aria-labelledby="z-${nazwa}" tabindex="-1">`
+    + `<h2 class="tytul-karty">${tytul}</h2>${tresc}</section>`);
+
+  const kartaPytania = (p, jezyk) => {
     const e = ETYKIETY[jezyk] || ETYKIETY.pl;
     return `<aside class="pytanie" id="pytanie-${p.id}" aria-label="${e.naglowek} ${p.id}">
   <p class="pytanie-nag"><span class="znak" aria-hidden="true">?</span> ${e.naglowek} ${p.id} — <span class="dotyczy">${e.dotyczy}: ${p.dotyczy}</span></p>
@@ -67,8 +71,21 @@ export default function (eleventyConfig) {
   <p><strong>${e.zmieni}:</strong> ${p.zmieni}</p>
   <p class="pytanie-stopka"><span class="status">${p.status}</span> <a href="${e.url}#${p.id}">${e.rejestr}</a></p>
 </aside>`;
+  };
+
+  // Pozycje agendy przypisane do danego miejsca. Jedno źródło prawdy: rejestr,
+  // nie ręczna lista w nagłówku strony, która potrafi się z nim rozminąć.
+  const pytaniaMiejsca = (miejsce) => agenda.pozycje.filter((p) => p.miejsca?.includes(miejsce));
+  eleventyConfig.addFilter("pytaniaMiejsca", pytaniaMiejsca);
+
+  eleventyConfig.addShortcode("pytanie", (id, jezyk = "pl") => {
+    const p = agenda.pozycje.find((x) => x.id === id);
+    if (!p) throw new Error(`Nieznana pozycja agendy: ${id}`);
+    return kartaPytania(p, jezyk);
   });
 
+  eleventyConfig.addShortcode("pytaniaTu", (miejsce, jezyk = "pl") =>
+    pytaniaMiejsca(miejsce).map((p) => kartaPytania(p, jezyk)).join("\n"));
 
   eleventyConfig.addCollection("przyrzady", (api) =>
     api.getFilteredByGlob("src/*/*.njk")

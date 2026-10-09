@@ -273,7 +273,6 @@ svg.sciana{max-width:none;width:100%}
 .para-zegara b{display:inline-block;width:1.4rem;height:0;border-top:2px solid var(--ink);margin-right:.4rem;vertical-align:middle}
 .para-zegara .znak-slon{border-top-style:dashed;border-color:var(--sun)}
 .para-zegara .znak-luk{border-top-width:3px;border-color:var(--verd)}
-.podpowiedz-zegara{margin:0;align-self:stretch}
 .plytka-roznicy{fill:var(--plyta-jasna);stroke:var(--rule-soft);stroke-width:.7}
 .dymek{border:1px solid var(--rule-soft);background:var(--plate);padding:.6rem .8rem;margin:.6rem 0 0;font-size:.9rem;color:var(--ink-soft)}
 
@@ -296,3 +295,32 @@ svg.sciana{max-width:none;width:100%}
 @media (prefers-reduced-motion:reduce){.przelacznik-dzwignia{transition:none}}
 
 .odczyt-opis{margin:0;font-size:.9rem;color:var(--ink-soft)}
+
+/* ── zakładki strony przyrządu ─────────────────────────────────────────── */
+.zakladki{display:flex;gap:.3rem;flex-wrap:wrap;border-bottom:1px solid var(--rule);margin:1.1rem 0 0}
+.zakladki button{border:1px solid transparent;border-bottom:0;background:none;padding:.5rem .95rem;
+  font-family:inherit;font-size:.95rem;color:var(--ink-soft);cursor:pointer;margin-bottom:-1px}
+.zakladki button:hover{color:var(--verd);border-color:transparent}
+.zakladki button[aria-selected="true"]{background:var(--plate);color:var(--ink);
+  border-color:var(--rule);border-bottom:1px solid var(--plate)}
+.zakladki .licznik{font-family:var(--mono);font-size:.7rem;border:1px solid var(--rule);
+  border-radius:1em;padding:0 .4em;margin-left:.3rem;color:var(--ink-soft)}
+.karta-przyrzadu{padding-top:.3rem}
+.karta-przyrzadu:focus{outline:none}
+/* Bez skryptu pasek zakładek byłby martwy, więc pokazuje się dopiero, gdy
+   skrypt go obsłuży; do tego czasu każda karta ma własny nagłówek. */
+.zakladki:not(.gotowe){display:none}
+.zakladki.gotowe ~ .karta-przyrzadu .tytul-karty{display:none}
+.tytul-karty{font-size:1.25rem;font-weight:400;margin:1.8rem 0 .4rem;
+  border-top:1px solid var(--rule-soft);padding-top:1rem}
+
+/* ── objaśnienia rachub ────────────────────────────────────────────────── */
+.rzad-objasnien{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;margin:.9rem 0 .4rem}
+.guzik-tarczy{font-family:inherit;font-size:.86rem;padding:.25rem .6rem;cursor:help;
+  background:var(--plate);border:1px solid var(--rule-soft);border-top-width:2px}
+.guzik-tarczy:hover,.guzik-tarczy:focus-visible{background:var(--paper)}
+.guzik-wloskie{border-top-color:var(--sun);color:var(--sun)}
+.guzik-rowne{border-top-color:var(--ink-soft);color:var(--ink)}
+.guzik-babilonskie{border-top-color:var(--verd);color:var(--verd)}
+.guzik-tarczy:hover{border-color:var(--rule-soft)}
+#dymekTarczy{min-height:3.2em}
