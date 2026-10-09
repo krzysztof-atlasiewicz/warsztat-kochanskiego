@@ -157,10 +157,21 @@ describe.skipIf(!zbudowane)("poprawki czytelności", () => {
           g.previousElementSibling
         );
       }
+      // Jedna strzała po lewej stronie okienka, druga po prawej.
       const beben = root.querySelector("#bebenDnia");
-      const [x] = [...groty].map((g) => Number(g.querySelector("rect").getAttribute("x")));
-      expect(x, "groty stoją po prawej stronie okienka")
-        .toBeLessThan(Number(beben.querySelector("rect").getAttribute("x")));
+      const okno = beben.querySelector("rect");
+      const x0 = Number(okno.getAttribute("x")), szer = Number(okno.getAttribute("width"));
+      const strzaly = [...root.querySelectorAll("#bebenDnia + .beben-groty .beben-grot")]
+        .map((s) => Number(s.querySelector("rect.pole-chwytu").getAttribute("x")));
+      expect(strzaly.length, "bębenek dnia nie ma dwóch strzał").toBe(2);
+      expect(Math.min(...strzaly), "brak strzały po lewej stronie okienka").toBeLessThan(x0);
+      expect(Math.max(...strzaly), "brak strzały po prawej stronie okienka").toBeGreaterThan(x0 + szer);
+      // Strzała ma być strzałą: drzewce, grot i lotki.
+      for (const s of root.querySelectorAll("#bebenDnia + .beben-groty .beben-grot")) {
+        expect(s.querySelector(".strzala-drzewce"), "strzała bez drzewca").toBeTruthy();
+        expect(s.querySelector(".strzala-grot"), "strzała bez grotu").toBeTruthy();
+        expect(s.querySelector(".strzala-lotki"), "strzała bez lotek").toBeTruthy();
+      }
     });
 
     it(`${plik} — grot przestawia dzień`, async () => {
