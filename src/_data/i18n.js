@@ -141,6 +141,8 @@ export default {
       opisKartki: "Kartka kalendarza z datą oraz długością dnia i nocy.",
       opisTarczy: "Tarcza zegara mechanicznego z cyframi rzymskimi, wskazówką godzinową i minutową.",
 
+      pulpitTytul: "Nastaw dzień i godzinę — ściana odpowie cieniem",
+      pulpitOpis: "Zegar słoneczny nie wie dwóch rzeczy: która jest data i co pokazuje zegar mechaniczny. Nastaw jedno i drugie na przyrządach po lewej. Na tarczy zegarka widać od razu obie godziny: ciemne wskazówki to zegar mechaniczny, kreskowane mosiężne — czas słoneczny prawdziwy, a zielony łuk między nimi to rozbieżność.",
       kiedyTytul: "Który to dzień i która godzina",
       kiedyOpis: "Dwie rzeczy, których zegar słoneczny sam nie wie: data i wskazanie zegara mechanicznego. Wybierz dzień i miesiąc, nastaw zegarek koronką — ściana obok odpowie cieniem. Na tarczy widać od razu obie godziny: ciemne wskazówki to zegar mechaniczny, kreskowane mosiężne — czas słoneczny prawdziwy, a zielony łuk między nimi to rozbieżność.",
       kiedyUwaga: "Zegar mechaniczny chodzi według dzisiejszego czasu urzędowego. Kochański takiego nie miał — to punkt odniesienia dla nas, żeby zobaczyć, o ile rozmija się z nim Słońce.",
@@ -323,6 +325,8 @@ export default {
       opisKartki: "A calendar leaf with the date and the length of day and night.",
       opisTarczy: "A mechanical clock face with Roman numerals and an hour and a minute hand.",
 
+      pulpitTytul: "Set the day and the hour — the wall answers with a shadow",
+      pulpitOpis: "A sundial cannot know two things: the date, and what a mechanical clock reads. Set both on the instruments at the left. The watch face carries both hours at once: dark hands for the mechanical clock, dashed brass ones for true solar time, and the green arc between them is the gap.",
       kiedyTytul: "Which day, and what the clock says",
       kiedyOpis: "Two things a sundial cannot know by itself: the date and the reading of a mechanical clock. Pick a day and a month, set the watch by its crown — the wall beside it answers with a shadow. The face carries both hours at once: dark hands for the mechanical clock, dashed brass ones for true solar time, and the green arc between them is the gap.",
       kiedyUwaga: "The mechanical clock keeps today's civil time. Kochański had no such thing; it is our own reference, there to show by how much the sun departs from it.",

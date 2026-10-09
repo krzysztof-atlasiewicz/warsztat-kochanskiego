@@ -337,3 +337,13 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Dymki rachub działają na dotyku.** Znacznik `title` w SVG nie pojawia się na ekranie dotykowym i bywa przeoczony myszą, więc wyjaśnienie trafiło do stałego pola pod ścianą, zapalanego najechaniem na tarczę, najechaniem na jej nazwę, dotknięciem albo klawiaturą. Trzy nazwy rachub stoją pod ścianą jako zwykłe przyciski, w barwach swoich tarcz.
 
 **Podpisy pod tarczami skrócone** do samej nazwy, bo wersja z dopiskiem „— od zachodu" nachodziła na sąsiednie tarcze. Punkt, od którego liczy się rachuba, przeniósł się do dymka i do nazwy w przycisku. Z paska przełącznika analemmy zniknął dopisek, który sklejał się z jego nazwą.
+
+## 2026-10-09 — Cykl 26: jeden pulpit zamiast dwóch plansz
+
+**Zarzut:** „Który to dzień i która godzina" oraz „Ściana, pręt i cień" były dwiema osobnymi planszami, a obok kartki kalendarza i zegarka ziało puste pole, podczas gdy objaśnienia leżały pod spodem, oderwane od tego, co objaśniają.
+
+**Zakładka „Przyrząd" to teraz jeden pulpit.** W górnym rzędzie trzy kolumny: kartka kalendarza z polami daty, zegarek kieszonkowy z odczytami, a w wolnym polu po prawej — objaśnienia, które dotąd stały pod spodem: jak nastawia się czas, jak czyta się cień i czym jest zegar mechaniczny w tym modelu. Pod rzędem ściana z trzema tarczami na pełnej szerokości, a pod nią stopka pulpitu: po lewej nazwy rachub z polem wyjaśnienia, po prawej przełącznik analemmy z własnym. Całość w jednej ramce na tle płyty, żeby czytało się jako jeden przyrząd, a nie trzy luźne kawałki.
+
+**Akapit „Dlaczego Słońce nie zgadza się z zegarem" zszedł do zakładki „Skąd to wiemy".** To wyjaśnienie, nie przyrząd; zostawiony na końcu pulpitu rozbijał go na dwie części.
+
+**Ściana przewija się w poziomie na wąskim ekranie.** Przy czterystu pikselach rysunek zmalałby do nieczytelnych cyfr; zachowuje więc minimalną szerokość sześciuset dwudziestu pikseli i przesuwa się palcem, zamiast kurczyć się do nieczytelności.

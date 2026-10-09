@@ -2,10 +2,10 @@
 
 <div class="przyrzady-gnomon" data-napisy='{{ s.gnomon.napisy | dump }}'>
 
-<section class="plansza">
-  <h3 class="plansza-tytul">{{ s.gnomon.kiedyTytul }}</h3>
-  <p class="plansza-opis">{{ s.gnomon.kiedyOpis }}</p>
-  <div class="kalendarz-rzad">
+<section class="plansza pulpit">
+  <h3 class="plansza-tytul">{{ s.gnomon.pulpitTytul }}</h3>
+  <p class="plansza-opis">{{ s.gnomon.pulpitOpis }}</p>
+  <div class="pulpit-sterowniki">
 
     <figure class="blok-daty">
       <svg viewBox="0 0 160 190" class="kartka" role="img" aria-describedby="o-kartka">
@@ -74,14 +74,15 @@
         <span class="para-zegara"><b class="znak-luk"></b><span id="roznica">—</span> {{ s.gnomon.roznica }}</span>
       </figcaption>
     </figure>
-  </div>
-  <p class="dim małe">{{ s.gnomon.jakNastawic }}</p>
-  <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>
-</section>
 
-<section class="plansza">
-  <h3 class="plansza-tytul">{{ s.gnomon.scianaTytul }}</h3>
-  <p class="plansza-opis">{{ s.gnomon.scianaOpis }}</p>
+    <div class="blok-objasnien">
+      <p>{{ s.gnomon.jakNastawic }}</p>
+      <p>{{ s.gnomon.scianaOpis }}</p>
+      <p>{{ s.gnomon.kiedyUwaga }}</p>
+    </div>
+  </div>
+
+  <div class="przewijalna">
   <svg viewBox="0 0 820 390" class="wide sciana" role="img" aria-describedby="o-sciana">
     <desc id="o-sciana">{{ s.gnomon.opis }}</desc>
     <rect x="0" y="0" width="820" height="390" fill="var(--niebo)"/>
@@ -98,31 +99,32 @@
     <g id="slonce"></g>
     <text id="brakSlonca" class="tb" x="410" y="30" text-anchor="middle" opacity="0">{{ s.gnomon.brakSlonca }}</text>
   </svg>
+  </div>
 
-  <p class="rzad-objasnien">
-    <span class="dim małe">{{ s.gnomon.ktoraRachuba }}</span>
-    <button type="button" class="guzik-tarczy guzik-wloskie" data-tarcza="wloskie"></button>
-    <button type="button" class="guzik-tarczy guzik-rowne" data-tarcza="rowne"></button>
-    <button type="button" class="guzik-tarczy guzik-babilonskie" data-tarcza="babilonskie"></button>
-  </p>
-  <p id="dymekTarczy" class="dymek" aria-live="polite"></p>
-
-  <p class="rzad-przelacznika">
-    <button id="przelacz" class="przelacznik" role="switch" aria-checked="false"
-            aria-describedby="coToAnalemma" title="{{ s.gnomon.opisy.analemma }}">
-      <span class="przelacznik-tor" aria-hidden="true"><span class="przelacznik-dzwignia"></span></span>
-      <span class="przelacznik-napis">{{ s.gnomon.analemma }}</span>
-    </button>
-  </p>
-  <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
+  <div class="pulpit-stopka">
+    <div>
+      <p class="rzad-objasnien">
+        <span class="dim małe">{{ s.gnomon.ktoraRachuba }}</span>
+        <button type="button" class="guzik-tarczy guzik-wloskie" data-tarcza="wloskie"></button>
+        <button type="button" class="guzik-tarczy guzik-rowne" data-tarcza="rowne"></button>
+        <button type="button" class="guzik-tarczy guzik-babilonskie" data-tarcza="babilonskie"></button>
+      </p>
+      <p id="dymekTarczy" class="dymek" aria-live="polite"></p>
+    </div>
+    <div>
+      <p class="rzad-przelacznika">
+        <button id="przelacz" class="przelacznik" role="switch" aria-checked="false"
+                aria-describedby="coToAnalemma" title="{{ s.gnomon.opisy.analemma }}">
+          <span class="przelacznik-tor" aria-hidden="true"><span class="przelacznik-dzwignia"></span></span>
+          <span class="przelacznik-napis">{{ s.gnomon.analemma }}</span>
+        </button>
+      </p>
+      <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
+    </div>
+  </div>
 
   <p class="dim małe">{{ s.gnomon.scianaLegenda }}</p>
   <p class="note">{{ s.gnomon.poCoTrzy }}</p>
-</section>
-
-<section class="plansza">
-  <h3 class="plansza-tytul">{{ s.gnomon.rozbieznoscTytul }}</h3>
-  <p class="plansza-opis">{{ s.gnomon.rozbieznoscOpis }}</p>
 </section>
 
 </div>
