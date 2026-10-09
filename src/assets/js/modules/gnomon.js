@@ -1,7 +1,8 @@
 import * as A from "../lib/astronomy.js";
 import {
   WILANOW, polozenieSlonca, cienNodusa, wschodSloneczny, zachodSloneczny,
-  liniaGodzinRownych, liniaGodzinWloskich, liniaGodzinBabilonskich, krzywaDeklinacji
+  liniaGodzinRownych, liniaGodzinWloskich, liniaGodzinBabilonskich, krzywaDeklinacji,
+  godzinaZKierunku
 } from "./matematyka.js";
 
 const OBS = new A.Observer(WILANOW.fi, WILANOW.lambda, 110);
@@ -273,6 +274,7 @@ export default function init(root) {
 
   // ── stałe linie na ścianie ─────────────────────────────────────────────
   const tarcze = $("tarcze");
+  const svgSciana = root.querySelector("svg.sciana");
   const zbierz = (zakres, buduj, podpis) => zakres
     .map((k) => ({ etykieta: podpis(k), punkty: buduj(k) }))
     .filter((l) => l.punkty.length > 1);
@@ -292,28 +294,51 @@ export default function init(root) {
       tarcze.append(zrob("polyline", { points: zapis(k), class: `krzywa krzywa-${dekl > 0 ? "lato" : dekl < 0 ? "zima" : "rownonoc"}` }));
   }
 
-  // ── dymki rachub ───────────────────────────────────────────────────────
-  // Znacznik title w SVG nie pojawia się na ekranie dotykowym i bywa
-  // przeoczony, więc wyjaśnienie trafia do stałego pola pod ścianą,
-  // zapalanego najechaniem, dotknięciem albo klawiaturą.
+  // ── dymki rachub, przy samych tarczach ─────────────────────────────────
+  // Znacznik title bywa przeoczony i nie pojawia się na ekranie dotykowym,
+  // więc to samo wyjaśnienie trafia do pola pod ścianą — zapalanego
+  // najechaniem na tarczę albo jej dotknięciem.
   const dymek = $("dymekTarczy");
   const domyslny = N.wybierzRachube;
   dymek.textContent = domyslny;
-  const pokazOpis = (rodzaj) => { dymek.textContent = `${N.tarcze.pelne[rodzaj]}. ${N.dymki[rodzaj]}`; };
-  const schowajOpis = () => { dymek.textContent = domyslny; };
-  for (const guzik of root.querySelectorAll(".guzik-tarczy")) {
-    const rodzaj = guzik.dataset.tarcza;
-    guzik.textContent = N.tarcze.krotkie[rodzaj];
-    guzik.title = N.dymki[rodzaj];
-    for (const z of ["pointerenter", "focus", "click"]) guzik.addEventListener(z, () => pokazOpis(rodzaj));
-    for (const z of ["pointerleave", "blur"]) guzik.addEventListener(z, schowajOpis);
-  }
   for (const rodzaj of Object.keys(TARCZE)) {
     const grupa = root.querySelector(`.tarcza-${rodzaj}`);
     if (!grupa) continue;
-    grupa.addEventListener("pointerenter", () => pokazOpis(rodzaj));
-    grupa.addEventListener("pointerleave", schowajOpis);
+    const pokaz = () => { dymek.textContent = `${N.tarcze.pelne[rodzaj]}. ${N.dymki[rodzaj]}`; };
+    grupa.addEventListener("pointerenter", pokaz);
+    grupa.addEventListener("click", pokaz);
+    grupa.addEventListener("pointerleave", () => { dymek.textContent = domyslny; });
   }
+
+  // ── Słońce jako uchwyt czasu ───────────────────────────────────────────
+  // Kierunek, z którego pada światło, jest monotoniczną funkcją godziny, więc
+  // da się go odwrócić: z położenia kursora odczytujemy kąt, a z kąta godzinę.
+  let ciagnieteSlonce = null;
+  const slonceEl = $("slonce");
+  slonceEl.addEventListener("pointerdown", (e) => {
+    const stan = stanNieba(ROK, Number(polaM.value), Number(polaD.value), godzina);
+    e.preventDefault();
+    e.stopPropagation();
+    svgSciana.setPointerCapture(e.pointerId);
+    ciagnieteSlonce = { dekl: stan.deklinacja, przesuniecie: stan.rowne - godzina };
+    svgSciana.classList.add("ciagniete");
+  });
+  svgSciana.addEventListener("pointermove", (e) => {
+    if (!ciagnieteSlonce) return;
+    const pr = svgSciana.getBoundingClientRect();
+    const x = ((e.clientX - pr.left) / pr.width) * 820;
+    const y = ((e.clientY - pr.top) / pr.height) * 390;
+    const kat = (Math.atan2(x - r.nx, r.ny - y) * 180) / Math.PI;
+    const sloneczna = godzinaZKierunku(fi, G, ciagnieteSlonce.dekl, kat);
+    if (sloneczna == null) return;
+    const t = ogranicz(sloneczna - ciagnieteSlonce.przesuniecie, 4, 21);
+    if (Math.abs(t - godzina) < 0.0005) return;
+    godzina = t;
+    odswiez();
+  });
+  const koniecSlonca = () => { ciagnieteSlonce = null; svgSciana.classList.remove("ciagniete"); };
+  svgSciana.addEventListener("pointerup", koniecSlonca);
+  svgSciana.addEventListener("pointercancel", koniecSlonca);
 
   // ── warstwa ruchoma ────────────────────────────────────────────────────
   let analemma = false;

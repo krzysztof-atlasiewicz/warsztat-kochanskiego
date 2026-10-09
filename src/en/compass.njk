@@ -19,6 +19,8 @@ rownowaznik: '<p>The construction yields a segment of length <math xmlns="http:/
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p>Published in {% zrodlo "acta-1685", "<em>Acta Eruditorum</em>" %} in 1685. With compass and straightedge it produces a segment almost exactly equal to half the circumference of the circle.</p>
 
+{{ rownowaznik | safe }}
+
 <details class="wyprowadzenie">
 <summary>Where the formula comes from</summary>
 <p>Take radius <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi></math> and coordinates in which the point of tangency <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi></math> sits at the origin, the centre at <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mi>r</mi><mo>)</mo></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>B</mi></math> at <math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mn>0</mn><mo>,</mo><mn>2</mn><mi>r</mi><mo>)</mo></math>. The tangent from step 2 is then the horizontal axis.</p>
@@ -34,11 +36,6 @@ rownowaznik: '<p>The construction yields a segment of length <math xmlns="http:/
 
 <p class="note">On a clock dial the error falls below what a seventeenth-century workshop could machine. At the radius of the Earth it grows to nearly four hundred metres.</p>
 <p class="note uwaga">The claim that this is an approximation designed for making rather than for calculating is our interpretation — Kochański nowhere argues it in those terms.</p>
-
-<details class="wyprowadzenie">
-<summary>{{ i18n[jezyk].rownowaznikNaglowek }}</summary>
-{{ rownowaznik | safe }}
-</details>
 {% endkarta %}
 
 {% karta "pytania", i18n[jezyk].zakladki.pytania %}

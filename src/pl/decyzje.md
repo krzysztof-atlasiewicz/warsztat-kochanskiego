@@ -347,3 +347,13 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Akapit „Dlaczego Słońce nie zgadza się z zegarem" zszedł do zakładki „Skąd to wiemy".** To wyjaśnienie, nie przyrząd; zostawiony na końcu pulpitu rozbijał go na dwie części.
 
 **Ściana przewija się w poziomie na wąskim ekranie.** Przy czterystu pikselach rysunek zmalałby do nieczytelnych cyfr; zachowuje więc minimalną szerokość sześciuset dwudziestu pikseli i przesuwa się palcem, zamiast kurczyć się do nieczytelności.
+
+## 2026-10-09 — Cykl 27: Słońce jako uchwyt, opis tekstowy w narracji
+
+**Słońce stało się uchwytem czasu.** Można je złapać i przesunąć po niebie — godzina idzie za nim, wskazówki zegarka obracają się, cienie wędrują po trzech tarczach. Działa to dlatego, że kierunek, z którego pada światło, jest monotoniczną funkcją godziny, więc da się go odwrócić: z położenia kursora odczytujemy kąt, a z kąta godzinę. Odwracanie jest osobną funkcją w warstwie obliczeniowej i ma dwa testy: jeden sprawdza, że z kierunku cienia odzyskuje się godzinę, z której ten cień powstał, drugi — że kierunek faktycznie maleje monotonicznie przez cały dzień, bo bez tego odwracanie byłoby wieloznaczne.
+
+**Opis tekstowy przyrządu przestał być zwijaną sekcją.** Wszedł w narrację zakładki „Skąd to wiemy" jako zwykły akapit, zaraz po wprowadzeniu. Nie jest już ani dodatkiem na końcu strony, ani schowkiem — czyta się jak reszta tekstu, a nadal pełni funkcję równoważnika dla czytnika ekranu i dla przeglądarki bez skryptu. Dotyczy wszystkich czterech przyrządów w obu językach.
+
+**Dymki zostały tylko przy tarczach.** Rząd trzech przycisków pod ścianą zniknął; wyjaśnienie rachuby zapala się od najechania na samą tarczę albo jej dotknięcia, a nazwy pod tarczami dostały kropkowane podkreślenie, żeby było widać, że coś się pod nimi kryje.
+
+**Uwaga o latach przestępnych zeszła do dymka przy kalendarzu** — tam, gdzie wybiera się datę, a nie na końcu strony. Żeby nie zniknęła dla czytnika ekranu i dla dotyku, jej treść została równocześnie wpisana do opisu tekstowego przyrządu, który od tego cyklu jest widoczny w narracji.
