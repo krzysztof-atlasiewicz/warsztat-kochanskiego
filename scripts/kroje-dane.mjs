@@ -20,6 +20,9 @@ export const KATALOG = "src/assets/fonts";
 export const RODZINY = ["EBGaramond", "EBGaramond-Italic", "IBMPlexMono"];
 export const ZAKRESY = ["latin", "latin-ext"];
 export const PLIK_CSS = "src/assets/css/fonty.css";
+// Spis wygenerowanych plików trafia do danych serwisu, żeby układ mógł
+// zamówić wstępne pobranie krojów po nazwie z odciskiem treści.
+export const PLIK_SPIS = "src/_data/kroje.json";
 
 // Znaki spoza zakresów łacińskich fontsource nie mają glifów w żadnym z dwóch
 // plików i renderują się krojem zastępczym. To świadoma zgoda, nie przeoczenie:
