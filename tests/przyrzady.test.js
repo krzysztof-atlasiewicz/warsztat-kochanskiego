@@ -426,3 +426,23 @@ describe("kroje bez podmiany w locie", () => {
     expect(a, "wiersz pary liter nie rezerwuje wysokości").toMatch(/#para\{min-height:/);
   });
 });
+
+// Akapit o przyrządach bocznych zniknął z kolumny objaśnień — ale zastrzeżenie
+// o zagęszczonej podziałce nie ma prawa zginąć razem z nim.
+describe.skipIf(!zbudowane)("przyrządy boczne wahadła", () => {
+  for (const plik of ["_site/pl/wahadlo/index.html", "_site/en/pendulum/index.html"]) {
+    it(`${plik} — każdy przyrząd boczny tłumaczy się sam`, () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const boczne = [...document.querySelectorAll(".rzad-mapy .przyrzad-boczny")];
+      expect(boczne.length, "spodziewane trzy przyrządy boczne").toBe(3);
+      for (const f of boczne) {
+        expect(f.dataset.dymek, "przyrząd boczny bez dymka").toBeTruthy();
+        expect(f.dataset.dymek.length, "dymek przyrządu bocznego jest zdawkowy").toBeGreaterThan(60);
+      }
+      const dymki = boczne.map((f) => f.dataset.dymek).join(" ");
+      expect(dymki, "zgubiono zastrzeżenie o zagęszczonej podziałce")
+        .toMatch(/zagęszczona przy zerze|compressed near zero/);
+    });
+  }
+});

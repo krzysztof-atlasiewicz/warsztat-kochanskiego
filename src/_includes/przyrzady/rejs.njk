@@ -110,7 +110,6 @@
     <div class="blok-objasnien">
       <p>{{ s.rejs.okretOpis }}</p>
       <p>{{ s.rejs.mapaOpis }}</p>
-      <p>{{ s.rejs.przyrzadyOpis }}</p>
     </div>
 
   </div>
@@ -146,7 +145,7 @@
     </div>
 
     <div class="wskazniki-boczne">
-      <figure class="przyrzad-boczny">
+      <figure class="przyrzad-boczny" data-dymek="{{ s.rejs.wskaznikDymek }}">
       <svg viewBox="0 0 200 200" role="img" aria-describedby="o-wsk1" class="wskaznik">
         <desc id="o-wsk1">{{ s.rejs.opisWskaznika }}</desc>
         <circle cx="100" cy="100" r="92" fill="var(--plyta-jasna)" stroke="var(--mosiadz-ciemny)" stroke-width="2"/>
@@ -160,7 +159,7 @@
       </svg>
         <figcaption><span id="dw">—</span><span id="kw" class="blad">—</span><span class="dim" data-dymek="{{ s.rejs.opisy.blad }}">{{ s.rejs.bladW }}</span></figcaption>
       </figure>
-      <figure class="przyrzad-boczny">
+      <figure class="przyrzad-boczny" data-dymek="{{ s.rejs.wskaznikDymek }}">
       <svg viewBox="0 0 200 200" role="img" aria-describedby="o-wsk2" class="wskaznik">
         <desc id="o-wsk2">{{ s.rejs.opisWskaznika }}</desc>
         <circle cx="100" cy="100" r="92" fill="var(--plyta-jasna)" stroke="var(--mosiadz-ciemny)" stroke-width="2"/>

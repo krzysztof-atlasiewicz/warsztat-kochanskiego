@@ -615,3 +615,11 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Obniżenie tekstu w piątym kroku cyrkla** miało przyczynę, której nie widać w wysokości akapitu: wiersz z pierwiastkiem jest naturalnie wyższy. Wzór na długość odcinka BD — pierwiastek z różnicy czterdziestu trzecich i dwóch pierwiastków z trzech, pomnożony przez promień — ma trzydzieści cztery punkty wysokości przy wierszu liczącym dwadzieścia siedem, więc wstawiony w zdanie rozpychał wiersz i tekst osiadał niżej niż w krokach bez wzoru. Akapit miał stałą wysokość — stąd kontrola geometrii nic nie pokazywała — ale pismo w nim wędrowało. Wzór zmniejszony do 0,82 wysokości pisma i opuszczony o 0,26 mieści się w wierszu: pierwszy wiersz zaczyna się w tym samym miejscu co przy kroku czwartym, co do punktu.
 
 **Nauka z tego pomiaru:** wysokość bloku to za mało. Przy ruchu „delikatnym" trzeba mierzyć prostokąty wierszy wewnątrz bloku, nie sam blok.
+
+## 2026-10-10 — Cykl 49: akapit o przyrządach bocznych zniknął, zastrzeżenie zostało
+
+**Trzy zdania z kolumny objaśnień usunięte.** Mówiły, co pokazuje termometr i co pokazują dwa wskaźniki — a termometr ma już własny dymek, który mówi to samo dokładniej, wraz z tym, skąd bierze się pokazywana temperatura.
+
+**Jedna rzecz z tego akapitu nie była nigdzie indziej:** że podziałka wskaźników jest zagęszczona przy zerze, żeby małe odchyłki były widoczne. To zastrzeżenie do odczytu, nie opis — igła w połowie tarczy nie znaczy połowy zakresu. Wędruje więc na same wskaźniki, jako ich dymek, razem ze zdaniem o tym, co igła mierzy.
+
+**Test pilnuje, że zastrzeżenie nie zginęło:** każdy z trzech przyrządów bocznych musi mieć niepusty dymek, a wśród nich musi paść zdanie o zagęszczeniu podziałki przy zerze — w obu wersjach językowych. Bez tego następne porządkowanie tekstu wyniosłoby je razem ze śmieciami.
