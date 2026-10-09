@@ -501,3 +501,15 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 3. **Usunąć chip „źródło",** zostawiając tylko oznaczenie tego, co dopowiedziane. Najprostsze i najkrótsze, ale strona przestaje wtedy twierdzić wprost, że cokolwiek opiera się na przekazie z epoki — a to jest twierdzenie, które chcemy wypowiadać.
 
 **Rekomendacja agenta:** wariant 2 teraz, wariant 1 po zamknięciu A2 i A7. Wariant 3 odradzany: osłabia oznaczenie statusu, a zysk jest tylko wizualny.
+
+## 2026-10-09 — Cykl 39: para oznaczeń czyta się jako zdanie
+
+**Rozstrzygnięcie kierownika projektu: wariant 2** z pozycji „do rozstrzygnięcia" otwartej w cyklu 38. Chip „źródło" zostaje jako stały człon pary, drugi mówi wprost, co jest nasze.
+
+**Pierwszy człon brzmi teraz „ze źródła"** zamiast „źródło" — ta sama treść, ale napis jest początkiem zdania, a nie etykietą pudełka. Na każdej stronie jest ten sam i taki ma być: mówi, że część tego, co widać, opiera się na przekazie z epoki, a nie że ta strona jest pod tym względem wyjątkowa.
+
+**Drugi człon nazywa dopowiedzenie i na każdej stronie nazywa co innego:** „nasze: interpretacja celu" przy cyrklu, „nasze: uproszczona geometria" przy gnomonie, „nasze: dzisiejszy model błędu" przy wahadle, „nasze: rekonstrukcja metody" przy szyfrze. Dotąd stały tam słowa „interpretacja", „geometria uproszczona", „model współczesny" i „rekonstrukcja" — każde z nich orzekało coś o stronie, ale żadne nie mówiło, o czym mówi. Dymki z cyklu 38 zostają bez zmian i podają szczegóły wraz z pozycją agendy.
+
+**Żadne oznaczenie nie zostało usunięte ani osłabione.** Typy `zrodlo` i `rekonstrukcja` są te same, zastrzeżenia w treści stron nietknięte, kontrola `oznaczenia` przechodzi. Zmiana jest redakcyjna: ta sama rzecz powiedziana tak, żeby dało się ją przeczytać.
+
+**Test pilnuje kształtu pary** (89 testów bez zmian co do liczby, trzy nowe warunki w istniejącym): pierwszy chip musi być oznaczeniem źródła i brzmieć „ze źródła" albo „from the source", drugi musi zaczynać się od „nasze:" albo „ours:" i mieć dalszy ciąg. Sprawdzono też, że drugie człony są różne na wszystkich czterech stronach — bo gdyby były takie same, wróciłby dokładnie ten zarzut, od którego cała rzecz się zaczęła.
