@@ -587,3 +587,11 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 3. **Pasek przewijania.** Strona, która w pierwszej chwili mieści się w oknie, a po dorysowaniu przyrządu już nie, dostaje pasek w locie: szerokość treści maleje o kilkanaście punktów i cały tekst łamie się na nowo. Miejsce na pasek jest teraz rezerwowane zawsze, także w przewijanym w poziomie polu ściany.
 
 **Wskaźnik niestabilności układu po poprawkach:** cyrkiel 0, wahadło 0, szyfr 0, gnomon 0,0005 bez wskazania konkretnego elementu. Próg uznawany za dobry to 0,1 — jesteśmy dwieście razy poniżej na najgorszej ze stron.
+
+## 2026-10-10 — Cykl 46: strzały z łuku po bokach bębenków
+
+**Daszki ustąpiły strzałom.** Dwa groty jeden pod drugim po lewej stronie okienka czytały się jak pasek przewijania. Teraz po bokach każdego bębenka stoi strzała: w lewo poprzednia wartość, w prawo następna — „← czerwca →" i „← 20 →". Rysunek jest strzałą z łuku: drzewce, grot i lotki, kreślone tym samym mosiądzem co koronka i radełka. Przyrząd ma mówić językiem warsztatu, nie paska przewijania.
+
+**Obsługa bez zmian:** strzały niosą `data-bez-dymka`, więc objaśnienie kartki nie wyskakuje nad tym, w co się celuje, a pole chwytu obejmuje dwadzieścia cztery na dwadzieścia punktów wokół każdej. Przeciąganie, kółko i klawiatura działają jak dotąd.
+
+**Test sprawdza, że strzała jest strzałą:** jedna po lewej stronie okienka, druga po prawej, a każda ma drzewce, grot i lotki. Dotąd warunek mówił tylko, że groty stoją po lewej — po zmianie układu przechodziłby dalej, nic nie znacząc.

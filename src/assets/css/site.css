@@ -393,10 +393,14 @@ html.js .pola-daty{display:none}
 .beben-walec{fill:url(#walecCien);pointer-events:none}
 .beben-obwodka{fill:none;stroke:var(--mosiadz-ciemny);stroke-width:1}
 .beben-radelko line{stroke:var(--mosiadz-ciemny);stroke-width:.8;opacity:.75}
-.beben-groty path{fill:none;stroke:var(--mosiadz-ciemny);stroke-width:1.6;
+.strzala-drzewce{stroke:var(--mosiadz-ciemny);stroke-width:1.5;stroke-linecap:round}
+.strzala-grot{fill:none;stroke:var(--mosiadz-ciemny);stroke-width:1.9;
   stroke-linecap:round;stroke-linejoin:round}
+.strzala-lotki{fill:none;stroke:var(--mosiadz-ciemny);stroke-width:1.2;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.8}
 .beben-grot{cursor:pointer}
-.beben-grot:hover path{stroke:var(--verd)}
+.beben-grot:hover .strzala-drzewce,.beben-grot:hover .strzala-grot,
+.beben-grot:hover .strzala-lotki{stroke:var(--verd)}
 .beben-sasiad{opacity:.28}
 .beben-miesiac{font-family:var(--mono);font-size:11px;fill:var(--ink-soft)}
 .beben-dzien{font-family:var(--serif);font-size:50px;fill:var(--ink)}

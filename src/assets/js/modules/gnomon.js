@@ -299,16 +299,25 @@ export default function init(root) {
     g.addEventListener("pointerup", koniecObrotu);
     g.addEventListener("pointercancel", () => { ciagniecie = null; g.classList.remove("beben-obracany"); });
 
-    // Groty stoją po lewej stronie okienka i są rodzeństwem bębenka, nie jego
-    // dziećmi: niosą „data-bez-dymka", więc objaśnienie kartki nie wyskakuje
-    // nad nimi i nie zasłania tego, w co się właśnie celuje.
+    // Strzały stoją po bokach okienka: w lewo poprzednia wartość, w prawo
+    // następna. Rysunek jest strzałą z łuku — grot, drzewce i lotki — bo cały
+    // przyrząd mówi językiem warsztatu, a nie paska przewijania. Są rodzeństwem
+    // bębenka, nie jego dziećmi, i niosą „data-bez-dymka", żeby objaśnienie
+    // kartki nie wyskakiwało nad tym, w co się właśnie celuje.
     const groty = zrob("g", { class: "beben-groty", "data-bez-dymka": "" });
-    const sx = geo.x - 9;
-    for (const [znak, kierunek] of [[-1, -1], [1, 1]]) {
-      const yy = cy + znak * 7;
+    for (const [bok, kierunek] of [[-1, -1], [1, 1]]) {
+      const ax = bok < 0 ? geo.x - 17 : geo.x + geo.w + 17;
+      const s = bok;                                   // zwrot grotu
       const grot = zrob("g", { class: "beben-grot" });
-      grot.append(zrob("path", { d: `M ${sx - 5} ${yy - znak * 2.5} L ${sx} ${yy + znak * 2.5} L ${sx + 5} ${yy - znak * 2.5}` }));
-      grot.append(zrob("rect", { x: sx - 8, y: yy - 7, width: 16, height: 14, class: "pole-chwytu" }));
+      // drzewce
+      grot.append(zrob("line", { x1: ax - 9 * s, y1: cy, x2: ax + 6 * s, y2: cy, class: "strzala-drzewce" }));
+      // grot
+      grot.append(zrob("path", { d: `M ${ax + 3 * s} ${cy - 4} L ${ax + 10 * s} ${cy} L ${ax + 3 * s} ${cy + 4}`,
+        class: "strzala-grot" }));
+      // lotki
+      grot.append(zrob("path", { d: `M ${ax - 10 * s} ${cy - 4} L ${ax - 5 * s} ${cy} L ${ax - 10 * s} ${cy + 4}`,
+        class: "strzala-lotki" }));
+      grot.append(zrob("rect", { x: ax - 12, y: cy - 10, width: 24, height: 20, class: "pole-chwytu" }));
       grot.addEventListener("click", (e) => { e.stopPropagation(); obroc(kierunek); });
       groty.append(grot);
     }
