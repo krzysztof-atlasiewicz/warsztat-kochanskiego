@@ -1,13 +1,14 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 import { join } from "node:path";
+import { ZNAKI, POZA_KROJEM, KATALOG, PLIK_CSS } from "../scripts/kroje-dane.mjs";
 
 const czytaj = (p) => readFileSync(p, "utf8");
 const agenda = JSON.parse(czytaj("pdca/agenda.json"));
 const zrodla = JSON.parse(czytaj("src/_data/zrodla.json"));
 const STATUSY = ["otwarta", "w toku", "zamknięta", "nierozstrzygalna"];
 // Kontrole, których niespełnienie jest zgłaszane, ale nie zatrzymuje cyklu.
-export const OSTRZEZENIA = new Set(["kroje"]);
+export const OSTRZEZENIA = new Set();
 const stronyZ = (kat) => readdirSync(kat).filter((f) => /\.(njk|md)$/.test(f)).map((f) => join(kat, f));
 const stronyZrodlowe = stronyZ("src/pl").map((p) => p.replace("src/pl/", ""));
 const zbudowane = () => {
@@ -101,6 +102,14 @@ const KONTROLE = {
         zasoby.add("/assets/js/modules/matematyka.js");
         if (modul === "gnomon") zasoby.add("/assets/js/lib/astronomy.js");
       }
+      // Arkusz stylów sam pobiera kroje pisma — bez tego budżet nie obejmowałby
+      // kilkudziesięciu kilobajtów, które realnie lecą do przeglądarki.
+      for (const z of [...zasoby].filter((x) => x.endsWith(".css"))) {
+        try {
+          const css = czytaj(join("_site", z));
+          for (const m of css.matchAll(/url\(["']?(\/assets\/[^"')]+)/g)) zasoby.add(m[1]);
+        } catch { /* brak arkusza zgłosi pętla poniżej */ }
+      }
       for (const z of zasoby) {
         const plik = join("_site", z);
         try { suma += spakuj(plik); } catch { bledy.push(`${p}: brak zasobu ${z}`); }
@@ -187,6 +196,19 @@ const KONTROLE = {
     const strony = zbudowane().map((p) => czytaj(p)).join("\n");
     const zOdciskiem = new Set();
     for (const m of strony.matchAll(/(?:href|src)="(\/assets\/[^"?]+)\?v=/g)) zOdciskiem.add(m[1]);
+    // Zasoby, po które sięga arkusz stylów, nie mają w adresie „?v=" — odcisk
+    // treści niosą w samej nazwie. Oba sposoby są równoważne dla pamięci
+    // podręcznej, więc kontrola musi uznawać jeden i drugi.
+    const zCss = new Set();
+    for (const m of strony.matchAll(/(?:href)="(\/assets\/[^"?]+\.css)/g)) {
+      try {
+        for (const u of czytaj(join("_site", m[1])).matchAll(/url\(["']?(\/assets\/[^"')]+)/g)) {
+          zCss.add(u[1]);
+          if (/\.[0-9a-f]{8}\.[a-z0-9]+$/.test(u[1])) zOdciskiem.add(u[1]);
+          else bledy.push(`${u[1]}: pobierany z arkusza stylów bez odcisku treści w nazwie`);
+        }
+      } catch { /* brak arkusza wyłapie kontrola budżetu */ }
+    }
 
     let sciezka = null;
     for (const linia of naglowki.split("\n")) {
@@ -196,8 +218,8 @@ const KONTROLE = {
       if (sciezka.endsWith("*")) {
         const przedrostek = sciezka.slice(0, -1);
         const objete = [...zOdciskiem].filter((x) => x.startsWith(przedrostek));
-        const wszystkie = [...strony.matchAll(/(?:href|src)="(\/assets\/[^"?]+)/g)]
-          .map((m) => m[1]).filter((x) => x.startsWith(przedrostek));
+        const wszystkie = [...[...strony.matchAll(/(?:href|src)="(\/assets\/[^"?]+)/g)].map((m) => m[1]), ...zCss]
+          .filter((x) => x.startsWith(przedrostek));
         for (const x of new Set(wszystkie))
           if (!objete.includes(x)) bledy.push(`_headers: ${sciezka} jest „immutable", a ${x} jest pobierany bez odcisku ?v=`);
       } else if (!zOdciskiem.has(sciezka)) {
@@ -244,13 +266,41 @@ const KONTROLE = {
     return bledy;
   },
 
+  // Kroje pisma powstają przy budowaniu: obcinane do repertuaru znaków serwisu
+  // i nazywane odciskiem treści. Kontrola pilnuje trzech rzeczy — że arkusz
+  // deklaracji istnieje, że każdy plik, po który sięga, leży na miejscu, oraz
+  // że na stronach nie pojawił się znak, którego w obciętym kroju nie ma.
   kroje() {
-    const katalog = "src/assets/fonts";
-    const wymagane = ["EBGaramond.woff2", "EBGaramond-Italic.woff2", "IBMPlexMono.woff2"];
-    let obecne = [];
-    try { obecne = readdirSync(katalog); } catch { /* brak katalogu */ }
-    return wymagane.filter((f) => !obecne.includes(f))
-      .map((f) => `brak pliku kroju ${katalog}/${f} — serwis działa na kroju zastępczym`);
+    const bledy = [];
+    let css;
+    try { css = czytaj(PLIK_CSS); }
+    catch { return [`brak ${PLIK_CSS} — uruchom npm run libs`]; }
+
+    const deklaracje = [...css.matchAll(/@font-face/g)].length;
+    if (deklaracje !== 6) bledy.push(`${PLIK_CSS}: ${deklaracje} deklaracji @font-face zamiast sześciu`);
+
+    for (const m of css.matchAll(/url\("(\/assets\/fonts\/[^"]+)"/g)) {
+      const nazwa = m[1].replace("/assets/fonts/", "");
+      if (!/\.[0-9a-f]{8}\.woff2$/.test(nazwa))
+        bledy.push(`${nazwa}: nazwa bez odcisku treści, a nagłówki każą trzymać kroje rok w pamięci podręcznej`);
+      try { statSync(join(KATALOG, nazwa)); }
+      catch { bledy.push(`brak pliku kroju ${KATALOG}/${nazwa} — uruchom npm run libs`); }
+    }
+
+    const dozwolone = new Set([...ZNAKI, ...POZA_KROJEM, "\n", "\r", "\t", "\u00a0"]);
+    const brakujace = new Map();
+    for (const p of zbudowane()) {
+      const t = czytaj(p);
+      if (t.includes("http-equiv=\"refresh\"")) continue;
+      const tekst = t.replace(/<script[\s\S]*?<\/script>/g, " ")
+        .replace(/<style[\s\S]*?<\/style>/g, " ")
+        .replace(/<[^>]+>/g, " ").replace(/&[a-z]+;/g, " ");
+      for (const ch of tekst) if (!dozwolone.has(ch)) brakujace.set(ch, p);
+    }
+    for (const [ch, p] of brakujace)
+      bledy.push(`znak „${ch}" (U+${ch.codePointAt(0).toString(16).toUpperCase().padStart(4, "0")}) nie mieści się w obciętym kroju — ${p}; rozszerz ZNAKI w scripts/kroje-dane.mjs`);
+
+    return bledy;
   },
 
   jezyki() {
