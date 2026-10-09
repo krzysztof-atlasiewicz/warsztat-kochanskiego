@@ -5,7 +5,7 @@ layout: layouts/base.njk
 <article class="przyrzad" data-modul="{{ modul }}">
   <h1>{{ naglowek }}</h1>
   <p class="tagi">
-    {%- for t in tagi %}<span class="tag {{ t.typ }}">{{ t.etykieta }}</span>{% endfor %}
+    {%- for t in tagi %}<span class="tag {{ t.typ }}"{% if t.opis %} data-dymek="{{ t.opis }}"{% endif %}>{{ t.etykieta }}</span>{% endfor %}
   </p>
   <div class="zakladki" role="tablist" aria-label="{{ z.opis }}">
     <button type="button" role="tab" id="z-przyrzad" aria-controls="k-przyrzad" aria-selected="true">{{ z[kartaPierwsza] if kartaPierwsza else z.przyrzad }}</button>
