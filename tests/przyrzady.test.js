@@ -65,6 +65,11 @@ describe.skipIf(!zbudowane)("pulpit gnomonu", () => {
       expect(kartka, "brak kartki kalendarza").toBeTruthy();
       const pola = kartka.querySelectorAll(".pola-daty select");
       expect(pola.length, "oba pola daty mają być na kartce").toBe(2);
+      // Data na kartce to same pola wyboru — nie rysowany tekst obok nich.
+      expect(kartka.querySelector("select.pole-dnia"), "dzień nie jest polem wyboru").toBeTruthy();
+      expect(kartka.querySelector("select.pole-miesiaca"), "miesiąc nie jest polem wyboru").toBeTruthy();
+      expect(kartka.querySelector("#kalDzien"), "został osobny napis z dniem").toBeFalsy();
+      expect(kartka.querySelector("#kalMiesiac"), "został osobny napis z miesiącem").toBeFalsy();
       for (const p of pola) {
         expect(p.getAttribute("aria-label"), "pole daty bez nazwy dostępnej").toBeTruthy();
         expect(p.dataset.dymek, "pole daty bez dymka").toBeTruthy();

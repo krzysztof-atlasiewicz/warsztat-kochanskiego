@@ -321,17 +321,23 @@ svg.sciana{max-width:none;width:100%}
   .przyrzady-rejs .blok-objasnien,.przyrzady-rejs .blok-wykresu{grid-column:auto;grid-row:auto}
 }
 .blok-zegara{flex:0 0 250px}
-/* Pola wyboru leżą na samej kartce, w polu odciętym kreską nad jej dartym
-   dolnym brzegiem — nie są osobnym formularzem obok przyrządu. Kartka ma
-   dokładnie wysokość zegarka (150 × 224 px przy proporcji viewBoksa 160:239),
+/* Data na kartce JEST polem wyboru: nazwa miesiąca w nagłówku i wielka liczba
+   dnia to dwa znaczniki <select> położone dokładnie tam, gdzie wcześniej stał
+   rysowany tekst. Nie ma osobnego formularza pod kartką ani obok niej.
+   Kartka ma wysokość zegarka (150 × 224 px przy proporcji viewBoksa 160:239),
    więc oba nastawniki stoją w rzędzie równo. */
 .blok-daty{flex:0 0 160px;gap:0;position:relative}
-.pola-daty{position:absolute;top:75.3%;left:50%;transform:translateX(-50%);
-  display:flex;gap:.25rem;justify-content:center;width:124px;margin:0}
-.pola-daty select:first-child{flex:0 0 3.1rem}
-.pola-daty select{flex:1 1 auto;min-width:0;font-variant-numeric:tabular-nums;
-  font-size:.78rem;padding:.12rem .05rem;text-align:center;background:var(--plyta-jasna);
-  border:1px solid var(--rule);border-radius:2px;color:var(--ink)}
+.pola-daty{display:contents}
+.pola-daty select{position:absolute;left:50%;transform:translateX(-50%);
+  appearance:none;-webkit-appearance:none;border:0;border-bottom:1px dashed var(--mosiadz-ciemny);
+  color:var(--ink);text-align:center;text-align-last:center;cursor:pointer;
+  background:transparent no-repeat right .1rem center/7px 4.5px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 4.5'><path d='M0 0h7L3.5 4.5z' fill='%238a7a52'/></svg>")}
+.pola-daty select:focus-visible{outline:2px solid var(--verd);outline-offset:2px}
+select.pole-miesiaca{top:9.4%;width:auto;font-family:var(--mono);font-size:11px;
+  color:var(--ink-soft);padding:0 11px 1px;border-bottom:0}
+select.pole-dnia{top:26.5%;width:auto;font-family:var(--serif);font-size:50px;line-height:1.08;
+  font-variant-numeric:tabular-nums;padding:0 15px 2px;border-bottom-style:dotted}
 .tarcza-mechaniczna{max-width:200px;touch-action:none;user-select:none}
 .tarcza-mechaniczna .cyfra-zegara{font-family:var(--serif);font-size:15px;fill:var(--ink)}
 .tarcza-mechaniczna .kreska-godzin{stroke:var(--ink);stroke-width:1.4}

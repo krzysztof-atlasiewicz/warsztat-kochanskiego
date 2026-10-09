@@ -335,9 +335,8 @@ export default function init(root) {
     const mies = Number(polaM.value), dm = Number(polaD.value);
     const stan = stanNieba(ROK, mies, dm, godzina);
 
-    // kartka kalendarza
-    $("kalMiesiac").textContent = N.miesiaceDop[mies];
-    $("kalDzien").textContent = String(dm);
+    // kartka kalendarza — miesiąc i dzień czyta się wprost z pól wyboru,
+    // bo to one są datą na kartce; dopisujemy tylko długość dnia i nocy
     const wsch = wschodSloneczny(fi, stan.deklinacja), zach = zachodSloneczny(fi, stan.deklinacja);
     $("kalPora").textContent = `${N.dzienTrwa} ${godzMin(zach - wsch)}`;
     $("kalDzien2").textContent = `${N.nocTrwa} ${godzMin(24 - (zach - wsch))}`;

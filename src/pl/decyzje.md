@@ -443,3 +443,13 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Zastrzeżenie o czasie urzędowym** zeszło spod rzędu nastawników do trzeciej kolumny, pod legendę zegarka, oddzielone od niej cienką kreską. To komentarz do tych właśnie trzech liczb — godziny mechanicznej, słonecznej i rozbieżności — a nie do całego pulpitu. Trzy kolumny kończą się teraz na tej samej wysokości, z dokładnością do sześciu punktów.
 
 **Wysokości pilnuje test** (62 zamiast 58): czyta proporcje obu viewBoksów z gotowej strony i szerokości z arkusza stylów, przelicza je na punkty i wymaga, żeby kartka i zegarek różniły się o mniej niż punkt. Sprawdzono, że potrafi zawieść — przy starym viewBoksie zgłasza różnicę 23,4 punktu. Drugi nowy test pilnuje, że zastrzeżenie o czasie urzędowym stoi w kolumnie objaśnień, pod legendą.
+
+## 2026-10-09 — Cykl 35: data na kartce jest polem wyboru
+
+**Nazwa miesiąca i wielka liczba dnia to teraz same nastawniki.** Dotąd kartka pokazywała datę rysowanym tekstem, a zmieniało się ją dwoma polami doklejonymi niżej — to samo czytało się dwa razy, w dwóch miejscach. Oba znaczniki `text` zniknęły; w ich miejsce weszły dwa znaczniki `select` położone dokładnie tam, gdzie stał napis: miesiąc w nagłówkowym pasie nad mosiężną kreską, dzień w wielkim polu pod nią. Wielkość pisma bez zmian — jedenaście punktów szeryfowego grotesku w nagłówku, pięćdziesiąt w liczbie dnia.
+
+**Nastawnik ma wyglądać jak kartka, nie jak formularz:** tło przezroczyste, bez obwódki, z drobnym rysowanym trójkątem przy prawej krawędzi i kropkowanym podkreśleniem pod liczbą dnia. Trójkąt ma stałe siedem punktów szerokości niezależnie od stopnia pisma, więc przy pięćdziesięciopunktowej liczbie nie puchnie razem z nią.
+
+**Usterka specyficzności przy okazji:** reguła wspólna `.pola-daty select` (klasa plus typ) wygrywała z regułami szczegółowymi `.pole-miesiaca` i `.pole-dnia` (sama klasa), więc obwódka i tło nie dawały się nadpisać. Rozwiązane podniesieniem szczegółowych do `select.pole-…`, nie zaś przez `!important`.
+
+**Sprawdzono działanie, nie tylko wygląd:** po przestawieniu na luty lista dni ma dwadzieścia dziewięć pozycji, 29 lutego daje się wybrać, długość dnia schodzi z 16 godz 46 min na 10 godz 51 min, a czas słoneczny prawdziwy z 11:22 na 12:12. Test pilnuje, że dzień i miesiąc są polami wyboru i że nie został po nich żaden osobny napis.
