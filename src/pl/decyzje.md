@@ -407,3 +407,15 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Uwaga o czasie urzędowym** została zwykłym zdaniem pod rzędem nastawników — to nie instrukcja obsługi, tylko zastrzeżenie do modelu, więc nie powinna chować się w dymku.
 
 **Powtórzenie usunięte:** podpis pod ścianą namawiał do najechania na tarczę, co teraz mówi samo pole objaśnień.
+
+## 2026-10-09 — Cykl 32: jeden mechanizm dymków zamiast pól tekstowych
+
+**Pola objaśnień zniknęły ze stron.** Opis, jak czytać ścianę, i opis analemmy nie są już akapitami zajmującymi miejsce w układzie — zapalają się jako dymki nad tym, czego dotyczą: nad ścianą i nad przełącznikiem. Tak samo opisy trzech rachub: znikły z pola pod ścianą i wracają jako dymek przy tarczy.
+
+**Dymek jest własny, nie systemowy.** Znacznik `title` jest mały, pojawia się z opóźnieniem, nie działa na ekranie dotykowym i gaśnie przy najmniejszym ruchu. Nowy jest czytelnym polem tekstu szerokim na trzydzieści cztery znaki, zapalanym najechaniem, dotknięciem albo klawiaturą, gaszonym klawiszem Escape. Obsługa jest delegowana na cały dokument, więc wystarczy dodać atrybut `data-dymek` — korzystają z tego oba przebudowane przyrządy.
+
+**Dymki się zagnieżdżają.** Ściana ma swój, każda tarcza na niej własny; dymek bierze się z najbliższego przodka, który go ma, więc zejście z tarczy wraca do objaśnienia ściany zamiast gasić wszystko. Przewinięcie strony przesuwa dymek za elementem i gasi go dopiero, gdy element wyjedzie poza okno.
+
+**Pole chwytu tarczy obejmuje cały jej blok** — kartusz, podpis i odczyt — zamiast samych kresek. Dymek przestał być czuły na to, czy kursor trafił akurat w linię.
+
+**Uwaga o dostępności:** dymek bywa jedyną drogą do tych objaśnień, więc każdy element z `data-dymek` jest osiągalny klawiaturą i niesie tę samą treść w atrybucie `aria-description`. Pełny opis przyrządu pozostaje w narracji zakładki „Skąd to wiemy", więc nic nie zależy wyłącznie od najechania myszą.
