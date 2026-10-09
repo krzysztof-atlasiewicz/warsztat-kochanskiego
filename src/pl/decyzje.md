@@ -607,3 +607,11 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Nowa kontrola automatyczna `polityka`** (czternasta): czyta politykę z `_site/_headers` i sprawdza, że zbudowane strony nie zawierają niczego, czego ta polityka nie przepuści — skryptu wpisanego wprost w stronę, atrybutu `style` w znaczniku, skryptu spoza serwisu — oraz że sama polityka nie zmiękła o `'unsafe-inline'`. Sprawdzono, że kontrola potrafi zawieść: po przywróceniu wiersza w nagłówku zgłasza wszystkie dziewiętnaście stron.
 
 **Lekcja ogólna, trzecia tego rodzaju w ciągu jednego wieczoru:** podgląd lokalny nie jest serwisem. Różni je polityka bezpieczeństwa treści, nagłówki pamięci podręcznej i opóźnienia sieci — i każda z tych trzech rzeczy po kolei dała usterkę niewidoczną w próbach. Odtąd kontrola automatyczna czyta `_headers` i konfrontuje je z tym, co faktycznie stoi na stronach.
+
+## 2026-10-10 — Cykl 48: strzały w obrębie kartki, wzór nie rozpycha wiersza
+
+**Strzały wychodziły poza kartkę.** Przy odstępie siedemnastu punktów od okienka i długości dwudziestu sięgały poza krawędź papieru — wyglądało to, jakby ktoś je przykleił obok kalendarza, a nie na nim. Skrócone do czternastu punktów i przysunięte do jedenastu od okienka; oba bębenki mają teraz jednakową szerokość osiemdziesięciu czterech punktów, więc strzały stoją w jednej osi, szesnaście punktów od brzegu kartki z każdej strony. Test wymaga, żeby pole chwytu każdej strzały mieściło się w kartce z zapasem dziesięciu punktów.
+
+**Obniżenie tekstu w piątym kroku cyrkla** miało przyczynę, której nie widać w wysokości akapitu: wiersz z pierwiastkiem jest naturalnie wyższy. Wzór na długość odcinka BD — pierwiastek z różnicy czterdziestu trzecich i dwóch pierwiastków z trzech, pomnożony przez promień — ma trzydzieści cztery punkty wysokości przy wierszu liczącym dwadzieścia siedem, więc wstawiony w zdanie rozpychał wiersz i tekst osiadał niżej niż w krokach bez wzoru. Akapit miał stałą wysokość — stąd kontrola geometrii nic nie pokazywała — ale pismo w nim wędrowało. Wzór zmniejszony do 0,82 wysokości pisma i opuszczony o 0,26 mieści się w wierszu: pierwszy wiersz zaczyna się w tym samym miejscu co przy kroku czwartym, co do punktu.
+
+**Nauka z tego pomiaru:** wysokość bloku to za mało. Przy ruchu „delikatnym" trzeba mierzyć prostokąty wierszy wewnątrz bloku, nie sam blok.

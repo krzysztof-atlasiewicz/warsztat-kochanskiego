@@ -166,6 +166,15 @@ describe.skipIf(!zbudowane)("poprawki czytelności", () => {
       expect(strzaly.length, "bębenek dnia nie ma dwóch strzał").toBe(2);
       expect(Math.min(...strzaly), "brak strzały po lewej stronie okienka").toBeLessThan(x0);
       expect(Math.max(...strzaly), "brak strzały po prawej stronie okienka").toBeGreaterThan(x0 + szer);
+      // Strzały mają mieścić się w kartce, a nie wystawać poza jej krawędź.
+      const kartka = root.querySelector("svg.kartka");
+      const [, , szerKartki] = kartka.getAttribute("viewBox").split(" ").map(Number);
+      for (const s of root.querySelectorAll(".beben-groty .beben-grot")) {
+        const r = s.querySelector("rect.pole-chwytu");
+        const x = Number(r.getAttribute("x")), w = Number(r.getAttribute("width"));
+        expect(x, "strzała wychodzi poza lewą krawędź kartki").toBeGreaterThan(10);
+        expect(x + w, "strzała wychodzi poza prawą krawędź kartki").toBeLessThan(szerKartki - 10);
+      }
       // Strzała ma być strzałą: drzewce, grot i lotki.
       for (const s of root.querySelectorAll("#bebenDnia + .beben-groty .beben-grot")) {
         expect(s.querySelector(".strzala-drzewce"), "strzała bez drzewca").toBeTruthy();

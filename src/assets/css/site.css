@@ -68,6 +68,10 @@ button:hover{border-color:var(--verd);color:var(--verd)}
 /* Opis kroku bywa jedno- albo dwuwierszowy; rezerwujemy dwa wiersze, żeby
    przejście między krokami nie przesuwało tego, co pod nim. */
 #opis{min-height:3.25em;margin-top:.4rem}
+/* Wzor z pierwiastkiem ma naturalna wysokosc 34 punktow przy wierszu 27 —
+   wstawiony w opis kroku rozpychal wiersz i tekst osiadal nizej niz przy
+   krokach bez wzoru. Zmniejszony i opuszczony miesci sie w wierszu. */
+#opis math{font-size:.82em;vertical-align:-.26em}
 /* Ze skryptem pole wyników cyrkla zajmuje miejsce od pierwszej klatki, choć
    odsłania się dopiero na ostatnim kroku. Bez skryptu zostaje schowane. */
 html.js #panel.hide{display:block;visibility:hidden}
