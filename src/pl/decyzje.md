@@ -357,3 +357,15 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Dymki zostały tylko przy tarczach.** Rząd trzech przycisków pod ścianą zniknął; wyjaśnienie rachuby zapala się od najechania na samą tarczę albo jej dotknięcia, a nazwy pod tarczami dostały kropkowane podkreślenie, żeby było widać, że coś się pod nimi kryje.
 
 **Uwaga o latach przestępnych zeszła do dymka przy kalendarzu** — tam, gdzie wybiera się datę, a nie na końcu strony. Żeby nie zniknęła dla czytnika ekranu i dla dotyku, jej treść została równocześnie wpisana do opisu tekstowego przyrządu, który od tego cyklu jest widoczny w narracji.
+
+## 2026-10-09 — Cykl 28: pulpit na stronie wahadła
+
+**Zarzut:** strona wahadła była sześcioma planszami jedna pod drugą — kalendarz, okręt, karta, przyrządy, wykres, odczyty. Suwaki stały z dala od tego, czym sterują, galeon zajmował pustą szeroką wstęgę, a cztery odczyty lądowały na samym dole, oderwane od wszystkiego.
+
+**Ten sam pulpit co w gnomonie.** W górnym rzędzie trzy kolumny: kartka kalendarza z suwakami dnia i tempa oraz przyciskiem odbicia, galeon ze stanem morza i kompensacją sprężyny, a w wolnym polu po prawej objaśnienia — co pokazuje okręt, co karta i co przyrządy pokładowe. Pod rzędem karta kursowa na pełnej szerokości, pod nią termometr z dwoma wskaźnikami i cztery odczyty, na końcu wykres narastania błędu z legendą i rachunkiem. Całość w jednej ramce, jak w gnomonie.
+
+**Nagłówki sekcji zniknęły,** bo ich treść przeszła do objaśnień po prawej albo do podpisów. Zostało jedno śródtytułowanie przed wykresem, żeby oddzielić narastanie błędu od bieżącego stanu.
+
+**Karta i wykres przewijają się w poziomie** na wąskim ekranie, tak samo jak ściana w gnomonie.
+
+**Kolumny pulpitu dostały górne ograniczenie szerokości.** Przy trzech kolumnach ustawionych na zawartość dwie pierwsze zabierały całe miejsce, a trzecia wychodziła poza obszar tekstu. Teraz pierwsza ma najwyżej dziewiętnaście znaków szerokości, a dwie pozostałe dzielą resztę po równo.
