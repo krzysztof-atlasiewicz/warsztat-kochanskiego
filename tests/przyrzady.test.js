@@ -237,3 +237,39 @@ describe.skipIf(!zbudowane)("poprawki czytelności", () => {
     });
   }
 });
+
+// Oznaczenia statusu wersji mają tłumaczyć się same, a przełączenie zakładki
+// nie ma zmieniać geometrii strony. Pierwsze da się sprawdzić w dokumencie,
+// drugie wymaga wysokości, więc pilnuje go wyrównanie kart.
+describe.skipIf(!zbudowane)("oznaczenia i zakładki", () => {
+  const STRONY = ["_site/pl/cyrkiel/index.html", "_site/pl/wahadlo/index.html",
+                  "_site/pl/szyfr/index.html", "_site/pl/gnomon/index.html",
+                  "_site/en/compass/index.html", "_site/en/pendulum/index.html",
+                  "_site/en/cipher/index.html", "_site/en/gnomon/index.html"];
+
+  for (const plik of STRONY) {
+    it(`${plik} — każde oznaczenie tłumaczy się dymkiem`, () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const tagi = [...document.querySelectorAll(".tagi .tag")];
+      expect(tagi.length, "strona bez oznaczeń statusu").toBe(2);
+      for (const t of tagi) {
+        expect(t.dataset.dymek, `oznaczenie „${t.textContent}" bez objaśnienia`).toBeTruthy();
+        expect(t.dataset.dymek.length, `objaśnienie „${t.textContent}" jest zdawkowe`).toBeGreaterThan(60);
+      }
+    });
+  }
+
+  it("zakładki wyrównują karty do najwyższej, żeby strona nie skakała", async () => {
+    document.body.innerHTML = readFileSync(STRONY[0], "utf8")
+      .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+    // jsdom nie liczy układu, więc wysokości podstawiamy sami
+    const karty = [...document.querySelectorAll('[role="tabpanel"]')];
+    expect(karty.length, "brak kart do wyrównania").toBe(3);
+    karty.forEach((k, i) => Object.defineProperty(k, "offsetHeight", { get: () => [900, 400, 150][i] }));
+    const m = await import("../src/assets/js/zakladki.js");
+    m.default();
+    for (const k of karty)
+      expect(k.style.minHeight, "karta nie została wyrównana do najwyższej").toBe("900px");
+  });
+});

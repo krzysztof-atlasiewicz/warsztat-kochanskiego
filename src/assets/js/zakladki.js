@@ -6,6 +6,21 @@ export default function init() {
     const karty = zakladki.map((z) => document.getElementById(z.getAttribute("aria-controls")));
     if (karty.some((k) => !k)) continue;
 
+    // Karty są różnej wysokości: „Pytania otwarte" mieszczą się w ćwiartce
+    // tego, co zajmuje przyrząd. Przy przełączeniu strona nagle się kurczyła
+    // i widok podskakiwał — stąd wrażenie migania. Zamiast tego mierzymy
+    // wszystkie karty, dopóki jeszcze stoją jedna pod drugą, i zadajemy
+    // każdej wysokość najwyższej. Układ strony przestaje wtedy zależeć od
+    // tego, która zakładka jest wybrana.
+    const wyrownaj = () => {
+      for (const k of karty) k.style.minHeight = "";
+      const ukryte = karty.map((k) => k.hidden);
+      for (const k of karty) k.hidden = false;
+      const najwyzsza = Math.max(...karty.map((k) => k.offsetHeight));
+      karty.forEach((k, j) => { k.hidden = ukryte[j]; });
+      if (najwyzsza > 0) for (const k of karty) k.style.minHeight = `${Math.ceil(najwyzsza)}px`;
+    };
+
     const pokaz = (i, przenies) => {
       zakladki.forEach((z, j) => {
         z.setAttribute("aria-selected", String(i === j));
@@ -25,6 +40,18 @@ export default function init() {
       });
     });
     pokaz(0, false);
+    wyrownaj();
     pasek.classList.add("gotowe");
+
+    // Po zmianie szerokości okna tekst łamie się inaczej, więc miarę trzeba
+    // wziąć na nowo. Przyrządy dorysowują się po starcie modułów, stąd jeszcze
+    // jeden pomiar po załadowaniu wszystkiego.
+    let oczekuje = 0;
+    const przemierz = () => {
+      clearTimeout(oczekuje);
+      oczekuje = setTimeout(wyrownaj, 160);
+    };
+    window.addEventListener("resize", przemierz);
+    window.addEventListener("load", przemierz);
   }
 }

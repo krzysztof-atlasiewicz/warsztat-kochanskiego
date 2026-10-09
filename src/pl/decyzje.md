@@ -483,3 +483,21 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Cyrkiel — wyprowadzenie wzoru stoi otworem.** Pięciokrokowy rachunek był schowany w elemencie rozwijanym. Nie ma powodu go chować: to trzon zakładki „Skąd to wiemy", a nie dodatek. Zostaje zwykłą sekcją z nagłówkiem.
 
 **Osiemnaście nowych testów** (80 zamiast 64) — po jednym na każdą z poprawek, w obu językach: groty stoją po lewej i nie przepuszczają dymka, kliknięcie grotu przestawia dzień, osobnego wykresu nie ma a ślady na karcie są dwa, podpis „tu jesteś" znika w porcie i wraca na pełnym morzu, koło sterowe stoi na drugim miejscu w rzędzie nastawników, termometr ma niepusty dymek, pierwsza zakładka cyrkla nazywa się „Konstrukcja" a wyprowadzenie nie jest rozwijane, instrukcja pierścienia siedzi w jednym polu z tarczą.
+
+## 2026-10-09 — Cykl 38: oznaczenia tłumaczą się same, zakładki nie skaczą
+
+**Każde oznaczenie ma teraz dymek mówiący, co dokładnie znaczy na tej stronie.** Chipy „źródło", „interpretacja", „model współczesny", „geometria uproszczona" i „rekonstrukcja" były enigmatyczne: widać było, że coś orzekają, ale nie było skąd wiedzieć co. Objaśnienia nie wnoszą nowych twierdzeń — powtarzają zastrzeżenie, które i tak stoi na stronie, i wskazują pozycję agendy, pod którą rzecz jest otwarta (A1 dla deklinacji ściany wilanowskiej, A2 dla zapisu szyfrowego, A4 dla uzasadnienia konstrukcji cyklometrycznej, A7 dla strony w relacji Richera).
+
+**Zakładki przestały skakać.** Karty są różnej wysokości — „Pytania otwarte" mieszczą się w ćwiartce tego, co zajmuje przyrząd — więc przy przełączeniu strona nagle się kurczyła, widok podskakiwał i wyglądało to jak mignięcie. Teraz, póki karty stoją jeszcze jedna pod drugą, mierzymy wszystkie i zadajemy każdej wysokość najwyższej; miara wraca po zmianie szerokości okna i po załadowaniu wszystkich przyrządów. Wysokość dokumentu przy przełączaniu trzech zakładek: cyrkiel 1550 punktów przy każdej, wahadło 2020, szyfr 1714, gnomon 1706 — rozrzut zero. Kosztem jest puste pole pod krótszymi kartami; uznano je za mniejszą dolegliwość niż podskakujący widok.
+
+## Do rozstrzygnięcia — oznaczenie „źródło" na każdej stronie
+
+**Zarzut:** chip „źródło" stoi na wszystkich czterech stronach przyrządów, więc niczego nie odróżnia. Oznaczenie, które nigdy nie jest nieobecne, nie niesie informacji.
+
+**Zarzut jest trafny co do formy,** ale usunięcie oznaczenia statusu wersji jest zmianą merytoryczną i agent go nie rusza. Trzy możliwości do wyboru przez kierownika projektu:
+
+1. **Zostawić i nazwać źródło.** Zamiast „źródło" chip mówi, z czego: „Acta Eruditorum 1685", „Technica curiosa", „relacja Richera", „literatura wilanowska". Wtedy każda strona ma inny napis i chip znowu coś znaczy. Wymaga rozstrzygnięcia A2 i A7, bo dwa z czterech źródeł nie są jeszcze potwierdzone.
+2. **Zostawić parę, przebudować drugi człon.** Chip „źródło" pozostaje jako stała część oznaczenia, a drugi mówi wprost, co jest nasze — na wzór pary „co ze źródła / co nasze". Zmiana wyłącznie redakcyjna, do wykonania od ręki.
+3. **Usunąć chip „źródło",** zostawiając tylko oznaczenie tego, co dopowiedziane. Najprostsze i najkrótsze, ale strona przestaje wtedy twierdzić wprost, że cokolwiek opiera się na przekazie z epoki — a to jest twierdzenie, które chcemy wypowiadać.
+
+**Rekomendacja agenta:** wariant 2 teraz, wariant 1 po zamknięciu A2 i A7. Wariant 3 odradzany: osłabia oznaczenie statusu, a zysk jest tylko wizualny.
