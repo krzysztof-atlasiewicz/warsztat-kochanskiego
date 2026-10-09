@@ -151,7 +151,7 @@ export default {
 
       scianaTytul: "Ściana, pręt i cień",
       scianaOpis: "Słońce nad ścianą jest uchwytem: złap je i przesuń, a godzina pójdzie za nim. Z każdej tarczy wystaje prostopadle krótki pręt. Patrzymy na niego od czoła, więc widać go jako krążek. Słońce rzuca cień końca pręta na siatkę linii — i dopiero siatka decyduje, co ten sam cień oznacza. Czyta się tak jak na prawdziwej tarczy: szuka się linii, na której stoi koniec cienia, i wodzi po niej wzrokiem aż do cyfry na jej końcu.",
-      scianaLegenda: "Linie wykreślono dla ściany dokładnie południowej i pręta prostopadłego do niej. Położenie Słońca na rysunku wskazuje kierunek, z którego pada światło; odległość jest umowna, bo Słońce jest nieskończenie daleko. Najedź na tarczę, żeby zobaczyć, czym jest jej rachuba.",
+      scianaLegenda: "Linie wykreślono dla ściany dokładnie południowej i pręta prostopadłego do niej. Położenie Słońca na rysunku wskazuje kierunek, z którego pada światło; odległość jest umowna, bo Słońce jest nieskończenie daleko.",
 
       poCoTrzy: "Trzy rachuby na jednej ścianie to nie ozdoba. Zegar postawiono w chwili, gdy godziny równe wypierały rachuby liczone od wschodu i zachodu — tarcza pokazuje oba porządki naraz i pozwala przełożyć jeden na drugi bez rachunku.",
 
@@ -169,7 +169,7 @@ export default {
         godz: "godz", min: "min", dzienTrwa: "dzień:", nocTrwa: "noc:", poZachodzie: "—",
         odZachodu: "godz. od zachodu", odWschodu: "godz. od wschodu",
         scianaWCieniu: "ściana w cieniu", poZachodzieSlonca: "po zachodzie Słońca",
-        wybierzRachube: "Najedź na którąkolwiek z trzech tarcz albo jej dotknij, żeby przeczytać, od czego liczy się jej rachuba.",
+        wybierzRachube: "Słońce nad ścianą jest uchwytem: złap je i przesuń, a godzina pójdzie za nim. Z każdej tarczy wystaje prostopadle krótki pręt — widać go od czoła, jako krążek. Cień jego końca czyta się jak na prawdziwej tarczy: szukasz linii, na której cień stoi, i wodzisz po niej wzrokiem aż do cyfry na jej końcu. Najedź na którąkolwiek z trzech tarcz albo jej dotknij, żeby przeczytać, od czego liczy się jej rachuba.",
         przesilenieLetnie: "przesilenie letnie", rownonoc: "równonoc", przesilenieZimowe: "przesilenie zimowe",
         tarcze: {
           krotkie: { wloskie: "godziny włoskie", rowne: "godziny równe", babilonskie: "godziny babilońskie" },
@@ -337,7 +337,7 @@ export default {
 
       scianaTytul: "The wall, the rod and the shadow",
       scianaOpis: "The sun above the wall is a handle: take hold of it and move it, and the hour follows. A short rod stands out of each dial at a right angle. We see it end-on, so it reads as a disc. The sun throws the shadow of its tip onto a grid of lines — and only the grid decides what that one shadow means. You read it as on a real dial: find the line the shadow tip stands on, then follow it out to the numeral at its end.",
-      scianaLegenda: "The lines are drawn for a wall facing due south and a rod perpendicular to it. The sun's place in the drawing gives the direction the light comes from; its distance is a convention, the sun being infinitely far away. Hover over a dial to see what its reckoning is.",
+      scianaLegenda: "The lines are drawn for a wall facing due south and a rod perpendicular to it. The sun's place in the drawing gives the direction the light comes from; its distance is a convention, the sun being infinitely far away.",
 
       poCoTrzy: "Three reckonings on one wall are not an ornament. The dial was put up just as equal hours were displacing the counts kept from sunrise and sunset — it shows both orders at once and lets one be read off against the other without any calculation.",
 
@@ -355,7 +355,7 @@ export default {
         godz: "h", min: "min", dzienTrwa: "day:", nocTrwa: "night:", poZachodzie: "—",
         odZachodu: "h since sunset", odWschodu: "h since sunrise",
         scianaWCieniu: "the wall is in shade", poZachodzieSlonca: "after sunset",
-        wybierzRachube: "Hover over any of the three dials, or tap one, to read what its reckoning counts from.",
+        wybierzRachube: "The sun above the wall is a handle: take hold of it and move it, and the hour follows. A short rod stands out of each dial at a right angle — seen end-on, it reads as a disc. The shadow of its tip is read as on a real dial: find the line the shadow stands on and follow it out to the numeral at its end. Hover over any of the three dials, or tap one, to read what its reckoning counts from.",
         przesilenieLetnie: "summer solstice", rownonoc: "equinox", przesilenieZimowe: "winter solstice",
         tarcze: {
           krotkie: { wloskie: "Italian hours", rowne: "equal hours", babilonskie: "Babylonian hours" },

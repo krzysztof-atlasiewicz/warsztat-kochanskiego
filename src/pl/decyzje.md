@@ -397,3 +397,13 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 **Usterka układu przy okazji:** blok objaśnień z narzuconym wierszem siatki wskakiwał na pierwszą kolumnę i wypychał kalendarz na prawo. Rozmieszczenie wszystkich czterech bloków jest teraz podane wprost, zamiast liczyć na rozpływ.
 
 Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest czterdzieści kilobajtów, dwa razy więcej niż na stronie gnomonu.
+
+## 2026-10-09 — Cykl 31: instrukcje obsługi zeszły do dymków
+
+**Dwa akapity instrukcji zniknęły z kolumny objaśnień.** „Jak nastawić czas" jest teraz dymkiem samego zegarka — tam, gdzie się go nastawia. „Jak czytać ścianę" trafiło do pola objaśnień jako jego treść domyślna: dopóki kursor nie stoi na żadnej tarczy, pole mówi, że Słońce jest uchwytem i jak wodzić wzrokiem po linii do cyfry; po najechaniu na tarczę ustępuje miejsca jej rachubie. Instrukcja obsługi przyrządu nie jest już osobnym tekstem do przeczytania, tylko odpowiedzią na to, gdzie akurat patrzysz.
+
+**Pole objaśnień przeniosło się do górnego rzędu,** w wolne miejsce obok zegarka, razem z przełącznikiem analemmy. Dotąd stało pod ścianą i dokładało dwa osobne pasy. Pulpit ma przez to trzy kolumny zamiast trzech kolumn i stopki.
+
+**Uwaga o czasie urzędowym** została zwykłym zdaniem pod rzędem nastawników — to nie instrukcja obsługi, tylko zastrzeżenie do modelu, więc nie powinna chować się w dymku.
+
+**Powtórzenie usunięte:** podpis pod ścianą namawiał do najechania na tarczę, co teraz mówi samo pole objaśnień.

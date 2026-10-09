@@ -28,7 +28,7 @@
       </figcaption>
     </figure>
 
-    <figure class="blok-zegara">
+    <figure class="blok-zegara" title="{{ s.gnomon.jakNastawic }}">
       <svg viewBox="0 0 200 224" class="tarcza-mechaniczna" role="img" aria-describedby="o-tarcza">
         <desc id="o-tarcza">{{ s.gnomon.opisTarczy }}</desc>
         <defs>
@@ -76,11 +76,18 @@
     </figure>
 
     <div class="blok-objasnien">
-      <p>{{ s.gnomon.jakNastawic }}</p>
-      <p>{{ s.gnomon.scianaOpis }}</p>
-      <p>{{ s.gnomon.kiedyUwaga }}</p>
+      <p id="dymekTarczy" class="dymek" aria-live="polite"></p>
+      <p class="rzad-przelacznika">
+        <button id="przelacz" class="przelacznik" role="switch" aria-checked="false"
+                aria-describedby="coToAnalemma" title="{{ s.gnomon.opisy.analemma }}">
+          <span class="przelacznik-tor" aria-hidden="true"><span class="przelacznik-dzwignia"></span></span>
+          <span class="przelacznik-napis">{{ s.gnomon.analemma }}</span>
+        </button>
+      </p>
+      <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
     </div>
   </div>
+  <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>
 
   <div class="przewijalna">
   <svg viewBox="0 0 820 390" class="wide sciana" role="img" aria-describedby="o-sciana">
@@ -99,22 +106,6 @@
     <g id="slonce"></g>
     <text id="brakSlonca" class="tb" x="410" y="30" text-anchor="middle" opacity="0">{{ s.gnomon.brakSlonca }}</text>
   </svg>
-  </div>
-
-  <div class="pulpit-stopka">
-    <div>
-      <p id="dymekTarczy" class="dymek" aria-live="polite"></p>
-    </div>
-    <div>
-      <p class="rzad-przelacznika">
-        <button id="przelacz" class="przelacznik" role="switch" aria-checked="false"
-                aria-describedby="coToAnalemma" title="{{ s.gnomon.opisy.analemma }}">
-          <span class="przelacznik-tor" aria-hidden="true"><span class="przelacznik-dzwignia"></span></span>
-          <span class="przelacznik-napis">{{ s.gnomon.analemma }}</span>
-        </button>
-      </p>
-      <p id="coToAnalemma" class="dymek">{{ s.gnomon.coToAnalemma }}</p>
-    </div>
   </div>
 
   <p class="dim małe">{{ s.gnomon.scianaLegenda }}</p>
