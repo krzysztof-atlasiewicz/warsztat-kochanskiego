@@ -595,3 +595,15 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Obsługa bez zmian:** strzały niosą `data-bez-dymka`, więc objaśnienie kartki nie wyskakuje nad tym, w co się celuje, a pole chwytu obejmuje dwadzieścia cztery na dwadzieścia punktów wokół każdej. Przeciąganie, kółko i klawiatura działają jak dotąd.
 
 **Test sprawdza, że strzała jest strzałą:** jedna po lewej stronie okienka, druga po prawej, a każda ma drzewce, grot i lotki. Dotąd warunek mówił tylko, że groty stoją po lewej — po zmianie układu przechodziłby dalej, nic nie znacząc.
+
+## 2026-10-10 — Cykl 47: polityka bezpieczeństwa treści unieważniła poprawkę z cyklu 41
+
+**Usterka tłumaczy pięć cykli chodzenia w kółko.** Od cyklu 41 w nagłówku każdej strony stał jeden wiersz skryptu nadający dokumentowi klasę `js`; na niej oparte były wszystkie reguły mające ustawić układ od pierwszej klatki — pasek zakładek, karty poza pierwszą, pole wyników cyrkla, pola wyboru daty na gnomonie. Polityka bezpieczeństwa treści serwisu ma jednak `script-src 'self'`, która blokuje skrypty wpisane wprost w stronę. Wiersz nie wykonywał się **na serwerze**, choć u nas, przy podglądzie bez tej polityki, wykonywał się bez zarzutu. Wszystkie pomiary wychodziły więc czysto, a na wdrożonym serwisie strona dalej skakała dokładnie tak jak przed poprawką.
+
+**Rzecz wyszła przypadkiem:** przeglądarka odmówiła wykonania wklejki pomiarowej w konsoli, podając tę samą dyrektywę. Dopiero wtedy stało się jasne, że ten sam zakaz dotyczy naszego wiersza w nagłówku.
+
+**Poprawka:** wiersz przeniesiony do osobnego pliku `/assets/js/wczesnie.js`, pobieranego w nagłówku. Czterysta bajtów, z tego samego serwisu, więc polityka go przepuszcza; nagłówki pamięci podręcznej dla `/assets/js/*` każą go sprawdzać przy każdym wejściu, więc nie zestarzeje się po cichu.
+
+**Nowa kontrola automatyczna `polityka`** (czternasta): czyta politykę z `_site/_headers` i sprawdza, że zbudowane strony nie zawierają niczego, czego ta polityka nie przepuści — skryptu wpisanego wprost w stronę, atrybutu `style` w znaczniku, skryptu spoza serwisu — oraz że sama polityka nie zmiękła o `'unsafe-inline'`. Sprawdzono, że kontrola potrafi zawieść: po przywróceniu wiersza w nagłówku zgłasza wszystkie dziewiętnaście stron.
+
+**Lekcja ogólna, trzecia tego rodzaju w ciągu jednego wieczoru:** podgląd lokalny nie jest serwisem. Różni je polityka bezpieczeństwa treści, nagłówki pamięci podręcznej i opóźnienia sieci — i każda z tych trzech rzeczy po kolei dała usterkę niewidoczną w próbach. Odtąd kontrola automatyczna czyta `_headers` i konfrontuje je z tym, co faktycznie stoi na stronach.
