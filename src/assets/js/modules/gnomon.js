@@ -221,13 +221,16 @@ export default function init(root) {
     cp.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3 }));
     defs.append(cp);
     g.append(defs);
-    g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-pole" }));
+    if (!geo.goly)
+      g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-pole" }));
     const rolka = zrob("g", { "clip-path": `url(#${clipId})` });
     g.append(rolka);
-    g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-walec" }));
-    g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-obwodka" }));
+    if (!geo.goly)
+      g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-walec" }));
+    if (!geo.goly)
+      g.append(zrob("rect", { x: geo.x, y: geo.y, width: geo.w, height: geo.h, rx: 3, class: "beben-obwodka" }));
     // Radełkowane krawędzie walca — ten sam język co koronka zegarka.
-    for (const bx of [geo.x + 3, geo.x + geo.w - 3]) {
+    for (const bx of geo.goly ? [] : [geo.x + 3, geo.x + geo.w - 3]) {
       const z = zrob("g", { class: "beben-radelko" });
       for (let i = 1; i < 6; i++) {
         const yy = geo.y + (geo.h * i) / 6;
@@ -235,9 +238,7 @@ export default function init(root) {
       }
       g.append(z);
     }
-    const sx = geo.x + geo.w + 7;
-    g.append(zrob("path", { d: `M ${sx - 4} ${cy - 3} h 8 l -4 -5 Z`, class: "beben-strzalka" }));
-    g.append(zrob("path", { d: `M ${sx - 4} ${cy + 3} h 8 l -4 5 Z`, class: "beben-strzalka" }));
+
 
     g.setAttribute("role", "spinbutton");
     g.setAttribute("tabindex", "0");
@@ -297,12 +298,28 @@ export default function init(root) {
     };
     g.addEventListener("pointerup", koniecObrotu);
     g.addEventListener("pointercancel", () => { ciagniecie = null; g.classList.remove("beben-obracany"); });
+
+    // Groty stoją po lewej stronie okienka i są rodzeństwem bębenka, nie jego
+    // dziećmi: niosą „data-bez-dymka", więc objaśnienie kartki nie wyskakuje
+    // nad nimi i nie zasłania tego, w co się właśnie celuje.
+    const groty = zrob("g", { class: "beben-groty", "data-bez-dymka": "" });
+    const sx = geo.x - 9;
+    for (const [znak, kierunek] of [[-1, -1], [1, 1]]) {
+      const yy = cy + znak * 7;
+      const grot = zrob("g", { class: "beben-grot" });
+      grot.append(zrob("path", { d: `M ${sx - 5} ${yy - znak * 2.5} L ${sx} ${yy + znak * 2.5} L ${sx + 5} ${yy - znak * 2.5}` }));
+      grot.append(zrob("rect", { x: sx - 8, y: yy - 7, width: 16, height: 14, class: "pole-chwytu" }));
+      grot.addEventListener("click", (e) => { e.stopPropagation(); obroc(kierunek); });
+      groty.append(grot);
+    }
+    g.parentNode.insertBefore(groty, g.nextSibling);
+
     odrysujBebny.push(rysuj);
     rysuj();
   }
   // Nazwy i objaśnienia bierzemy z pól <select>, żeby nie powielać tłumaczeń.
   zbudujBeben("bebenMiesiaca", polaM, polaM.getAttribute("aria-label"),
-    { x: 26, y: 24, w: 98, h: 20, baza: 4, odstep: 12, klasa: "beben-miesiac" }, polaM.dataset.dymek);
+    { x: 34, y: 24, w: 90, h: 20, baza: 4, odstep: 12, klasa: "beben-miesiac", goly: true }, polaM.dataset.dymek);
   zbudujBeben("bebenDnia", polaD, polaD.getAttribute("aria-label"),
     { x: 38, y: 60, w: 76, h: 66, baza: 17, odstep: 46, klasa: "beben-dzien" }, polaD.dataset.dymek);
   if (odrysujBebny.length) root.classList.add("z-bebnami");

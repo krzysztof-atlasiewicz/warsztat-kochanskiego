@@ -48,8 +48,14 @@ export default function init() {
     pole.style.transform = `translate(${Math.round(lewo)}px, ${Math.round(gora)}px)`;
   };
 
-  const zNajblizszego = (cel) =>
-    cel instanceof Element ? cel.closest("[data-dymek]") : null;
+  // Element z „data-bez-dymka" zasłania dymki przodków: tak oznaczamy drobne
+  // elementy sterujące — groty, uchwyty — nad którymi wyskakujące objaśnienie
+  // tylko by przeszkadzało w trafieniu.
+  const zNajblizszego = (cel) => {
+    if (!(cel instanceof Element)) return null;
+    const bl = cel.closest("[data-dymek],[data-bez-dymka]");
+    return bl && bl.hasAttribute("data-dymek") ? bl : null;
+  };
 
   document.addEventListener("pointerover", (e) => {
     kursor = { x: e.clientX, y: e.clientY };

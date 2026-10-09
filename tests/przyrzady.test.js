@@ -134,3 +134,106 @@ describe.skipIf(!zbudowane)("pulpit gnomonu", () => {
     });
   }
 });
+
+// Poprawki z cyklu 37 dotknęły czterech stron naraz. Każda z nich jest łatwa
+// do cofnięcia przy następnej zmianie układu, więc każda ma tu swój warunek.
+describe.skipIf(!zbudowane)("poprawki czytelności", () => {
+  const wczytaj = (plik) => {
+    document.body.innerHTML = readFileSync(plik, "utf8")
+      .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+    return document.querySelector("[data-modul]");
+  };
+
+  for (const plik of ["_site/pl/gnomon/index.html", "_site/en/gnomon/index.html"]) {
+    it(`${plik} — groty bębenka stoją po lewej i nie noszą dymka`, async () => {
+      const root = wczytaj(plik);
+      const m = await import("../src/assets/js/modules/gnomon.js");
+      m.default(root);
+      const groty = root.querySelectorAll(".beben-groty");
+      expect(groty.length, "brak grotów przy bębenkach").toBe(2);
+      for (const g of groty) {
+        expect(g.hasAttribute("data-bez-dymka"), "groty przepuszczają dymek kartki").toBe(true);
+        expect(g.closest("[data-dymek]"), "groty siedzą w środku bębenka").not.toBe(
+          g.previousElementSibling
+        );
+      }
+      const beben = root.querySelector("#bebenDnia");
+      const [x] = [...groty].map((g) => Number(g.querySelector("rect").getAttribute("x")));
+      expect(x, "groty stoją po prawej stronie okienka")
+        .toBeLessThan(Number(beben.querySelector("rect").getAttribute("x")));
+    });
+
+    it(`${plik} — grot przestawia dzień`, async () => {
+      const root = wczytaj(plik);
+      const m = await import("../src/assets/js/modules/gnomon.js");
+      m.default(root);
+      const przed = root.querySelector("#dzien").value;
+      root.querySelectorAll("#bebenDnia + .beben-groty .beben-grot")[1]
+        .dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+      expect(root.querySelector("#dzien").value, "kliknięcie grotu nic nie zmieniło").not.toBe(przed);
+    });
+  }
+
+  for (const plik of ["_site/pl/wahadlo/index.html", "_site/en/pendulum/index.html"]) {
+    it(`${plik} — wykres błędu jest wkreślony w kartę, nie stoi obok niej`, async () => {
+      const root = wczytaj(plik);
+      expect(root.querySelector("#eWahadlo"), "osobny wykres błędu nie zniknął").toBeFalsy();
+      const m = await import("../src/assets/js/modules/rejs.js");
+      m.default(root);
+      expect(root.querySelectorAll("svg.karta .slad-bledu").length,
+        "na karcie brakuje śladów obu zegarów").toBe(2);
+    });
+
+    it(`${plik} — w porcie podpis „tu jesteś" ustępuje nazwie portu`, async () => {
+      const root = wczytaj(plik);
+      const m = await import("../src/assets/js/modules/rejs.js");
+      m.default(root);
+      const podpisy = () => [...root.querySelectorAll("#pozycje text")].map((t) => t.textContent);
+      const tu = root.querySelector("[data-napisy]")
+        ? JSON.parse(root.querySelector("[data-napisy]").dataset.napisy).tuJestes : "tu jesteś";
+      expect(podpisy().some((t) => t === tu), "w porcie docelowym podpis został").toBe(false);
+      const d = root.querySelector("#dzien");
+      d.value = "40";
+      d.dispatchEvent(new window.Event("input", { bubbles: true }));
+      expect(podpisy().some((t) => t === tu), "na pełnym morzu podpisu zabrakło").toBe(true);
+    });
+
+    it(`${plik} — koło sterowe stoi między kalendarzem a okrętem`, () => {
+      const root = wczytaj(plik);
+      const kolo = root.querySelector("#rejsStart.kolo-sterowe");
+      expect(kolo, "przycisk nie jest kołem sterowym").toBeTruthy();
+      const bloki = [...root.querySelectorAll(".pulpit-sterowniki > *")];
+      expect(bloki.indexOf(kolo.closest(".blok-kola")), "koło nie stoi na drugim miejscu").toBe(1);
+      expect(bloki[0].classList.contains("blok-daty")).toBe(true);
+      expect(bloki[2].classList.contains("blok-okretu")).toBe(true);
+    });
+
+    it(`${plik} — termometr tłumaczy się dymkiem`, () => {
+      const root = wczytaj(plik);
+      const term = root.querySelector(".rzad-mapy .przyrzad-boczny[data-dymek]");
+      expect(term, "termometr bez dymka").toBeTruthy();
+      expect(term.dataset.dymek.length, "dymek termometru jest pusty").toBeGreaterThan(40);
+    });
+  }
+
+  for (const [plik, etykieta] of [["_site/pl/cyrkiel/index.html", "Konstrukcja"],
+                                  ["_site/en/compass/index.html", "Construction"]]) {
+    it(`${plik} — pierwsza zakładka to „${etykieta}", a wyprowadzenie stoi otworem`, () => {
+      const root = wczytaj(plik);
+      expect(root.querySelector("#z-przyrzad").textContent.trim(),
+        "pierwsza zakładka dalej nazywa się jak przyrząd").toBe(etykieta);
+      expect(root.querySelector("details.wyprowadzenie"), "wyprowadzenie dalej się rozwija").toBeFalsy();
+      expect(root.querySelector("section.wyprowadzenie h3"), "wyprowadzenie bez nagłówka").toBeTruthy();
+    });
+  }
+
+  for (const plik of ["_site/pl/szyfr/index.html", "_site/en/cipher/index.html"]) {
+    it(`${plik} — instrukcja pierścienia stoi obok nastawy`, () => {
+      const root = wczytaj(plik);
+      const nastawa = root.querySelector(".szyfr-nastawa");
+      expect(nastawa, "brak pola nastawy").toBeTruthy();
+      expect(nastawa.querySelector(".szyfr-tarcza #tarcza"), "tarcza poza polem nastawy").toBeTruthy();
+      expect(nastawa.querySelector(".tarcza-podpowiedz"), "instrukcja poza polem nastawy").toBeTruthy();
+    });
+  }
+});

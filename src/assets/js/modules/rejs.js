@@ -1,7 +1,6 @@
 import { przebiegRejsu, dataDnia, REJS, TRASA } from "./matematyka.js";
 
 const NS = "http://www.w3.org/2000/svg";
-const X0 = 90, X1 = 700, Y0 = 46, Y1 = 240;        // wykres błędu
 const PROG = 56;                                    // pół stopnia długości geograficznej
 const M = { x0: 40, x1: 720, y0: 40, y1: 370, lonA: -64, lonB: 6, latA: 52, latB: -4 };
 const WSK_MAX = 400;                                // górna granica podziałki wskaźników
@@ -136,7 +135,6 @@ export default function init(root) {
     const kompensacja = $("kompensacja").checked;
     const dzien = Number($("dzien").value);
     const bieg = przebiegRejsu({ kolysanie, kompensacja });
-    const koniec = bieg[REJS.dni];
     const p = bieg[dzien];
 
     // kalendarz
@@ -180,27 +178,28 @@ export default function init(root) {
         "text-anchor": przyKrawedzi ? "end" : "start", fill: kolor
       }, podpis));
     };
+    // Ślad narastania błędu: dla każdej doby do bieżącej punkt, w którym okręt
+    // *myślałby*, że jest. To ten sam przebieg, co dawny wykres obok mapy —
+    // tyle że wykreślony tam, gdzie ma sens, czyli na karcie kursowej.
+    const slad = (pole) => bieg.slice(0, dzien + 1).map((q) => {
+      const kmSt = 111.32 * Math.cos((q.szerokosc * Math.PI) / 180);
+      const lon = Math.min(q.dlugosc + q[pole] / kmSt, M.lonB - 0.5);
+      return `${mx(lon).toFixed(1)},${my(q.szerokosc).toFixed(1)}`;
+    }).join(" ");
+    for (const [pole, kolor] of [["kmWahadlo", "var(--sun)"], ["kmSprezyna", "var(--verd)"]])
+      g.append(el("polyline", { points: slad(pole), fill: "none", stroke: kolor,
+        "stroke-width": "1.4", opacity: "0.85", class: "slad-bledu" }));
+
     znacznik(p.kmWahadlo, "var(--sun)", `${n.wahadlo}: ${pl(p.kmWahadlo)} km`, -8);
     znacznik(p.kmSprezyna, "var(--verd)", `${n.sprezyna}: ${pl(p.kmSprezyna)} km`, 16);
     g.append(el("circle", { cx: mx(p.dlugosc), cy: my(p.szerokosc), r: 5, fill: "var(--ink)" }));
-    g.append(el("text", { class: "t napis-karty", x: mx(p.dlugosc) - 8, y: my(p.szerokosc) + 4, "text-anchor": "end" }, n.tuJestes || ""));
-
-    // wykres narastania błędu
-    const max = Math.max(PROG * 1.6, koniec.kmWahadlo, koniec.kmSprezyna) * 1.08;
-    const px = (i) => X0 + ((X1 - X0) * i) / REJS.dni;
-    const py = (y) => Y1 - ((Y1 - Y0) * Math.min(y, max)) / max;
-    const linia = (pole) => bieg.map((q, i) => `${px(i).toFixed(1)},${py(q[pole]).toFixed(1)}`).join(" ");
-    $("eWahadlo").setAttribute("points", linia("kmWahadlo"));
-    $("eSprezyna").setAttribute("points", linia("kmSprezyna"));
-    const ty = py(PROG).toFixed(1);
-    $("prog").setAttribute("y1", ty); $("prog").setAttribute("y2", ty);
-    $("progL").setAttribute("y", (Number(ty) + 4).toFixed(1));
-    $("yMax").textContent = `${pl(max)} km`;
-    $("ySrodek").textContent = `${pl(max / 2)} km`;
-    const xz = px(dzien).toFixed(1);
-    $("znacznik").setAttribute("x1", xz); $("znacznik").setAttribute("x2", xz);
-    $("punktW").setAttribute("cx", xz); $("punktW").setAttribute("cy", py(p.kmWahadlo).toFixed(1));
-    $("punktS").setAttribute("cx", xz); $("punktS").setAttribute("cy", py(p.kmSprezyna).toFixed(1));
+    // Podpis „tu jesteś" ustępuje nazwie portu: w La Rochelle i w Kajennie
+    // obie etykiety lądowały na sobie i czytało się z tego zdanie, którego
+    // nikt nie napisał.
+    const wPorcie = [[REJS.lonA, REJS.latA], [REJS.lonB, REJS.latB]]
+      .some(([lo, la]) => Math.hypot(mx(p.dlugosc) - mx(lo), my(p.szerokosc) - my(la)) < 26);
+    if (!wPorcie)
+      g.append(el("text", { class: "t napis-karty", x: mx(p.dlugosc) - 8, y: my(p.szerokosc) + 4, "text-anchor": "end" }, n.tuJestes || ""));
 
     // Odczyty stoją przy przyrządach, które je dają: szerokość pod kartą,
     // błąd pozycji pod wskaźnikiem tego zegara, z którego wynika.
@@ -210,15 +209,6 @@ export default function init(root) {
 
     rachunek(bieg, dzien, kmNaStopien);
   }
-
-  (function podzialkaDni() {
-    const g = $("dniPodzialka");
-    for (const d of [0, 20, 40, 60, 74]) {
-      const x = X0 + ((X1 - X0) * d) / REJS.dni;
-      g.append(el("line", { x1: x, y1: 240, x2: x, y2: 246, stroke: "var(--rule)", "stroke-width": "1" }));
-      g.append(el("text", { class: "t", x, y: 260, "text-anchor": d === 0 ? "start" : d === REJS.dni ? "end" : "middle" }, String(d)));
-    }
-  })();
 
   function rachunek(bieg, dzien, kmNaStopien) {
     const lista = $("rachunekLista");

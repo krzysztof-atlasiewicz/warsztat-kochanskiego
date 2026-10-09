@@ -463,3 +463,23 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Pola `select` zostają w dokumencie,** schowane dopiero wtedy, gdy skrypt zbuduje bębenki. Bez skryptu kartka pokazuje dwa zwykłe pola wyboru pod spodem i data dalej daje się ustawić; bębenki są wzbogaceniem, nie warunkiem działania. Są też nośnikiem stanu — bębenek nie trzyma własnej liczby, tylko obraca `selectedIndex` i rozsyła zdarzenie `change`, więc reszta przyrządu nie wie o zmianie sposobu nastawiania.
 
 **Sprawdzono ruch, nie tylko wygląd:** dwa naciśnięcia strzałki w dół przestawiają dzień z 21 na 23, strzałka w górę na bębenku miesiąca cofa z maja na kwiecień i skraca dzień z 16 godz 46 min na 16 godz 07 min, kółko myszy przesuwa o jedną pozycję. Test wymaga, żeby oba bębenki były `spinbutton`ami osiągalnymi klawiaturą, miały odczytaną wartość i pokazywały trzy wartości naraz — bieżącą i dwie sąsiednie.
+
+## 2026-10-09 — Cykl 37: dziesięć poprawek czytelności na czterech stronach
+
+**Gnomon — groty po lewej, bez dymka, bez obwódki.** Dwa daszki stoją teraz po lewej stronie każdego bębenka i są jego rodzeństwem w rysunku, nie dzieckiem. Niosą nowy atrybut `data-bez-dymka`, który zasłania dymki przodków: objaśnienie kartki nie wyskakuje już nad grotem i nie zasłania tego, w co się celuje. Mechanizm jest ogólny — każdy drobny element sterujący może się tak wypisać z dymka. Bębenek miesiąca stracił ramkę, tło i radełkowanie: w nagłówkowym pasie kartki wystarczy sam obracany napis, bo pas i tak jest odcięty mosiężną kreską.
+
+**Szyfr — instrukcja obok nastawy.** Akapit o chwytaniu pierścienia stał pod tarczą i dokładał kolejny pas do przewijania. Teraz zajmuje wolne pole po prawej od tarczy, w tej samej planszy; poniżej 52 rem wraca pod spód.
+
+**Wahadło — podpis ustępuje portowi.** W La Rochelle i w Kajennie podpis „tu jesteś" lądował na nazwie portu i czytało się z tego zdanie, którego nikt nie napisał. Podpis znika, gdy pozycja jest bliżej niż dwadzieścia sześć punktów od portu — nazwa portu mówi to samo i dokładniej.
+
+**Wahadło — wykres wkreślony w kartę.** Osobny wykres narastania błędu zniknął z pulpitu. Te same dwa przebiegi są teraz dwoma śladami na karcie kursowej: dla każdej doby do bieżącej punkt, w którym okręt *myślałby*, że jest. Wykres błędu pozycji ma sens na mapie, a nie obok niej — odchylenie widać jako odległość, a nie jako wysokość słupka. Strona straciła przy tym cały jeden pas o wysokości ponad trzystu punktów.
+
+**Wahadło — koło sterowe.** „Odbij od brzegu" nie jest już wierszem pod suwakami, tylko kołem sterowym stojącym między kalendarzem a okrętem, który ma ruszyć. Przy najechaniu obraca się o czterdzieści pięć stopni, o ile użytkownik nie prosił o ograniczenie ruchu.
+
+**Wahadło — dymek termometru.** Termometr nie pokazuje pogody, tylko temperaturę wynikającą z szerokości geograficznej: 9,8 °C na wysokości La Rochelle, 27,8 °C u Kajenny, liniowo pomiędzy. Dotąd nigdzie tego nie było napisane, a to właśnie ta liczba napędza błąd obu zegarów.
+
+**Cyrkiel — zakładka „Konstrukcja".** Cyrkiel nie jest przyrządem do nastawiania, tylko konstrukcją geometryczną, więc pierwsza zakładka nazywa się tak, jak to, co w niej stoi. Układ strony przyrządu przyjmuje teraz własną nazwę pierwszej zakładki z nagłówka strony.
+
+**Cyrkiel — wyprowadzenie wzoru stoi otworem.** Pięciokrokowy rachunek był schowany w elemencie rozwijanym. Nie ma powodu go chować: to trzon zakładki „Skąd to wiemy", a nie dodatek. Zostaje zwykłą sekcją z nagłówkiem.
+
+**Osiemnaście nowych testów** (80 zamiast 64) — po jednym na każdą z poprawek, w obu językach: groty stoją po lewej i nie przepuszczają dymka, kliknięcie grotu przestawia dzień, osobnego wykresu nie ma a ślady na karcie są dwa, podpis „tu jesteś" znika w porcie i wraca na pełnym morzu, koło sterowe stoi na drugim miejscu w rzędzie nastawników, termometr ma niepusty dymek, pierwsza zakładka cyrkla nazywa się „Konstrukcja" a wyprowadzenie nie jest rozwijane, instrukcja pierścienia siedzi w jednym polu z tarczą.

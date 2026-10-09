@@ -8,7 +8,7 @@ layout: layouts/base.njk
     {%- for t in tagi %}<span class="tag {{ t.typ }}">{{ t.etykieta }}</span>{% endfor %}
   </p>
   <div class="zakladki" role="tablist" aria-label="{{ z.opis }}">
-    <button type="button" role="tab" id="z-przyrzad" aria-controls="k-przyrzad" aria-selected="true">{{ z.przyrzad }}</button>
+    <button type="button" role="tab" id="z-przyrzad" aria-controls="k-przyrzad" aria-selected="true">{{ z[kartaPierwsza] if kartaPierwsza else z.przyrzad }}</button>
     <button type="button" role="tab" id="z-wiemy" aria-controls="k-wiemy" aria-selected="false">{{ z.wiemy }}</button>
     <button type="button" role="tab" id="z-pytania" aria-controls="k-pytania" aria-selected="false">{{ z.pytania }} <span class="licznik">{{ (para | pytaniaMiejsca) | length }}</span></button>
   </div>
