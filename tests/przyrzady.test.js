@@ -71,6 +71,34 @@ describe.skipIf(!zbudowane)("pulpit gnomonu", () => {
       }
     });
 
+    it(`${plik} — zastrzeżenie o czasie urzędowym stoi pod legendą zegarka`, () => {
+      document.body.innerHTML = readFileSync(plik, "utf8")
+        .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+      const blok = document.querySelector(".blok-objasnien");
+      const uwaga = blok.querySelector(".uwaga-urzedowa");
+      const odczyt = blok.querySelector(".odczyt-zegara");
+      expect(uwaga, "uwaga o czasie urzędowym nie jest w kolumnie objaśnień").toBeTruthy();
+      expect(
+        odczyt.compareDocumentPosition(uwaga) & Node.DOCUMENT_POSITION_FOLLOWING,
+        "uwaga nie stoi pod legendą"
+      ).toBeTruthy();
+    });
+
+    it(`${plik} — kartka kalendarza jest tej samej wysokości co zegarek`, () => {
+      const html = readFileSync(plik, "utf8");
+      const vb = (klasa) => {
+        const m = new RegExp(`viewBox="0 0 (\\d+) (\\d+)"[^>]*class="${klasa}`).exec(html);
+        expect(m, `brak viewBoksa dla .${klasa}`).toBeTruthy();
+        return { w: Number(m[1]), h: Number(m[2]) };
+      };
+      const css = readFileSync("src/assets/css/site.css", "utf8");
+      const szer = (regula) => Number(new RegExp(`${regula}\\{[^}]*?width:(\\d+)px`).exec(css)[1]);
+      const kartka = vb("kartka"), zegar = vb("tarcza-mechaniczna");
+      const wysKartki = (szer("\\.kartka") * kartka.h) / kartka.w;
+      const wysZegara = (szer("\\.tarcza-mechaniczna") * zegar.h) / zegar.w;
+      expect(Math.abs(wysKartki - wysZegara), `kartka ${wysKartki} px, zegarek ${wysZegara} px`).toBeLessThan(1);
+    });
+
     it(`${plik} — Słońce samo niesie swój dymek i pole chwytu`, async () => {
       document.body.innerHTML = readFileSync(plik, "utf8")
         .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
