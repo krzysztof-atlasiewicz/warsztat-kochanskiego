@@ -281,7 +281,35 @@ svg.sciana{max-width:none;width:100%}
 .nastawniki .ctl input[type=range]{flex:1 1 5rem}
 .nastawniki .ctl output{flex:0 0 6rem;font-size:.8rem;line-height:1.25}
 .nastawniki p{margin:.5rem 0 0}
-.pulpit-podtytul{font-size:1rem;font-weight:400;margin:1.4rem 0 .3rem;color:var(--ink-soft)}
+.pulpit-podtytul{font-size:1rem;font-weight:400;margin:0 0 .3rem;color:var(--ink-soft)}
+
+/* ── wykres w wolnym polu pod kalendarzem i okrętem ────────────────────── */
+/* Rozmieszczenie podane wprost: przy samym rozpływie siatki blok objaśnień
+   z narzuconym wierszem wskakiwał na pierwszą kolumnę i wypychał kalendarz. */
+.przyrzady-rejs .blok-daty{grid-column:1;grid-row:1}
+.przyrzady-rejs .blok-okretu{grid-column:2;grid-row:1}
+.przyrzady-rejs .blok-objasnien{grid-column:3;grid-row:1 / 3}
+.przyrzady-rejs .blok-wykresu{grid-column:1 / 3;grid-row:2}
+.blok-wykresu .legenda{margin-bottom:.2rem}
+.blok-wykresu .t{font-size:16px}
+.blok-wykresu p{margin:.2rem 0 0}
+
+/* ── termometr po lewej od karty, wskaźniki po prawej ──────────────────── */
+.rzad-mapy{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.6rem 1rem;align-items:center;margin:.8rem 0 .3rem}
+.przyrzad-boczny{margin:0;text-align:center}
+.przyrzad-boczny svg{max-width:86px}
+.wskazniki-boczne{display:flex;flex-direction:column;gap:.7rem}
+.wskazniki-boczne svg{max-width:124px}
+.przyrzad-boczny figcaption{font-family:var(--mono);font-size:.92rem;line-height:1.25}
+.przyrzad-boczny figcaption span{display:block}
+.przyrzad-boczny figcaption .blad{color:var(--verd)}
+.przyrzad-boczny figcaption .dim{font-family:var(--serif);font-size:.76rem;cursor:help}
+@media (max-width:58rem){
+  .rzad-mapy{grid-template-columns:1fr}
+  .wskazniki-boczne{flex-direction:row;justify-content:center}
+  .przyrzady-rejs .blok-daty,.przyrzady-rejs .blok-okretu,
+  .przyrzady-rejs .blok-objasnien,.przyrzady-rejs .blok-wykresu{grid-column:auto;grid-row:auto}
+}
 .blok-zegara{flex:0 0 250px}
 .pola-daty{display:grid;grid-template-columns:auto auto;gap:.35rem .5rem;align-items:center}
 .pola-daty .wybor{display:contents}

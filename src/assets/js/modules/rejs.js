@@ -202,8 +202,9 @@ export default function init(root) {
     $("punktW").setAttribute("cx", xz); $("punktW").setAttribute("cy", py(p.kmWahadlo).toFixed(1));
     $("punktS").setAttribute("cx", xz); $("punktS").setAttribute("cy", py(p.kmSprezyna).toFixed(1));
 
+    // Odczyty stoją przy przyrządach, które je dają: szerokość pod kartą,
+    // błąd pozycji pod wskaźnikiem tego zegara, z którego wynika.
     $("szer").innerHTML = `${d1(p.szerokosc)} <small>°N</small>`;
-    $("temp").innerHTML = `${d1(p.temperatura)} <small>°C</small>`;
     $("kw").innerHTML = `${pl(p.kmWahadlo)} <small>km</small>`;
     $("ks").innerHTML = `${pl(p.kmSprezyna)} <small>km</small>`;
 

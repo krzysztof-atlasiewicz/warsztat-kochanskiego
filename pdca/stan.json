@@ -1,7 +1,7 @@
 {
   "faza": "A",
   "wersja": "0.9-dev",
-  "cykl": 12,
+  "cykl": 13,
   "bramka": {
     "id": "GA",
     "warunki": [
@@ -73,7 +73,7 @@
         "opis": "Kroje pisma osadzone w repozytorium",
         "typ": "automat",
         "kontrola": "kroje",
-        "ostatniWynik": "niespełniony"
+        "ostatniWynik": "spełniony"
       },
       {
         "id": "GA11",
