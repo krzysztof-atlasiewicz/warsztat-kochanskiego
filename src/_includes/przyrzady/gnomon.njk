@@ -8,23 +8,22 @@
   <div class="pulpit-sterowniki">
 
     <figure class="blok-daty" data-dymek="{{ s.gnomon.dymekKalendarza }}">
-      <svg viewBox="0 0 160 190" class="kartka" role="img" aria-describedby="o-kartka">
+      <svg viewBox="0 0 160 214" class="kartka" role="img" aria-describedby="o-kartka">
         <desc id="o-kartka">{{ s.gnomon.opisKartki }}</desc>
-        <path d="M 10 18 L 150 18 L 150 160 Q 120 170 90 162 Q 55 153 10 164 Z"
+        <path d="M 10 18 L 150 18 L 150 184 Q 120 194 90 186 Q 55 177 10 188 Z"
               fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
         <line x1="10" y1="42" x2="150" y2="42" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
         <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <text id="kalMiesiac" class="t" x="80" y="36" text-anchor="middle">—</text>
-        <text id="kalDzien" class="kartka-liczba" x="80" y="112" text-anchor="middle">—</text>
-        <text id="kalPora" class="t" x="80" y="140" text-anchor="middle">—</text>
-        <text id="kalDzien2" class="t" x="80" y="156" text-anchor="middle">—</text>
+        <text id="kalDzien" class="kartka-liczba" x="80" y="116" text-anchor="middle">—</text>
+        <line x1="34" y1="138" x2="126" y2="138" stroke="var(--rule-soft)" stroke-width="0.8"/>
+        <text id="kalPora" class="t" x="80" y="156" text-anchor="middle">—</text>
+        <text id="kalDzien2" class="t" x="80" y="172" text-anchor="middle">—</text>
       </svg>
       <figcaption class="pola-daty">
-        <span class="wybor"><label for="dzien">{{ s.gnomon.dzien }}</label>
-          <select id="dzien" title="{{ s.gnomon.opisy.dzien }}"></select></span>
-        <span class="wybor"><label for="miesiac">{{ s.gnomon.miesiac }}</label>
-          <select id="miesiac" title="{{ s.gnomon.opisy.miesiac }}"></select></span>
+        <select id="dzien" aria-label="{{ s.gnomon.dzien }}" data-dymek="{{ s.gnomon.opisy.dzien }}"></select>
+        <select id="miesiac" aria-label="{{ s.gnomon.miesiac }}" data-dymek="{{ s.gnomon.opisy.miesiac }}"></select>
       </figcaption>
     </figure>
 
@@ -68,11 +67,6 @@
           </g>
         </g>
       </svg>
-      <figcaption class="odczyt-zegara">
-        <span class="para-zegara"><b class="znak-mech"></b><span id="mech">—</span> {{ s.gnomon.mech }}</span>
-        <span class="para-zegara"><b class="znak-slon"></b><span id="slon">—</span> {{ s.gnomon.slon }}</span>
-        <span class="para-zegara"><b class="znak-luk"></b><span id="roznica">—</span> {{ s.gnomon.roznica }}</span>
-      </figcaption>
     </figure>
 
     <div class="blok-objasnien">
@@ -83,6 +77,11 @@
           <span class="przelacznik-napis">{{ s.gnomon.analemma }}</span>
         </button>
       </p>
+      <div class="odczyt-zegara">
+        <span class="para-zegara"><b class="znak-mech"></b><span id="mech">—</span> {{ s.gnomon.mech }}</span>
+        <span class="para-zegara"><b class="znak-slon"></b><span id="slon">—</span> {{ s.gnomon.slon }}</span>
+        <span class="para-zegara"><b class="znak-luk"></b><span id="roznica">—</span> {{ s.gnomon.roznica }}</span>
+      </div>
     </div>
   </div>
   <p class="dim małe">{{ s.gnomon.kiedyUwaga }}</p>

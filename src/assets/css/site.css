@@ -168,7 +168,8 @@ math{font-size:1.05em}
 .blok-objasnien p{margin:0 0 .7rem}
 .przyrzady-gnomon .blok-objasnien{border-left:0;padding-left:0}
 .przyrzady-gnomon .blok-objasnien .dymek{margin-top:0}
-.przyrzady-gnomon .rzad-przelacznika{margin:.8rem 0 0}
+.przyrzady-gnomon .rzad-przelacznika{margin:.2rem 0 .9rem}
+.przyrzady-gnomon .odczyt-zegara{font-size:.86rem}
 .blok-objasnien p:last-child{margin-bottom:0}
 .pulpit-stopka{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:.4rem 1.6rem;margin-top:.9rem}
 .pulpit .dymek{background:var(--paper)}
@@ -314,9 +315,11 @@ svg.sciana{max-width:none;width:100%}
   .przyrzady-rejs .blok-objasnien,.przyrzady-rejs .blok-wykresu{grid-column:auto;grid-row:auto}
 }
 .blok-zegara{flex:0 0 250px}
-.pola-daty{display:grid;grid-template-columns:auto auto;gap:.35rem .5rem;align-items:center}
-.pola-daty .wybor{display:contents}
-.pola-daty label{text-align:right}
+/* Pola wyboru wpięte pod kartkę, jak metalowy uchwyt kalendarza ściennego. */
+.pola-daty{display:flex;gap:.3rem;justify-content:center;width:100%;max-width:150px;margin:-.35rem auto 0;
+  border:1px solid var(--mosiadz-ciemny);border-top:0;border-radius:0 0 3px 3px;padding:.3rem;background:var(--plyta-ciemna)}
+.pola-daty select{flex:1 1 auto;min-width:0;font-variant-numeric:tabular-nums;font-size:.85rem;padding:.2rem .1rem;text-align:center}
+.blok-daty{flex:0 0 160px;gap:0}
 .pola-daty select{font-variant-numeric:tabular-nums}
 .tarcza-mechaniczna{max-width:200px;touch-action:none;user-select:none}
 .tarcza-mechaniczna .cyfra-zegara{font-family:var(--serif);font-size:15px;fill:var(--ink)}

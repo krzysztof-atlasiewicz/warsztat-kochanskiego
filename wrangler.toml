@@ -7,7 +7,6 @@ preview_urls = false
 directory = "./_site"
 not_found_handling = "404-page"
 
-
 [[routes]]
 pattern = "warsztat.adamandy.pl"
 custom_domain = true

@@ -169,13 +169,13 @@ function rysujTarcze(rodzic, tarcza, rodzaj, linie, napisy, opisy) {
   n.append(zrob("circle", { cx: r.nx, cy: r.ny, r: 2, class: "nodus-pret" }));
   g.append(n);
   const sx = (r.x0 + r.x1) / 2;
-  g.append(zrob("text", { x: sx, y: r.y1 + 23, "text-anchor": "middle", class: "napis-tarczy" }, napisy.krotkie[rodzaj]));
-  g.append(zrob("text", { id: rodzaj, x: sx, y: r.y1 + 48, "text-anchor": "middle",
+  g.append(zrob("text", { x: sx, y: r.y1 + 31, "text-anchor": "middle", class: "napis-tarczy" }, napisy.krotkie[rodzaj]));
+  g.append(zrob("text", { id: rodzaj, x: sx, y: r.y1 + 56, "text-anchor": "middle",
     class: `odczyt-sciany odczyt-${rodzaj}` }, "—"));
   // Pole chwytu: dymek ma się zapalać nad całym blokiem tarczy razem z podpisem
   // i odczytem, a nie tylko tam, gdzie akurat leży kreska.
   g.append(zrob("rect", { x: r.x0 - 16, y: r.y0 - 16, width: r.x1 - r.x0 + 32,
-    height: r.y1 - r.y0 + 74, class: "pole-chwytu" }));
+    height: r.y1 - r.y0 + 82, class: "pole-chwytu" }));
 }
 
 export default function init(root) {
@@ -382,7 +382,10 @@ export default function init(root) {
       if (r.ny - lam * c.dy < 40) lam = (r.ny - 40) / c.dy;
       const sx = r.nx - lam * c.dx, sy = r.ny - lam * c.dy;
 
+      slonce.dataset.dymek = N.slonceUchwyt;
       slonce.append(zrob("circle", { cx: sx.toFixed(1), cy: sy.toFixed(1), r: 15, class: "slonce-tarcza" }));
+      // Pole chwytu Słońca: trafienie w samą tarczę na dotyku bywa trudne.
+      slonce.append(zrob("circle", { cx: sx.toFixed(1), cy: sy.toFixed(1), r: 30, class: "pole-chwytu" }));
       for (let i = 0; i < 12; i++) {
         const a = (i * 30 * Math.PI) / 180;
         slonce.append(zrob("line", {

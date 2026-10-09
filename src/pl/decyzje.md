@@ -419,3 +419,17 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Pole chwytu tarczy obejmuje cały jej blok** — kartusz, podpis i odczyt — zamiast samych kresek. Dymek przestał być czuły na to, czy kursor trafił akurat w linię.
 
 **Uwaga o dostępności:** dymek bywa jedyną drogą do tych objaśnień, więc każdy element z `data-dymek` jest osiągalny klawiaturą i niesie tę samą treść w atrybucie `aria-description`. Pełny opis przyrządu pozostaje w narracji zakładki „Skąd to wiemy", więc nic nie zależy wyłącznie od najechania myszą.
+
+## 2026-10-09 — Cykl 33: pulpit gnomonu dociągnięty do ręki
+
+**Legenda zegarka zeszła pod przełącznik analemmy.** Trzy odczyty — godzina mechaniczna, słoneczna i różnica między nimi — stały dotąd w podpisie pod zegarkiem i rozpychały środkową kolumnę w dół. Teraz tworzą jedną kolumnę z przełącznikiem, po prawej stronie pulpitu, gdzie i tak było puste miejsce. Zegarek odzyskał swoją wysokość, a trzy liczby stoją jedna pod drugą, czytelne jak legenda mapy.
+
+**Dymek Słońca zapala się przy Słońcu.** Objaśnienie, że Słońce jest uchwytem do przesuwania czasu, wisiało dotąd na całej ścianie i pojawiało się gdzieś pod nią — daleko od rzeczy, której dotyczyło. Słońce ma teraz własny dymek i własne, niewidoczne pole chwytu o promieniu trzydziestu punktów, więc trafia się w nie bez celowania. Przy okazji dymki dużych obszarów — ściany, mapy — idą za kursorem zamiast czepiać się środka elementu: dla pola wyższego niż 240 punktów albo szerszego niż 420 punktów punktem zaczepienia jest kursor.
+
+**Podpisy tarcz zeszły o osiem punktów niżej,** odczyty o tyle samo. „Godziny włoskie", „równe" i „babilońskie" dotykały dotąd ramki kartusza. Pole chwytu tarczy urosło razem z nimi, żeby dymek dalej obejmował podpis i odczyt.
+
+**Kartka kalendarza jest dłuższa o trzydzieści punktów** i ma kreskę rozdzielającą datę od długości dnia i nocy. Przy dacie dwucyfrowej liczba nachodziła dotąd na wiersz „dzień / noc".
+
+**Wybór dnia i miesiąca wrócił na kartkę.** Dwa pola stoją bezpośrednio pod nią, na wspólnej mosiężnej listwie przyklejonej do jej dolnej krawędzi, bez podpisów — nazwy pól niosą `aria-label` i dymek. Dotąd były osobnym rzędem pod kalendarzem i czytało się je jak formularz obok przyrządu, a nie jak jego część.
+
+**Układ pulpitu ma od tego cyklu własne testy** (58 zamiast 52): legenda musi stać po przełączniku w tym samym bloku, oba pola daty muszą siedzieć na kartce i mieć nazwę dostępną wraz z dymkiem, a Słońce po złożeniu przyrządu musi nieść dymek i pole chwytu. Trzy rzeczy, które najłatwiej rozjechać następną poprawką arkusza stylów.
