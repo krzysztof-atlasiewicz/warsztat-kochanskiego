@@ -17,8 +17,18 @@ const TARCZE = {
 };
 // Tarcza zegara kieszonkowego: środek, promienie podziałki i koronka.
 const ZEG = { cx: 100, cy: 128, w: 200, h: 224, rCyfry: 61, rZnacznik: 78, rLuk: 73, kx: 100, ky: 34 };
-const ROK = 2026;
-const DNI_MIESIACA = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+// Rok modelowy jest przestępny, żeby 29 lutego dało się w ogóle wybrać.
+// Model liczy dla konkretnego roku — ta sama data kalendarzowa wypada w cyklu
+// czteroletnim nieco inaczej względem przesileń, co opisuje uwaga pod przyrządem.
+const ROK = 2028;
+export const przestepny = (rok) => (rok % 4 === 0 && rok % 100 !== 0) || rok % 400 === 0;
+export const dniMiesiaca = (rok, miesiac) =>
+  [31, przestepny(rok) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][miesiac];
+export const dniRoku = (rok) => (przestepny(rok) ? 366 : 365);
+const zDniaRoku = (rok, n) => {
+  const d = new Date(Date.UTC(rok, 0, n));
+  return [d.getUTCMonth(), d.getUTCDate()];
+};
 const RZYMSKIE = ["XII", "I", "II", "III", "IIII", "V", "VI", "VII", "VIII", "IX", "X", "XI"];
 const NS = "http://www.w3.org/2000/svg";
 
@@ -51,9 +61,10 @@ function zCzasuLokalnego(rok, mies, dzien, godziny) {
 }
 const czasSloneczny = (t) => (A.HourAngle(A.Body.Sun, t, OBS) + 12) % 24;
 
-export function stanNieba(rok, dzienRoku, godzinaZegarowa) {
-  const d0 = new Date(Date.UTC(rok, 0, dzienRoku));
-  const data = zCzasuLokalnego(rok, d0.getUTCMonth(), d0.getUTCDate(), godzinaZegarowa);
+// Stan nieba dla rzeczywistej daty kalendarzowej — bez przeliczania na numer
+// dnia w roku, bo takie przeliczenie gubiłoby 29 lutego.
+export function stanNieba(rok, miesiac, dzien, godzinaZegarowa) {
+  const data = zCzasuLokalnego(rok, miesiac, dzien, godzinaZegarowa);
   const t = A.MakeTime(data);
   const eq = A.Equator(A.Body.Sun, t, OBS, true, true);
   const hor = A.Horizon(t, OBS, eq.ra, eq.dec, "normal");
@@ -74,13 +85,6 @@ export function stanNieba(rok, dzienRoku, godzinaZegarowa) {
     wloskie: zachod ? (teraz - czasSloneczny(zachod) + 24) % 24 : null,
     nadHoryzontem: hor.altitude > 0
   };
-}
-
-// Numer dnia w roku modelowym (nieprzestępnym) z miesiąca i dnia miesiąca.
-export function dzienRoku(miesiac, dzien) {
-  let s = 0;
-  for (let i = 0; i < miesiac; i++) s += DNI_MIESIACA[i];
-  return s + dzien;
 }
 
 // Przesunięcie cienia końca pręta dla bieżącego stanu nieba.
@@ -134,8 +138,12 @@ function miejsceNapisu(kawalki, r) {
   };
 }
 
-function rysujTarcze(g, tarcza, rodzaj, linie, napisy) {
+function rysujTarcze(rodzic, tarcza, rodzaj, linie, napisy, opisy) {
   const r = tarcza;
+  const g = zrob("g", { class: `tarcza-sciany tarcza-${rodzaj}` });
+  rodzic.append(g);
+  // Wyjaśnienie rachuby jako dymek nad całą tarczą — bez rozbudowanego opisu obok.
+  g.append(zrob("title", {}, opisy[rodzaj]));
   g.append(zrob("rect", { x: r.x0 - 13, y: r.y0 - 13, width: r.x1 - r.x0 + 26, height: r.y1 - r.y0 + 26,
     class: "kartusz" }));
   g.append(zrob("rect", { x: r.x0 - 6, y: r.y0 - 6, width: r.x1 - r.x0 + 12, height: r.y1 - r.y0 + 12,
@@ -159,8 +167,10 @@ function rysujTarcze(g, tarcza, rodzaj, linie, napisy) {
   n.append(zrob("circle", { cx: r.nx, cy: r.ny, r: 5.5, class: "nodus-tuleja" }));
   n.append(zrob("circle", { cx: r.nx, cy: r.ny, r: 2, class: "nodus-pret" }));
   g.append(n);
-  g.append(zrob("text", { x: (r.x0 + r.x1) / 2, y: r.y1 + 22, "text-anchor": "middle", class: "napis-tarczy" },
-    napisy[rodzaj]));
+  const sx = (r.x0 + r.x1) / 2;
+  g.append(zrob("text", { x: sx, y: r.y1 + 23, "text-anchor": "middle", class: "napis-tarczy" }, napisy[rodzaj]));
+  g.append(zrob("text", { id: rodzaj, x: sx, y: r.y1 + 48, "text-anchor": "middle",
+    class: `odczyt-sciany odczyt-${rodzaj}` }, "—"));
 }
 
 export default function init(root) {
@@ -180,7 +190,7 @@ export default function init(root) {
   N.miesiaceDop.forEach((m, i) => polaM.append(opcja(i, m)));
   polaM.value = "5";
   function wypelnijDni() {
-    const ile = DNI_MIESIACA[Number(polaM.value)];
+    const ile = dniMiesiaca(ROK, Number(polaM.value));
     const byl = Number(polaD.value) || 21;
     polaD.replaceChildren();
     for (let d = 1; d <= ile; d++) polaD.append(opcja(d, String(d)));
@@ -268,11 +278,11 @@ export default function init(root) {
     .filter((l) => l.punkty.length > 1);
 
   rysujTarcze(tarcze, TARCZE.wloskie, "wloskie",
-    zbierz([...Array(24).keys()].map((i) => i + 1), (k) => liniaGodzinWloskich(fi, G, k), String), N.tarcze);
+    zbierz([...Array(24).keys()].map((i) => i + 1), (k) => liniaGodzinWloskich(fi, G, k), String), N.tarcze, N.dymki);
   rysujTarcze(tarcze, TARCZE.rowne, "rowne",
-    zbierz([...Array(15).keys()].map((i) => i + 5), (k) => liniaGodzinRownych(fi, G, k), (k) => RZYMSKIE[k % 12]), N.tarcze);
+    zbierz([...Array(15).keys()].map((i) => i + 5), (k) => liniaGodzinRownych(fi, G, k), (k) => RZYMSKIE[k % 12]), N.tarcze, N.dymki);
   rysujTarcze(tarcze, TARCZE.babilonskie, "babilonskie",
-    zbierz([...Array(17).keys()], (k) => liniaGodzinBabilonskich(fi, G, k), String), N.tarcze);
+    zbierz([...Array(17).keys()], (k) => liniaGodzinBabilonskich(fi, G, k), String), N.tarcze, N.dymki);
 
   // krzywe deklinacyjne rysujemy tylko na tarczy środkowej, żeby nie zamazać reszty
   const r = TARCZE.rowne;
@@ -287,8 +297,7 @@ export default function init(root) {
 
   function odswiez() {
     const mies = Number(polaM.value), dm = Number(polaD.value);
-    const dzien = dzienRoku(mies, dm);
-    const stan = stanNieba(ROK, dzien, godzina);
+    const stan = stanNieba(ROK, mies, dm, godzina);
 
     // kartka kalendarza
     $("kalMiesiac").textContent = N.miesiaceDop[mies];
@@ -368,27 +377,32 @@ export default function init(root) {
     // analemma na tarczy środkowej
     if (analemma) {
       const pkt = [];
-      for (let d2 = 1; d2 <= 365; d2 += 3) {
-        const q = przesuniecieCienia(stanNieba(ROK, d2, godzina));
+      for (let d2 = 1; d2 <= dniRoku(ROK); d2 += 3) {
+        const [m2, dm2] = zDniaRoku(ROK, d2);
+        const q = przesuniecieCienia(stanNieba(ROK, m2, dm2, godzina));
         if (q) pkt.push({ x: r.nx + q.dx, y: r.ny + q.dy });
       }
       for (const k of przytnij(pkt, r)) cienie.append(zrob("polyline", { points: zapis(k), class: "analemma" }));
     }
 
-    // Odczyty tarczowe podajemy tylko wtedy, gdy cień naprawdę pada na ścianę —
-    // inaczej liczba stałaby przy tarczy, na której nic nie widać.
-    const niema = `— <small>${stan.nadHoryzontem ? N.scianaWCieniu : N.poZachodzieSlonca}</small>`;
-    $("rowne").innerHTML = c ? hhmm(stan.rowne) : niema;
-    $("wloskie").innerHTML = c ? `${h1(stan.wloskie)} <small>${N.odZachodu}</small>` : niema;
-    $("babilonskie").innerHTML = c ? `${h1(stan.babilonskie)} <small>${N.odWschodu}</small>` : niema;
+    // Odczyty stoją pod swoimi tarczami i milkną, gdy cień nie pada na ścianę —
+    // inaczej liczba wisiałaby przy tarczy, na której nic nie widać.
+    const powod = stan.nadHoryzontem ? N.scianaWCieniu : N.poZachodzieSlonca;
+    const ustawOdczyt = (id, tekst) => {
+      const e = $(id);
+      e.textContent = tekst;
+      e.classList.toggle("odczyt-pusty", !c);
+    };
+    ustawOdczyt("rowne", c ? hhmm(stan.rowne) : powod);
+    ustawOdczyt("wloskie", c ? h1(stan.wloskie) : powod);
+    ustawOdczyt("babilonskie", c ? h1(stan.babilonskie) : powod);
   }
 
   polaM.addEventListener("change", () => { wypelnijDni(); odswiez(); });
   polaD.addEventListener("change", odswiez);
   $("przelacz").addEventListener("click", (e) => {
     analemma = !analemma;
-    e.currentTarget.textContent = analemma ? e.currentTarget.dataset.ukryj : e.currentTarget.dataset.pokaz;
-    e.currentTarget.setAttribute("aria-pressed", String(analemma));
+    e.currentTarget.setAttribute("aria-checked", String(analemma));
     odswiez();
   });
   odswiez();

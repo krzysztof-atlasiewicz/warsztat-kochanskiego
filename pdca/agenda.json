@@ -103,10 +103,10 @@
     },
     {
       "id": "A8",
-      "pytanie": "Co o zegarze słonecznym mówi artykuł Wojciecha Fijałkowskiego w Studia Wilanowskie XI (1989) — czy podaje atrybucję, geometrię albo dokumentację powstania?",
+      "pytanie": "Skąd pochodzi przypisanie zegara słonecznego Heweliuszowi i czy monografia Juliusza Starzyńskiego mówi o nim więcej niż artykuł Fijałkowskiego?",
       "dlaczego": "To jedyne znane nam opracowanie naukowe poświęcone wprost pracy Kochańskiego w Wilanowie. Skan udostępniony przez muzeum nie ma rozpoznanego tekstu, więc odczytaliśmy go wzrokowo; część pytania jest już rozstrzygnięta, część nie.",
-      "zmieni": "Może rozstrzygnąć udział Heweliusza i Locciego, a przy odrobinie szczęścia także deklinację ściany i typ wskazówki z pozycji A1.",
-      "zrodlo": "Studia Wilanowskie XI (1989), skan PDF udostępniony przez Muzeum Pałacu Króla Jana III",
+      "zmieni": "Zdanie o współpracy z Heweliuszem: albo zyska oparcie w źródle, albo trzeba je będzie osłabić do przekazu bez podstawy.",
+      "zrodlo": "Juliusz Starzyński, monografia Wilanowa; Studia Wilanowskie XI (1989), s. 40–41 — przeczytane",
       "status": "w toku",
       "miejsca": [
         "gnomon"

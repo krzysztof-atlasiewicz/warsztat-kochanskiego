@@ -29,8 +29,9 @@ const prostosc = (linia) => {
   return naj;
 };
 
-const PROBY = [[172, 12], [172, 10], [172, 15], [80, 12], [80, 9], [355, 12], [355, 14],
-  [250, 11], [30, 13], [120, 16], [300, 10]];
+const ROK = 2028;
+const PROBY = [[5, 21, 12], [5, 21, 10], [5, 21, 15], [2, 21, 12], [2, 21, 9], [11, 21, 12],
+  [11, 21, 14], [8, 7, 11], [0, 30, 13], [3, 30, 16], [9, 27, 10]];
 
 describe("ściana zegarowa", () => {
   it("w południe letnie cień jest krótki, w zimowe najkrótszy", () => {
@@ -80,14 +81,14 @@ describe("ściana zegarowa", () => {
   // podaje odczyt. Gdyby siatka i odczyty rozjechały się, przyrząd kłamałby.
   it("cień leży na linii, którą wskazuje odczyt", () => {
     let sprawdzonych = 0;
-    for (const [doba, godzina] of PROBY) {
-      const s = stanNieba(2026, doba, godzina);
+    for (const [mies, dm, godzina] of PROBY) {
+      const s = stanNieba(ROK, mies, dm, godzina);
       const c = cienNodusa({ wysokosc: s.wysokosc, azymut: s.azymutOdPoludnia }, G);
       if (!c) continue;
       sprawdzonych++;
-      expect(odleglosc(c, liniaGodzinRownych(fi, G, s.rowne)), `równe, doba ${doba} godz ${godzina}`).toBeLessThan(1.2);
-      expect(odleglosc(c, liniaGodzinWloskich(fi, G, s.wloskie)), `włoskie, doba ${doba} godz ${godzina}`).toBeLessThan(1.2);
-      expect(odleglosc(c, liniaGodzinBabilonskich(fi, G, s.babilonskie)), `babilońskie, doba ${doba} godz ${godzina}`).toBeLessThan(1.2);
+      expect(odleglosc(c, liniaGodzinRownych(fi, G, s.rowne)), `równe, ${dm}.${mies + 1} godz ${godzina}`).toBeLessThan(1.2);
+      expect(odleglosc(c, liniaGodzinWloskich(fi, G, s.wloskie)), `włoskie, ${dm}.${mies + 1} godz ${godzina}`).toBeLessThan(1.2);
+      expect(odleglosc(c, liniaGodzinBabilonskich(fi, G, s.babilonskie)), `babilońskie, ${dm}.${mies + 1} godz ${godzina}`).toBeLessThan(1.2);
     }
     expect(sprawdzonych).toBeGreaterThan(8);
   });

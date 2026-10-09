@@ -126,10 +126,10 @@ export default {
     gnomon: {
       data: "Data", zegar: "Zegar", rowne: "Godziny równe", wloskie: "Zegar włoski", babilonskie: "Zegar babiloński",
       mech: "Zegar mechaniczny", slon: "Czas słoneczny prawdziwy", roznica: "Rozbieżność",
-      analemmaPokaz: "Pokaż analemmę", analemmaUkryj: "Ukryj analemmę",
+      analemma: "Analemma",
+      legendaCienia: "ślad cienia o tej samej godzinie zegarowej przez cały rok",
       brakSlonca: "O tej porze Słońce nie oświetla ściany — żadna z trzech tarcz nic nie pokazuje.",
       
-      krzyweDnia: "droga cienia w ciągu doby",
       opis: "Ściana z trzema tarczami zegara słonecznego: po lewej godziny włoskie, pośrodku równe, po prawej babilońskie. Nad ścianą Słońce, od niego promień do pręta każdej tarczy, a od pręta cień padający na siatkę linii.",
       opisKartki: "Kartka kalendarza z datą oraz długością dnia i nocy.",
       opisTarczy: "Tarcza zegara mechanicznego z cyframi rzymskimi, wskazówką godzinową i minutową.",
@@ -140,13 +140,8 @@ export default {
 
       scianaTytul: "Ściana, pręt i cień",
       scianaOpis: "Z każdej tarczy wystaje prostopadle krótki pręt. Patrzymy na niego od czoła, więc widać go jako krążek. Słońce rzuca cień końca pręta na siatkę linii — i dopiero siatka decyduje, co ten sam cień oznacza. Czyta się tak jak na prawdziwej tarczy: szuka się linii, na której stoi koniec cienia, i wodzi po niej wzrokiem aż do cyfry na jej końcu.",
-      scianaLegenda: "Linie wykreślono dla ściany dokładnie południowej i pręta prostopadłego do niej. Położenie Słońca na rysunku wskazuje kierunek, z którego pada światło; odległość jest umowna, bo Słońce jest nieskończenie daleko.",
+      scianaLegenda: "Linie wykreślono dla ściany dokładnie południowej i pręta prostopadłego do niej. Położenie Słońca na rysunku wskazuje kierunek, z którego pada światło; odległość jest umowna, bo Słońce jest nieskończenie daleko. Najedź na tarczę, żeby zobaczyć, czym jest jej rachuba.",
 
-      odczytyTytul: "Trzy odczyty z jednego cienia",
-      odczytyOpis: "Ten sam punkt cienia, odczytany na trzech siatkach, daje trzy różne godziny. Żadna z nich nie jest błędna — każda odpowiada na inne pytanie.",
-      coToRowne: "Doba podzielona na dwadzieścia cztery równe części, liczone od północy. To rachuba, którą posługujemy się do dziś. Na zegarze słonecznym daje godzinę słoneczną prawdziwą, a ta rozmija się z zegarem mechanicznym.",
-      coToWloskie: "Rachuba liczona od ostatniego zachodu Słońca: zachód to godzina dwudziesta czwarta, a nowa doba zaczyna się wraz z zapadnięciem zmroku. Odczyt odpowiada wprost na pytanie „ile godzin minęło od zachodu”, a odjęty od dwudziestu czterech — „ile zostało światła”. Dla podróżnego i rzemieślnika było to pytanie ważniejsze niż pora względem północy. W użyciu we Włoszech, Czechach i Polsce jeszcze w XVII wieku.",
-      coToBabilonskie: "Rachuba liczona od wschodu Słońca: wschód to godzina zerowa. Odczyt mówi, ile godzin trwa już dzień. Nazwa pochodzi od rachuby babilońskiej, którą przejęli astronomowie greccy; na zegarach nowożytnych pojawiała się jako uczony dodatek obok godzin równych.",
       poCoTrzy: "Trzy rachuby na jednej ścianie to nie ozdoba. Zegar postawiono w chwili, gdy godziny równe wypierały rachuby liczone od wschodu i zachodu — tarcza pokazuje oba porządki naraz i pozwala przełożyć jeden na drugi bez rachunku.",
 
       rozbieznoscTytul: "Dlaczego Słońce nie zgadza się z zegarem",
@@ -164,7 +159,12 @@ export default {
         odZachodu: "godz. od zachodu", odWschodu: "godz. od wschodu",
         scianaWCieniu: "ściana w cieniu", poZachodzieSlonca: "po zachodzie Słońca",
         przesilenieLetnie: "przesilenie letnie", rownonoc: "równonoc", przesilenieZimowe: "przesilenie zimowe",
-        tarcze: { wloskie: "godziny włoskie", rowne: "godziny równe", babilonskie: "godziny babilońskie" },
+        tarcze: { wloskie: "godziny włoskie — od zachodu", rowne: "godziny równe — od północy", babilonskie: "godziny babilońskie — od wschodu" },
+        dymki: {
+          wloskie: "Godziny włoskie liczy się od ostatniego zachodu Słońca: zachód to godzina dwudziesta czwarta. Odczyt odjęty od dwudziestu czterech mówi wprost, ile zostało światła — pytanie ważniejsze dla podróżnego i rzemieślnika niż pora względem północy. W użyciu we Włoszech, Czechach i Polsce jeszcze w XVII wieku.",
+          rowne: "Doba podzielona na dwadzieścia cztery równe części, liczone od północy — rachuba używana do dziś. Na zegarze słonecznym daje czas słoneczny prawdziwy, który rozmija się z zegarem mechanicznym.",
+          babilonskie: "Godziny babilońskie liczy się od wschodu Słońca: wschód to godzina zerowa, a odczyt mówi, ile godzin trwa już dzień. Nazwa pochodzi od rachuby babilońskiej przejętej przez astronomów greckich; na zegarach nowożytnych bywała uczonym dodatkiem obok godzin równych."
+        },
         miesiace: ["sty","lut","mar","kwi","maj","cze","lip","sie","wrz","paź","lis","gru"],
         miesiaceDop: ["stycznia","lutego","marca","kwietnia","maja","czerwca","lipca","sierpnia","września","października","listopada","grudnia"]
       },
@@ -298,9 +298,9 @@ export default {
     gnomon: {
       data: "Date", zegar: "Clock", rowne: "Equal hours", wloskie: "Italian hours", babilonskie: "Babylonian hours",
       mech: "Mechanical clock", slon: "True solar time", roznica: "Discrepancy",
-      analemmaPokaz: "Show the analemma", analemmaUkryj: "Hide the analemma",
+      analemma: "Analemma",
+      legendaCienia: "the shadow at the same clock hour right through the year",
       brakSlonca: "At this hour the sun does not light the wall, and none of the three dials shows anything.",
-      krzyweDnia: "path of the shadow across one day",
       opis: "A wall carrying three sundials: Italian hours on the left, equal hours in the centre, Babylonian hours on the right. The sun above the wall, a ray from it to the rod of each dial, and the shadow of the rod falling on the grid of lines.",
       opisKartki: "A calendar leaf with the date and the length of day and night.",
       opisTarczy: "A mechanical clock face with Roman numerals and an hour and a minute hand.",
@@ -311,13 +311,8 @@ export default {
 
       scianaTytul: "The wall, the rod and the shadow",
       scianaOpis: "A short rod stands out of each dial at a right angle. We see it end-on, so it reads as a disc. The sun throws the shadow of its tip onto a grid of lines — and only the grid decides what that one shadow means. You read it as on a real dial: find the line the shadow tip stands on, then follow it out to the numeral at its end.",
-      scianaLegenda: "The lines are drawn for a wall facing due south and a rod perpendicular to it. The sun's place in the drawing gives the direction the light comes from; its distance is a convention, the sun being infinitely far away.",
+      scianaLegenda: "The lines are drawn for a wall facing due south and a rod perpendicular to it. The sun's place in the drawing gives the direction the light comes from; its distance is a convention, the sun being infinitely far away. Hover over a dial to see what its reckoning is.",
 
-      odczytyTytul: "Three readings from one shadow",
-      odczytyOpis: "The same point of shadow, read on three grids, gives three different hours. None of them is wrong — each answers a different question.",
-      coToRowne: "The day divided into twenty-four equal parts counted from midnight — the reckoning still in use. On a sundial it gives true solar time, which never quite agrees with a mechanical clock.",
-      coToWloskie: "Counted from the last sunset: sunset is the twenty-fourth hour, and a new day begins as dusk falls. The reading answers directly how many hours have passed since sunset, and subtracted from twenty-four, how much daylight is left — a more useful question for a traveller or a craftsman than the hour since midnight. Still in use in Italy, Bohemia and Poland in the seventeenth century.",
-      coToBabilonskie: "Counted from sunrise: sunrise is hour zero. The reading says how long the day has lasted so far. The name comes from Babylonian practice, taken up by the Greek astronomers; on early modern dials it appeared as a learned companion to the equal hours.",
       poCoTrzy: "Three reckonings on one wall are not an ornament. The dial was put up just as equal hours were displacing the counts kept from sunrise and sunset — it shows both orders at once and lets one be read off against the other without any calculation.",
 
       rozbieznoscTytul: "Why the sun disagrees with the clock",
@@ -335,7 +330,12 @@ export default {
         odZachodu: "h since sunset", odWschodu: "h since sunrise",
         scianaWCieniu: "the wall is in shade", poZachodzieSlonca: "after sunset",
         przesilenieLetnie: "summer solstice", rownonoc: "equinox", przesilenieZimowe: "winter solstice",
-        tarcze: { wloskie: "Italian hours", rowne: "equal hours", babilonskie: "Babylonian hours" },
+        tarcze: { wloskie: "Italian hours — from sunset", rowne: "equal hours — from midnight", babilonskie: "Babylonian hours — from sunrise" },
+        dymki: {
+          wloskie: "Italian hours are counted from the last sunset: sunset is the twenty-fourth hour. Subtracted from twenty-four, the reading says how much daylight is left — a more useful question for a traveller or a craftsman than the hour since midnight. Still in use in Italy, Bohemia and Poland in the seventeenth century.",
+          rowne: "The day divided into twenty-four equal parts counted from midnight — the reckoning still in use. On a sundial it gives true solar time, which never quite agrees with a mechanical clock.",
+          babilonskie: "Babylonian hours are counted from sunrise: sunrise is hour zero, and the reading says how long the day has lasted. The name comes from Babylonian practice taken up by the Greek astronomers; on early modern dials it was a learned companion to the equal hours."
+        },
         miesiace: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
         miesiaceDop: ["January","February","March","April","May","June","July","August","September","October","November","December"]
       },
