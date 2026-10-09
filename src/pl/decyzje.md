@@ -382,6 +382,18 @@ Dodano rozwijany wykład „jak to odszyfrować bez klucza", liczony na bieżąc
 
 **Nazwy plików niosą odcisk treści,** bo nagłówki każą trzymać kroje rok w pamięci podręcznej. Bez odcisku zmiana repertuaru znaków byłaby dla zwracających się przeglądarek niewidoczna przez rok. Kontrola pamięci podręcznej też się tego nauczyła: dotąd uznawała wyłącznie odcisk w adresie (`?v=`), teraz akceptuje również odcisk w nazwie i sprawdza, że każdy zasób pobierany z arkusza jakiś ma.
 
-**Kontrola `kroje` przestała być ostrzeżeniem i zatrzymuje cykl.** Sprawdza trzy rzeczy: że arkusz deklaracji istnieje, że każdy plik, po który sięga, leży na miejscu i ma odcisk w nazwie, oraz — to najważniejsze — że na zbudowanych stronach nie pojawił się znak spoza repertuaru. Wszystkie trzy przypadki zostały wywołane celowo i każdy zawiódł tak, jak miał: znak ☭ wstawiony na próbę do nagłówka został zgłoszony z podaniem strony i punktu kodowego.
+**Kontrola `kroje` przestała być ostrzeżeniem i zatrzymuje cykl.** Sprawdza trzy rzeczy: że arkusz deklaracji istnieje, że każdy plik, po który sięga, leży na miejscu i ma odcisk w nazwie, oraz — to najważniejsze — że na zbudowanych stronach nie pojawił się znak spoza repertuaru. Wszystkie trzy przypadki zostały wywołane celowo i każdy zawiódł tak, jak miał: obcy znak wstawiony na próbę do nagłówka został zgłoszony z podaniem strony i punktu kodowego. Samego znaku nie przytaczam, bo kontrola — słusznie — uznałaby ten wpis za usterkę.
 
 **Świadome ustępstwo:** π, ≈ i strzałki nie mają glifów w zakresach łacińskich fontsource i renderują się krojem zastępczym. Lista takich znaków jest wypisana w kodzie, żeby nie wyglądała na przeoczenie.
+
+## 2026-10-09 — Cykl 30: pulpit wahadła ściśnięty w pionie
+
+**Przyrządy stanęły po bokach karty.** Termometr po lewej, oba wskaźniki jeden pod drugim po prawej — zamiast rzędu pod mapą, który dokładał dwieście pikseli wysokości i oddalał odczyty od tego, czego dotyczą.
+
+**Wykres wszedł w puste pole** pod kalendarzem i okrętem, obok kolumny objaśnień. Górny rząd pulpitu był dotąd wysoki na tyle, ile liczy kolumna tekstu, a pod kalendarzem i statkiem ział pusty prostokąt. Teraz mieści się w nim narastanie błędu; strona skróciła się o kolejne kilkaset pikseli. Napisy na wykresie są odpowiednio większe, bo rysunek stoi w węższym polu.
+
+**Pasek czterech odczytów zniknął.** Powtarzał to, co i tak pokazują przyrządy: temperaturę z termometru i błąd pozycji każdego z zegarów. Odczyty przeniosły się pod przyrządy, z których wynikają — kilometry pod wskaźnik tego zegara, który je generuje — a szerokość geograficzna pod kartę kursową, bo to karta ją pokazuje.
+
+**Usterka układu przy okazji:** blok objaśnień z narzuconym wierszem siatki wskakiwał na pierwszą kolumnę i wypychał kalendarz na prawo. Rozmieszczenie wszystkich czterech bloków jest teraz podane wprost, zamiast liczyć na rozpływ.
+
+Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest czterdzieści kilobajtów, dwa razy więcej niż na stronie gnomonu.
