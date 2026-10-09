@@ -8,7 +8,7 @@
 
   <div class="pulpit-sterowniki">
 
-    <figure class="blok-daty" title="{{ s.rejs.kalendarzOpis }}">
+    <figure class="blok-daty" data-dymek="{{ s.rejs.kalendarzOpis }}">
       <svg viewBox="0 0 160 190" class="kartka" role="img" aria-describedby="o-kalendarz">
         <desc id="o-kalendarz">{{ s.rejs.opisKalendarza }}</desc>
         <path d="M 10 18 L 150 18 L 150 160 Q 120 170 90 162 Q 55 153 10 164 Z"
@@ -28,7 +28,7 @@
       </figcaption>
     </figure>
 
-    <figure class="blok-okretu" title="{{ s.rejs.okretOpis }}">
+    <figure class="blok-okretu" data-dymek="{{ s.rejs.okretOpis }}">
       <svg viewBox="0 0 520 300" class="galeon" role="img" aria-describedby="o-okret">
         <desc id="o-okret">{{ s.rejs.opisOkret }}</desc>
         <g class="okret">
@@ -163,7 +163,7 @@
         <text class="t" x="100" y="166" text-anchor="middle">s / {{ s.rejs.doba }}</text>
         <defs><radialGradient id="mosiadz2" cx="35%" cy="30%"><stop offset="0" stop-color="var(--mosiadz-jasny)"/><stop offset="1" stop-color="var(--mosiadz-ciemny)"/></radialGradient></defs>
       </svg>
-        <figcaption><span id="dw">—</span><span id="kw" class="blad">—</span><span class="dim" title="{{ s.rejs.opisy.blad }}">{{ s.rejs.bladW }}</span></figcaption>
+        <figcaption><span id="dw">—</span><span id="kw" class="blad">—</span><span class="dim" data-dymek="{{ s.rejs.opisy.blad }}">{{ s.rejs.bladW }}</span></figcaption>
       </figure>
       <figure class="przyrzad-boczny">
       <svg viewBox="0 0 200 200" role="img" aria-describedby="o-wsk2" class="wskaznik">
@@ -176,7 +176,7 @@
         <text class="t" x="100" y="150" text-anchor="middle">{{ s.rejs.sprezyna }}</text>
         <text class="t" x="100" y="166" text-anchor="middle">s / {{ s.rejs.doba }}</text>
       </svg>
-        <figcaption><span id="ds">—</span><span id="ks" class="blad">—</span><span class="dim" title="{{ s.rejs.opisy.blad }}">{{ s.rejs.bladS }}</span></figcaption>
+        <figcaption><span id="ds">—</span><span id="ks" class="blad">—</span><span class="dim" data-dymek="{{ s.rejs.opisy.blad }}">{{ s.rejs.bladS }}</span></figcaption>
       </figure>
     </div>
   </div>

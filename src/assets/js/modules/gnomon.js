@@ -144,7 +144,7 @@ function rysujTarcze(rodzic, tarcza, rodzaj, linie, napisy, opisy) {
   const g = zrob("g", { class: `tarcza-sciany tarcza-${rodzaj}` });
   rodzic.append(g);
   // Wyjaśnienie rachuby jako dymek nad całą tarczą — bez rozbudowanego opisu obok.
-  g.append(zrob("title", {}, `${napisy.pelne[rodzaj]} — ${opisy[rodzaj]}`));
+  g.dataset.dymek = `${napisy.pelne[rodzaj]} ${opisy[rodzaj]}`;
   g.append(zrob("rect", { x: r.x0 - 13, y: r.y0 - 13, width: r.x1 - r.x0 + 26, height: r.y1 - r.y0 + 26,
     class: "kartusz" }));
   g.append(zrob("rect", { x: r.x0 - 6, y: r.y0 - 6, width: r.x1 - r.x0 + 12, height: r.y1 - r.y0 + 12,
@@ -172,6 +172,10 @@ function rysujTarcze(rodzic, tarcza, rodzaj, linie, napisy, opisy) {
   g.append(zrob("text", { x: sx, y: r.y1 + 23, "text-anchor": "middle", class: "napis-tarczy" }, napisy.krotkie[rodzaj]));
   g.append(zrob("text", { id: rodzaj, x: sx, y: r.y1 + 48, "text-anchor": "middle",
     class: `odczyt-sciany odczyt-${rodzaj}` }, "—"));
+  // Pole chwytu: dymek ma się zapalać nad całym blokiem tarczy razem z podpisem
+  // i odczytem, a nie tylko tam, gdzie akurat leży kreska.
+  g.append(zrob("rect", { x: r.x0 - 16, y: r.y0 - 16, width: r.x1 - r.x0 + 32,
+    height: r.y1 - r.y0 + 74, class: "pole-chwytu" }));
 }
 
 export default function init(root) {
@@ -292,22 +296,6 @@ export default function init(root) {
     const kawalki = przytnij(naPkt(r, krzywaDeklinacji(fi, G, dekl)), r);
     for (const k of kawalki)
       tarcze.append(zrob("polyline", { points: zapis(k), class: `krzywa krzywa-${dekl > 0 ? "lato" : dekl < 0 ? "zima" : "rownonoc"}` }));
-  }
-
-  // ── dymki rachub, przy samych tarczach ─────────────────────────────────
-  // Znacznik title bywa przeoczony i nie pojawia się na ekranie dotykowym,
-  // więc to samo wyjaśnienie trafia do pola pod ścianą — zapalanego
-  // najechaniem na tarczę albo jej dotknięciem.
-  const dymek = $("dymekTarczy");
-  const domyslny = N.wybierzRachube;
-  dymek.textContent = domyslny;
-  for (const rodzaj of Object.keys(TARCZE)) {
-    const grupa = root.querySelector(`.tarcza-${rodzaj}`);
-    if (!grupa) continue;
-    const pokaz = () => { dymek.textContent = `${N.tarcze.pelne[rodzaj]}. ${N.dymki[rodzaj]}`; };
-    grupa.addEventListener("pointerenter", pokaz);
-    grupa.addEventListener("click", pokaz);
-    grupa.addEventListener("pointerleave", () => { dymek.textContent = domyslny; });
   }
 
   // ── Słońce jako uchwyt czasu ───────────────────────────────────────────

@@ -1,7 +1,7 @@
 {
   "faza": "A",
   "wersja": "0.9-dev",
-  "cykl": 14,
+  "cykl": 15,
   "bramka": {
     "id": "GA",
     "warunki": [
