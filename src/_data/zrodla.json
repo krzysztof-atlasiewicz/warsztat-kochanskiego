@@ -34,15 +34,15 @@
     "w": null,
     "rok": 1664,
     "tom": null,
-    "strony": "620–720 (księga IX)",
+    "strony": "620–725 (księga IX); zapis szyfrowy na s. 692, drugi na s. 587–588",
     "instytucja": "Getty Research Institute / Internet Archive",
-    "url": "https://archive.org/details/gri_pgasparissch00scho",
-    "osadzenie": "https://archive.org/embed/gri_pgasparissch00scho/page/n748/mode/2up",
+    "url": "https://archive.org/details/gri_pgasparissch00scho/page/n826/mode/2up",
+    "osadzenie": "https://archive.org/embed/gri_pgasparissch00scho/page/n826",
     "licencja": "domena publiczna",
     "frazy": [
       "Technica curiosa"
     ],
-    "uwaga": "Pełny skan tomu, egzemplarz Getty Research Institute. Druk ukazał się w Norymberdze u Endterów, choć Schott pracował w Würzburgu. Księga IX „Mirabilia Chronometrica” zaczyna się na stronie drukowanej 620, czyli około 748 skanu — odnośnik otwiera się w tym miejscu. Zapis szyfrowy nie został w tym egzemplarzu odnaleziony; szczegóły w pozycji A2 agendy."
+    "uwaga": "Pełny skan tomu, egzemplarz Getty Research Institute. Druk ukazał się w Norymberdze u Endterów, choć Schott pracował w Würzburgu. Księga IX „Mirabilia Chronometrica\" zaczyna się na stronie drukowanej 620. Zapis szyfrowy odnaleziony: strona 692, Propositio XXXI — anagram z dwudziestu jeden liter, nie szyfr podstawieniowy; odnośnik otwiera się na tej stronie. Przypisanie księgi IX Kochańskiemu pochodzi z opracowań — w druku mowa wyłącznie o bezimiennym „Amicusie\". Szczegóły w pozycji A2 agendy."
   },
   "richer-1729": {
     "autor": "Jean Richer",
@@ -52,11 +52,11 @@
     "tom": 7,
     "strony": "233–326, obserwacja wahadła na s. 320",
     "instytucja": "Internet Archive",
-    "url": "https://archive.org/details/richer-mmoiresdelacad-07pari",
-    "osadzenie": "https://archive.org/embed/richer-mmoiresdelacad-07pari",
+    "url": "https://archive.org/details/richer-mmoiresdelacad-07pari/page/n89/mode/2up",
+    "osadzenie": "https://archive.org/embed/richer-mmoiresdelacad-07pari/page/n89",
     "licencja": "Public Domain Mark 1.0",
     "frazy": [],
-    "uwaga": "Własna relacja Richera z wyprawy do Kajenny, wydana w zbiorze pamiętników Akademii. Obserwacja, od której zaczyna się moduł, stoi na stronie 320: rozdział X, artykuł I „De la longueur du Pendule à secondes de temps\". Skan nie ma rozpoznanego tekstu, więc odnośnik prowadzi do całego tomu, nie do samej strony."
+    "uwaga": "Własna relacja Richera z wyprawy do Kajenny, wydana w zbiorze pamiętników Akademii. Obserwacja, od której zaczyna się moduł, stoi na stronie 320: rozdział X, artykuł I „De la longueur du Pendule à secondes de temps\". Paginacja druku zaczyna się na stronie 233, więc w skanie jest to osiemdziesiąta dziewiąta karta — i na nią otwiera się odnośnik."
   },
   "widacka-2008": {
     "autor": "Hanna Widacka",

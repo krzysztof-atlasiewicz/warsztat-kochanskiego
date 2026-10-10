@@ -25,11 +25,12 @@
       ],
       "dotyczy": "zapis wczytywany przyciskiem „Wczytaj zapis z 1664\" i jego odczyt na tarczy",
       "ustalenia": [
-        "Księga IX „Mirabilia Chronometrica” obejmuje strony drukowane 620–720, co odpowiada mniej więcej stronie 748 skanu. Spis rozdziałów: I. rodzaje mechanizmów (620), II. o wahadłach (622), III. miary chronometryczne (624), IV. siły napędowe (638), V. wskaźniki optyczne (651), VI. sygnały akustyczne (668), VII. ozdoby i dodatki (677), VIII. zegary osobliwe (690), IX. zegary podręczne, X. nowe horometry (703), XI. horometry wieczne (713).",
-        "W spisie rozdziałów księgi IX nie ma rozdziału o kryptografii. Jedyny taki rozdział w całym dziele to księga VII, rozdział VI „De Cryptographia, seu occulta scriptione”, strona drukowana 542.",
-        "Nazwisko Kochańskiego nie pojawia się w rozpoznanym tekście ani razu. Zgadza się to z przekazem, że dzieło firmował Schott, ale rozpoznanie tekstu jest na tyle słabe, że samo w sobie niczego nie dowodzi.",
-        "Jedyna wzmianka o magnesie w księdze IX dotyczy ukrytego magnesu przesuwającego wskaźnik po podziałce („ducetur ab occulto magnete”, około strony drukowanej 661), a nie wahacza regulującego bieg zegara.",
-        "Zastrzeżenie: rozpoznanie tekstu tego druku jest mocno zniekształcone, więc brak trafień nie jest dowodem nieobecności. Rozstrzygnięcie wymaga przejrzenia stron 620–720 wzrokowo."
+        "Zapis szyfrowy w księdze IX istnieje i stoi na stronie 692, w Propositio XXXI „Horometrum ACCURATUM Portatile cum Perpendiculo, vel aliter construere\" (karta 827 skanu).",
+        "Ma postać ANAGRAMU, nie szyfru podstawieniowego. Autor pisze: „en habet artificium, Cryptographicè per Anagramma propositum, nec difficulter eruendum, si Typotheta & Oedipus servent easdem litteras\", po czym podaje dwadzieścia jeden liter w siedmiu trójkach: R G T, T C O, MME, RIP, NAE, INS, ATE.",
+        "Zapis nie dotyczy wahaczy magnetycznych. Ukrywa „artificium\" dokładnego przenośnego zegara wahadłowego; magnetyzm pada dopiero w następnym zdaniu i jako porównanie — mechanizm chodzi na pierścieniach przegubowych, „jak lampy toczące się po posadzce bez rozlania oliwy albo busole (pyxides Magneticae) w przyrządach astronomicznych\".",
+        "Autor zapisu nie jest w księdze nazwany. Księga IX relacjonuje prace bezimiennego „Amicusa\" — tak zaczyna się jej część pierwsza na stronie 620 („in duas Amico dispertiar Partes\") i tak wraca w całym wywodzie („appellat Amicus\", „videat Lector apud Amicum\"). Utożsamienie Amicusa z Kochańskim pochodzi z opracowań, nie z druku.",
+        "Znaleziono drugi zapis szyfrowy, w księdze VIII na stronach 587–588: korespondent przesłał Schottowi swój sąd o próbie kwadratury koła „in fine cryptographico velamine, hisce litteris: gptaramtasy rcepegnik Xacperdiq\". Schott podaje tam rozwiązanie: odrzucić pierwszą i ostatnią literę każdego wyrazu, a z pozostałych sylab czytać po jednej z każdej trójki, zaczynając od ostatniej — wychodzi „dignitas (sive Axioma) perperam accepta\".",
+        "DO ROZSTRZYGNIĘCIA PRZEZ CZŁOWIEKA: (1) zapis źródła przypisuje księgę IX Kochańskiemu, a druk mówi tylko o bezimiennym Amicusie — czy skorygować to przypisanie; (2) moduł odtwarza szyfr przesuwający, podczas gdy w dziele stoją anagram i metoda odrzucania skrajnych liter — czy przebudować moduł na zapis z księgi VIII, który ma w druku i zadanie, i rozwiązanie."
       ]
     },
     {

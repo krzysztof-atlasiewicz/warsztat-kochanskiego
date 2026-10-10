@@ -655,3 +655,23 @@ Zapis źródła uzupełniony o strony i o wskazanie rozdziału; pozycja A7 przen
 **Szyfr zaczyna od pustego pola wiadomości.** Przy pierścieniu nastawionym na zero „odszyfrowanie" przepisywało zapis znak w znak i obok siebie stały dwa identyczne ciągi — wyglądało to na usterkę, a było tautologią. Pole wiadomości stoi teraz puste, z podpowiedzią mówiącą wprost, co zrobić: przekręcić pierścień i złamać zapis albo wpisać własny tekst. Od pierwszego ruchu — pokrętła albo klawiatury — pola pracują dwukierunkowo, jak dotąd: wpis w wiadomość szyfruje, wpis w zapis odszyfrowuje. Przywrócenie zapisu z 1664 roku wraca do stanu wyjściowego, razem z pustym polem.
 
 **Siedem nowych testów** (120 zamiast 113). Przy okazji dwie kontrole automatyczne złapały wpis do rejestru: francuski tytuł rozdziału wpisany w pole fraz kazałby rejestrowi pytań linkować do samego siebie, a znak ułamka „pół" nie mieści się w obciętym kroju. Oba poprawione w rejestrze, nie przez rozszerzanie repertuaru.
+
+## 2026-10-10 — Cykl 52: liczba Richera na stronie, kwerenda A2 z niespodzianką
+
+**Wartość z relacji Richera wpisana do zakładki „Skąd to wiemy".** Decyzja kierownika projektu. Miarę wahadła sekundowego odmierzono w Kajennie na żelaznym pręcie, przywieziono do Francji i porównano z paryską: kajeńska okazała się krótsza o jedną linię i ćwierć, czyli około 2,8 mm, przy paryskiej długości 3 stóp 8½ linii. Oryginalne brzmienie podane przy polskim tekście, z numerem strony. Odnośnik do skanu otwiera się teraz na karcie osiemdziesiątej dziewiątej, czyli na stronie drukowanej 320.
+
+**Znak „½" dopisany do repertuaru krojów.** Pada w cytacie ze źródła, a cytatu nie wolno przepisać inaczej, niż stoi w druku. To jedyny powód, dla którego repertuar rośnie.
+
+**A2: zapis szyfrowy odnaleziony — i okazał się czym innym, niż zakładaliśmy.** Kierownik projektu dostarczył pełny skan *Technica curiosa* z rozpoznanym tekstem. Ustalenia:
+
+1. **Zapis jest i stoi na stronie 692**, w Propositio XXXI księgi IX, zatytułowanej „Horometrum ACCURATUM Portatile cum Perpendiculo, vel aliter construere".
+2. **Ma postać anagramu, nie szyfru podstawieniowego.** Autor pisze wprost: „en habet artificium, Cryptographicè per Anagramma propositum, nec difficulter eruendum, si Typotheta & Oedipus servent easdem litteras", po czym podaje dwadzieścia jeden liter w siedmiu trójkach: R G T, T C O, MME, RIP, NAE, INS, ATE.
+3. **Nie dotyczy wahaczy magnetycznych.** Ukrywa sposób wykonania dokładnego przenośnego zegara wahadłowego. Magnetyzm pada dopiero w następnym zdaniu i jako porównanie: mechanizm chodzi na pierścieniach przegubowych, „jak lampy toczące się po posadzce bez rozlania oliwy albo busole w przyrządach astronomicznych".
+4. **Autor zapisu nie jest w księdze nazwany.** Cała księga IX relacjonuje prace bezimiennego „Amicusa" — tak zaczyna się jej część pierwsza na stronie 620 i tak wraca w całym wywodzie. Utożsamienie Amicusa z Kochańskim pochodzi z opracowań, nie z druku.
+5. **Przy okazji znaleziono drugi zapis szyfrowy**, w księdze VIII na stronach 587–588. Korespondent przesłał Schottowi swój sąd o cudzej kwadraturze koła „in fine cryptographico velamine", literami „gptaramtasy rcepegnik Xacperdiq". Schott podaje tam także rozwiązanie: odrzucić pierwszą i ostatnią literę każdego wyrazu, a z pozostałych sylab czytać po jednej z każdej trójki, zaczynając od ostatniej — wychodzi „dignitas (sive Axioma) perperam accepta", czyli „aksjomat źle wzięty".
+
+**Dwie rzeczy do rozstrzygnięcia przez człowieka, obie merytoryczne.** Pierwsza: zapis źródła przypisuje księgę IX Kochańskiemu, a druk mówi wyłącznie o bezimiennym Amicusie — czy skorygować przypisanie. Druga: moduł odtwarza szyfr przesuwający, podczas gdy w dziele stoją anagram i metoda odrzucania skrajnych liter; zapis z księgi VIII ma w druku i zadanie, i rozwiązanie, więc dałby się pokazać w całości. Agent tego nie rozstrzyga.
+
+**Kontrola „zrodla" porównuje teraz adres samego skanu, bez wskazania strony.** Odnośnik otwierany na stronie 692 i odnośnik do całego tomu prowadzą do tego samego egzemplarza, a starsze wpisy w rejestrze mają prawo wskazywać tom. Wzmocnienia ani osłabienia w tym nie ma — zmienia się to, co porównujemy, nie to, czego wymagamy.
+
+**Cztery nowe testy** (124 zamiast 120).
