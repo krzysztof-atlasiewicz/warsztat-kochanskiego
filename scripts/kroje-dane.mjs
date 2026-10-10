@@ -3,7 +3,8 @@
 // wciągać biblioteki do obcinania fontów tylko po to, żeby policzyć pliki.
 
 // Łacinka polska i angielska, cyfry, interpunkcja typograficzna oraz znaki
-// działań używane w opisach. Kontrola „kroje" sprawdza, czy na zbudowanych
+// działań używane w opisach. Znak „½" dopisany w cyklu 52: pada w cytacie
+// z relacji Richera i cytatu nie wolno przepisać inaczej, niż stoi w druku. Kontrola „kroje" sprawdza, czy na zbudowanych
 // stronach nie pojawił się znak spoza tej listy.
 export const ZNAKI = [
   " !\"#$%&'()*+,-./0123456789:;<=>?@",
@@ -11,7 +12,7 @@ export const ZNAKI = [
   "abcdefghijklmnopqrstuvwxyz{|}~",
   "ĄĆĘŁŃÓŚŹŻąćęłńóśźż",
   "ÀÁÂÄÇÈÉÊËÎÏÔÖÙÛÜàáâäçèéêëîïôöùûü",
-  "°±·×÷µ−≈≠≤≥",
+  "°±·×÷µ−≈≠≤≥½",
   "–—‘’‚“”„†‡…§¶",
   "←→↑↓π"
 ].join("");

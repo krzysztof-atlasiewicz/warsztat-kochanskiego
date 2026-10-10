@@ -127,7 +127,11 @@ const KONTROLE = {
         if (z[pole] === undefined) bledy.push(`${id}: brak pola ${pole}`);
       if (z.url && !z.licencja) bledy.push(`${id}: odnośnik bez podanej licencji`);
     }
-    // Każda wzmianka o dziele, które ma ustalony skan, musi na tej stronie prowadzić do niego.
+    // Każda wzmianka o dziele, które ma ustalony skan, musi na tej stronie prowadzić
+    // do niego. Porównujemy adres samego skanu, bez wskazania strony: odnośnik
+    // otwierany na stronie 692 i odnośnik do całego tomu prowadzą do tego samego
+    // egzemplarza, a starsze wpisy w rejestrze decyzji mają prawo wskazywać tom.
+    const bezStrony = (u) => u.split("/page/")[0];
     for (const p of zbudowane()) {
       if (p.includes("/zrodla/") || p.includes("/sources/")) continue;
       const t = czytaj(p);
@@ -135,7 +139,7 @@ const KONTROLE = {
       for (const [id, z] of Object.entries(zrodla)) {
         if (!z.url || !z.frazy?.length) continue;
         for (const fraza of z.frazy)
-          if (tekst.includes(fraza) && !t.includes(z.url))
+          if (tekst.includes(fraza) && !t.includes(bezStrony(z.url)))
             bledy.push(`${p}: wzmianka „${fraza}" bez odnośnika do źródła ${id}`);
       }
     }

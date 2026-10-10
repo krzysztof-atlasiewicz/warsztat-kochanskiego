@@ -571,3 +571,36 @@ describe.skipIf(!zbudowane)("stan początkowy i wznawianie", () => {
       .not.toMatch(/Iberii, Kanary/);
   });
 });
+
+// Liczba Richera i odnośniki otwierane na właściwej stronie skanu.
+describe.skipIf(!zbudowane)("kwerendy źródłowe", () => {
+  for (const [plik, fraza] of [["_site/pl/wahadlo/index.html", "o jedną linię i ćwierć"],
+                               ["_site/en/pendulum/index.html", "by one line and a quarter"]]) {
+    it(`${plik} — wartość Richera z oryginałem i stroną`, () => {
+      const h = readFileSync(plik, "utf8");
+      expect(h, "brak wartości skrócenia").toContain(fraza);
+      expect(h, "brak oryginalnego brzmienia").toContain("d’une ligne &amp; un quart");
+      expect(h, "brak paryskiej długości odniesienia").toMatch(/3 (stóp|feet) 8½ (linii|lines)/);
+      expect(h, "odnośnik nie otwiera się na stronie 320 skanu")
+        .toContain("archive.org/details/richer-mmoiresdelacad-07pari/page/n89");
+    });
+  }
+
+  it("skan Technica curiosa otwiera się na stronie z zapisem szyfrowym", () => {
+    const z = JSON.parse(readFileSync("src/_data/zrodla.json", "utf8"));
+    expect(z["technica-curiosa"].url, "odnośnik nie wskazuje karty 827 (druk 692)")
+      .toContain("/page/n826");
+    expect(z["technica-curiosa"].uwaga, "uwaga nie odnotowuje, że to anagram").toMatch(/anagram/i);
+  });
+
+  it("ustalenia obu kwerend zapisane w agendzie", () => {
+    const a = JSON.parse(readFileSync("pdca/agenda.json", "utf8"));
+    const poz = a.pozycje || a;
+    for (const id of ["A2", "A7"]) {
+      const p = poz.find((x) => x.id === id);
+      expect(p.ustalenia?.length, `${id}: brak ustaleń z kwerendy`).toBeGreaterThan(2);
+    }
+    expect(poz.find((x) => x.id === "A7").ustalenia.join(" "), "A7 bez numeru strony").toContain("320");
+    expect(poz.find((x) => x.id === "A2").ustalenia.join(" "), "A2 bez numeru strony").toContain("692");
+  });
+});
