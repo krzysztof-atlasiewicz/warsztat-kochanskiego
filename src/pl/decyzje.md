@@ -709,3 +709,28 @@ Zapis źródła uzupełniony o strony i o wskazanie rozdziału; pozycja A7 przen
 **Czterdzieści cztery nowe testy w nowym pliku `tests/rejestr.test.js`** (171 zamiast 127): słownik statusów, obowiązek ustaleń przy pozycji zamkniętej, czas przeszły w jej polu skutku, wskazanie daty i podstawy rozstrzygnięcia, zgodność licznika zakładki z liczbą pozycji otwartych na każdej z ośmiu stron, obecność śladu po pozycji zamkniętej i obecność karty przy każdej otwartej, a na stronie rejestru — kompletność listy, dwie sekcje z licznikami i wstęp, który nie kłamie. Sprawdzono, że dwanaście z nich upada po zmianie statusu jednej pozycji.
 
 **Dlaczego to jest wpis merytoryczny, a nie porządkowy.** Rejestr pytań otwartych jest tu obietnicą: że czego nie wiemy, trzymamy osobno i nazywamy wprost. Rejestr, który rozmija się ze stanem wiedzy, tę obietnicę unieważnia — i robi to tym skuteczniej, im bardziej serwis się nią chwali. Rozminięcie przeżyło cały cykl, w którym czternaście kontroli i sto dwadzieścia siedem testów zgłosiło sprawność; zauważył je człowiek. Stąd kontrola i testy, nie samo poprawienie tekstu.
+
+## 2026-10-10 — Cykl 55: skok przy przełączaniu zakładek zgaszony bez pustego papieru
+
+**Poprzednie rozwiązanie leczyło nie tę rzecz.** Zgłoszenie brzmiało „strona podskakuje", więc w cyklach 42–47 zrównaliśmy wysokości wszystkich trzech kart przyrządu: każda dostawała wysokość najwyższej, więc przełączenie nie zmieniało wysokości dokumentu. Skok zgasł. Cena wyszła przy pomiarze w przeglądarce, w dwóch szerokościach:
+
+| strona | zakładka | treść | wysokość nadana |
+|---|---|---|---|
+| szyfr, 390 pkt | Pytania otwarte | 118 pkt | 2224 pkt |
+| wahadło, 390 pkt | Pytania otwarte | 368 pkt | 2255 pkt |
+| szyfr, 390 pkt | Przyrząd | 1202 pkt | 2224 pkt |
+| szyfr, 1280 pkt | Pytania otwarte | 118 pkt | 962 pkt |
+
+Dwa zdania na telefonie dostawały dziewiętnaście ekranów pustego papieru. Na stronie szyfru najwyższa była karta „Skąd to wiemy", więc dopełnienie brał też sam przyrząd — tysiąc punktów pustki pod przyrządem, który się skończył.
+
+**Właściwa przyczyna skoku.** Pasek zakładek stoi w dokumencie nad kartami, więc podmiana karty nie rusza go z miejsca. Ruch miał jedno źródło: karta krótsza od poprzedniej skracała dokument poniżej bieżącego przewinięcia, a przeglądarka dociągała przewinięcie do nowego dna. Widzowi nie przeszkadza zmiana wysokości dokumentu — przeszkadza mu, że to, na co patrzy, ucieka. Wyrównywaliśmy wysokość, choć problemem było przewinięcie.
+
+**Teraz dopełniamy wyłącznie niedobór** — tyle, ile brakuje, żeby bieżące przewinięcie zostało w mocy, i tylko karcie właśnie pokazanej. Przy widoku od góry, czyli w najczęstszym przypadku, nie dokładamy ani jednego punktu. Dopełnienie wraca, gdy widz przewinie na tyle w górę, że jego oddanie nie może już niczego dociągnąć, oraz przy każdej zmianie szerokości okna, bo stare dopełnienie opisuje dokument, którego już nie ma.
+
+**Pułapka po drodze: „scrollHeight" ma dolną granicę.** Ta miara nigdy nie podaje mniej niż wysokość okna, więc przy krótkiej karcie zgłaszała dokument wyższy, niż jest naprawdę, niedobór wychodził za mały i na szerokim ekranie zostawało 64 punkty skoku. Dno treści bierzemy teraz z prostokąta `document.body`, który mówi prawdę także wtedy, gdy treść jest niższa od okna. Drugą odmianę tego samego błędu miał warunek oddania dopełnienia: liczony przez dno widoku nie zaskakiwał nigdy na stronie szyfru na szerokim ekranie, bo karta nie wypełnia tam nawet jednego widoku — dopełnienie zostawało na stałe. Warunek pyta teraz o to, co dokument wytrzyma bez dopełnienia.
+
+**Pomiar po poprawce**, dla czterech stron w dwóch szerokościach, przy sześciu przełączeniach w obie strony: skok 0 punktów w każdym przypadku, dopełnienie 0 punktów przy widoku od góry, dopełnienie oddane po powrocie na górę. Przedtem pomiar dawał od 619 do 2256 punktów nadanej wysokości na każdej stronie bez względu na przewinięcie.
+
+**Dziewięć nowych testów** (176 zamiast 167 po odjęciu testu zniesionego): brak dopełnienia przy widoku od góry, dopełnienie równe dokładnie niedoborowi, dopełnienie tylko dla karty czynnej, oddanie po przewinięciu w górę, oddanie na górze także gdy treść jest niższa od okna, brak rezerwacji przy pierwszym wywołaniu oraz odporność na dolną granicę „scrollHeight". Zniesiony został test, który wymagał starego zachowania — stwierdzał, że każda karta ma wysokość najwyższej, czyli dokładnie to, co dziś uznajemy za wadę. Sprawdzono, że cztery z nowych testów upadają po powrocie do mylącej miary.
+
+**Co z tego wynika na przyszłość.** Objaw został opisany trafnie, a mimo to trzy cykle leczyły co innego: „strona podskakuje" przeczytaliśmy jako „zmienia się wysokość", a znaczyło „ucieka mi widok". Pomiar w przeglądarce przyszedł po, nie przed — i to on pokazał koszt. Następny raz, gdy zgłoszenie dotyczy ruchu na stronie, pomiar idzie pierwszy, w dwóch szerokościach, i obejmuje nie tylko objaw, ale i cenę lekarstwa.

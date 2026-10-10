@@ -259,8 +259,9 @@ describe.skipIf(!zbudowane)("poprawki czytelności", () => {
 });
 
 // Oznaczenia statusu wersji mają tłumaczyć się same, a przełączenie zakładki
-// nie ma zmieniać geometrii strony. Pierwsze da się sprawdzić w dokumencie,
-// drugie wymaga wysokości, więc pilnuje go wyrównanie kart.
+// nie ma ruszać widoku — ale też nie ma za to płacić pustym papierem.
+// Pierwsze da się sprawdzić w dokumencie, drugie trzeba policzyć: ile
+// dokładamy i kiedy to oddajemy.
 describe.skipIf(!zbudowane)("oznaczenia i zakładki", () => {
   const STRONY = ["_site/pl/cyrkiel/index.html", "_site/pl/wahadlo/index.html",
                   "_site/pl/szyfr/index.html", "_site/pl/gnomon/index.html",
@@ -287,17 +288,100 @@ describe.skipIf(!zbudowane)("oznaczenia i zakładki", () => {
     });
   }
 
-  it("zakładki wyrównują karty do najwyższej, żeby strona nie skakała", async () => {
+  // Przełączenie zakładki nie może ruszać widoku — i nie może za to płacić
+  // pustym papierem. Dawniej każda karta dostawała wysokość najwyższej, więc
+  // dwa zdania w „Pytaniach otwartych" rozpychały się na dwa tysiące punktów.
+  // Teraz dopełniamy wyłącznie niedobór potrzebny, by bieżące przewinięcie
+  // zostało w mocy — a przy widoku od góry nie dopełniamy wcale.
+  const scenaZakladek = async (ustaw) => {
     document.body.innerHTML = readFileSync(STRONY[0], "utf8")
       .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
-    // jsdom nie liczy układu, więc wysokości podstawiamy sami
+    // jsdom nie liczy układu, więc wymiary podstawiamy sami
     const karty = [...document.querySelectorAll('[role="tabpanel"]')];
-    expect(karty.length, "brak kart do wyrównania").toBe(3);
+    expect(karty.length, "brak kart na stronie przyrządu").toBe(3);
     karty.forEach((k, i) => Object.defineProperty(k, "offsetHeight", { get: () => [900, 400, 150][i] }));
+    ustaw();
     const m = await import("../src/assets/js/zakladki.js");
     m.default();
+    return { karty, zakladki: [...document.querySelectorAll('[role="tab"]')] };
+  };
+
+  // „wysokoscDokumentu" to dno treści liczone od początku dokumentu. Moduł
+  // bierze je z prostokąta treści, nie ze „scrollHeight", bo ta druga miara
+  // nigdy nie podaje mniej niż wysokość okna i przy krótkiej karcie kłamie.
+  const udajOkno = ({ y, wysokoscOkna, wysokoscDokumentu }) => {
+    Object.defineProperty(window, "scrollY", { get: () => y, configurable: true });
+    Object.defineProperty(window, "innerHeight", { get: () => wysokoscOkna, configurable: true });
+    document.body.getBoundingClientRect = () => ({ bottom: wysokoscDokumentu - y });
+    window.scrollTo = () => {};
+  };
+
+  it("przy widoku od góry nie dopełnia kart ani o punkt", async () => {
+    const { karty, zakladki } = await scenaZakladek(() =>
+      udajOkno({ y: 0, wysokoscOkna: 768, wysokoscDokumentu: 2000 }));
+    zakladki[2].click();
     for (const k of karty)
-      expect(k.style.minHeight, "karta nie została wyrównana do najwyższej").toBe("900px");
+      expect(k.style.minHeight, "karta dostała pustą wysokość bez potrzeby").toBe("");
+  });
+
+  it("dopełnia tylko tyle, ile brakuje pod bieżącym przewinięciem", async () => {
+    // Widz jest nisko: dno widoku na 2268, a krótsza karta kończy dokument
+    // na 1800. Brakuje 468 — i dokładnie tyle wolno dołożyć, do wysokości
+    // karty, która właśnie się pokazała (150).
+    const { karty, zakladki } = await scenaZakladek(() =>
+      udajOkno({ y: 1500, wysokoscOkna: 768, wysokoscDokumentu: 1800 }));
+    zakladki[2].click();
+    expect(karty[2].style.minHeight, "dopełnienie nie odpowiada niedoborowi").toBe("618px");
+    expect(karty[0].style.minHeight, "karta nieaktywna nie powinna być dopełniana").toBe("");
+    expect(karty[1].style.minHeight, "karta nieaktywna nie powinna być dopełniana").toBe("");
+  });
+
+  it("oddaje dopełnienie, gdy widz wróci na górę", async () => {
+    const { karty, zakladki } = await scenaZakladek(() =>
+      udajOkno({ y: 1500, wysokoscOkna: 768, wysokoscDokumentu: 1800 }));
+    zakladki[2].click();
+    expect(karty[2].style.minHeight, "brak dopełnienia do oddania").toBe("618px");
+    // Po przewinięciu w górę treść i bez dopełnienia sięga dna widoku,
+    // więc oddanie go nie może już niczego dociągnąć.
+    udajOkno({ y: 100, wysokoscOkna: 768, wysokoscDokumentu: 2268 });
+    window.dispatchEvent(new Event("scroll"));
+    expect(karty[2].style.minHeight, "dopełnienie zostało na stałe").toBe("");
+  });
+
+  it("oddaje dopełnienie na górze także wtedy, gdy treść jest niższa od okna", async () => {
+    // Tak wygląda strona szyfru na szerokim ekranie: karta „Pytania otwarte"
+    // nie wypełnia nawet jednego widoku. Warunek oddania liczony przez dno
+    // widoku nigdy by tu nie zaskoczył i dopełnienie zostawało na stałe.
+    const { karty, zakladki } = await scenaZakladek(() =>
+      udajOkno({ y: 782, wysokoscOkna: 900, wysokoscDokumentu: 772 }));
+    zakladki[2].click();
+    expect(karty[2].style.minHeight, "brak dopełnienia do oddania").not.toBe("");
+    udajOkno({ y: 0, wysokoscOkna: 900, wysokoscDokumentu: 1682 });
+    window.dispatchEvent(new Event("scroll"));
+    expect(karty[2].style.minHeight, "dopełnienie zostało, choć nie ma czego przewijać").toBe("");
+  });
+
+  it("nie daje się zmylić dolnej granicy „scrollHeight”", async () => {
+    // Przeglądarka nigdy nie podaje w „scrollHeight” mniej niż wysokość okna.
+    // Moduł liczący niedobór z tej miary zgłaszał dokument wyższy, niż jest,
+    // i zostawiał 64 punkty skoku na szerokim ekranie. Tu dno treści (772)
+    // jest niższe od okna (900), a „scrollHeight” kłamie, że to 900 — pomiar
+    // musi wziąć pierwsze, nie drugie.
+    const { karty, zakladki } = await scenaZakladek(() => {
+      udajOkno({ y: 782, wysokoscOkna: 900, wysokoscDokumentu: 772 });
+      Object.defineProperty(document.documentElement, "scrollHeight",
+        { get: () => 900, configurable: true });
+    });
+    zakladki[2].click();
+    // niedobór = 782 + 900 − 772 = 910, karta ma 150 → 1060
+    expect(karty[2].style.minHeight, "niedobór policzony ze zmyłkowej miary").toBe("1060px");
+  });
+
+  it("pierwsze wywołanie nie rezerwuje miejsca na nic", async () => {
+    const { karty } = await scenaZakladek(() =>
+      udajOkno({ y: 400, wysokoscOkna: 768, wysokoscDokumentu: 0 }));
+    for (const k of karty)
+      expect(k.style.minHeight, "karta dopełniona już przy starcie").toBe("");
   });
 });
 
