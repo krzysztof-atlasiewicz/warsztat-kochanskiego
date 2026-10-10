@@ -19,7 +19,7 @@
       "dlaczego": "Pierwsza część pytania została rozstrzygnięta: księga IX zaczyna się na stronie drukowanej 620. Druga nie — przeszukanie pełnego tekstu egzemplarza nie potwierdziło obecności zapisu szyfrowego w tej księdze.",
       "zmieni": "Albo moduł szyfru przejdzie z rekonstrukcji metody na pracę ze źródłem, albo trzeba będzie poprawić twierdzenie na stronie — zapis może pochodzić z innego miejsca dzieła albo z innego przekazu.",
       "zrodlo": "Technica curiosa, Norymberga 1664 — skan Getty Research Institute, księga IX od strony 620",
-      "status": "w toku",
+      "status": "zamknięta",
       "miejsca": [
         "szyfr"
       ],
@@ -30,7 +30,7 @@
         "Zapis nie dotyczy wahaczy magnetycznych. Ukrywa „artificium\" dokładnego przenośnego zegara wahadłowego; magnetyzm pada dopiero w następnym zdaniu i jako porównanie — mechanizm chodzi na pierścieniach przegubowych, „jak lampy toczące się po posadzce bez rozlania oliwy albo busole (pyxides Magneticae) w przyrządach astronomicznych\".",
         "Autor zapisu nie jest w księdze nazwany. Księga IX relacjonuje prace bezimiennego „Amicusa\" — tak zaczyna się jej część pierwsza na stronie 620 („in duas Amico dispertiar Partes\") i tak wraca w całym wywodzie („appellat Amicus\", „videat Lector apud Amicum\"). Utożsamienie Amicusa z Kochańskim pochodzi z opracowań, nie z druku.",
         "Znaleziono drugi zapis szyfrowy, w księdze VIII na stronach 587–588: korespondent przesłał Schottowi swój sąd o próbie kwadratury koła „in fine cryptographico velamine, hisce litteris: gptaramtasy rcepegnik Xacperdiq\". Schott podaje tam rozwiązanie: odrzucić pierwszą i ostatnią literę każdego wyrazu, a z pozostałych sylab czytać po jednej z każdej trójki, zaczynając od ostatniej — wychodzi „dignitas (sive Axioma) perperam accepta\".",
-        "DO ROZSTRZYGNIĘCIA PRZEZ CZŁOWIEKA: (1) zapis źródła przypisuje księgę IX Kochańskiemu, a druk mówi tylko o bezimiennym Amicusie — czy skorygować to przypisanie; (2) moduł odtwarza szyfr przesuwający, podczas gdy w dziele stoją anagram i metoda odrzucania skrajnych liter — czy przebudować moduł na zapis z księgi VIII, który ma w druku i zadanie, i rozwiązanie."
+        "Rozstrzygnięta 10 października 2026 decyzją kierownika projektu: rozbieżności między zapisem w druku a modułem opisane wprost na stronie szyfru, bez przebudowy modułu."
       ]
     },
     {
@@ -100,13 +100,13 @@
       "miejsca": [
         "rejs"
       ],
-      "status": "w toku",
+      "status": "zamknięta",
       "ustalenia": [
         "Strona ustalona: 320 tomu VII (Chapitre X, Article I, „De la longueur du Pendule à secondes de temps\"). Paginacja druku zaczyna się na stronie 233.",
         "Wartość podana przez Richera: różnica wynosi „une ligne & un quart\" — jedną linię i ćwierć — przy czym wahadło w Kajennie jest krótsze niż paryskie.",
         "Richer podaje też długość wahadła sekundowego w Paryżu: 3 stopy 8 i pół linii.",
         "Obserwację powtarzano przez dziesięć pełnych miesięcy, kilka razy w tygodniu.",
-        "Pozostaje do rozstrzygnięcia przez człowieka: czy wpisać te wartości wprost do przyrządu i zamknąć pozycję. Agent nie zamyka pozycji agendy ani nie dopisuje twierdzeń historycznych do stron."
+        "Rozstrzygnięta 10 października 2026 decyzją kierownika projektu: wartość i strona wpisane do zakładki „Skąd to wiemy” na stronie wahadła, odnośnik otwiera się na stronie 320 skanu."
       ]
     },
     {
