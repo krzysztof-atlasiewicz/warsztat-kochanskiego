@@ -99,7 +99,14 @@
       "miejsca": [
         "rejs"
       ],
-      "status": "otwarta"
+      "status": "w toku",
+      "ustalenia": [
+        "Strona ustalona: 320 tomu VII (Chapitre X, Article I, „De la longueur du Pendule à secondes de temps\"). Paginacja druku zaczyna się na stronie 233.",
+        "Wartość podana przez Richera: różnica wynosi „une ligne & un quart\" — jedną linię i ćwierć — przy czym wahadło w Kajennie jest krótsze niż paryskie.",
+        "Richer podaje też długość wahadła sekundowego w Paryżu: 3 stopy 8 i pół linii.",
+        "Obserwację powtarzano przez dziesięć pełnych miesięcy, kilka razy w tygodniu.",
+        "Pozostaje do rozstrzygnięcia przez człowieka: czy wpisać te wartości wprost do przyrządu i zamknąć pozycję. Agent nie zamyka pozycji agendy ani nie dopisuje twierdzeń historycznych do stron."
+      ]
     },
     {
       "id": "A8",

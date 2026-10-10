@@ -641,3 +641,17 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Przy okazji dwa teksty dogonione po cyklu 39:** stopka i pasek wersji opisywały oznaczenia starym słownikiem („rekonstrukcja", „interpretacja"), choć chipy mówią od tamtej pory „ze źródła" i „nasze: …". Teraz brzmią zgodnie.
 
 **Siedem nowych testów** (113 zamiast 106).
+
+## 2026-10-10 — Cykl 51: kwerenda A7 rozstrzygnięta, trzy poprawki w przyrządach
+
+**A7: strona i wartość ustalone z samej relacji Richera.** Kierownik projektu dostarczył skan tomu VII pamiętników Akademii. Obserwacja stoi na **stronie 320**, w rozdziale X, artykule I, zatytułowanym *De la longueur du Pendule à secondes de temps*. Richer pisze, że miara wahadła sekundowego odmierzona w Kajennie na żelaznym pręcie, przywieziona do Francji i porównana z paryską, okazała się krótsza o **jedną linię i ćwierć**; długość paryską podaje jako 3 stopy 8 i pół linii. Zaznacza też, że obserwację powtarzano przez dziesięć pełnych miesięcy, kilka razy w tygodniu. Paginacja druku zaczyna się na stronie 233, więc w tym skanie strona 320 leży na osiemdziesiątej dziewiątej karcie.
+
+Zapis źródła uzupełniony o strony i o wskazanie rozdziału; pozycja A7 przeniesiona na „w toku" z pełnymi ustaleniami. **Nie zamykam jej i nie dopisuję tych liczb do strony przyrządu** — zamknięcie pozycji agendy i wprowadzenie twierdzenia historycznego należą do człowieka. Wystarczy jedno słowo, żeby obie rzeczy weszły w następnym cyklu.
+
+**Zatrzymanie rzuca kotwicę tam, gdzie okręt stoi.** Dotąd każde naciśnięcie koła sterowego przestawiało dzień rejsu na zero, więc zatrzymanie w połowie Atlantyku i ponowne ruszenie odsyłało okręt do La Rochelle. Teraz rejs idzie dalej od miejsca postoju; od początku zaczyna tylko wtedy, gdy okręt dobił już do Kajenny.
+
+**Wyspy Kanaryjskie pełną nazwą** w opisie trasy, zamiast „Kanary".
+
+**Szyfr zaczyna od pustego pola wiadomości.** Przy pierścieniu nastawionym na zero „odszyfrowanie" przepisywało zapis znak w znak i obok siebie stały dwa identyczne ciągi — wyglądało to na usterkę, a było tautologią. Pole wiadomości stoi teraz puste, z podpowiedzią mówiącą wprost, co zrobić: przekręcić pierścień i złamać zapis albo wpisać własny tekst. Od pierwszego ruchu — pokrętła albo klawiatury — pola pracują dwukierunkowo, jak dotąd: wpis w wiadomość szyfruje, wpis w zapis odszyfrowuje. Przywrócenie zapisu z 1664 roku wraca do stanu wyjściowego, razem z pustym polem.
+
+**Siedem nowych testów** (120 zamiast 113). Przy okazji dwie kontrole automatyczne złapały wpis do rejestru: francuski tytuł rozdziału wpisany w pole fraz kazałby rejestrowi pytań linkować do samego siebie, a znak ułamka „pół" nie mieści się w obciętym kroju. Oba poprawione w rejestrze, nie przez rozszerzanie repertuaru.
