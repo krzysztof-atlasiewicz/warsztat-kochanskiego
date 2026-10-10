@@ -7,6 +7,7 @@ const czytaj = (p) => readFileSync(p, "utf8");
 const agenda = JSON.parse(czytaj("pdca/agenda.json"));
 const zrodla = JSON.parse(czytaj("src/_data/zrodla.json"));
 const STATUSY = ["otwarta", "w toku", "zamknięta", "nierozstrzygalna"];
+const ZAMKNIETE = ["zamknięta", "nierozstrzygalna"];
 // Kontrole, których niespełnienie jest zgłaszane, ale nie zatrzymuje cyklu.
 export const OSTRZEZENIA = new Set();
 const stronyZ = (kat) => readdirSync(kat).filter((f) => /\.(njk|md)$/.test(f)).map((f) => join(kat, f));
@@ -58,9 +59,19 @@ const KONTROLE = {
           bledy.push(`${p.id}: wskazuje miejsce „${m}", któremu nie odpowiada żadna strona`);
           continue;
         }
-        for (const c of cele)
-          if (!c.tresc.includes(`id="pytanie-${p.id}"`))
+        // Pozycja otwarta musi stać na stronie jako karta. Pozycja zamknięta
+        // nie może udawać otwartej, ale nie wolno jej też wymazać: zostaje
+        // ślad z odnośnikiem do rejestru. Jedno albo drugie, nigdy nic.
+        const domknieta = ZAMKNIETE.includes(p.status);
+        for (const c of cele) {
+          const karta = c.tresc.includes(`id="pytanie-${p.id}"`);
+          if (!domknieta && !karta)
             bledy.push(`${p.id}: nie jest osadzone w miejscu, którego dotyczy — ${c.plik}`);
+          if (domknieta && karta)
+            bledy.push(`${p.id}: pozycja zamknięta nadal stoi jako pytanie otwarte — ${c.plik}`);
+          if (domknieta && !c.tresc.includes(`agenda/#${p.id}">${p.id}</a>`))
+            bledy.push(`${p.id}: zamknięta i bez śladu z odnośnikiem do rejestru — ${c.plik}`);
+        }
       }
     }
 

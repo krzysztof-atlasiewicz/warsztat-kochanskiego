@@ -5,8 +5,12 @@ const odciski = new Map();
 const agenda = JSON.parse(readFileSync("pdca/agenda.json", "utf8"));
 const zrodla = JSON.parse(readFileSync("src/_data/zrodla.json", "utf8"));
 const ETYKIETY = {
-  pl: { naglowek: "Pytanie otwarte", dotyczy: "dotyczy", zmieni: "Co się zmieni", gdzie: "Gdzie szukać", rejestr: "cała pozycja w rejestrze", url: "/pl/agenda/" },
-  en: { naglowek: "Open question", dotyczy: "concerns", zmieni: "What will change", gdzie: "Where to look", rejestr: "full entry in the register", url: "/en/agenda/" }
+  pl: { naglowek: "Pytanie otwarte", dotyczy: "dotyczy", zmieni: "Co się zmieni", gdzie: "Gdzie szukać", rejestr: "cała pozycja w rejestrze", url: "/pl/agenda/",
+        rozstrzygniete: "Rozstrzygnięte tutaj", brakPytan: "Do tego przyrządu nie ma już pytań otwartych.",
+        naglowekZ: "Pytanie rozstrzygnięte", zmienilo: "Co się zmieniło" },
+  en: { naglowek: "Open question", dotyczy: "concerns", zmieni: "What will change", gdzie: "Where to look", rejestr: "full entry in the register", url: "/en/agenda/",
+        rozstrzygniete: "Settled here", brakPytan: "No open questions remain for this instrument.",
+        naglowekZ: "Settled question", zmienilo: "What changed" }
 };
 
 export default function (eleventyConfig) {
@@ -63,20 +67,35 @@ export default function (eleventyConfig) {
     `<section class="karta-przyrzadu" id="k-${nazwa}" role="tabpanel" aria-labelledby="z-${nazwa}" tabindex="-1">`
     + `<h2 class="tytul-karty">${tytul}</h2>${tresc}</section>`);
 
+  const ZAMKNIETE = new Set(["zamknięta", "nierozstrzygalna"]);
   const kartaPytania = (p, jezyk) => {
     const e = ETYKIETY[jezyk] || ETYKIETY.pl;
-    return `<aside class="pytanie" id="pytanie-${p.id}" aria-label="${e.naglowek} ${p.id}">
-  <p class="pytanie-nag"><span class="znak" aria-hidden="true">?</span> ${e.naglowek} ${p.id} — <span class="dotyczy">${e.dotyczy}: ${p.dotyczy}</span></p>
+    // Nagłówek i czas gramatyczny idą za statusem pozycji. Karta pozycji
+    // rozstrzygniętej, która nadal głosi „pytanie otwarte” i „co się zmieni”,
+    // jest fałszem na stronie — a to ten sam błąd, przed którym serwis ostrzega.
+    const zamkn = ZAMKNIETE.has(p.status);
+    const nag = zamkn ? e.naglowekZ : e.naglowek;
+    return `<aside class="pytanie${zamkn ? " rozstrzygnieta" : ""}" id="pytanie-${p.id}" aria-label="${nag} ${p.id}">
+  <p class="pytanie-nag"><span class="znak" aria-hidden="true">${zamkn ? "!" : "?"}</span> ${nag} ${p.id} — <span class="dotyczy">${e.dotyczy}: ${p.dotyczy}</span></p>
   <p class="pytanie-tresc">${p.pytanie}</p>
-  <p><strong>${e.zmieni}:</strong> ${p.zmieni}</p>
+  <p><strong>${zamkn ? e.zmienilo : e.zmieni}:</strong> ${p.zmieni}</p>
   <p class="pytanie-stopka"><span class="status">${p.status}</span> <a href="${e.url}#${p.id}">${e.rejestr}</a></p>
 </aside>`;
   };
 
   // Pozycje agendy przypisane do danego miejsca. Jedno źródło prawdy: rejestr,
   // nie ręczna lista w nagłówku strony, która potrafi się z nim rozminąć.
-  const pytaniaMiejsca = (miejsce) => agenda.pozycje.filter((p) => p.miejsca?.includes(miejsce));
+  // Zakładka nazywa się „Pytania otwarte", więc pozycje zamknięte do niej nie
+  // należą — ale nie mogą też zniknąć bez śladu, bo ślad jest tu treścią.
+  // Stąd dwa zbiory: otwarte wchodzą na zakładkę jako karty, zamknięte
+  // jednym wierszem z odesłaniem do rejestru.
+  const wszystkieMiejsca = (miejsce) => agenda.pozycje.filter((p) => p.miejsca?.includes(miejsce));
+  const pytaniaMiejsca = (miejsce) => wszystkieMiejsca(miejsce).filter((p) => !ZAMKNIETE.has(p.status));
+  const pytaniaZamkniete = (miejsce) => wszystkieMiejsca(miejsce).filter((p) => ZAMKNIETE.has(p.status));
   eleventyConfig.addFilter("pytaniaMiejsca", pytaniaMiejsca);
+  eleventyConfig.addFilter("pytaniaZamkniete", pytaniaZamkniete);
+  eleventyConfig.addFilter("agendaOtwarte", (poz) => poz.filter((p) => !ZAMKNIETE.has(p.status)));
+  eleventyConfig.addFilter("agendaZamkniete", (poz) => poz.filter((p) => ZAMKNIETE.has(p.status)));
 
   eleventyConfig.addShortcode("pytanie", (id, jezyk = "pl") => {
     const p = agenda.pozycje.find((x) => x.id === id);
@@ -84,8 +103,19 @@ export default function (eleventyConfig) {
     return kartaPytania(p, jezyk);
   });
 
-  eleventyConfig.addShortcode("pytaniaTu", (miejsce, jezyk = "pl") =>
-    pytaniaMiejsca(miejsce).map((p) => kartaPytania(p, jezyk)).join("\n"));
+  eleventyConfig.addShortcode("pytaniaTu", (miejsce, jezyk = "pl") => {
+    const e = ETYKIETY[jezyk] || ETYKIETY.pl;
+    const karty = pytaniaMiejsca(miejsce).map((p) => kartaPytania(p, jezyk));
+    // Zakładka bez ani jednej karty nie może zostać pusta: milczenie czyta się
+    // jako brak pytań albo jako awarię, a to dwie różne rzeczy.
+    if (!karty.length) karty.push(`<p class="rozstrzygniete-tu">${e.brakPytan}</p>`);
+    const z = pytaniaZamkniete(miejsce);
+    if (z.length) {
+      const lista = z.map((p) => `<a href="${e.url}#${p.id}">${p.id}</a>`).join(", ");
+      karty.push(`<p class="rozstrzygniete-tu">${e.rozstrzygniete}: ${lista}.</p>`);
+    }
+    return karty.join("\n");
+  });
 
   eleventyConfig.addCollection("przyrzady", (api) =>
     api.getFilteredByGlob("src/*/*.njk")

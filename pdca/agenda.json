@@ -11,13 +11,20 @@
       "miejsca": [
         "gnomon"
       ],
-      "dotyczy": "krzywe przesileń i równonocy oraz położenie cienia na ścianie"
+      "dotyczy": "krzywe przesileń i równonocy oraz położenie cienia na ścianie",
+      "ustalenia": [
+        "Kolejność rozstrzygania ma znaczenie: najpierw typ wskazówki, potem deklinacja ściany. Deklinacja zmierzona dla modelu z prętem prostopadłym do ściany będzie bezużyteczna, jeśli zegar okaże się biegunowy, bo wtedy inna jest cała rodzina krzywych.",
+        "Typ wskazówki rozstrzyga się z fotografii i dokumentacji, nie z obliczeń: zdjęcie Hanny Widackiej (Pasaż Wiedzy muzeum), dokumentacja konserwatorska Muzeum Pałacu Króla Jana III, zbiory Muzeum im. Przypkowskich w Jędrzejowie, Fijałkowski 1989. Pręt prostopadły do ściany i pręt równoległy do osi świata dają cienie, które na zdjęciu z dołu różnią się kierunkiem w południe.",
+        "Deklinację ściany mierzy się z danych geodezyjnych, nigdy kompasem: ortofotomapa geoportal.gov.pl daje azymut elewacji z dokładnością około ±0,5°, a wektorowe obrysy budynku z EGiB albo BDOT10k (pliki GML) — około ±0,2°. Kompas magnetyczny jest wykluczony: w pobliżu murów i zbrojenia błąd przekracza spodziewaną wielkość mierzoną.",
+        "Próg przydatności: ±1°. Poniżej tego progu geometria krzywych na ścianie zmienia się mniej niż grubość rysowanej linii, więc wynik dokładniejszy niż ±1° nie zmieni już modelu. Powyżej — zmienia, i wtedy trzeba przeliczyć siatki.",
+        "Dopóki oba pytania nie są rozstrzygnięte, model zostaje przy ścianie dokładnie południowej i pręcie prostopadłym, z zastrzeżeniem widocznym na stronie i przy oznaczeniu „nasze: uproszczona geometria”."
+      ]
     },
     {
       "id": "A2",
       "pytanie": "Czy zapis szyfrowy konstrukcji wahaczy magnetycznych faktycznie znajduje się w księdze IX — i jaką ma postać?",
       "dlaczego": "Pierwsza część pytania została rozstrzygnięta: księga IX zaczyna się na stronie drukowanej 620. Druga nie — przeszukanie pełnego tekstu egzemplarza nie potwierdziło obecności zapisu szyfrowego w tej księdze.",
-      "zmieni": "Albo moduł szyfru przejdzie z rekonstrukcji metody na pracę ze źródłem, albo trzeba będzie poprawić twierdzenie na stronie — zapis może pochodzić z innego miejsca dzieła albo z innego przekazu.",
+      "zmieni": "Twierdzenie o zapisie szyfrowym trzeba było poprawić, nie moduł. Strona szyfru mówi teraz o czterech rozbieżnościach z drukiem — stronie 692 zamiast księgi IX, anagramie zamiast szyfru podstawieniowego, przedmiocie niemagnetycznym i bezimiennym „Amicusie” — a przykładowy kryptogram z księgi VIII podano razem z rozwiązaniem. Moduł pozostał rekonstrukcją metody.",
       "zrodlo": "Technica curiosa, Norymberga 1664 — skan Getty Research Institute, księga IX od strony 620",
       "status": "zamknięta",
       "miejsca": [
@@ -49,7 +56,7 @@
       "id": "A4",
       "pytanie": "Czy Kochański uzasadniał konstrukcję cyklometryczną względami warsztatowymi?",
       "dlaczego": "Teza o przybliżeniu zaprojektowanym do wykonania jest obecnie naszą interpretacją.",
-      "zmieni": "Status oznaczenia w module cyrkla: interpretacja albo źródło.",
+      "zmieni": "Treść oznaczenia „nasze: interpretacja celu” w module cyrkla. Jeśli Kochański uzasadnia konstrukcję warsztatowo, teza przechodzi do oznaczenia „ze źródła”; jeśli nie — zostaje przy nas, ale z podaną podstawą negatywną, czyli wskazaniem miejsc, w których jej nie ma.",
       "zrodlo": "Acta Eruditorum 1685, Observationes cyclometricae",
       "status": "otwarta",
       "miejsca": [
@@ -77,7 +84,7 @@
       "id": "A6",
       "pytanie": "Czy Chronos na medalionie zegara wilanowskiego trzyma kosę czy kłos zboża?",
       "dlaczego": "Opisy ikonograficzne się różnią. Pierwszy sprawdzony opis muzealny mówi o kłosie, ale opiera się na jednym ujęciu fotograficznym i nie jest opisem konserwatorskim.",
-      "zmieni": "Warstwę ikonograficzną modułu gnomonu.",
+      "zmieni": "Zdanie o medalionie w zakładce „Skąd to wiemy” modułu gnomonu: atrybut w dłoni i to, czy postać wolno nazwać Chronosem. Sam rysunek przyrządu się nie zmieni — celowo nie odtwarza stiukowej dekoracji, tylko geometrię trzech rachub.",
       "zrodlo": "Fotografia muzealna (Widacka 2008), dokumentacja konserwatorska Muzeum Pałacu Króla Jana III",
       "status": "w toku",
       "miejsca": [
@@ -94,7 +101,7 @@
       "id": "A7",
       "pytanie": "Na której stronie relacji Richera opisane jest skrócenie wahadła sekundowego w Kajennie i jaka dokładnie wartość została podana?",
       "dlaczego": "Moduł powołuje się na tę obserwację, a opieramy się na opracowaniach, nie na samej relacji. Skan nie ma rozpoznanego tekstu, więc nie da się go przeszukać.",
-      "zmieni": "Odnośnik otworzy się na właściwej stronie, a podana w module wartość skrócenia zyska oparcie w źródle.",
+      "zmieni": "Odnośnik otwiera się na stronie 320 relacji Richera, a wartość skrócenia podana w module ma oparcie w druku: „une ligne & un quart” względem paryskich 3 stóp 8½ linii, czyli około 2,8 mm. Zdanie z oryginałem francuskim stoi w zakładce „Skąd to wiemy”.",
       "zrodlo": "Observations astronomiques et physiques faites en l'isle de Caïenne, Mémoires de l'Académie Royale des Sciences t. VII",
       "dotyczy": "zdanie o obserwacji Richera we wstępie przyrządu",
       "miejsca": [

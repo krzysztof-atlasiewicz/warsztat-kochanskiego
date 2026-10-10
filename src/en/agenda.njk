@@ -6,9 +6,14 @@ para: agenda
 permalink: /en/agenda/
 ---
 <h1>What we still don't know</h1>
-<p>This site is a working model. The questions below remain open, and an answer to each will change something specific on a specific page. The list is public because that is what work on the past actually looks like — and because showing the gaps is more honest than filling them with guesswork.</p>
-<p>Every change made in response to a source goes into the public change log.</p>
-{%- for p in agenda.pozycje %}
+<p>This site is a working model. Each of the questions below changes something specific on a specific page, and the list is public because that is what work on the past actually looks like — and because showing the gaps is more honest than filling them with guesswork. Settled items stay on the list together with whatever settled them: striking them out would erase the trail, and the trail is part of the content here.</p>
+<p>Every change made in response to a source goes into the <a href="/en/changes/">public change log</a>.</p>
+
+{%- set otwarte = agenda.pozycje | agendaOtwarte %}
+{%- set zamkniete = agenda.pozycje | agendaZamkniete %}
+
+<h2>Open and in progress <span class="licznik">{{ otwarte | length }}</span></h2>
+{%- for p in otwarte %}
 <div class="agenda-poz" id="{{ p.id }}">
   <h3>{{ p.id }}. {{ p.pytanie }}</h3>
   <p><span class="status">{{ p.status }}</span></p>
@@ -23,6 +28,26 @@ permalink: /en/agenda/
   </div>
   {%- endif %}
   <p class="agenda-miejsca">{%- for m in p.miejsca %}{% for s in collections.all %}{% if s.data.para == m and s.data.jezyk == jezyk %}<a href="{{ s.url }}#pytanie-{{ p.id }}">See it where it applies: {{ s.data.tytul }}</a> {% endif %}{% endfor %}{% endfor %}</p>
+</div>
+{%- endfor %}
+
+<h2>Settled <span class="licznik">{{ zamkniete | length }}</span></h2>
+<p>Below are the questions that now have an answer. The entry is kept whole — including what we expected before reaching for the source.</p>
+{%- for p in zamkniete %}
+<div class="agenda-poz rozstrzygnieta" id="{{ p.id }}">
+  <h3>{{ p.id }}. {{ p.pytanie }}</h3>
+  <p><span class="status">{{ p.status }}</span></p>
+  <p>{{ p.dlaczego }}</p>
+  <p><strong>Concerns:</strong> {{ p.dotyczy }}</p>
+  <p><strong>What changed:</strong> {{ p.zmieni }}</p>
+  <p><strong>Where we looked:</strong> {{ p.zrodlo | podlinkuj | safe }}</p>
+  {%- if p.ustalenia %}
+  <div class="ustalenia">
+    <p><strong>What was established:</strong></p>
+    <ul>{% for u in p.ustalenia %}<li>{{ u }}</li>{% endfor %}</ul>
+  </div>
+  {%- endif %}
+  <p class="agenda-miejsca">{%- for m in p.miejsca %}{% for s in collections.all %}{% if s.data.para == m and s.data.jezyk == jezyk %}<a href="{{ s.url }}">See it where it applies: {{ s.data.tytul }}</a> {% endif %}{% endfor %}{% endfor %}</p>
 </div>
 {%- endfor %}
 <p class="note uwaga">The agenda is maintained in Polish; an English rendering of each item is pending translation.</p>
