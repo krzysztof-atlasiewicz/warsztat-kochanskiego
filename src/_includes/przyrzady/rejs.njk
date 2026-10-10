@@ -28,9 +28,9 @@
     </figure>
 
     <div class="blok-kola">
-      <button id="rejsStart" class="kolo-sterowe" title="{{ s.rejs.opisy.odbij }}"
-              data-dymek="{{ s.rejs.opisy.odbij }}" aria-label="{{ s.rejs.odbij }}">
-        <svg viewBox="0 0 100 100" aria-hidden="true">
+      <button id="rejsStart" class="kolo-sterowe" type="button" aria-pressed="false"
+              title="{{ s.rejs.opisy.odbij }}" data-dymek="{{ s.rejs.opisy.odbij }}">
+        <svg viewBox="0 0 100 100" class="ikona-kolo" aria-hidden="true">
           <circle cx="50" cy="50" r="31" fill="none" stroke="var(--mosiadz-ciemny)" stroke-width="5"/>
           <circle cx="50" cy="50" r="10" fill="url(#mosiadzKolo)" stroke="var(--mosiadz-ciemny)" stroke-width="1.6"/>
           <circle cx="50" cy="50" r="4" fill="none" stroke="var(--mosiadz-ciemny)" stroke-width="1"/>
@@ -50,7 +50,16 @@
             <stop offset="0" stop-color="var(--mosiadz-jasny)"/><stop offset="1" stop-color="var(--mosiadz-ciemny)"/>
           </radialGradient></defs>
         </svg>
-        <span>{{ s.rejs.odbij }}</span>
+        <svg viewBox="0 0 100 100" class="ikona-kotwica" aria-hidden="true">
+          <circle cx="50" cy="16" r="8" fill="none" stroke="var(--mosiadz-ciemny)" stroke-width="4"/>
+          <line x1="50" y1="24" x2="50" y2="82" stroke="var(--mosiadz-ciemny)" stroke-width="5" stroke-linecap="round"/>
+          <line x1="26" y1="36" x2="74" y2="36" stroke="var(--mosiadz-ciemny)" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M 18 58 Q 20 82 50 86 Q 80 82 82 58" fill="none" stroke="var(--mosiadz-ciemny)"
+                stroke-width="5" stroke-linecap="round"/>
+          <path d="M 10 52 L 18 58 L 26 50 Z" fill="var(--mosiadz-ciemny)"/>
+          <path d="M 90 52 L 82 58 L 74 50 Z" fill="var(--mosiadz-ciemny)"/>
+        </svg>
+        <span id="rejsNapis">{{ s.rejs.odbij }}</span>
       </button>
     </div>
 
@@ -174,10 +183,6 @@
       </figure>
     </div>
   </div>
-  <p class="legenda">
-    <span class="probka probka-wahadlo"></span>{{ s.rejs.wahadlo }}
-    <span class="probka probka-sprezyna"></span>{{ s.rejs.sprezyna }}
-  </p>
   <p class="dim małe">{{ s.rejs.szerokosc }}: <span id="szer">—</span>. {{ s.rejs.mapaLegenda }} {{ s.rejs.sladOpis }}</p>
 
   <details class="wyprowadzenie" id="rachunek">

@@ -446,3 +446,62 @@ describe.skipIf(!zbudowane)("przyrządy boczne wahadła", () => {
     });
   }
 });
+
+// Zgłoszenia Z1–Z5: przełącznik rejsu, kolory odczytów, pasek przyrządów
+// i tytuł serwisu. Każde z nich łatwo cofnąć następną zmianą układu.
+describe.skipIf(!zbudowane)("poprawki zgłoszone 10 października", () => {
+  const wczytaj = (plik) => {
+    document.body.innerHTML = readFileSync(plik, "utf8")
+      .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+    return document.querySelector("[data-modul]") || document.body;
+  };
+
+  for (const plik of ["_site/pl/wahadlo/index.html", "_site/en/pendulum/index.html"]) {
+    it(`${plik} — rejs przełącza się kołem i kotwicą, nie napisem`, async () => {
+      const root = wczytaj(plik);
+      const g = root.querySelector("#rejsStart");
+      expect(g.querySelector(".ikona-kolo"), "brak koła sterowego").toBeTruthy();
+      expect(g.querySelector(".ikona-kotwica"), "brak kotwicy").toBeTruthy();
+      expect(g.getAttribute("aria-pressed"), "przycisk nie jest przełącznikiem").toBe("false");
+      expect(g.querySelector("#rejsNapis"), "napis nie jest osobnym elementem").toBeTruthy();
+      // Moduł nie może podmieniać całej zawartości guzika — tak zginął rysunek.
+      const m = readFileSync("src/assets/js/modules/rejs.js", "utf8");
+      expect(m, "moduł nadpisuje zawartość guzika").not.toMatch(/\$\("rejsStart"\)\.textContent/);
+      const mod = await import("../src/assets/js/modules/rejs.js");
+      mod.default(root);
+      root.querySelector("#rejsStart").dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+      expect(root.querySelector("#rejsStart").getAttribute("aria-pressed"), "kliknięcie nie przestawiło stanu").toBe("true");
+      expect(root.querySelector(".ikona-kolo"), "koło zniknęło z dokumentu").toBeTruthy();
+    });
+
+    it(`${plik} — odczyty błędu w kolorach swoich śladów, bez legendy pod mapą`, () => {
+      const root = wczytaj(plik);
+      expect(root.querySelector(".rzad-mapy ~ .legenda, .legenda"), "legenda pod mapą została").toBeFalsy();
+      const a = readFileSync("src/assets/css/site.css", "utf8");
+      expect(a, "odczyt wahadła nie ma koloru swojego śladu").toMatch(/#kw\{color:var\(--sun\)\}/);
+      expect(a, "odczyt sprężyny nie ma koloru swojego śladu").toMatch(/#ks\{color:var\(--verd\)\}/);
+    });
+  }
+
+  for (const [plik, etykieta] of [["_site/pl/gnomon/index.html", "Biografia"],
+                                  ["_site/en/gnomon/index.html", "Biography"]]) {
+    it(`${plik} — biografia stoi w rzędzie przyrządów z latami życia`, () => {
+      wczytaj(plik);
+      const pozycje = [...document.querySelectorAll(".bench a")];
+      expect(pozycje.length, "pasek ma mieć cztery przyrządy i biografię").toBe(5);
+      const z = pozycje[4];
+      expect(z.textContent.trim(), "ostatnia pozycja to nie biografia").toContain(etykieta);
+      expect(z.querySelector(".y").textContent.trim(), "brak lat życia").toBe("1631–1700");
+      expect(document.querySelector("footer a[href$='/biografia/']"), "odnośnik w stopce się dublował").toBeFalsy();
+    });
+  }
+
+  it("szyld mówi w języku strony", () => {
+    const szyld = (p) => {
+      wczytaj(p);
+      return document.querySelector(".marka").textContent.trim();
+    };
+    expect(szyld("_site/pl/index.html")).toBe("Warsztat Kochańskiego");
+    expect(szyld("_site/en/index.html"), "angielski szyld nieprzetłumaczony").toBe("Kochański's Workshop");
+  });
+});

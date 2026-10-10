@@ -1,10 +1,10 @@
 export default {
   pl: {
     opis: 'Cztery przyrządy, nad którymi pracował Adam Adamandy Kochański, do samodzielnego uruchomienia.',
-    status: 'Wersja demonstracyjna 0.9 — model roboczy. Części oznaczone jako rekonstrukcja czekają na uszczegółowienie po kwerendzie źródłowej.',
+    status: 'Wersja demonstracyjna 0.9 — model roboczy. Części oznaczone jako nasze dopowiedzenie czekają na uszczegółowienie po kwerendzie źródłowej.',
     statusLink: "Zobacz, czego jeszcze nie wiemy",
     agendaUrl: "/pl/agenda/",
-    stopka: "Oznaczenia: <strong>źródło</strong> — potwierdzone w druku lub opracowaniu; <strong>rekonstrukcja</strong> — odtworzenie metody na podstawie opisu; <strong>interpretacja</strong> — wniosek redakcyjny.",
+    stopka: "Oznaczenia czyta się parami: <strong>ze źródła</strong> — część, która opiera się na przekazie z epoki; <strong>nasze</strong> — co dopowiadamy od siebie, nazwane wprost przy każdym przyrządzie.",
     zrodlaLink: "Skąd to wiemy i czego nie wiemy",
     rownowaznikNaglowek: "Opis tekstowy przyrządu",
     zakladki: {
@@ -193,10 +193,10 @@ export default {
   },
   en: {
     opis: "Four instruments Adam Adamandy Kochański worked on, built to be operated.",
-    status: "Demonstration version 0.9 — a working model. Everything marked as reconstruction awaits refinement once archival research is done.",
+    status: "Demonstration version 0.9 — a working model. Everything marked as ours awaits refinement once archival research is done.",
     statusLink: "See what we still don't know",
     agendaUrl: "/en/agenda/",
-    stopka: "Labels: <strong>source</strong> — attested in print or scholarship; <strong>reconstruction</strong> — method rebuilt from a description; <strong>interpretation</strong> — our own editorial conclusion.",
+    stopka: "The labels read in pairs: <strong>from the source</strong> — the part that rests on a period account; <strong>ours</strong> — what we add ourselves, named outright beside each instrument.",
     zrodlaLink: "How we know this, and what we don't",
     rownowaznikNaglowek: "Text description of the instrument",
     zakladki: {
