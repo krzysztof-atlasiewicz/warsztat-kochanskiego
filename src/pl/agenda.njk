@@ -6,10 +6,14 @@ para: agenda
 permalink: /pl/agenda/
 ---
 <h1>Czego jeszcze nie wiemy</h1>
-<p>Ten serwis jest modelem roboczym. Poniższe pytania pozostają otwarte, a odpowiedź na każde z nich zmieni coś konkretnego na konkretnej stronie. Lista jest jawna, bo tak wygląda praca nad przeszłością — i bo pokazanie luk jest uczciwsze niż ich zasypanie domysłem.</p>
-<p>Każda zmiana naniesiona pod wpływem źródła trafia do publicznego rejestru zmian.</p>
+<p>Ten serwis jest modelem roboczym. Każde z poniższych pytań zmienia coś konkretnego na konkretnej stronie, a lista jest jawna, bo tak wygląda praca nad przeszłością — i bo pokazanie luk jest uczciwsze niż ich zasypanie domysłem. Pozycje rozstrzygnięte zostają na liście razem z tym, co je rozstrzygnęło: wykreślenie zatarłoby ślad, a ślad jest tu treścią.</p>
+<p>Każda zmiana naniesiona pod wpływem źródła trafia do <a href="/pl/decyzje/">publicznego rejestru decyzji</a>.</p>
 
-{%- for p in agenda.pozycje %}
+{%- set otwarte = agenda.pozycje | agendaOtwarte %}
+{%- set zamkniete = agenda.pozycje | agendaZamkniete %}
+
+<h2>Otwarte i w toku <span class="licznik">{{ otwarte | length }}</span></h2>
+{%- for p in otwarte %}
 <div class="agenda-poz" id="{{ p.id }}">
   <h3>{{ p.id }}. {{ p.pytanie }}</h3>
   <p><span class="status">{{ p.status }}</span></p>
@@ -24,5 +28,25 @@ permalink: /pl/agenda/
   </div>
   {%- endif %}
   <p class="agenda-miejsca">{%- for m in p.miejsca %}{% for s in collections.all %}{% if s.data.para == m and s.data.jezyk == jezyk %}<a href="{{ s.url }}#pytanie-{{ p.id }}">Zobacz w miejscu, którego dotyczy: {{ s.data.tytul }}</a> {% endif %}{% endfor %}{% endfor %}</p>
+</div>
+{%- endfor %}
+
+<h2>Rozstrzygnięte <span class="licznik">{{ zamkniete | length }}</span></h2>
+<p>Poniżej pytania, na które odpowiedź już jest. Zapis zostaje w całości — wraz z tym, czego się spodziewaliśmy przed sięgnięciem do źródła.</p>
+{%- for p in zamkniete %}
+<div class="agenda-poz rozstrzygnieta" id="{{ p.id }}">
+  <h3>{{ p.id }}. {{ p.pytanie }}</h3>
+  <p><span class="status">{{ p.status }}</span></p>
+  <p>{{ p.dlaczego }}</p>
+  <p><strong>Dotyczy:</strong> {{ p.dotyczy }}</p>
+  <p><strong>Co się zmieniło:</strong> {{ p.zmieni }}</p>
+  <p><strong>Gdzie szukaliśmy:</strong> {{ p.zrodlo | podlinkuj | safe }}</p>
+  {%- if p.ustalenia %}
+  <div class="ustalenia">
+    <p><strong>Co ustalono:</strong></p>
+    <ul>{% for u in p.ustalenia %}<li>{{ u }}</li>{% endfor %}</ul>
+  </div>
+  {%- endif %}
+  <p class="agenda-miejsca">{%- for m in p.miejsca %}{% for s in collections.all %}{% if s.data.para == m and s.data.jezyk == jezyk %}<a href="{{ s.url }}">Zobacz w miejscu, którego dotyczy: {{ s.data.tytul }}</a> {% endif %}{% endfor %}{% endfor %}</p>
 </div>
 {%- endfor %}

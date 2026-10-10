@@ -107,6 +107,15 @@ body.osadzenie h1{font-size:1.5rem}
 .pytanie .dotyczy{color:var(--ink-soft);text-transform:none;letter-spacing:0}
 .pytanie-tresc{font-size:1rem!important;color:var(--ink)}
 .pytanie-stopka .status{margin-right:.5rem}
+/* Pozycja rozstrzygnięta zostaje widoczna, ale przestaje wołać o uwagę:
+   zieleń zamiast słonecznego akcentu, bez wołania „otwarte”. */
+.pytanie.rozstrzygnieta{border-color:var(--verd)}
+.pytanie.rozstrzygnieta .pytanie-nag{color:var(--verd)}
+.pytanie.rozstrzygnieta .pytanie-nag .znak{border-color:var(--verd)}
+.agenda-poz.rozstrzygnieta{border-top-color:var(--verd)}
+.agenda-poz.rozstrzygnieta .status{border-color:var(--verd);color:var(--verd)}
+.rozstrzygniete-tu{font-size:.88rem;color:var(--ink-soft);margin:1rem 0 0}
+h2 .licznik{font-family:var(--mono);font-size:.62em;color:var(--ink-soft);border:1px solid var(--rule);padding:.1rem .4rem;vertical-align:.25em}
 .pytanie-stopka a{color:var(--verd)}
 .agenda-miejsca a{color:var(--verd);font-size:.9rem}
 a.zrodlo{color:var(--verd);text-decoration-style:dotted;text-underline-offset:.2em}
