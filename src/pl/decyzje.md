@@ -623,3 +623,21 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 **Jedna rzecz z tego akapitu nie była nigdzie indziej:** że podziałka wskaźników jest zagęszczona przy zerze, żeby małe odchyłki były widoczne. To zastrzeżenie do odczytu, nie opis — igła w połowie tarczy nie znaczy połowy zakresu. Wędruje więc na same wskaźniki, jako ich dymek, razem ze zdaniem o tym, co igła mierzy.
 
 **Test pilnuje, że zastrzeżenie nie zginęło:** każdy z trzech przyrządów bocznych musi mieć niepusty dymek, a wśród nich musi paść zdanie o zagęszczeniu podziałki przy zerze — w obu wersjach językowych. Bez tego następne porządkowanie tekstu wyniosłoby je razem ze śmieciami.
+
+## 2026-10-10 — Cykl 50: sześć zgłoszeń z listy do zrobienia
+
+**Koło sterowe ginęło bezpowrotnie.** Moduł podmieniał całą zawartość przycisku na napis, więc po odbiciu od brzegu rysunek koła znikał i zostawał sam tekst. Przełącznik ma teraz dwa stany i jeden kształt: koło sterowe przy postoju, kotwica w drodze, zawsze w tym samym miejscu pulpitu. Podmieniamy wyłącznie napis i `aria-pressed`; oba rysunki mają tę samą ramkę, więc przełączenie nie rusza układu. Obraca się przy najechaniu tylko koło — kotwica ma wisieć spokojnie. Test nie dopuszcza już nadpisywania zawartości przycisku.
+
+**Odczyty błędu w kolorach swoich śladów.** „5958 km" przy wahadle jest mosiężne jak jego ślad na karcie, „3759 km" przy sprężynie — patynowe. Dwie liczby w jednym kolorze nie mówiły, która do którego zegara należy.
+
+**Legenda kolorów pod mapą usunięta.** Po poprzedniej poprawce powtarzała to, co mówią same odczyty i końcówki śladów na karcie.
+
+**Biografia weszła w rząd przyrządów** jako piąta pozycja paska, z latami życia 1631–1700 w miejscu, w którym przyrządy mają swój rok. Dotąd była drobnym odnośnikiem w stopce — a jest tym samym rodzajem wejścia do serwisu. Odnośnik ze stopki usunięty, żeby się nie dublował.
+
+**Szyld mówi w języku strony.** Tytuł serwisu był jeden dla obu wersji, więc na `/en/` stało „Warsztat Kochańskiego". Rozdzielony na wersje językowe; brzmienie angielskie — „Kochański's Workshop" — wzięte z nagłówka tamtejszej strony głównej, gdzie stało od początku. Zmiana nazwy własnej wymaga jednego wiersza w `src/_data/site.js`.
+
+**Strona główna rozbudowana z trzech zdań do pięciu akapitów.** Co każdy przyrząd właściwie robi i że liczy naprawdę, a nie odtwarza nagrania; na czym polega para oznaczeń i gdzie szukać tego, czego nie wiemy; czym jest tu biografia; co znaczy wersja demonstracyjna i jak osadzić przyrząd u siebie. Żadnego nowego twierdzenia historycznego — wszystko, co pada o Kochańskim, stoi już na stronach przyrządów albo w życiorysie.
+
+**Przy okazji dwa teksty dogonione po cyklu 39:** stopka i pasek wersji opisywały oznaczenia starym słownikiem („rekonstrukcja", „interpretacja"), choć chipy mówią od tamtej pory „ze źródła" i „nasze: …". Teraz brzmią zgodnie.
+
+**Siedem nowych testów** (113 zamiast 106).

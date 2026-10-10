@@ -350,11 +350,18 @@ svg.sciana{max-width:none;width:100%}
 .kolo-sterowe{display:flex;flex-direction:column;align-items:center;gap:.3rem;
   border:0;padding:0;background:none;cursor:pointer;color:var(--ink-soft);font-size:.78rem;line-height:1.2;text-align:center}
 .kolo-sterowe svg{width:62px;max-width:62px;margin:0;transition:transform .35s ease}
+/* Obraca sie tylko kolo sterowe — kotwica ma wisiec spokojnie. */
 @media (prefers-reduced-motion:no-preference){
-  .kolo-sterowe:hover svg,.kolo-sterowe:focus-visible svg{transform:rotate(45deg)}
+  .kolo-sterowe:hover .ikona-kolo,.kolo-sterowe:focus-visible .ikona-kolo{transform:rotate(45deg)}
 }
 .kolo-sterowe:hover{color:var(--verd)}
 .kolo-sterowe span{white-space:nowrap}
+/* Dwa stany, jeden ksztalt i jedno miejsce: kolo przy postoju, kotwica
+   w drodze. Oba rysunki maja te sama ramke, wiec podmiana nie rusza ukladu. */
+.kolo-sterowe .ikona-kotwica{display:none}
+.kolo-sterowe[aria-pressed="true"] .ikona-kolo{display:none}
+.kolo-sterowe[aria-pressed="true"] .ikona-kotwica{display:block}
+.kolo-sterowe[aria-pressed="true"]{color:var(--verd)}
 .slad-bledu{stroke-dasharray:2 3}
 .blok-wykresu .legenda{margin-bottom:.2rem}
 .blok-wykresu .t{font-size:16px}
@@ -368,7 +375,10 @@ svg.sciana{max-width:none;width:100%}
 .wskazniki-boczne svg{max-width:124px}
 .przyrzad-boczny figcaption{font-family:var(--mono);font-size:.92rem;line-height:1.25}
 .przyrzad-boczny figcaption span{display:block}
-.przyrzad-boczny figcaption .blad{color:var(--verd)}
+/* Kazdy odczyt w kolorze swojego sladu na karcie — inaczej dwie liczby
+   w jednym kolorze nie mowia, ktora do ktorego zegara nalezy. */
+#kw{color:var(--sun)}
+#ks{color:var(--verd)}
 .przyrzad-boczny figcaption .dim{font-family:var(--serif);font-size:.76rem;cursor:help}
 @media (max-width:58rem){
   .rzad-mapy{grid-template-columns:1fr}

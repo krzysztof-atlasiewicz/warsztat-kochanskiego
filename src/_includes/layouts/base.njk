@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ tytul }} — {{ site.tytul }}</title>
+<title>{{ tytul }} — {{ site.tytuly[jezyk] or site.tytul }}</title>
 <meta name="para" content="{{ para }}">
 <meta name="description" content="{{ opis or i18n[jezyk].opis }}">
 {%- for inny in collections.all %}{% if inny.data.para == para and inny.data.jezyk and inny.data.jezyk != jezyk %}
@@ -35,7 +35,7 @@
 <div class="wrap">
 {% if not goly %}
 <header class="szyld">
-  <a class="marka" href="/{{ jezyk }}/">{{ site.tytul }}</a>
+  <a class="marka" href="/{{ jezyk }}/">{{ site.tytuly[jezyk] or site.tytul }}</a>
   <nav class="jez" aria-label="Język">
     {%- for j in site.jezyki %}{% if j.kod != jezyk %}<a class="przelacz-jezyk" href="{{ j.prefix }}/" lang="{{ j.kod }}" hreflang="{{ j.kod }}">{{ j.nazwa }}</a>{% endif %}{% endfor %}
   </nav>
@@ -50,7 +50,7 @@
 <footer>
   <p>{{ i18n[jezyk].stopka | safe }}</p>
   <p><a href="{{ i18n[jezyk].agendaUrl }}">{{ i18n[jezyk].zrodlaLink }}</a>
-  {%- if jezyk == "pl" %} · <a href="/pl/zrodla/">źródła</a> · <a href="/pl/decyzje/">rejestr decyzji</a> · <a href="/pl/zmiany/">rejestr zmian</a> · <a href="/pl/biografia/">biografia</a>{% endif %}</p>
+  {%- if jezyk == "pl" %} · <a href="/pl/zrodla/">źródła</a> · <a href="/pl/decyzje/">rejestr decyzji</a> · <a href="/pl/zmiany/">rejestr zmian</a>{% endif %}</p>
 </footer>
 {% endif %}
 </div>

@@ -1,7 +1,15 @@
-<nav class="bench" aria-label="{{ 'Przyrządy' if jezyk == 'pl' else 'Instruments' }}">
+<nav class="bench" aria-label="{{ 'Przyrządy i biografia' if jezyk == 'pl' else 'Instruments and biography' }}">
   {%- for p in collections.przyrzady %}{% if p.data.jezyk == jezyk %}
   <a href="{{ p.url }}"{% if p.url == page.url %} aria-current="page"{% endif %}>
     <span class="y">{{ p.data.rok }}</span>{{ p.data.przyrzad }}
+  </a>
+  {%- endif %}{% endfor %}
+  {#- Biografia stoi w tym samym rzędzie co przyrządy, bo jest tym samym
+      rodzajem wejścia do serwisu — tyle że zamiast roku powstania przyrządu
+      niesie lata życia. Dotąd była drobnym odnośnikiem w stopce. #}
+  {%- for p in collections.all %}{% if p.data.para == "biografia" and p.data.jezyk == jezyk %}
+  <a class="zyciorys" href="{{ p.url }}"{% if p.url == page.url %} aria-current="page"{% endif %}>
+    <span class="y">1631–1700</span>{{ p.data.tytul }}
   </a>
   {%- endif %}{% endfor %}
 </nav>

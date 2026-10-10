@@ -239,15 +239,23 @@ export default function init(root) {
   const msNaDzien = () => Math.round(2600 * Math.pow(0.74, Number($("tempo").value) - 1));
 
   let bieg = null;
+  // Przełącznik ma dwa stany i jeden kształt: koło sterowe przy postoju,
+  // kotwica w drodze. Podmieniamy sam napis i „aria-pressed", nigdy całą
+  // zawartość guzika — tak zginął kiedyś rysunek koła, zastąpiony tekstem.
+  const stanRejsu = (plynie) => {
+    const g = $("rejsStart");
+    g.setAttribute("aria-pressed", String(plynie));
+    $("rejsNapis").textContent = (plynie ? n.zatrzymaj : n.odbij) || "";
+  };
   $("rejsStart").addEventListener("click", () => {
-    if (bieg) { clearInterval(bieg); bieg = null; $("rejsStart").textContent = n.odbij || ""; return; }
+    if (bieg) { clearInterval(bieg); bieg = null; stanRejsu(false); return; }
     $("dzien").value = 0; rysuj();
-    $("rejsStart").textContent = n.zatrzymaj || "";
+    stanRejsu(true);
     const krok = () => {
       const d = Number($("dzien").value) + 1;
       $("dzien").value = Math.min(d, REJS.dni);
       rysuj();
-      if (d >= REJS.dni) { clearInterval(bieg); bieg = null; $("rejsStart").textContent = n.odbij || ""; }
+      if (d >= REJS.dni) { clearInterval(bieg); bieg = null; stanRejsu(false); }
     };
     bieg = setInterval(krok, msNaDzien());
   });
