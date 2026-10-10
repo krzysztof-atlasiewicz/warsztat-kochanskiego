@@ -604,3 +604,37 @@ describe.skipIf(!zbudowane)("kwerendy źródłowe", () => {
     expect(poz.find((x) => x.id === "A2").ustalenia.join(" "), "A2 bez numeru strony").toContain("692");
   });
 });
+
+// Rozbieżności między przekazem a drukiem mają stać na stronie szyfru, wypisane,
+// a nie zniknąć przy następnym porządkowaniu tekstu.
+describe.skipIf(!zbudowane)("rozbieżności w module szyfru", () => {
+  for (const [plik, naglowek, slowa] of [
+    ["_site/pl/szyfr/index.html", "rozbieżności z drukiem",
+     ["692", "Anagramma", "Amicus", "587", "dignitas"]],
+    ["_site/en/cipher/index.html", "discrepancies with the printed book",
+     ["692", "Anagramma", "Amicus", "587", "dignitas"]]
+  ]) {
+    it(`${plik} — cztery rozbieżności wypisane wraz z drugim zapisem`, () => {
+      const h = readFileSync(plik, "utf8");
+      expect(h, "brak wykazu rozbieżności").toContain(naglowek);
+      for (const s of slowa) expect(h, `brak „${s}" w wykazie`).toContain(s);
+      // Przekaz z opracowań nie może już stać jako własne twierdzenie serwisu.
+      expect(h, "twierdzenie o Kochańskim bez wskazania, że to przekaz opracowań")
+        .toMatch(/Opracowania podają|The scholarship holds/);
+      // Zastrzeżenie mówi wprost, czego moduł nie odtwarza.
+      expect(h, "zastrzeżenie nie nazywa tego, czego moduł nie odtwarza")
+        .toMatch(/nie tę, która stoi|not the one that stands/);
+    });
+  }
+
+  it("obie kwerendy odnotowane jako zamknięte", () => {
+    const a = JSON.parse(readFileSync("pdca/agenda.json", "utf8"));
+    const poz = a.pozycje || a;
+    for (const id of ["A2", "A7"]) {
+      const p = poz.find((x) => x.id === id);
+      expect(p.status, `${id} nie został zamknięty`).toBe("zamknięta");
+      expect(p.ustalenia.join(" "), `${id} bez wskazania, czyja była decyzja`)
+        .toMatch(/decyzją kierownika projektu/);
+    }
+  });
+});

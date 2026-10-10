@@ -8,7 +8,7 @@ modul: szyfr
 para: szyfr
 permalink: /pl/szyfr/
 tagi:
-  - { typ: zrodlo, etykieta: ze źródła, opis: "Oznaczenie mówi, że wzmianka o zapisie szyfrowym pochodzi z „Technica curiosa”. Czy zapis faktycznie tam jest i jaką ma postać — pozycja A2 w zakładce „Pytania otwarte”." }
+  - { typ: zrodlo, etykieta: ze źródła, opis: "Oznaczenie mówi, że wzmianka o zapisie szyfrowym pochodzi z „Technica curiosa”. Kwerenda potwierdziła zapis na stronie 692 — ale w postaci anagramu i bez nazwiska autora; cztery rozbieżności wypisane w zakładce „Skąd to wiemy”." }
   - { typ: rekonstrukcja, etykieta: "nasze: rekonstrukcja metody", opis: "Szyfr przesuwający i tekst łaciński są rekonstrukcją metody, nie odczytem oryginału. Nie wiemy, jakiego rodzaju zapisu Kochański faktycznie użył." }
 rownowaznik: "<p>Tarcza szyfrowa przesuwa alfabet o zadaną liczbę pozycji. Przy przesunięciu dwunastu zapis odczytuje się jako łacińskie zdanie o tym, że siła magnetyczna rządzi wahaczem zegara. Szyfr i tekst są rekonstrukcją metody, nie odczytem oryginału.</p>"
 ---
@@ -17,12 +17,21 @@ rownowaznik: "<p>Tarcza szyfrowa przesuwa alfabet o zadaną liczbę pozycji. Prz
 {% endkarta %}
 
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
-<p>Księga IX dzieła Caspara Schotta {% zrodlo "technica-curiosa", "<em>Technica curiosa</em>" %} (Norymberga 1664) to pierwszy systematyczny wykład zegarmistrzostwa w Europie. Kochański podał w niej konstrukcję wahaczy magnetycznych w postaci zaszyfrowanej, w druku firmowanym cudzym nazwiskiem.</p>
+<p>Księga IX dzieła Caspara Schotta {% zrodlo "technica-curiosa", "<em>Technica curiosa</em>" %} (Norymberga 1664) to pierwszy systematyczny wykład zegarmistrzostwa w Europie. Opracowania podają, że Kochański zamieścił w niej konstrukcję wahaczy magnetycznych w postaci zaszyfrowanej, w druku firmowanym cudzym nazwiskiem. Od tego przekazu zaczął się ten moduł.</p>
 
 {{ rownowaznik | safe }}
 <p>Tarcza poniżej jest narzędziem, nie pokazem. Obracaj pierścień, żeby odczytać wczytany zapis z 1664 roku — klucz to liczba godzin na tarczy. Możesz też wpisać własną wiadomość i zaszyfrować ją w drugą stronę, a odnośnikiem przesłać komuś sam zapis, bez klucza.</p>
 <p>Przycisk „Złam szyfr" pokazuje, dlaczego ten rodzaj zapisu nie dawał trwałego bezpieczeństwa: wystarczy policzyć, jak często w odczycie pojawiają się poszczególne litery, i porównać z częstościami typowymi dla języka. Klucz odnajduje się sam, bez zgadywania. Dla Kochańskiego i jego korespondentów szyfr miał nie ukryć wynalazku na zawsze, tylko zabezpieczyć pierwszeństwo do chwili, w której autor zechce je ujawnić.</p>
-<p class="note uwaga">Szyfr przesuwający i tekst łaciński są rekonstrukcją metody, nie odczytem oryginału. Nie wiemy, jakiego rodzaju zapisu Kochański faktycznie użył.</p>
+<h3>Cztery rozbieżności z drukiem</h3>
+<p>Kwerenda w egzemplarzu Getty Research Institute rozeszła się z tym przekazem w czterech miejscach. Wypisujemy je, bo rozbieżność jest tu ciekawsza niż gładka opowieść.</p>
+<ol>
+<li><strong>Zapis szyfrowy jest</strong> i stoi na stronie 692, w Propositio XXXI: <em lang="la">„Horometrum ACCURATUM Portatile cum Perpendiculo, vel aliter construere”</em>.</li>
+<li><strong>To anagram, nie szyfr przesuwający.</strong> Autor pisze wprost: <em lang="la">„en habet artificium, Cryptographicè per Anagramma propositum, nec difficulter eruendum, si Typotheta &amp; Oedipus servent easdem litteras”</em> — po czym podaje dwadzieścia jeden liter w siedmiu trójkach: R G T, T C O, MME, RIP, NAE, INS, ATE.</li>
+<li><strong>Nie dotyczy wahaczy magnetycznych.</strong> Ukrywa sposób wykonania dokładnego przenośnego zegara wahadłowego. Magnetyzm pada dopiero w zdaniu następnym i jako porównanie: mechanizm chodzi na pierścieniach przegubowych, jak lampy toczące się po posadzce bez rozlania oliwy albo jak busole w przyrządach astronomicznych.</li>
+<li><strong>Autora nie nazwano.</strong> Księga IX relacjonuje prace bezimiennego <em lang="la">Amicusa</em> — tak zaczyna się jej część pierwsza na stronie 620 (<em lang="la">„in duas Amico dispertiar Partes”</em>) i tak wraca w całym wywodzie. Utożsamienie Amicusa z Kochańskim pochodzi z opracowań, nie z druku.</li>
+</ol>
+<p>W tym samym tomie jest jeszcze jeden zapis szyfrowy — i ten ma wydrukowane także rozwiązanie. Księga VIII, strony 587–588: korespondent przesłał Schottowi swój sąd o cudzej kwadraturze koła, <em lang="la">„in fine cryptographico velamine”</em>, literami <em lang="la">„gptaramtasy rcepegnik Xacperdiq”</em>. Schott podaje regułę — odrzucić pierwszą i ostatnią literę każdego wyrazu, a z pozostałych sylab czytać po jednej z każdej trójki, zaczynając od ostatniej — i wynik: <em lang="la">„dignitas (sive Axioma) perperam accepta”</em>, czyli aksjomat źle wzięty.</p>
+<p class="note uwaga">Tarcza poniżej odtwarza szyfr przesuwający: metodę z epoki, ale nie tę, która stoi w <em>Technica curiosa</em>. Nie jest odczytem ani anagramu ze strony 692, ani zapisu ze stron 587–588.</p>
 {% endkarta %}
 
 {% karta "pytania", i18n[jezyk].zakladki.pytania %}

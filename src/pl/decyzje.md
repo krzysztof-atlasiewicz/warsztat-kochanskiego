@@ -675,3 +675,17 @@ Zapis źródła uzupełniony o strony i o wskazanie rozdziału; pozycja A7 przen
 **Kontrola „zrodla" porównuje teraz adres samego skanu, bez wskazania strony.** Odnośnik otwierany na stronie 692 i odnośnik do całego tomu prowadzą do tego samego egzemplarza, a starsze wpisy w rejestrze mają prawo wskazywać tom. Wzmocnienia ani osłabienia w tym nie ma — zmienia się to, co porównujemy, nie to, czego wymagamy.
 
 **Cztery nowe testy** (124 zamiast 120).
+
+## 2026-10-10 — Cykl 53: rozbieżności wypisane zamiast przepisane
+
+**Rozstrzygnięcie kierownika projektu: opisać jako rozbieżności, nie przebudowywać modułu.** Przekaz z opracowań i treść druku rozchodzą się w czterech miejscach i tak to teraz stoi na stronie szyfru, w zakładce „Skąd to wiemy", pod osobnym nagłówkiem. Rozbieżność jest tu ciekawsza niż gładka opowieść i serwis nie ma powodu jej zacierać.
+
+**Zdanie otwierające przestało być twierdzeniem serwisu.** Dotąd strona mówiła wprost, że Kochański zamieścił w księdze IX konstrukcję wahaczy magnetycznych w postaci zaszyfrowanej. Teraz mówi, że tak podają opracowania — i że od tego przekazu zaczął się moduł. Zdanie nie znika, zmienia się jego status: z ustalenia na relację cudzego ustalenia.
+
+**Zastrzeżenie pod tarczą nazywa wprost, czego moduł nie odtwarza:** ani anagramu ze strony 692, ani zapisu ze stron 587–588. Dotąd mówiło tylko, że nie wiemy, jakiego zapisu Kochański użył — a teraz wiemy, co stoi w druku, i trzeba było to powiedzieć.
+
+**Zapis źródła opisuje rozbieżność w przypisaniu, zamiast ją przesądzać:** pole autora mówi, że księgę IX opracowania przypisują Kochańskiemu, a w druku mowa wyłącznie o bezimiennym Amicusie.
+
+**A2 i A7 zamknięte**, obie decyzją kierownika projektu, z ustaleniami kwerendy w agendzie. To pierwsze dwie pozycje agendy zamknięte od założenia rejestru. Zostają otwarte A1, A3, A4 oraz w toku A5, A6, A8.
+
+**Trzy nowe testy** (127 zamiast 124): wykaz rozbieżności musi stać na stronie w obu wersjach, razem z numerami stron i cytowanymi słowami; zdanie o Kochańskim musi być oznaczone jako przekaz opracowań; obie pozycje agendy muszą nieść wskazanie, czyja była decyzja. Bez tego następne porządkowanie tekstu wyniosłoby wykaz razem ze śmieciami — tak jak o mało nie stało się z zastrzeżeniem o zagęszczonej podziałce w cyklu 49.

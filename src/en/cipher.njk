@@ -8,7 +8,7 @@ modul: szyfr
 para: szyfr
 permalink: /en/cipher/
 tagi:
-  - { typ: zrodlo, etykieta: from the source, opis: "The marker says the mention of a ciphered passage comes from “Technica curiosa”. Whether the passage is really there, and in what form, is item A2 under “Open questions”." }
+  - { typ: zrodlo, etykieta: from the source, opis: "The marker says the mention of a ciphered passage comes from “Technica curiosa”. The search confirmed it on page 692 — but as an anagram, and with no author named; four discrepancies are set out under “How we know”." }
   - { typ: rekonstrukcja, etykieta: "ours: reconstructed method", opis: "The shift cipher and the Latin text reconstruct the method, not a reading of the original. We do not know what kind of notation Kochański actually used." }
 rownowaznik: "<p>The cipher disc shifts the alphabet by a chosen number of positions. At a shift of twelve the text reads as a Latin sentence stating that magnetic force governs the balance of the clock. Both cipher and text are a reconstruction of the method, not a reading of the original.</p>"
 ---
@@ -17,12 +17,21 @@ rownowaznik: "<p>The cipher disc shifts the alphabet by a chosen number of posit
 {% endkarta %}
 
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
-<p>Book IX of Caspar Schott's {% zrodlo "technica-curiosa", "<em>Technica curiosa</em>" %} (Nuremberg 1664) is the first systematic treatment of clockmaking in Europe. Kochański set out the construction of magnetic balances there in cipher, in a work published under another man's name.</p>
+<p>Book IX of Caspar Schott's {% zrodlo "technica-curiosa", "<em>Technica curiosa</em>" %} (Nuremberg 1664) is the first systematic treatment of clockmaking in Europe. The scholarship holds that Kochański set out the construction of magnetic balances there in cipher, in a work published under another man's name. That account is where this instrument began.</p>
 
 {{ rownowaznik | safe }}
 <p>The dial below is a tool, not a demonstration. Turn the ring to read the 1664 record loaded into it — the key is the number of hours on a dial. You can also type a message of your own and encipher it the other way, then send someone the cipher text alone by link, without the key.</p>
 <p>The "Break the cipher" button shows why this kind of record gave no lasting security: count how often each letter appears in a candidate reading and compare with the frequencies typical of the language, and the key falls out without guesswork. For Kochański and his correspondents the cipher was never meant to hide the invention for good, only to secure priority until the author chose to disclose it.</p>
-<p class="note uwaga">The shift cipher and the Latin text are a reconstruction of the method, not a reading of the original. We do not know what kind of record Kochański actually used.</p>
+<h3>Four discrepancies with the printed book</h3>
+<p>A search through the Getty Research Institute copy parted company with that account in four places. We set them out because the discrepancy is more interesting than the smooth story.</p>
+<ol>
+<li><strong>The cipher is there</strong>, on page 692, in Propositio XXXI: <em lang="la">“Horometrum ACCURATUM Portatile cum Perpendiculo, vel aliter construere”</em>.</li>
+<li><strong>It is an anagram, not a shift cipher.</strong> The author says so outright: <em lang="la">“en habet artificium, Cryptographicè per Anagramma propositum, nec difficulter eruendum, si Typotheta &amp; Oedipus servent easdem litteras”</em> — and then gives twenty-one letters in seven groups of three: R G T, T C O, MME, RIP, NAE, INS, ATE.</li>
+<li><strong>It is not about magnetic balances.</strong> What it conceals is how to make an accurate portable pendulum clock. Magnetism appears only in the next sentence, and as a comparison: the mechanism runs on gimbal rings, like lamps rolling across a floor without spilling their oil, or like compasses in astronomical instruments.</li>
+<li><strong>The author is not named.</strong> Book IX relays the work of an unnamed <em lang="la">Amicus</em> — so its first part opens on page 620 (<em lang="la">“in duas Amico dispertiar Partes”</em>), and so it recurs throughout. Identifying that Friend with Kochański comes from the scholarship, not from the print.</li>
+</ol>
+<p>The same volume holds a second cryptogram — and that one comes with its solution printed. Book VIII, pages 587–588: a correspondent sent Schott his verdict on someone else's squaring of the circle <em lang="la">“in fine cryptographico velamine”</em>, in the letters <em lang="la">“gptaramtasy rcepegnik Xacperdiq”</em>. Schott gives the rule — drop the first and last letter of each word, then read one syllable from each group of three, beginning with the last — and the answer: <em lang="la">“dignitas (sive Axioma) perperam accepta”</em>, the axiom wrongly taken.</p>
+<p class="note uwaga">The dial below reconstructs a shift cipher: a method of the period, but not the one that stands in <em>Technica curiosa</em>. It is a reading neither of the anagram on page 692 nor of the record on pages 587–588.</p>
 {% endkarta %}
 
 {% karta "pytania", i18n[jezyk].zakladki.pytania %}
