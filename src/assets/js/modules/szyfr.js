@@ -8,11 +8,18 @@ export default function init(root) {
   const $ = (id) => root.querySelector(`#${id}`);
   const n = JSON.parse(root.querySelector("[data-napisy]")?.dataset.napisy || "{}");
   let zrodlo = "szyfr";      // które pole było ostatnio zmieniane
+  let nietkniete = true;     // nikt jeszcze nie ruszył przyrządu
   let wybrana = null;        // litera podświetlona na tarczy i pasku
   let obrot = 0;             // o ile pozycji przekręcony jest pierścień
 
   const SR = 160, KROK = 360 / 26;
-  const ustawObrot = (v) => { obrot = ((Math.round(v) % 26) + 26) % 26; odswiezWszystko(); };
+  // Przekręcenie pierścienia to już ruch: od tej chwili pole wiadomości
+  // pokazuje, co z zapisu wychodzi przy tym nastawieniu.
+  const ustawObrot = (v) => {
+    nietkniete = false;
+    obrot = ((Math.round(v) % 26) + 26) % 26;
+    odswiezWszystko();
+  };
 
   const podstaw = (wzor, dane) =>
     String(wzor || "").replace(/\{(\w+)\}/g, (_, k) => dane[k] ?? "");
@@ -156,8 +163,13 @@ export default function init(root) {
     $("srodek").textContent = s;
     $("tarcza").setAttribute("aria-valuenow", s);
     $("tarcza").setAttribute("aria-valuetext", podstaw(n.wartoscTarczy, { n: s }));
+    // Przy pierwszym wejsciu pole wiadomosci zostaje puste: pierscien stoi na
+    // zerze, wiec „odszyfrowanie" przepisywaloby zapis znak w znak i obok
+    // siebie stalyby dwa te same ciagi. Podpowiedz w pustym polu mowi, co
+    // z tym zrobic. Od pierwszego ruchu — pokretla albo klawiatury — pola
+    // pracuja normalnie: wpis w wiadomosc szyfruje, wpis w zapis odszyfrowuje.
     if (zrodlo === "jawny") $("szyfrogram").value = szyfruj($("jawny").value, s);
-    else $("jawny").value = odszyfruj($("szyfrogram").value, s);
+    else if (!nietkniete) $("jawny").value = odszyfruj($("szyfrogram").value, s);
 
     const trafione = uprosc($("jawny").value).trim() === JAWNY;
     $("pierscien").setAttribute("stroke", trafione ? "var(--verd)" : "var(--rule)");
@@ -176,8 +188,8 @@ export default function init(root) {
     catch { powiedz(n.schowekNie || ""); }
   }
 
-  $("jawny").addEventListener("input", () => { zrodlo = "jawny"; odswiezWszystko(); });
-  $("szyfrogram").addEventListener("input", () => { zrodlo = "szyfr"; odswiezWszystko(); });
+  $("jawny").addEventListener("input", () => { nietkniete = false; zrodlo = "jawny"; odswiezWszystko(); });
+  $("szyfrogram").addEventListener("input", () => { nietkniete = false; zrodlo = "szyfr"; odswiezWszystko(); });
   // ── obracanie tarczy: wskaźnikiem, kółkiem myszy i klawiaturą ─────────────
   const tarczaEl = $("tarcza");
   const pozycjaZeZdarzenia = (e) => {
@@ -242,6 +254,11 @@ export default function init(root) {
     $("szyfrogram").value = SZYFROGRAM_1664;
     zrodlo = "szyfr";
     ustawObrot(0);
+    // Przywrócenie zapisu z 1664 roku to powrót do stanu wyjściowego, więc
+    // pole wiadomości znów stoi puste — jest co łamać.
+    nietkniete = true;
+    $("jawny").value = "";
+    odswiezWszystko();
     powiedz(n.wczytano || "");
   });
 

@@ -249,7 +249,10 @@ export default function init(root) {
   };
   $("rejsStart").addEventListener("click", () => {
     if (bieg) { clearInterval(bieg); bieg = null; stanRejsu(false); return; }
-    $("dzien").value = 0; rysuj();
+    // Zatrzymanie rzuca kotwicę tam, gdzie okręt stoi; koło sterowe podnosi ją
+    // i rejs idzie dalej od tego miejsca. Od początku zaczynamy tylko wtedy,
+    // gdy okręt dobił już do Kajenny — wtedy nie ma dokąd płynąć dalej.
+    if (Number($("dzien").value) >= REJS.dni) { $("dzien").value = 0; rysuj(); }
     stanRejsu(true);
     const krok = () => {
       const d = Number($("dzien").value) + 1;

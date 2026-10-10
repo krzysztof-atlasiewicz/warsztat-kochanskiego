@@ -7,8 +7,8 @@ const STRONY = [
   { plik: "_site/en/compass/index.html", modul: "cyrkiel", sprawdz: ["w1", "w2", "w3"] },
   { plik: "_site/pl/wahadlo/index.html", modul: "rejs", sprawdz: ["kw", "ks", "szer"] },
   { plik: "_site/en/pendulum/index.html", modul: "rejs", sprawdz: ["kw", "ks", "szer"] },
-  { plik: "_site/pl/szyfr/index.html", modul: "szyfr", sprawdz: ["jawny", "szyfrogram"] },
-  { plik: "_site/en/cipher/index.html", modul: "szyfr", sprawdz: ["jawny", "szyfrogram"] },
+  { plik: "_site/pl/szyfr/index.html", modul: "szyfr", sprawdz: ["szyfrogram"] },
+  { plik: "_site/en/cipher/index.html", modul: "szyfr", sprawdz: ["szyfrogram"] },
   { plik: "_site/pl/gnomon/index.html", modul: "gnomon", sprawdz: ["rowne", "wloskie", "babilonskie"] },
   { plik: "_site/en/gnomon/index.html", modul: "gnomon", sprawdz: ["rowne", "wloskie", "babilonskie"] }
 ];
@@ -503,5 +503,71 @@ describe.skipIf(!zbudowane)("poprawki zgłoszone 10 października", () => {
     };
     expect(szyld("_site/pl/index.html")).toBe("Warsztat Kochańskiego");
     expect(szyld("_site/en/index.html"), "angielski szyld nieprzetłumaczony").toBe("Kochański's Workshop");
+  });
+});
+
+// Szyfr ma zaczynać od pustego pola wiadomości — przy pierścieniu na zerze
+// „odszyfrowanie" przepisywało zapis znak w znak i obok siebie stały dwa te
+// same ciągi. Rejs ma wznawiać bieg, nie wracać do La Rochelle.
+describe.skipIf(!zbudowane)("stan początkowy i wznawianie", () => {
+  const wczytaj = (plik) => {
+    document.body.innerHTML = readFileSync(plik, "utf8")
+      .replace(/[\s\S]*<body[^>]*>/, "").replace(/<\/body>[\s\S]*/, "");
+    return document.querySelector("[data-modul]");
+  };
+
+  for (const plik of ["_site/pl/szyfr/index.html", "_site/en/cipher/index.html"]) {
+    it(`${plik} — na wejściu wiadomość pusta, zapis gotowy do złamania`, async () => {
+      const root = wczytaj(plik);
+      const m = await import("../src/assets/js/modules/szyfr.js");
+      m.default(root);
+      expect(root.querySelector("#szyfrogram").value.trim().length,
+        "brak zapisu do złamania").toBeGreaterThan(10);
+      expect(root.querySelector("#jawny").value, "pole wiadomości nie jest puste").toBe("");
+      expect(root.querySelector("#jawny").getAttribute("placeholder"),
+        "puste pole nie podpowiada, co zrobić").toMatch(/\S/);
+    });
+
+    it(`${plik} — wpis w wiadomość szyfruje, wpis w zapis odszyfrowuje`, async () => {
+      const root = wczytaj(plik);
+      const m = await import("../src/assets/js/modules/szyfr.js");
+      m.default(root);
+      const jawny = root.querySelector("#jawny"), zapis = root.querySelector("#szyfrogram");
+      jawny.value = "ALA";
+      jawny.dispatchEvent(new window.Event("input", { bubbles: true }));
+      const zaszyfrowane = zapis.value.trim();
+      expect(zaszyfrowane, "wpis w wiadomość nic nie zaszyfrował").toMatch(/\S/);
+      zapis.value = zaszyfrowane;
+      zapis.dispatchEvent(new window.Event("input", { bubbles: true }));
+      expect(jawny.value.trim().toUpperCase(), "wpis w zapis nie wrócił do wiadomości").toContain("ALA");
+    });
+  }
+
+  for (const plik of ["_site/pl/wahadlo/index.html", "_site/en/pendulum/index.html"]) {
+    it(`${plik} — kotwica zatrzymuje, koło podnosi ją i płynie dalej`, async () => {
+      const root = wczytaj(plik);
+      const m = await import("../src/assets/js/modules/rejs.js");
+      m.default(root);
+      const dzien = root.querySelector("#dzien"), guzik = root.querySelector("#rejsStart");
+      dzien.value = "30";
+      dzien.dispatchEvent(new window.Event("input", { bubbles: true }));
+      guzik.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));   // odbij
+      guzik.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));   // zatrzymaj
+      expect(Number(dzien.value), "zatrzymanie cofnęło okręt do portu wyjścia").toBeGreaterThan(0);
+      const gdzieStoi = Number(dzien.value);
+      guzik.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));   // dalej
+      expect(Number(dzien.value), "wznowienie wróciło do La Rochelle").toBeGreaterThanOrEqual(gdzieStoi);
+      guzik.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+    });
+  }
+
+  it("legenda karty kursowej nazywa Wyspy Kanaryjskie pełną nazwą", () => {
+    for (const [plik, fraza] of [["_site/pl/wahadlo/index.html", "Wyspy Kanaryjskie"],
+                                 ["_site/en/pendulum/index.html", "Canary Islands"]]) {
+      const h = readFileSync(plik, "utf8");
+      expect(h, `${plik}: brak pełnej nazwy wysp`).toContain(fraza);
+    }
+    expect(readFileSync("_site/pl/wahadlo/index.html", "utf8"), "została skrócona nazwa")
+      .not.toMatch(/Iberii, Kanary/);
   });
 });
