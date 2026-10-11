@@ -9,8 +9,8 @@ kartaPierwsza: konstrukcja
 para: cyrkiel
 permalink: /en/compass/
 tagi:
-  - { typ: zrodlo, etykieta: from the source, opis: "The marker says the construction itself comes from a treatise published in 1685, and the drawing reproduces what stands in it. The link to the scan is under “How we know”." }
-  - { typ: rekonstrukcja, etykieta: "ours: reading of intent", opis: "Ours is the claim about why the approximation was made: that it was designed to be struck with compasses rather than computed. Kochański nowhere argues it that way — item A4 under “Open questions”." }
+  - { typ: zrodlo, etykieta: from the source, opis: "The marker says the source gives both the construction and the reason for it. The 1685 treatise is titled “cyclometric observations adapted to facilitate practice”, and the heading above the construction itself reads “for mechanical uses”. The quotations with the Latin original are under “How we know”." }
+  - { typ: rekonstrukcja, etykieta: "ours: the error budget", opis: "Ours is the modern error budget: micrometres at a clock face, hundreds of metres at the radius of the Earth. Kochański gives the shortfall in fractions of the diameter and weighs it as it mattered to him — whether the last little part to be added can still be seen by eye at a given size of circle." }
 rownowaznik: '<p>The construction yields a segment of length <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>·</mo><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt></math> ≈ <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3.141533</mn><mo>·</mo><mi>r</mi></math>, short of <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi><mi>r</mi></math> by about six millionths of the radius. At a radius of 150 mm the error is 8.9 µm; at the radius of the Earth it grows to nearly 380 metres.</p>'
 ---
 {% karta "przyrzad", i18n[jezyk].zakladki.konstrukcja %}
@@ -19,6 +19,12 @@ rownowaznik: '<p>The construction yields a segment of length <math xmlns="http:/
 
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p>Published in {% zrodlo "acta-1685", "<em>Acta Eruditorum</em>" %} in 1685. With compass and straightedge it produces a segment almost exactly equal to half the circumference of the circle.</p>
+
+<h3>What it was for — in the author's words</h3>
+<p>The treatise leaves nothing to guesswork. The purpose stands in its title on page 394: <em lang="la">Observationes Cyclometricæ, ad facilitandam Praxin accommodatæ</em> — cyclometric observations adapted to facilitate practice. The opening paragraph ends with a statement of intent: <em lang="la">ad investiganda compendia quaedam Cyclometrica, Praxibus mechanicis utilia, idque tam in Numeris, quam Lineis</em> — to investigate certain cyclometric shortcuts, useful to mechanical practitioners, and that as much in Numbers as in Lines.</p>
+<p>The section holding this very construction carries its own heading on page 397: <em lang="la">GRAMMICÆ RATIONES CYCLOMETRICÆ, Ad Usus Mechanicos</em> — linear cyclometric ratios, for mechanical uses. <em lang="la">Grammicae</em>, from the Greek word for “of lines”, means “linear” here and stands against the arithmetical ratios given earlier. In an appendix on page 398 the author names the tool outright: <em lang="la">adjungam alteram Praxin Linearem Mechanicorum Circino opportunissimam</em> — I shall add a second linear practice, most convenient for the compasses of mechanics.</p>
+<p>There too he weighs the limit of accuracy as a workshop weighs it, not as a calculator does: <em lang="la">istam Praxin in Majoribus Circulis potissimum locum habere, in parvis aciem oculorum effugere, quoad particulam, postremo addendam</em> — this practice has its place chiefly in larger circles; in small ones the last little part to be added escapes the sharpness of the eye. The radius slider in the instrument above asks the same question, and answers it in micrometres.</p>
+<p class="note uwaga">What the treatise does <strong>not</strong> contain: any opposition between drawing and calculation. Kochański gives both — <em lang="la">tam in Numeris, quam Lineis</em> — and three of the five pages are arithmetical ratios, one of which, 113 to 355, he recommends outright <em lang="la">in Praxi</em>. He proves the construction itself by calculation: <em lang="la">Demonstratur calculo Trigonometrico</em>. This site used to say the approximation was designed “to be struck with compasses rather than computed”; the second half of that sentence was ours, and it was wrong.</p>
 
 {{ rownowaznik | safe }}
 

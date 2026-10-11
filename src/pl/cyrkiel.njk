@@ -9,8 +9,8 @@ kartaPierwsza: konstrukcja
 para: cyrkiel
 permalink: /pl/cyrkiel/
 tagi:
-  - { typ: zrodlo, etykieta: ze źródła, opis: "Oznaczenie mówi, że sama konstrukcja pochodzi z rozprawy ogłoszonej w 1685 roku i rysunek odwzorowuje to, co w niej stoi. Odnośnik do skanu jest w zakładce „Skąd to wiemy”." }
-  - { typ: rekonstrukcja, etykieta: "nasze: interpretacja celu", opis: "Nasza jest teza, po co to przybliżenie powstało: że zaprojektowano je do wykonania cyrklem, a nie do rachunku. Kochański nigdzie nie uzasadnia tak konstrukcji wprost — to pozycja A4 w zakładce „Pytania otwarte”." }
+  - { typ: zrodlo, etykieta: ze źródła, opis: "Oznaczenie mówi, że ze źródła pochodzi i sama konstrukcja, i to, po co powstała. Rozprawa z 1685 roku nosi tytuł „obserwacje cyklometryczne przystosowane do ułatwienia praktyki”, a nagłówek nad samą konstrukcją brzmi „do użytków mechanicznych”. Cytaty z oryginałem są w zakładce „Skąd to wiemy”." }
+  - { typ: rekonstrukcja, etykieta: "nasze: rachunek błędu", opis: "Nasz jest dzisiejszy rachunek błędu: mikrometry przy tarczy zegara, setki metrów przy promieniu Ziemi. Kochański podaje wielkość odchyłki w ułamkach średnicy i rozważa ją tak, jak go obchodziła — czy ostatnia dokładana cząstka da się jeszcze dostrzec okiem przy danej wielkości koła." }
 rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>·</mo><msqrt><mfrac><mn>40</mn><mn>3</mn></mfrac><mo>−</mo><mn>2</mn><msqrt><mn>3</mn></msqrt></msqrt></math> ≈ <math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3,141533</mn><mo>·</mo><mi>r</mi></math>, czyli krótszy od <math xmlns="http://www.w3.org/1998/Math/MathML"><mi>π</mi><mi>r</mi></math> o około sześć milionowych promienia. Przy promieniu 150 mm błąd wynosi 8,9 µm, przy promieniu Ziemi — blisko 380 metrów.</p>'
 ---
 {% karta "przyrzad", i18n[jezyk].zakladki.konstrukcja %}
@@ -19,6 +19,12 @@ rownowaznik: '<p>Konstrukcja wyznacza odcinek o długości <math xmlns="http://w
 
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
 <p>Konstrukcja ogłoszona w {% zrodlo "acta-1685", "„Acta Eruditorum”" %} w 1685 roku. Cyrklem i linijką wyznacza odcinek o długości niemal dokładnie równej połowie obwodu okręgu.</p>
+
+<h3>Po co powstała — słowami autora</h3>
+<p>Rozprawa nie zostawia tego domysłowi. Cel stoi już w jej tytule na stronie 394: <em lang="la">Observationes Cyclometricæ, ad facilitandam Praxin accommodatæ</em> — obserwacje cyklometryczne przystosowane do ułatwienia praktyki. Akapit otwierający kończy się deklaracją zamiaru: <em lang="la">ad investiganda compendia quaedam Cyclometrica, Praxibus mechanicis utilia, idque tam in Numeris, quam Lineis</em> — ku zbadaniu pewnych skrótów cyklometrycznych, przydatnych praktykom mechanicznym, i to zarówno w liczbach, jak i w liniach.</p>
+<p>Sekcja, w której stoi ta właśnie konstrukcja, ma na stronie 397 własny nagłówek: <em lang="la">GRAMMICÆ RATIONES CYCLOMETRICÆ, Ad Usus Mechanicos</em> — liniowe stosunki cyklometryczne, do użytków mechanicznych. <em lang="la">Grammicae</em>, od greckiego słowa oznaczającego „kreskowy, liniowy”, znaczy tu „liniowe” i stoi w opozycji do podanych wcześniej stosunków arytmetycznych. W dopisku na stronie 398 autor nazywa narzędzie wprost: <em lang="la">adjungam alteram Praxin Linearem Mechanicorum Circino opportunissimam</em> — dołożę drugą praktykę liniową, nader dogodną dla cyrkla mechaników.</p>
+<p>Tamże rozważa granicę dokładności tak, jak rozważa ją warsztat, a nie rachmistrz: <em lang="la">istam Praxin in Majoribus Circulis potissimum locum habere, in parvis aciem oculorum effugere, quoad particulam, postremo addendam</em> — ta praktyka ma miejsce głównie przy większych okręgach, przy małych ostatnia dokładana cząstka umyka ostrości oka. To samo pytanie zadaje suwak promienia w przyrządzie powyżej, tylko odpowiada na nie w mikrometrach.</p>
+<p class="note uwaga">Czego w rozprawie <strong>nie ma</strong>: przeciwstawienia wykreślania rachunkowi. Kochański podaje jedno i drugie — <em lang="la">tam in Numeris, quam Lineis</em> — a trzy z pięciu stron zajmują stosunki arytmetyczne, z których jeden, 113 do 355, zaleca wprost <em lang="la">in Praxi</em>. Samą konstrukcję dowodzi zresztą rachunkiem: <em lang="la">Demonstratur calculo Trigonometrico</em>. Serwis mówił dotąd, że przybliżenie zaprojektowano „do wykonania cyrklem, a nie do rachunku”; druga połowa tego zdania była nasza i nietrafna.</p>
 
 {{ rownowaznik | safe }}
 

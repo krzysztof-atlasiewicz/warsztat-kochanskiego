@@ -56,13 +56,23 @@
       "id": "A4",
       "pytanie": "Czy Kochański uzasadniał konstrukcję cyklometryczną względami warsztatowymi?",
       "dlaczego": "Teza o przybliżeniu zaprojektowanym do wykonania jest obecnie naszą interpretacją.",
-      "zmieni": "Treść oznaczenia „nasze: interpretacja celu” w module cyrkla. Jeśli Kochański uzasadnia konstrukcję warsztatowo, teza przechodzi do oznaczenia „ze źródła”; jeśli nie — zostaje przy nas, ale z podaną podstawą negatywną, czyli wskazaniem miejsc, w których jej nie ma.",
+      "zmieni": "Oznaczenie w module cyrkla przestało przypisywać nam tezę o celu: Kochański nazywa go sam, w tytule rozprawy, w akapicie otwierającym, w nagłówku nad samą konstrukcją i w dopisku o cyrklu mechaników. Zniknęło za to zdanie o przybliżeniu „do wykonania, a nie do rachunku” — tego przeciwstawienia w rozprawie nie ma. Naszym dopowiedzeniem pozostał dzisiejszy rachunek błędu przy zadanym promieniu.",
       "zrodlo": "Acta Eruditorum 1685, Observationes cyclometricae",
-      "status": "otwarta",
+      "status": "zamknięta",
       "miejsca": [
         "cyrkiel"
       ],
-      "dotyczy": "teza o przybliżeniu zaprojektowanym do wykonania"
+      "dotyczy": "teza o przybliżeniu zaprojektowanym do wykonania",
+      "ustalenia": [
+        "Kwerenda w skanie „Acta Eruditorum” z sierpnia 1685, strony 394–398 (egzemplarz Wellcome Library w Internet Archive). Cytaty odczytane z obrazu strony, nie z warstwy tekstowej skanu — rozpoznanie pisma myli się tu systematycznie, na przykład nagłówek „GRAMMICÆ” podaje jako „QKAUUIC/E”.",
+        "Tytuł rozprawy sam nazywa jej cel: „OBSERVATIONES Cyclometricæ, ad facilitandam Praxin accommodatæ” — obserwacje cyklometryczne przystosowane do ułatwienia praktyki (s. 394).",
+        "Akapit otwierający kończy się deklaracją zamiaru: „ad investiganda compendia quaedam Cyclometrica, Praxibus mechanicis utilia, idque tam in Numeris, quam Lineis” — ku zbadaniu pewnych skrótów cyklometrycznych, przydatnych praktykom mechanicznym, i to zarówno w liczbach, jak i w liniach (s. 394).",
+        "Sekcja zawierająca samą konstrukcję ma nagłówek: „GRAMMICÆ RATIONES CYCLOMETRICÆ, Ad Usus Mechanicos” — liniowe stosunki cyklometryczne, do użytków mechanicznych (s. 397). „Grammicae”, od greckiego słowa oznaczającego „kreskowy”, znaczy tu „liniowe” i stoi w opozycji do podanych wcześniej stosunków arytmetycznych.",
+        "W dopisku na końcu Kochański nazywa narzędzie wprost: „adjungam alteram Praxin Linearem Mechanicorum Circino opportunissimam” — dołożę drugą praktykę liniową, nader dogodną dla cyrkla mechaników (s. 398).",
+        "Tamże rozważa granicę dokładności w kategoriach warsztatowych, nie rachunkowych: „istam Praxin in Majoribus Circulis potissimum locum habere, in parvis aciem oculorum effugere, quoad particulam, postremo addendam” — ta praktyka ma miejsce głównie przy większych okręgach, przy małych ostatnia dokładana cząstka umyka ostrości oka (s. 398).",
+        "ROZBIEŻNOŚĆ z naszym sformułowaniem. Serwis mówi, że przybliżenie „zaprojektowano do wykonania cyrklem, a nie do rachunku”. Tego przeciwstawienia u Kochańskiego nie ma. Rozprawa podaje jedno i drugie — „tam in Numeris, quam Lineis” — a trzy z pięciu stron zajmują stosunki arytmetyczne, z których jeden (113 do 355) autor zaleca wprost „in Praxi”. Samą konstrukcję dowodzi zresztą rachunkiem: „Demonstratur calculo Trigonometrico” (s. 397).",
+        "Rozstrzygnięta 11 października 2026 decyzją kierownika projektu: cel warsztatowy przechodzi z naszej interpretacji do przekazu źródłowego, a przeciwstawienie rysunku rachunkowi znika jako nasze i nietrafne. Rachunek jest u Kochańskiego równie praktyczny jak wykreślanie."
+      ]
     },
     {
       "id": "A5",

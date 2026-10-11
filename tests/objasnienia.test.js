@@ -157,3 +157,55 @@ describe("rejestr sprawdzonych adresów", () => {
     }
   });
 });
+
+// A4: cel warsztatowy przeszedł z naszej interpretacji do przekazu źródłowego.
+// Test pilnuje nie samego faktu zamknięcia pozycji — to należy do kontroli
+// agendy — tylko tego, czy strona mówi to, co mówi druk, i czy nie wróciło
+// zdanie, które druk prostuje.
+describe.skipIf(!zbudowane)("cel konstrukcji cyklometrycznej", () => {
+  for (const [plik, cytaty, zniesione] of [
+    ["_site/pl/cyrkiel/index.html",
+     ["ad facilitandam Praxin accommodat", "Praxibus mechanicis utilia",
+      "GRAMM", "Ad Usus Mechanicos", "Mechanicorum Circino opportunissimam",
+      "aciem oculorum effugere", "Demonstratur calculo Trigonometrico"],
+     ["a nie do rachunku", "interpretacja celu"]],
+    ["_site/en/compass/index.html",
+     ["ad facilitandam Praxin accommodat", "Praxibus mechanicis utilia",
+      "GRAMM", "Ad Usus Mechanicos", "Mechanicorum Circino opportunissimam",
+      "aciem oculorum effugere", "Demonstratur calculo Trigonometrico"],
+     ["rather than computed", "reading of intent"]]
+  ]) {
+    const html = existsSync(plik) ? readFileSync(plik, "utf8") : "";
+
+    it(`${plik}: niesie słowa autora o celu, z numerami stron`, () => {
+      for (const c of cytaty) expect(html, `brak cytatu: ${c}`).toContain(c);
+      for (const s of ["394", "397", "398"])
+        expect(html, `brak numeru strony ${s}`).toContain(s);
+    });
+
+    it(`${plik}: przeciwstawienie rysunku rachunkowi nie jest już twierdzeniem`, () => {
+      // Fraza wolno, żeby padła w zdaniu, które ją prostuje — i właśnie tam
+      // pada. Zakazana jest tam, gdzie była twierdzeniem: w oznaczeniu.
+      const tagi = html.slice(html.indexOf('<p class="tagi">'), html.indexOf("</p>", html.indexOf('<p class="tagi">')));
+      for (const s of zniesione)
+        expect(tagi, `oznaczenie wciąż twierdzi: „${s}"`).not.toContain(s);
+      // A samo sprostowanie musi stać na stronie, bo bez niego zniknięcie
+      // tezy wyglądałoby na ciche wycofanie się z niej.
+      expect(html, "brak sprostowania dawnego sformułowania")
+        .toMatch(/(była nasza i nietrafna|was ours, and it was wrong)/);
+    });
+
+    it(`${plik}: oznaczenia nadal tworzą parę źródło + nasze`, () => {
+      const tagi = [...html.matchAll(/<span class="tag (zrodlo|rekonstrukcja)"/g)].map((m) => m[1]);
+      expect(tagi, "para oznaczeń rozpadła się").toEqual(["zrodlo", "rekonstrukcja"]);
+    });
+  }
+
+  it("ligatury z druku mieszczą się w repertuarze kroju", () => {
+    // Cytatu nie wolno przepisać inaczej, niż stoi w druku, więc repertuar
+    // ustępuje źródłu, a nie odwrotnie.
+    const repertuar = readFileSync("scripts/kroje-dane.mjs", "utf8");
+    for (const znak of ["Æ", "æ"])
+      expect(repertuar, `znak „${znak}" poza repertuarem`).toContain(znak);
+  });
+});

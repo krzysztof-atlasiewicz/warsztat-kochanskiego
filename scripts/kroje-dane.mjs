@@ -5,6 +5,9 @@
 // Łacinka polska i angielska, cyfry, interpunkcja typograficzna oraz znaki
 // działań używane w opisach. Znak „½" dopisany w cyklu 52: pada w cytacie
 // z relacji Richera i cytatu nie wolno przepisać inaczej, niż stoi w druku. Kontrola „kroje" sprawdza, czy na zbudowanych
+// Ligatury „Æ" i „æ" dopisane w cyklu 61 z tego samego powodu: tak stoi
+// w tytule rozprawy Kochańskiego z 1685 roku i w nagłówku nad konstrukcją.
+// Kontrola „kroje" sprawdza, czy na zbudowanych
 // stronach nie pojawił się znak spoza tej listy.
 export const ZNAKI = [
   " !\"#$%&'()*+,-./0123456789:;<=>?@",
@@ -12,7 +15,7 @@ export const ZNAKI = [
   "abcdefghijklmnopqrstuvwxyz{|}~",
   "ĄĆĘŁŃÓŚŹŻąćęłńóśźż",
   "ÀÁÂÄÇÈÉÊËÎÏÔÖÙÛÜàáâäçèéêëîïôöùûü",
-  "°±·×÷µ−≈≠≤≥½",
+  "°±·×÷µ−≈≠≤≥½Ææ",
   "–—‘’‚“”„†‡…§¶",
   "←→↑↓π"
 ].join("");
