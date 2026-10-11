@@ -5,7 +5,7 @@
       "id": "A1",
       "pytanie": "Jaka jest rzeczywista deklinacja ściany alkierza południowo-wschodniego i jaki typ wskazówki ma zegar wilanowski?",
       "dlaczego": "Model zakłada ścianę dokładnie południową i gnomon prostopadły. Rzeczywista deklinacja przesuwa wszystkie krzywe.",
-      "zmieni": "Geometrię krzywych przesileń i równonocy w module gnomonu.",
+      "zmieni": "Geometrię krzywych na ścianie gnomonu. Krzywe przesileń to tory, po których czubek cienia przebiega w najdłuższy i najkrótszy dzień roku; linia równonocy to prosta, po której przebiega 21 marca i 23 września. Ich kształt zależy od tego, pod jakim kątem ściana odchyla się od południa i jak ustawiony jest pręt — zmiana któregokolwiek z tych dwóch założeń każe przeliczyć wszystkie trzy siatki godzin od nowa.",
       "zrodlo": "Dokumentacja konserwatorska, Muzeum Pałacu Króla Jana III",
       "status": "otwarta",
       "miejsca": [

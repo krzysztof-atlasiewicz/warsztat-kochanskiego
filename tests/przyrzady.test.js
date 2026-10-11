@@ -98,8 +98,10 @@ describe.skipIf(!zbudowane)("pulpit gnomonu", () => {
       };
       const css = readFileSync("src/assets/css/site.css", "utf8");
       const szer = (regula) => Number(new RegExp(`${regula}\\{[^}]*?width:(\\d+)px`).exec(css)[1]);
+      // Szerokość kartki stoi w zmiennej, bo biorą ją z niej dwie reguły naraz.
+      const szerKartki = Number(/--kartka:(\d+)px/.exec(css)[1]);
       const kartka = vb("kartka"), zegar = vb("tarcza-mechaniczna");
-      const wysKartki = (szer("\\.kartka") * kartka.h) / kartka.w;
+      const wysKartki = (szerKartki * kartka.h) / kartka.w;
       const wysZegara = (szer("\\.tarcza-mechaniczna") * zegar.h) / zegar.w;
       expect(Math.abs(wysKartki - wysZegara), `kartka ${wysKartki} px, zegarek ${wysZegara} px`).toBeLessThan(1);
     });

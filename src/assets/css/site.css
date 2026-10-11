@@ -8,6 +8,10 @@
      niewidoczną. Osobna barwa, żeby podniesienie kontrastu sterowników nie
      pogrubiło wszystkich kresek w serwisie. */
   --rule-ster:#748073;
+  /* Szerokość kartki kalendarza w jednym miejscu: używa jej i sam rysunek,
+     i blok, w którym stoi. Rozjechane, dawały rysunek szerszy od swojego
+     pola i dosunięty do krawędzi. */
+  --kartka:209px;
   --serif:"EB Garamond","Iowan Old Style",Palatino,Georgia,serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
@@ -91,6 +95,12 @@ html.js #panel.hide{display:block;visibility:hidden}
 .rownowaznik{border-top:1px solid var(--rule);margin-top:2.5rem;padding-top:1rem;color:var(--ink-soft);font-size:.95rem}
 footer{margin-top:3rem;border-top:1px solid var(--rule);padding-top:1.5rem;color:var(--ink-soft);font-size:.92rem}
 @media (prefers-reduced-motion:no-preference){
+  /* Fale przesuwają się pod okrętem o jeden swój okres i wracają na początek;
+     przy okresie równym przesunięciu przeskok jest niewidoczny. Tempo zadaje
+     moduł zmienną „--fala" z wysokości stanu morza — gładka woda płynie leniwie,
+     sztorm przelatuje. Bez tego morze stało w miejscu, choć okręt się kołysał. */
+  #fale{animation:przeplyw var(--fala,6s) linear infinite;transform-box:view-box}
+  @keyframes przeplyw{from{transform:translateX(0)}to{transform:translateX(-40px)}}
   .okret{animation:rock 3.4s ease-in-out infinite;transform-box:view-box;transform-origin:272px 250px}
   .wahadlo{animation:swing 1.6s ease-in-out infinite;transform-box:view-box;transform-origin:364px 177px}
   @keyframes rock{0%,100%{transform:rotate(calc(var(--rk,4) * -1deg))}50%{transform:rotate(calc(var(--rk,4) * 1deg))}}
@@ -137,9 +147,11 @@ a.zrodlo-obca::after{content:" ↗";font-size:.85em;text-decoration:none;display
    i stoi w rejestrze; objaśnienie tylko mówi, czym jest rzecz wspomniana
    w zdaniu — kim był Huygens, co to perpetuum mobile. Stąd inna barwa, inny
    znak i nieobecność w rejestrze źródeł, czego pilnuje kontrola. */
+/* Bez znaku po słowie: pytajnik doklejony do „Heweliuszem" czytał się jako
+   wątpliwość co do Heweliusza, a nie jako zapowiedź objaśnienia. Kreskowane
+   podkreślenie w barwie przygaszonej wystarczy, żeby odróżnić objaśnienie
+   od źródła, które ma kreskę kropkowaną w zieleni. */
 a.objasnienie{color:var(--ink-soft);text-decoration-style:dashed;text-underline-offset:.2em}
-a.objasnienie::after{content:" ?";font-family:var(--mono);font-size:.78em;
-  vertical-align:.25em;text-decoration:none;display:inline-block}
 a.objasnienie:hover{color:var(--ink)}
 /* Dymek przy słowie w zdaniu, bez wyprowadzania czytelnika ze strony: tam,
    gdzie wyjaśnienie jest krótkie i dotyczy samego tekstu, a nie rzeczy
@@ -287,8 +299,8 @@ math{font-size:1.05em}
    i większe groty, a nie kosztuje nic poza miejscem, które w tym rzędzie jest.
    Na wąskim ekranie kolumny i tak stoją jedna pod drugą, więc kartka nie musi
    się już z niczym równać i rośnie jeszcze o dwadzieścia punktów. */
-.kartka{width:180px;max-width:100%;height:auto;flex:0 0 auto}
-@media (max-width:58rem){ .kartka{width:200px} }
+.kartka{width:var(--kartka);max-width:100%;height:auto;flex:0 0 auto}
+@media (max-width:58rem){ :root{--kartka:230px} }
 /* Wiersze o długości dnia i nocy sięgały przy jedenastu punktach od krawędzi
    do krawędzi kartki: „dzień: 14 godz 21 min" to dwadzieścia jeden znaków
    pisma o stałej szerokości, czyli 139 ze 140 jednostek wnętrza. Dziesięć
@@ -386,7 +398,7 @@ svg.sciana{max-width:none;width:100%}
 
 /* ── zegarek kieszonkowy: tarcza, koronka, dwie pary wskazówek ─────────── */
 .blok-daty,.blok-zegara{margin:0;display:flex;flex-direction:column;align-items:center;gap:.55rem}
-.blok-daty{flex:0 0 190px}
+.blok-daty{flex:0 0 var(--kartka)}
 .blok-okretu{margin:0;display:flex;flex-direction:column;gap:.5rem}
 .blok-okretu .galeon{max-width:100%}
 .nastawniki{width:100%}
@@ -410,7 +422,16 @@ svg.sciana{max-width:none;width:100%}
 /* 5,8 rem zamiast 4,6: „1 min 45 s" to dziesięć znaków pisma o stałej
    szerokości i w węższym polu łamało się na dwa wiersze. Dwa wiersze
    rezerwujemy nadal, bo odczyt stanu morza jest dwuwierszowy z założenia. */
-.przyrzady-rejs .nastawniki .ctl output{flex:0 0 5.8rem;min-height:3.8em}
+/* „margin-left:auto" po złamaniu wiersza dosuwa odczyt do prawej krawędzi,
+   czyli pod koniec suwaka, a nie pod etykietę. Wszystkie trzy odczyty rejsu
+   stoją wtedy w jednej pionowej linii. */
+.przyrzady-rejs .nastawniki .ctl output{flex:0 0 5.8rem;min-height:3.8em;margin-left:auto;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-end}
+/* Suwak nie może zejść poniżej ośmiu firetów: w wąskiej kolumnie okrętu
+   zostawały mu trzydzieści cztery punkty i nie dawał się przeciągnąć.
+   Zamiast ściskać go dalej, wiersz się łamie i suwak dostaje całą szerokość. */
+.przyrzady-rejs .nastawniki .ctl{flex-wrap:wrap}
+.przyrzady-rejs .nastawniki .ctl input[type=range]{flex:1 1 8rem;min-width:8rem}
 /* Odczyt stanu morza to dwie różne rzeczy: liczba i nazwa przedziału, w który
    ta liczba wpada. Stoją więc w dwóch wierszach, bez separatora, który przy
    łamaniu zostawał samotny na końcu pierwszego z nich. */
@@ -475,7 +496,7 @@ html.js #stop.hide{display:block;visibility:hidden}
    po zbudowaniu bębenków chowa je klasa .z-bebnami.
    Kartka ma wysokość zegarka (150 × 224 px przy proporcji viewBoksa 160:239),
    więc oba nastawniki stoją w rzędzie równo. */
-.blok-daty{flex:0 0 190px;gap:0;position:relative}
+.blok-daty{flex:0 0 var(--kartka);gap:0;position:relative}
 .pola-daty{display:flex;gap:.3rem;justify-content:center;margin:.3rem 0 0}
 .pola-daty select{font-size:.8rem}
 .przyrzad.z-bebnami .pola-daty{display:none}
@@ -501,7 +522,7 @@ html.js .pola-daty{display:none}
 #bebenMiesiaca,#bebenDnia{cursor:grab;touch-action:none;user-select:none}
 #bebenMiesiaca.beben-obracany,#bebenDnia.beben-obracany{cursor:grabbing}
 #bebenMiesiaca:focus-visible,#bebenDnia:focus-visible{outline:2px solid var(--verd);outline-offset:2px}
-.tarcza-mechaniczna{max-width:240px;touch-action:none;user-select:none}
+.tarcza-mechaniczna{max-width:279px;touch-action:none;user-select:none}
 .tarcza-mechaniczna .cyfra-zegara{font-family:var(--serif);font-size:15px;fill:var(--ink)}
 .tarcza-mechaniczna .kreska-godzin{stroke:var(--ink);stroke-width:1.4}
 .tarcza-mechaniczna .kreska-minut{stroke:var(--rule);stroke-width:.7}

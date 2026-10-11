@@ -118,20 +118,47 @@ describe("pole przewijane w poziomie", () => {
 });
 
 describe("kartka kalendarza", () => {
+  // Szerokość kartki stoi w jednym miejscu — w zmiennej — bo używa jej i sam
+  // rysunek, i blok, w którym rysunek stoi. Rozjechane dawały rysunek szerszy
+  // od swojego pola, dosunięty do krawędzi.
+  const szerKartki = (reguly) => Number(reguly.match(/--kartka:(\d+)px/)[1]);
+
+  // Testy liczą własność, nie liczbę: inaczej każda zmiana rozmiaru każe
+  // przepisywać test, a przepisywany test przestaje czegokolwiek pilnować.
   it("rośnie jeszcze bardziej tam, gdzie nie musi się równać z zegarkiem", () => {
-    // Przy wąskim oknie kolumny pulpitu stoją jedna pod drugą, więc kartka
-    // może być szersza — a szerokość kartki to wielkość grotów wyboru daty.
-    expect(arkusz, "brak szerszej kartki na wąskim ekranie")
-      .toMatch(/@media \(max-width:58rem\)\{ \.kartka\{width:200px\} \}/);
-    expect(arkusz, "podstawowa szerokość kartki nie została powiększona")
-      .toMatch(/\.kartka\{width:180px/);
+    const szeroko = szerKartki(arkusz.slice(0, arkusz.indexOf("@media (max-width:58rem)")));
+    const wasko = szerKartki(arkusz.slice(arkusz.indexOf("@media (max-width:58rem){ :root{--kartka")));
+    expect(wasko, "kartka na wąskim ekranie nie jest szersza").toBeGreaterThan(szeroko);
+  });
+
+  it("papier kartki ma margines, a nie dotyka krawędzi rysunku", () => {
+    // Papier zaczynał się dziesięć jednostek od brzegu viewBoksa, czyli
+    // jedenaście punktów na ekranie — kartka wyglądała na dosuniętą do
+    // krawędzi. Zawartość jest teraz zmniejszona wokół środka, a kartka
+    // o tyle samo szersza, więc sam papier ma tę samą wielkość co przedtem.
+    const njk = readFileSync("src/_includes/przyrzady/gnomon.njk", "utf8");
+    const skala = Number(njk.match(/class="arkusz" transform="[^"]*scale\(([\d.]+)\)/)[1]);
+    const [, , vbSzer] = njk.match(/viewBox="0 0 (\d+) (\d+)"[^>]*class="kartka/).slice(0, 3).map(Number);
+    const papierOd = Number(njk.match(/<path d="M (\d+) 18 L/)[1]);
+    const srodek = vbSzer / 2;
+    const poSkali = srodek - (srodek - papierOd) * skala;
+    const px = poSkali * szerKartki(arkusz) / vbSzer;
+    expect(px, `margines papieru to ${px.toFixed(1)} punktu`).toBeGreaterThan(20);
+  });
+
+  it("rysunek kartki i jej blok biorą szerokość z tej samej liczby", () => {
+    expect(arkusz, "rysunek ma własną szerokość").toMatch(/\.kartka\{width:var\(--kartka\)/);
+    const bloki = [...arkusz.matchAll(/\.blok-daty\{flex:0 0 ([^;}]+)/g)].map((m) => m[1]);
+    expect(bloki.length, "nie znalazłem reguł bloku daty").toBeGreaterThan(0);
+    for (const b of bloki)
+      expect(b, "blok daty ma szerokość wpisaną z ręki").toBe("var(--kartka)");
   });
 
   it("kartka i zegarek kończą się na tej samej wysokości", () => {
     // Stoją w jednym rzędzie, więc muszą rosnąć w tej samej proporcji.
     // Kartka: viewBox 160 × 239. Zegarek: 200 × 224. Przy 180 i 240 punktach
     // szerokości oba mają 269 punktów wysokości — stąd te, a nie inne liczby.
-    const szerKartki = Number(arkusz.match(/\.kartka\{width:(\d+)px/)[1]);
+    const szerKartki = Number(arkusz.match(/--kartka:(\d+)px/)[1]);
     const szerZegarka = Number(arkusz.match(/\.tarcza-mechaniczna\{max-width:(\d+)px/)[1]);
     const wysKartki = szerKartki * 239 / 160;
     const wysZegarka = szerZegarka * 224 / 200;
@@ -175,5 +202,47 @@ describe("odczyty wahadła", () => {
     expect(i18n, "polski opis nie mówi, czyja jest skala").toMatch(/Skala jest nasza, nie historyczna/);
     expect(i18n, "angielski opis nie mówi, czyja jest skala").toMatch(/scale is ours, not historical/);
     expect(i18n, "opis nie podaje progu sztormu").toMatch(/10,5|10\.5/);
+  });
+});
+
+describe("morze się rusza", () => {
+  it("fale przesuwają się o własny okres, więc przeskok jest niewidoczny", () => {
+    const modul = readFileSync("src/assets/js/modules/rejs.js", "utf8");
+    const okres = Number(modul.match(/OKRES_FALI = (\d+)/)[1]);
+    // Blok klatek ma zagnieżdżone nawiasy, więc czytamy go od nazwy do końca
+    // ostatniej klatki, a nie do pierwszego zamknięcia.
+    const blok = arkusz.slice(arkusz.indexOf("@keyframes przeplyw"));
+    const przesuniecie = Number(blok.match(/translateX\(-(\d+)px\)/)[1]);
+    expect(przesuniecie, "przesunięcie nie równa się okresowi fali — przeskok będzie widać")
+      .toBe(okres);
+  });
+
+  it("fale są rysowane z zapasem większym niż przesunięcie", () => {
+    // Inaczej po przesunięciu z prawej strony odsłoniłaby się pusta woda.
+    const modul = readFileSync("src/assets/js/modules/rejs.js", "utf8");
+    const od = Number(modul.match(/FALE_OD = (-?\d+)/)[1]);
+    const okres = Number(modul.match(/OKRES_FALI = (\d+)/)[1]);
+    expect(Math.abs(od), "za mały zapas z lewej").toBeGreaterThan(okres);
+  });
+
+  it("tempo fal idzie za stanem morza, a ruch pyta o zgodę", () => {
+    const modul = readFileSync("src/assets/js/modules/rejs.js", "utf8");
+    expect(modul, "tempo fal nie zależy od stanu morza").toMatch(/--fala.*stan/s);
+    const ruch = arkusz.slice(arkusz.indexOf("@media (prefers-reduced-motion:no-preference)"));
+    expect(ruch.slice(0, 600), "ruch fal poza osłoną zgody na animację").toContain("#fale{animation");
+  });
+});
+
+describe("serwis nie opisuje narzędzi, którymi go zrobiono", () => {
+  it("rejestr decyzji mówi bezosobowo o tym, czego nie rozstrzyga się bez decyzji", () => {
+    const rejestr = readFileSync("src/pl/decyzje.md", "utf8");
+    // Jak w kontroli: łącznik nie jest tu granicą słowa, bo rejestr ma prawo
+    // mówić o polu „User-agent" w robots.txt.
+    for (const slowo of [/(?<![-\w])agent(a|owi|em|ach|ów|y)?\b/i, /sztuczn\w* inteligencj/i, /\bClaude\b/i])
+      expect(rejestr, `w rejestrze wróciła wzmianka o narzędziu: ${slowo}`).not.toMatch(slowo);
+    // Reguła nie znika razem ze słowem: zakaz zamykania pozycji bez decyzji
+    // kierownika projektu musi dalej stać w tekście, tylko bezosobowo.
+    expect(rejestr, "zniknęła sama reguła, nie tylko jej podmiot")
+      .toMatch(/nie rozstrzyga się bez decyzji|zamknięcie należy do kierownika projektu/);
   });
 });

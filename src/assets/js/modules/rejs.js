@@ -113,16 +113,28 @@ export default function init(root) {
     }));
   }
 
+  // Fale rysują się z zapasem poza kadr z obu stron, bo cały pasek przesuwa
+  // się potem w bok o jeden okres fali (40 jednostek) i wraca na początek.
+  // Przy okresie równym przesunięciu przeskok jest niewidoczny — rysunek po
+  // przesunięciu nakłada się sam na siebie. Zapas musi być większy niż
+  // przesunięcie, inaczej z prawej strony odsłoniłaby się pusta woda.
+  const FALE_OD = -80, FALE_DO = 620, OKRES_FALI = 40;
+
   function fale(stan) {
     const g = $("fale");
     g.replaceChildren();
     const amp = 3 + stan * 1.6;
     for (let i = 0; i < 3; i++) {
       const y = 252 + i * 14, a = amp * (1 - i * 0.22);
-      let d = `M -10 ${y}`;
-      for (let x = 20; x <= 540; x += 40) d += ` Q ${x - 20} ${(y - a).toFixed(1)} ${x} ${y}`;
+      let d = `M ${FALE_OD} ${y}`;
+      for (let x = FALE_OD + OKRES_FALI; x <= FALE_DO; x += OKRES_FALI)
+        d += ` Q ${x - OKRES_FALI / 2} ${(y - a).toFixed(1)} ${x} ${y}`;
       g.append(el("path", { d, fill: "none", stroke: i === 0 ? "var(--ink-soft)" : "var(--rule)", "stroke-width": i === 0 ? "1.3" : "0.9" }));
     }
+    // Im bardziej wzburzone morze, tym prędzej fale przechodzą pod okrętem.
+    // Od dziewięciu sekund na okres przy gładkiej wodzie do dwóch i pół przy
+    // sztormie. Samo przesuwanie opisuje arkusz, który pyta o zgodę na ruch.
+    g.style.setProperty("--fala", `${(9 - stan * 0.46).toFixed(2)}s`);
   }
 
   const MIESIACE = {

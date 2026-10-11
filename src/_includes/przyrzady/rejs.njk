@@ -11,15 +11,23 @@
     <figure class="blok-daty" data-dymek="{{ s.rejs.kalendarzOpis }}">
       <svg viewBox="0 0 160 190" class="kartka" role="img" aria-describedby="o-kalendarz">
         <desc id="o-kalendarz">{{ s.rejs.opisKalendarza }}</desc>
+        <!-- Cała zawartość kartki zmniejszona wokół środka o jedną siódmą.
+             Papier miał dziesięć jednostek marginesu z każdej strony, czyli
+             jedenaście punktów przy stu osiemdziesięciu — za mało, kartka
+             wyglądała na dosuniętą do krawędzi rysunku. Skalowanie grupy
+             zamiast przesuwania współrzędnych: rysunek zostaje ten sam,
+             a utrata wielkości wraca przez szerszą kartkę w arkuszu. -->
+        <g class="arkusz" transform="translate(80 92) scale(0.86) translate(-80 -92)">
         <path d="M 10 18 L 150 18 L 150 160 Q 120 170 90 162 Q 55 153 10 164 Z"
               fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
-        <line x1="10" y1="42" x2="150" y2="42" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
+        <line x1="24" y1="42" x2="136" y2="42" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
         <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <text id="kalMiesiac" class="t" x="80" y="36" text-anchor="middle">—</text>
         <text id="kalDzien" class="kartka-liczba" x="80" y="112" text-anchor="middle">—</text>
         <text id="kalRok" class="t" x="80" y="140" text-anchor="middle">1672</text>
         <text id="kalDoba" class="t" x="80" y="156" text-anchor="middle">—</text>
+        </g>
       </svg>
       <figcaption class="nastawniki">
         <div class="ctl"><label for="dzien" title="{{ s.rejs.opisy.dzien }}">{{ s.rejs.dzien }}</label><input type="range" id="dzien" min="0" max="74" step="1" value="74"><output id="dzienO">74</output></div>

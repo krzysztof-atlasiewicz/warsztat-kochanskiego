@@ -457,6 +457,32 @@ const KONTROLE = {
     for (const u of znane)
       if (!widziane.has(u)) bledy.push(`w rejestrze został adres, którego nikt już nie używa: ${u}`);
     return bledy;
+  },
+
+  // Decyzja redakcyjna kierownika projektu z 11 października: strony serwisu
+  // nie opisują narzędzi, którymi je zrobiono. Rejestr decyzji mówi, co i
+  // dlaczego zmieniono, a nie czyją ręką — zdania w rodzaju „agent tego nie
+  // rusza" zamieniono na bezosobowe. Reguła nie dotyczy repozytorium, tylko
+  // tego, co trafia do czytelnika, więc kontrola patrzy na zbudowane strony.
+  redakcja() {
+    const bledy = [];
+    // „(?<![-\\w])" nie daje się złapać na „User-agent" w robots.txt ani na
+    // zdaniu rejestru, które o tym polu protokołu mówi. Łącznik jest dla
+    // „\\b" granicą słowa, więc sam „\\bagent" dawał fałszywy alarm.
+    const SLOWA = [/(?<![-\w])agent(a|owi|em|ach|ów|y)?\b/i, /\bsztuczn\w* inteligencj\w*/i,
+                   /\bmodel\w* językow\w*/i, /\bLLM\b/, /\bChatGPT\b/i, /\bClaude\b/i,
+                   /\bCopilot\b/i, /\bpdca\/agent/i];
+    for (const p of zbudowane()) {
+      // Sam znacznik „User-agent" w robots.txt to nazwa pola protokołu,
+      // nie wzmianka o narzędziu — tam ta kontrola nie sięga.
+      if (p.endsWith("robots.txt")) continue;
+      const tekst = czytaj(p).replace(/<[^>]+>/g, " ");
+      for (const w of SLOWA) {
+        const m = tekst.match(w);
+        if (m) bledy.push(`${p}: wzmianka o narzędziu — „${m[0]}"`);
+      }
+    }
+    return bledy;
   }
 };
 

@@ -32,7 +32,12 @@ describe("trzy rodzaje odnośnika wyglądają inaczej", () => {
     expect(arkusz, "skan nie ma własnego stylu").toMatch(/a\.zrodlo-skan\{/);
     expect(arkusz, "tekst u wydawcy bez znaku wyjścia").toMatch(/a\.zrodlo-obca::after\{[^}]*content/);
     expect(arkusz, "objaśnienie bez własnego stylu").toMatch(/a\.objasnienie\{/);
-    expect(arkusz, "objaśnienie bez własnego znaku").toMatch(/a\.objasnienie::after\{[^}]*content/);
+    // Objaśnienie nie dostaje znaku po słowie: pytajnik doklejony do
+    // „Heweliuszem" czytał się jako wątpliwość co do Heweliusza.
+    expect(arkusz, "objaśnienie znów nosi znak po słowie")
+      .not.toMatch(/a\.objasnienie::after\{[^}]*content/);
+    expect(arkusz, "objaśnienie nie odróżnia się krojem kreski")
+      .toMatch(/a\.objasnienie\{[^}]*text-decoration-style:dashed/);
   });
 
   it("objaśnienie nie ma barwy źródła", () => {
@@ -92,13 +97,23 @@ describe.skipIf(!zbudowane)("odnośniki na zbudowanych stronach", () => {
     }
   });
 
-  it("wersja polska prowadzi do polskiej encyklopedii, angielska do angielskiej", () => {
-    const pl = readFileSync("_site/pl/biografia/index.html", "utf8");
-    const en = readFileSync("_site/en/biography/index.html", "utf8");
-    for (const m of pl.matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"/g))
-      expect(m[1], "polska strona prowadzi do obcojęzycznej encyklopedii").toMatch(/^https:\/\/pl\./);
-    for (const m of en.matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"/g))
-      expect(m[1], "angielska strona prowadzi do obcojęzycznej encyklopedii").toMatch(/^https:\/\/en\./);
+  it("objaśnienie prowadzi do encyklopedii w języku strony — albo mówi, że nie", () => {
+    // Zasada: czytelnik dostaje hasło w swoim języku. Wyjątek jest możliwy,
+    // bo nie każde hasło istnieje w obu wersjach Wikipedii — Kaspar Schott ma
+    // tylko angielskie. Wtedy odnośnik musi o tym uprzedzić w swoim tytule,
+    // żeby nikt nie trafił niespodziewanie na obcy język.
+    for (const [plik, jezyk, ostrzezenie] of [
+      ["_site/pl/biografia/index.html", "pl", /po angielsku|polska Wikipedia go nie ma/],
+      ["_site/en/biography/index.html", "en", /in Polish|English Wikipedia does not have/]
+    ]) {
+      const html = readFileSync(plik, "utf8");
+      for (const m of html.matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"[^>]*title="([^"]*)"/g)) {
+        const [, url, tytul] = m;
+        if (url.startsWith(`https://${jezyk}.`)) continue;
+        expect(tytul, `${plik}: ${url} prowadzi do obcego języka bez uprzedzenia`)
+          .toMatch(ostrzezenie);
+      }
+    }
   });
 
   it("zdanie o porażkach nazywa rzecz po imieniu", () => {

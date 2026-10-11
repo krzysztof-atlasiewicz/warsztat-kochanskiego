@@ -34,7 +34,7 @@ Każda decyzja merytoryczna: data, treść, uzasadnienie, skutek. Dokument publi
 
 ## 2026-09-14 — Zakres wykonany w cyklu 2
 
-**Decyzja:** wykonano pełen zakres fazy A możliwy bez udziału człowieka, zgodnie z `pdca/agent.md`.
+**Decyzja:** wykonano pełen zakres fazy A możliwy bez rozstrzygnięć merytorycznych, zgodnie z regulaminem prac przygotowawczych.
 
 **Zrobione:** wydzielenie przyrządów do wspólnych partiali i oddzielenie warstwy tekstowej od znaczników; pełna wersja angielska czterech przyrządów i agendy; biografia z jawnie zaznaczonymi rozbieżnościami dat; publiczny rejestr zmian założony przed pierwszą zmianą; wersje osadzalne wszystkich przyrządów w obu językach; ścieżka prowadzona między przyrządami; dwie nowe kontrole automatyczne (parzystość językowa, obecność wersji osadzalnych) i odpowiadające im warunki bramki GA8 i GA9; testy dymne uruchamiające realne moduły na zbudowanych stronach.
 
@@ -494,13 +494,13 @@ Strona wahadła waży po tych zmianach 110 kB przy budżecie 150 — zapasu jest
 
 **Zarzut:** chip „źródło" stoi na wszystkich czterech stronach przyrządów, więc niczego nie odróżnia. Oznaczenie, które nigdy nie jest nieobecne, nie niesie informacji.
 
-**Zarzut jest trafny co do formy,** ale usunięcie oznaczenia statusu wersji jest zmianą merytoryczną i agent go nie rusza. Trzy możliwości do wyboru przez kierownika projektu:
+**Zarzut jest trafny co do formy,** ale usunięcie oznaczenia statusu wersji jest zmianą merytoryczną i nie wprowadza się jej bez decyzji. Trzy możliwości do wyboru przez kierownika projektu:
 
 1. **Zostawić i nazwać źródło.** Zamiast „źródło" chip mówi, z czego: „Acta Eruditorum 1685", „Technica curiosa", „relacja Richera", „literatura wilanowska". Wtedy każda strona ma inny napis i chip znowu coś znaczy. Wymaga rozstrzygnięcia A2 i A7, bo dwa z czterech źródeł nie są jeszcze potwierdzone.
 2. **Zostawić parę, przebudować drugi człon.** Chip „źródło" pozostaje jako stała część oznaczenia, a drugi mówi wprost, co jest nasze — na wzór pary „co ze źródła / co nasze". Zmiana wyłącznie redakcyjna, do wykonania od ręki.
 3. **Usunąć chip „źródło",** zostawiając tylko oznaczenie tego, co dopowiedziane. Najprostsze i najkrótsze, ale strona przestaje wtedy twierdzić wprost, że cokolwiek opiera się na przekazie z epoki — a to jest twierdzenie, które chcemy wypowiadać.
 
-**Rekomendacja agenta:** wariant 2 teraz, wariant 1 po zamknięciu A2 i A7. Wariant 3 odradzany: osłabia oznaczenie statusu, a zysk jest tylko wizualny.
+**Rekomendacja:** wariant 2 teraz, wariant 1 po zamknięciu A2 i A7. Wariant 3 odradzany: osłabia oznaczenie statusu, a zysk jest tylko wizualny.
 
 ## 2026-10-09 — Cykl 39: para oznaczeń czyta się jako zdanie
 
@@ -670,7 +670,7 @@ Zapis źródła uzupełniony o strony i o wskazanie rozdziału; pozycja A7 przen
 4. **Autor zapisu nie jest w księdze nazwany.** Cała księga IX relacjonuje prace bezimiennego „Amicusa" — tak zaczyna się jej część pierwsza na stronie 620 i tak wraca w całym wywodzie. Utożsamienie Amicusa z Kochańskim pochodzi z opracowań, nie z druku.
 5. **Przy okazji znaleziono drugi zapis szyfrowy**, w księdze VIII na stronach 587–588. Korespondent przesłał Schottowi swój sąd o cudzej kwadraturze koła „in fine cryptographico velamine", literami „gptaramtasy rcepegnik Xacperdiq". Schott podaje tam także rozwiązanie: odrzucić pierwszą i ostatnią literę każdego wyrazu, a z pozostałych sylab czytać po jednej z każdej trójki, zaczynając od ostatniej — wychodzi „dignitas (sive Axioma) perperam accepta", czyli „aksjomat źle wzięty".
 
-**Dwie rzeczy do rozstrzygnięcia przez człowieka, obie merytoryczne.** Pierwsza: zapis źródła przypisuje księgę IX Kochańskiemu, a druk mówi wyłącznie o bezimiennym Amicusie — czy skorygować przypisanie. Druga: moduł odtwarza szyfr przesuwający, podczas gdy w dziele stoją anagram i metoda odrzucania skrajnych liter; zapis z księgi VIII ma w druku i zadanie, i rozwiązanie, więc dałby się pokazać w całości. Agent tego nie rozstrzyga.
+**Dwie rzeczy do rozstrzygnięcia przez człowieka, obie merytoryczne.** Pierwsza: zapis źródła przypisuje księgę IX Kochańskiemu, a druk mówi wyłącznie o bezimiennym Amicusie — czy skorygować przypisanie. Druga: moduł odtwarza szyfr przesuwający, podczas gdy w dziele stoją anagram i metoda odrzucania skrajnych liter; zapis z księgi VIII ma w druku i zadanie, i rozwiązanie, więc dałby się pokazać w całości. Obu nie rozstrzyga się bez decyzji kierownika projektu.
 
 **Kontrola „zrodla" porównuje teraz adres samego skanu, bez wskazania strony.** Odnośnik otwierany na stronie 692 i odnośnik do całego tomu prowadzą do tego samego egzemplarza, a starsze wpisy w rejestrze mają prawo wskazywać tom. Wzmocnienia ani osłabienia w tym nie ma — zmienia się to, co porównujemy, nie to, czego wymagamy.
 
@@ -702,7 +702,7 @@ Zapis źródła uzupełniony o strony i o wskazanie rozdziału; pozycja A7 przen
 
 **Dymek przy oznaczeniu „ze źródła” na stronie wahadła twierdził, że strony pomiaru „jeszcze nie ustalono”.** Ustalono ją w poprzednim cyklu. Dymek podaje teraz stronę 320 i wartość. Dymek gnomonu wymienia obie części pozycji A1: deklinację ściany i typ wskazówki.
 
-**A1 dostało ustalenia — metodę, nie odpowiedź.** Pięć punktów: kolejność rozstrzygania (najpierw typ wskazówki, bo deklinacja zmierzona dla złego modelu jest bezużyteczna), sposób ustalenia typu wskazówki ze zdjęcia i dokumentacji, pomiar deklinacji z danych geodezyjnych z nazwanymi dokładnościami (ortofotomapa ±0,5°, obrysy EGiB i BDOT10k ±0,2°) i wprost wykluczonym kompasem magnetycznym, próg przydatności ±1° oraz to, że do rozstrzygnięcia model zostaje przy ścianie południowej i pręcie prostopadłym. Pozycja pozostaje otwarta; agent jej nie zamyka.
+**A1 dostało ustalenia — metodę, nie odpowiedź.** Pięć punktów: kolejność rozstrzygania (najpierw typ wskazówki, bo deklinacja zmierzona dla złego modelu jest bezużyteczna), sposób ustalenia typu wskazówki ze zdjęcia i dokumentacji, pomiar deklinacji z danych geodezyjnych z nazwanymi dokładnościami (ortofotomapa ±0,5°, obrysy EGiB i BDOT10k ±0,2°) i wprost wykluczonym kompasem magnetycznym, próg przydatności ±1° oraz to, że do rozstrzygnięcia model zostaje przy ścianie południowej i pręcie prostopadłym. Pozycja pozostaje otwarta: metoda nie jest odpowiedzią, a zamknięcie należy do kierownika projektu.
 
 **Kontrola „agenda” umie teraz odróżnić jedno od drugiego.** Dotąd wymagała od każdej pozycji karty na stronie i tylko tego. Teraz wymaga karty od pozycji otwartej, zabrania karty pozycji zamkniętej i wymaga od niej śladu z odnośnikiem do rejestru. Wymagań nie ubyło — doszło trzecie, a drugie jest nowym zakazem. Sprawdzono, że kontrola upada po usunięciu samego śladu.
 
@@ -785,12 +785,38 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 
 **Czego ten cykl nie ruszył i dlaczego.** Adresy encyklopedii wpisano bez sprawdzenia, bo kontener roboczy nie ma dostępu do sieci — **sprawdzenie wykonuje człowiek przed wdrożeniem**, jednym poleceniem odpytującym wszystkie adresy naraz. Zostają też: strony prawne i informacja o prywatnym charakterze projektu, mapa miejsc i zakładki w biografii, dymek o hrabinie opiekującej się Kochańskim w ostatnich miesiącach, nazwy uczelni, pierwsza korespondencja z Leibnizem i jej skan, podstawa dla sprężyny z 1672 roku oraz sprawdzenie, dokąd prowadzi odnośnik do „Acta Eruditorum". Wszystkie wymagają kwerendy albo decyzji, nie są więc pracą na formie.
 
-**Uzupełnienie tego samego dnia: dwa z ośmiu adresów encyklopedii nie istniały.** Sprawdzenie wykonane przez kierownika projektu dało `404` dla „Balans (zegarmistrzostwo)" i „Włos (zegarmistrzostwo)". Oba były zmyślone — agent wpisał nazwy, które wyglądały na prawdopodobne, bo polska Wikipedia opatruje wiele haseł dopiskiem w nawiasie. Właściwe hasła to po prostu **Balans** („regulator chodu w zegarach i zegarkach mechanicznych, odpowiednik wahadła w zegarze wahadłowym") i **Sprężyna spiralna**, która opisuje włos jako „element regulatora balansowego zegarka". Pięć adresów angielskich zwróciło `429` — to ograniczenie częstości po stronie Wikipedii, nie brak strony, i wymaga powtórzenia z przerwami.
+**Uzupełnienie tego samego dnia: dwa z ośmiu adresów encyklopedii nie istniały.** Sprawdzenie wykonane przez kierownika projektu dało `404` dla „Balans (zegarmistrzostwo)" i „Włos (zegarmistrzostwo)". Oba adresy wpisano z pamięci, bez sprawdzenia: nazwy wyglądały na prawdopodobne, bo polska Wikipedia opatruje wiele haseł dopiskiem w nawiasie. Właściwe hasła to po prostu **Balans** („regulator chodu w zegarach i zegarkach mechanicznych, odpowiednik wahadła w zegarze wahadłowym") i **Sprężyna spiralna**, która opisuje włos jako „element regulatora balansowego zegarka". Pięć adresów angielskich zwróciło `429` — to ograniczenie częstości po stronie Wikipedii, nie brak strony, i wymaga powtórzenia z przerwami.
 
 **Stąd szesnasta kontrola, `odnosnikiSprawdzone`, i rejestr `sprawdz/objasnienia-sprawdzone.json`.** Każdy adres objaśnienia musi stać w rejestrze razem z datą, kiedy ktoś potwierdził, że istnieje. Adres nieobecny w rejestrze jest zgłaszany jako nieprzejrzany; adres w rejestrze, którego już nikt nie używa, też, żeby wykaz nie puchł. Kontrola ma status **ostrzeżenia, nie błędu** — i to jest w niej rzecz najważniejsza. Nie umie rozstrzygnąć sprawy sama, bo kontener roboczy nie ma dostępu do sieci, więc nie ma prawa zatrzymywać budowania. Ma za to prawo nie dać o sobie zapomnieć: wdrażać z nieprzejrzanym adresem nie wolno. To pierwsza kontrola w serwisie, która nie orzeka, tylko przypomina, że orzeczenie należy do człowieka.
 
-**Czego się z tego uczymy.** Agent nie ma dostępu do sieci i wiedział o tym, a mimo to wpisał osiem adresów z pamięci, opatrując je tylko ostrzeżeniem w tekście. Ostrzeżenie w tekście znika po przeczytaniu; kontrola zostaje. Każda rzecz, której agent nie jest w stanie sprawdzić sam, ma od teraz zostawiać po sobie ślad w kontrolach, a nie w zdaniu skierowanym do człowieka.
+**Czego się z tego uczymy.** Osiem adresów wpisano z pamięci, w środowisku, które nie ma dostępu do sieci, opatrując je wyłącznie ostrzeżeniem w tekście. Ostrzeżenie w tekście znika po przeczytaniu; kontrola zostaje. Każda rzecz, której nie da się sprawdzić na miejscu, ma od teraz zostawiać po sobie ślad w kontrolach, a nie w zdaniu skierowanym do czytelnika.
 
 **Wszystkie szesnaście adresów potwierdzone tego samego dnia.** Powtórne sprawdzenie pięciu angielskich, tym razem z dwusekundową przerwą między zapytaniami i z własną nazwą klienta, dało `200` dla każdego — pierwsze `429` było rzeczywiście ograniczeniem częstości. Rejestr nie ma już pozycji oczekujących, ostrzeżenie zgasło i szesnasta kontrola świeci na zielono. Przy okazji wniosek praktyczny: sprawdzając wiele adresów naraz, daje się przerwę i nazywa klienta, bo inaczej odpowiedź mówi o tempie zapytań, a nie o stanie stron.
 
 **Cztery kolejne testy** (240 zamiast 236): każdy sprawdzony adres z datą, żaden naraz sprawdzony i oczekujący, każdy oczekujący z podanym powodem, i żaden adres na stronach nieznany rejestrowi — czyli dopisany bez jakiejkolwiek próby sprawdzenia.
+
+## 2026-10-11 — Cykl 58: odnośniki, ruch morza i decyzja redakcyjna o rejestrze
+
+**Decyzja kierownika projektu: strony serwisu nie opisują narzędzi, którymi je zrobiono.** Rejestr decyzji mówi, co i dlaczego zmieniono, a nie czyją ręką. Sześć zdań przepisano bezosobowo — „nie wprowadza się jej bez decyzji" zamiast wskazywania wykonawcy, „Rekomendacja" zamiast rekomendacji czyjejś. **Reguły, które te zdania niosły, zostają co do joty**: pozycji agendy nie zamyka się bez rozstrzygnięcia kierownika projektu, zmiany merytorycznej nie wprowadza się bez decyzji. Zmienia się podmiot zdania, nie jego treść — i tylko w tym, co czyta czytelnik. Siedemnasta kontrola, `redakcja`, pilnuje tego na zbudowanych stronach i wyłącza spod reguły `robots.txt`, gdzie „User-agent" jest nazwą pola protokołu, nie wzmianką o narzędziu.
+
+**Znak zapytania przy objaśnieniach zdjęty.** Pytajnik doklejony do słowa czytał się jako wątpliwość co do rzeczy, nie jako zapowiedź objaśnienia: „Heweliuszem?" wyglądało na podanie Heweliusza w wątpliwość. Kreskowane podkreślenie w barwie przygaszonej wystarczy, żeby odróżnić objaśnienie od źródła, które ma kreskę kropkowaną w zieleni.
+
+**Dziesięć nowych objaśnień** w biografii i po jednym na obu stronach gnomonu: pałac w Wilanowie, Jan III Sobieski, Kaspar Schott, wahadło zegarowe, sprężyna regulująca, wahacz kołowy, zegar morski, wahacz magnetyczny w zdaniu o ślepej uliczce, oraz Heweliusz — ten ostatni dlatego, że nazwisko było podlinkowane w biografii, a w gnomonie stało gołe. **Kaspar Schott nie ma hasła po polsku**, więc na stronie polskiej odnośnik prowadzi do angielskiego i mówi o tym wprost w swoim tytule. Zasada jest taka: czytelnik dostaje hasło w swoim języku, a jeśli go nie ma — zostaje uprzedzony, zanim kliknie. Test tego pilnuje.
+
+**Pole „co się zmieni" przy A1 tłumaczy wreszcie, o czym mowa.** Dotąd brzmiało „Geometrię krzywych przesileń i równonocy w module gnomonu" i nie mówiło nic komuś, kto nie wie, czym są te krzywe. Teraz mówi: tory, po których czubek cienia przebiega w najdłuższy i najkrótszy dzień roku, oraz prosta dla 21 marca i 23 września — a ich kształt zależy od obu niewiadomych naraz.
+
+**Morze przestało stać w miejscu.** Okręt kołysał się na nieruchomej wodzie. Fale przesuwają się teraz pod nim o dokładnie jeden swój okres i wracają na początek, więc przeskok jest niewidoczny: po przesunięciu rysunek nakłada się sam na siebie. Rysują się z zapasem osiemdziesięciu jednostek z lewej, czyli większym niż przesunięcie, inaczej z prawej odsłoniłaby się pusta woda. Tempo idzie za stanem morza — od dziewięciu sekund na okres przy gładkiej wodzie do około dwóch i pół przy sztormie — i cały ruch stoi pod osłoną zgody na animacje.
+
+**Suwak stanu morza miał trzydzieści cztery punkty.** W wąskiej kolumnie okrętu etykieta i odczyt zjadały całą szerokość i na suwak zostawał kikut, którego nie dawało się przeciągnąć. Zamiast ściskać go dalej, wiersz łamie się: suwak ma zagwarantowane osiem firetów, a odczyt schodzi pod niego i dosuwa się do prawej krawędzi. Wynik: **137 punktów na szerokim ekranie i 191 na telefonie** zamiast 34, a wszystkie trzy odczyty rejsu stoją w jednej pionowej linii. Odczyty są przy tym wyśrodkowane w swojej zarezerwowanej wysokości — dotąd tekst siedział u góry pola i wyglądał, jakby uciekł nad suwak.
+
+**Szerokość kartki kalendarza stoi teraz w jednej zmiennej.** Rysunek brał ją z jednej reguły, a blok, w którym rysunek stoi, z drugiej; rozjechane dawały rysunek szerszy od swojego pola. Przy okazji mosiężna kreska pod nazwą miesiąca jest wsunięta o czternaście jednostek od obu krawędzi papieru — dotąd biegła od brzegu do brzegu.
+
+**Dziewięć nowych adresów czeka na sprawdzenie** i siedemnasta kontrola o tym przypomina. Zasada z cyklu 57 zadziałała od pierwszego razu: adresy dopisano od razu do wykazu oczekujących, a nie do zdania skierowanego do czytelnika.
+
+**Papier kartki odsunięty od krawędzi rysunku.** Zaczynał się dziesięć jednostek od brzegu, czyli jedenaście punktów na ekranie, i kartka wyglądała na dosuniętą do krawędzi. Zamiast przesuwać kilkadziesiąt współrzędnych z osobna, cała zawartość jest zmniejszona wokół środka o jedną siódmą, a sama kartka o tyle samo szersza — **papier ma więc tę samą wielkość co przedtem, a marginesu przybyło z jedenastu do dwudziestu sześciu punktów**. Zegarek urósł razem z kartką, bo oba kończą się na tej samej wysokości, i rząd nadal stoi równo: 209 × 312 i 279 × 312. Groty daty nie ucierpiały — 40 × 49 na szerokim ekranie i 45 × 54 na telefonie.
+
+**Dwadzieścia pięć adresów objaśnień potwierdzonych**, żaden nie czeka. Siedemnasta kontrola świeci na zielono.
+
+**Testy liczą teraz własność, nie liczbę.** Dotychczasowy test szerokości kartki wymagał dokładnie 180 i 200 punktów, więc każda zmiana rozmiaru kazała go przepisać — a test, który się przepisuje przy każdej zmianie, przestaje czegokolwiek pilnować. Nowe sprawdzają, że kartka na wąskim ekranie jest szersza niż na szerokim, i liczą rzeczywisty margines papieru ze skali, viewBoksu i szerokości kartki, zgłaszając go w punktach. Sprawdzono, że test upada po zmianie skali na 0,98 i podaje wtedy 10,7 punktu.
+
+**Siedem nowych testów** (246 zamiast 240): przesunięcie fal równe ich okresowi, zapas rysunku większy niż przesunięcie, tempo zależne od stanu morza i ruch pod osłoną zgody, szerokość kartki brana przez obie reguły z tej samej liczby, rejestr decyzji bez wzmianek o narzędziach — z osobnym sprawdzeniem, czy razem ze słowem nie zniknęła sama reguła, którą to słowo niosło — oraz dwa testy kartki opisane wyżej.

@@ -20,9 +20,16 @@
             <stop offset="1" stop-color="#2c2415" stop-opacity="0.26"/>
           </linearGradient>
         </defs>
+        <!-- Cała zawartość kartki zmniejszona wokół środka o jedną siódmą.
+             Papier miał dziesięć jednostek marginesu z każdej strony, czyli
+             jedenaście punktów przy stu osiemdziesięciu — za mało, kartka
+             wyglądała na dosuniętą do krawędzi rysunku. Skalowanie grupy
+             zamiast przesuwania współrzędnych: rysunek zostaje ten sam,
+             a utrata wielkości wraca przez szerszą kartkę w arkuszu. -->
+        <g class="arkusz" transform="translate(80 119.5) scale(0.86) translate(-80 -119.5)">
         <path d="M 10 18 L 150 18 L 150 214 Q 120 224 90 216 Q 55 207 10 218 Z"
               fill="var(--plyta-jasna)" stroke="var(--rule)" stroke-width="1"/>
-        <line x1="10" y1="46" x2="150" y2="46" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
+        <line x1="24" y1="46" x2="136" y2="46" stroke="var(--mosiadz-ciemny)" stroke-width="1.2"/>
         <circle cx="42" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <circle cx="118" cy="18" r="4" fill="none" stroke="var(--rule)" stroke-width="1"/>
         <g id="bebenMiesiaca"></g>
@@ -30,6 +37,7 @@
         <line x1="34" y1="154" x2="126" y2="154" stroke="var(--rule-soft)" stroke-width="0.8"/>
         <text id="kalPora" class="t kartka-pora" x="80" y="174" text-anchor="middle">—</text>
         <text id="kalDzien2" class="t kartka-pora" x="80" y="192" text-anchor="middle">—</text>
+        </g>
       </svg>
       <figcaption class="pola-daty">
         <select id="dzien" class="pole-dnia" aria-label="{{ s.gnomon.dzien }}" data-dymek="{{ s.gnomon.opisy.dzien }}"></select>
