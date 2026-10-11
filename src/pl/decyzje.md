@@ -888,3 +888,17 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **Przy okazji posunęły się A6 i A8.** Ten sam artykuł jest drugim, niezależnym od Widackiej świadectwem, że postać trzyma kłos, a nie kosę — i jedynym, które ją nazywa: to **Saturn**, nie Chronos. Artykuł Widackiej przypisuje z kolei zegar współpracy z Heweliuszem wprost, co lokalizuje przypisanie z A8 w konkretnym opracowaniu, choć samo opracowanie nie podaje tam przypisu. Obie rzeczy zapisano w ustaleniach, statusów nie ruszono.
 
 **Siedem nowych testów** (265 zamiast 258): opis zabytku wymienia kłos, Saturna i putta, a nie zawiera już zdania o jednym pręcie; zastrzeżenie nazywa trzy uproszczenia; akapit o trzech tarczach ma odnośnik do źródła; wpis w rejestrze istnieje, nie jest osadzany i mówi, czego źródło nie podaje. Testy dzielą dokument na część przed zastrzeżeniem i po nim, bo właśnie tamtędy przebiega granica, której pilnują.
+
+## 2026-10-11 — Cykl 63: serwis mówi, czyj jest
+
+**Rozstrzygnięcie: na razie to prywatny projekt badawczy, nie przedsięwzięcie instytucji.** Fundacja jest w planach, nie w rejestrze, i do czasu jej powstania serwis się nią nie zasłania. To ten sam zakaz, który obowiązuje przy twierdzeniach o przeszłości: nie powołujemy się na to, czego nie da się sprawdzić.
+
+**Dlaczego to w ogóle musi stać na stronie.** Rozróżnienie „ze źródła” i „nasze” jest osią całego serwisu, a drugi jego człon nie znaczy nic, dopóki czytelnik nie wie, kto jest tym „my”. Instytucja uwiarygodnia się szyldem i tego pytania nie dostaje. Projekt prywatny musi odpowiedzieć wprost — i powiedzieć, co ma zamiast recenzenta. Ma rejestry: każda decyzja merytoryczna z datą i uzasadnieniem, każde pytanie bez odpowiedzi pod własnym numerem w agendzie. Nowa sekcja „Kto za tym stoi” mówi dokładnie to, a nie buduje powagi, której nie ma.
+
+**Drugi akapit tej sekcji dotyczy cudzej pracy.** Serwis korzysta z opracowań Muzeum Pałacu Króla Jana III i innych instytucji — odsyła do nich i nie przejmuje materiałów, na które nie ma licencji. Zdanie stoi tam, bo czytelnik ma wiedzieć, na czyjej pracy to stoi, zanim zapyta o to ktoś inny. Kończy się zaproszeniem do sprostowań, bo rejestry są właśnie po to.
+
+**Stopka niesie jedno zdanie o autorze na każdej stronie**, nie tylko na głównej — ktokolwiek trafi w głąb serwisu z wyszukiwarki, zobaczy je bez cofania się.
+
+**Cztery nowe testy** (269 zamiast 265): obie wersje językowe nazywają charakter projektu i autora; informacja stoi także w stopce; i — osobno — **żadna ze stron nie powołuje się na fundację**. Ten ostatni test jest zakazem, nie wymogiem: ma upaść w dniu, w którym ktoś wpisze nieistniejący jeszcze podmiot, i zostanie zniesiony dopiero wtedy, gdy podmiot powstanie.
+
+**Co to zmienia w kolejności prac.** Nawiązanie współpracy z muzeum wymagało wcześniej rozstrzygnięcia, czyim głosem serwis przemawia — instytucja, która dostaje odnośnik, sprawdza najpierw, kto za tym stoi, a strona milczała na ten temat. Teraz nie milczy, więc pismo do muzeum przestaje być zablokowane.

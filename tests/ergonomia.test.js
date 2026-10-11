@@ -332,3 +332,36 @@ describe("pulpit rejsu czyta się jak pulpit", () => {
     expect(wcieta[0], "zwężenie nie jest płynne").toContain("auto-fit");
   });
 });
+
+describe("serwis mówi, czyj jest", () => {
+  // Rozróżnienie „ze źródła / nasze" nie znaczy nic, dopóki czytelnik nie wie,
+  // kto jest tym „my". Instytucja uwiarygodnia się szyldem; prywatny projekt
+  // musi to powiedzieć wprost i podać, co ma zamiast recenzenta.
+  const STRONY = [
+    ["_site/pl/index.html", "prywatny projekt badawczy", "Atłasiewicza"],
+    ["_site/en/index.html", "a private research project", "Atłasiewicz"]
+  ];
+
+  for (const [plik, fraza, nazwisko] of STRONY) {
+    it.skipIf(!existsSync(plik))(`${plik}: nazywa autora i charakter projektu`, () => {
+      const html = readFileSync(plik, "utf8").toLowerCase();
+      expect(html, "brak informacji o charakterze projektu").toContain(fraza.toLowerCase());
+      expect(html, "brak nazwiska autora").toContain(nazwisko.toLowerCase());
+    });
+  }
+
+  it("informacja o autorze stoi też w stopce, czyli na każdej stronie", () => {
+    const i18n = readFileSync("src/_data/i18n.js", "utf8");
+    expect(i18n, "polska stopka nie nazywa autora").toMatch(/stopka: "Prywatny projekt badawczy dr/);
+    expect(i18n, "angielska stopka nie nazywa autora").toMatch(/stopka: "A private research project by dr/);
+  });
+
+  it.skipIf(!existsSync("_site/pl/index.html"))("nie przypisuje projektu instytucji, której nie ma", () => {
+    // Fundacja jest w planach, nie w rejestrze. Dopóki jej nie ma, serwis się
+    // nią nie zasłania — to ten sam zakaz, co przy twierdzeniach o przeszłości.
+    for (const plik of ["_site/pl/index.html", "_site/en/index.html"]) {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "serwis powołuje się na fundację").not.toMatch(/[Ff]undacj|[Ff]oundation/);
+    }
+  });
+});

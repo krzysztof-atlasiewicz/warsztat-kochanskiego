@@ -4,7 +4,7 @@ export default {
     status: 'Wersja demonstracyjna 0.9 — model roboczy. Części oznaczone jako nasze dopowiedzenie czekają na uszczegółowienie po kwerendzie źródłowej.',
     statusLink: "Zobacz, czego jeszcze nie wiemy",
     agendaUrl: "/pl/agenda/",
-    stopka: "Oznaczenia czyta się parami: <strong>ze źródła</strong> — część, która opiera się na przekazie z epoki; <strong>nasze</strong> — co dopowiadamy od siebie, nazwane wprost przy każdym przyrządzie.",
+    stopka: "Prywatny projekt badawczy dr. Krzysztofa Atłasiewicza. Oznaczenia czyta się parami: <strong>ze źródła</strong> — część, która opiera się na przekazie z epoki; <strong>nasze</strong> — co dopowiadamy od siebie, nazwane wprost przy każdym przyrządzie.",
     zrodlaLink: "Skąd to wiemy i czego nie wiemy",
     rownowaznikNaglowek: "Opis tekstowy przyrządu",
     zakladki: {
@@ -196,7 +196,7 @@ export default {
     status: "Demonstration version 0.9 — a working model. Everything marked as ours awaits refinement once archival research is done.",
     statusLink: "See what we still don't know",
     agendaUrl: "/en/agenda/",
-    stopka: "The labels read in pairs: <strong>from the source</strong> — the part that rests on a period account; <strong>ours</strong> — what we add ourselves, named outright beside each instrument.",
+    stopka: "A private research project by dr Krzysztof Atłasiewicz. The labels read in pairs: <strong>from the source</strong> — the part that rests on a period account; <strong>ours</strong> — what we add ourselves, named outright beside each instrument.",
     zrodlaLink: "How we know this, and what we don't",
     rownowaznikNaglowek: "Text description of the instrument",
     zakladki: {
