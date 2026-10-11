@@ -365,3 +365,75 @@ describe("serwis mówi, czyj jest", () => {
     }
   });
 });
+
+describe("adres do korespondencji", () => {
+  // Sekcja „Kto za tym stoi" kończy się zaproszeniem do sprostowań. Zaproszenie
+  // bez adresu jest gestem, nie zaproszeniem: czytelnik, który znajdzie błąd,
+  // nie ma gdzie go zgłosić, a serwis, który obiecuje ślad każdej poprawki,
+  // nie może zamknąć do siebie drogi. Dlatego jedno nie może tu stać bez
+  // drugiego — i to pilnuje trzeci test, nie dwa pierwsze.
+  const STRONY = [
+    ["_site/pl/index.html", "kontakt@adamandy.pl"],
+    ["_site/en/index.html", "office@adamandy.pl"]
+  ];
+
+  for (const [plik, adres] of STRONY) {
+    it.skipIf(!existsSync(plik))(`${plik}: podaje adres ${adres}`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "brak odnośnika pocztowego").toContain(`href="mailto:${adres}"`);
+      expect(html, "adres nie jest widoczny w treści, tylko w atrybucie")
+        .toContain(`>${adres}</a>`);
+    });
+  }
+
+  const strony = (katalog, zebrane = []) => {
+    for (const w of readdirSync(katalog, { withFileTypes: true })) {
+      const sciezka = `${katalog}/${w.name}`;
+      if (w.isDirectory()) strony(sciezka, zebrane);
+      else if (w.name.endsWith(".html")) zebrane.push(sciezka);
+    }
+    return zebrane;
+  };
+
+  it.skipIf(!existsSync("_site"))("nie publikuje adresu poza domeną serwisu", () => {
+    // Zakaz, nie wymóg. Adres prywatny albo firmowy wklejony tu przez pomyłkę
+    // zostaje w sieci na zawsze i nie da się go odwołać wdrożeniem poprawki.
+    // Szukamy kształtu adresu i w odnośnikach, i w samej treści: adres
+    // wklejony w akapit bez odnośnika jest równie publiczny. Znaczniki trzeba
+    // wpierw usunąć, bo „`mailto:`" w kodzie rejestru decyzji daje po
+    // złożeniu „mailto:</code" i wcześniejsza wersja tego testu brała to za
+    // adres.
+    const DOZWOLONE = /@adamandy\.pl$/;
+    const KSZTALT = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
+    for (const plik of strony("_site")) {
+      const html = readFileSync(plik, "utf8");
+      const widziane = new Set();
+      for (const m of html.matchAll(/href="mailto:([^"?]+)"/g)) widziane.add(m[1]);
+      for (const m of html.replace(/<[^>]*>/g, " ").matchAll(KSZTALT)) widziane.add(m[0]);
+      for (const a of widziane)
+        expect(a, `${plik}: adres poza domeną serwisu (${a})`).toMatch(DOZWOLONE);
+    }
+  });
+
+  it("adres stoi w jednym miejscu, nie w szablonach", () => {
+    // Regulamin i polityka prywatności będą tego adresu potrzebowały. Dwa
+    // wpisane ręcznie rozjechałyby się po pierwszej zmianie i nikt by tego nie
+    // zauważył, bo każda ze stron z osobna wyglądałaby poprawnie.
+    const dane = readFileSync("src/_data/site.js", "utf8");
+    expect(dane, "brak adresów w danych serwisu").toMatch(/poczta:\s*\{[^}]*@adamandy\.pl/);
+    for (const szablon of ["src/pl/index.njk", "src/en/index.njk"]) {
+      expect(readFileSync(szablon, "utf8"), `${szablon}: adres wpisany wprost w szablon`)
+        .not.toMatch(/mailto:[a-z]/);
+    }
+  });
+
+  it.skipIf(!existsSync("_site"))("nie zaprasza do sprostowań tam, gdzie nie ma adresu", () => {
+    const ZAPROSZENIA = [/Sprostowania i uwagi są mile widziane/, /Corrections are welcome/];
+    for (const plik of strony("_site")) {
+      const html = readFileSync(plik, "utf8");
+      if (!ZAPROSZENIA.some((z) => z.test(html))) continue;
+      expect(html, `${plik}: zaproszenie do sprostowań bez adresu, pod który można je wysłać`)
+        .toMatch(/href="mailto:/);
+    }
+  });
+});

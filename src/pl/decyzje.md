@@ -902,3 +902,17 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **Cztery nowe testy** (269 zamiast 265): obie wersje językowe nazywają charakter projektu i autora; informacja stoi także w stopce; i — osobno — **żadna ze stron nie powołuje się na fundację**. Ten ostatni test jest zakazem, nie wymogiem: ma upaść w dniu, w którym ktoś wpisze nieistniejący jeszcze podmiot, i zostanie zniesiony dopiero wtedy, gdy podmiot powstanie.
 
 **Co to zmienia w kolejności prac.** Nawiązanie współpracy z muzeum wymagało wcześniej rozstrzygnięcia, czyim głosem serwis przemawia — instytucja, która dostaje odnośnik, sprawdza najpierw, kto za tym stoi, a strona milczała na ten temat. Teraz nie milczy, więc pismo do muzeum przestaje być zablokowane.
+
+## 2026-10-11 — Cykl 64: zaproszenie dostaje adres
+
+**Rozstrzygnięcie kierownika projektu: `kontakt@adamandy.pl` w wersji polskiej, `office@adamandy.pl` w angielskiej.** Sekcja „Kto za tym stoi” kończyła się od wczoraj zaproszeniem do sprostowań i nie podawała, gdzie je wysłać. Serwis obiecuje ślad każdej poprawki, a zamykał do siebie drogę — zaproszenie bez adresu jest gestem, nie zaproszeniem.
+
+**Adres jest adresem w domenie, nie twierdzeniem o podmiocie.** `adamandy.pl` należy do kierownika projektu; skrzynka pocztowa w tej domenie nie powołuje się na fundację i nie mówi, że istnieje. Zakaz z poprzedniego cyklu obowiązuje nadal i test, który go pilnuje, przechodzi bez zmian — bo na stronie nie pojawiło się ani słowo o podmiocie, tylko ciąg znaków z kropką i małpą.
+
+**Oba adresy stoją w `src/_data/site.js`, nie w szablonach.** Regulamin i polityka prywatności (pozycja B-1) będą ich potrzebowały z mocy prawa, a dwa adresy wpisane ręcznie rozjeżdżają się po pierwszej zmianie — i to się nie rzuca w oczy, bo każda ze stron z osobna wygląda wtedy poprawnie. Zmiana w jednym miejscu, test pilnuje obu wersji i tego, że żaden szablon nie wpisuje adresu wprost.
+
+**Odnośnik jest zwykłym `mailto:`, bez zasłaniania adresu skryptem.** Zasłonięcie działa tylko przy włączonym skrypcie, a serwis ma bez skryptu zostawać czytelnym dokumentem — adres ukryty tą metodą zniknąłby dokładnie tym czytelnikom, którzy najczęściej czytają bez skryptu. Koszt jest znany i przyjęty: adres na stronie publicznej zbiera spam. Zysk jest ten, że zaproszenie do sprostowań prowadzi dokądś przy każdym sposobie czytania.
+
+**Pięć nowych testów** (274 zamiast 269): każda z dwóch stron podaje swój adres i ma go widocznego w treści, a nie tylko w atrybucie; adres stoi w danych serwisu i w żadnym szablonie; **żadna strona nie podaje adresu poza domeną `adamandy.pl`** i **żadna nie zaprasza do sprostowań bez podania adresu**. Dwa ostatnie to zakazy, nie wymogi, i oba sprawdzono na próbę: podstawienie obcego adresu — w odnośniku i osobno w samym akapicie, bez odnośnika — oraz usunięcie odnośnika przy zachowanym zaproszeniu psują je tak, jak mają psuć. Pierwszy z nich pilnuje rzeczy nieodwracalnej — adres prywatny wklejony tu przez pomyłkę zostaje w sieci i nie da się go odwołać wdrożeniem poprawki.
+
+**Czego ten cykl nie sprawdził i sprawdzić nie może.** Czy obie skrzynki odbierają pocztę. Środowisko robocze nie ma dostępu do sieci, więc jest to dokładnie ten sam rodzaj braku, co przy adresach encyklopedii w cyklu 57: wpisu, którego nikt nie sprawdził, nie wolno wdrażać. Sprawdzeniem jest wiadomość próbna wysłana przez człowieka pod oba adresy — przed wdrożeniem, nie po.
