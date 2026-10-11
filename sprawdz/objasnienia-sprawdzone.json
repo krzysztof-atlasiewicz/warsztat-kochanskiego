@@ -1,0 +1,22 @@
+{
+  "_opis": "Rejestr adresów objaśnień, których istnienie ktoś sprawdził, i kiedy. Kontener roboczy agenta nie ma dostępu do sieci, więc sprawdzenie wykonuje człowiek poleceniem z rejestru decyzji, a wynik trafia tutaj. Adres objaśnienia, którego tu nie ma, kontrola zgłasza jako nieprzejrzany — to ostrzeżenie, nie błąd, ale wdrażać z nim nie wolno. Powód: w cyklu 57 agent wpisał dwa adresy z głowy i oba okazały się nieistniejące.",
+  "adresy": {
+    "https://en.wikipedia.org/wiki/Balance_spring": "2026-10-11",
+    "https://en.wikipedia.org/wiki/Balance_wheel": "2026-10-11",
+    "https://en.wikipedia.org/wiki/Christiaan_Huygens": "2026-10-11",
+    "https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz": "2026-10-11",
+    "https://en.wikipedia.org/wiki/Johannes_Hevelius": "2026-10-11",
+    "https://en.wikipedia.org/wiki/Perpetual_motion": "2026-10-11",
+    "https://en.wikipedia.org/wiki/Teplice": "2026-10-11",
+    "https://en.wikipedia.org/wiki/Vilnius_University": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Balans": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Christiaan_Huygens": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Jan_Heweliusz": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Perpetuum_mobile": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Spr%C4%99%C5%BCyna_spiralna": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Teplice": "2026-10-11",
+    "https://pl.wikipedia.org/wiki/Uniwersytet_Wile%C5%84ski": "2026-10-11"
+  },
+  "oczekuje": {}
+}

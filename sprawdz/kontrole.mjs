@@ -6,10 +6,13 @@ import { ZNAKI, POZA_KROJEM, KATALOG, PLIK_CSS } from "../scripts/kroje-dane.mjs
 const czytaj = (p) => readFileSync(p, "utf8");
 const agenda = JSON.parse(czytaj("pdca/agenda.json"));
 const zrodla = JSON.parse(czytaj("src/_data/zrodla.json"));
+const sprawdzone = JSON.parse(czytaj("sprawdz/objasnienia-sprawdzone.json"));
 const STATUSY = ["otwarta", "w toku", "zamknięta", "nierozstrzygalna"];
 const ZAMKNIETE = ["zamknięta", "nierozstrzygalna"];
 // Kontrole, których niespełnienie jest zgłaszane, ale nie zatrzymuje cyklu.
-export const OSTRZEZENIA = new Set();
+// Kontrola, której wynik jest ostrzeżeniem, nie błędem: nie potrafi
+// rozstrzygnąć sprawy sama, bo kontener roboczy nie ma dostępu do sieci.
+export const OSTRZEZENIA = new Set(["odnosnikiSprawdzone"]);
 const stronyZ = (kat) => readdirSync(kat).filter((f) => /\.(njk|md)$/.test(f)).map((f) => join(kat, f));
 const stronyZrodlowe = stronyZ("src/pl").map((p) => p.replace("src/pl/", ""));
 const zbudowane = () => {
@@ -383,6 +386,76 @@ const KONTROLE = {
       for (const m of t.matchAll(/<script[^>]*\ssrc="([^"]+)"/g))
         if (!m[1].startsWith("/")) bledy.push(`${p}: skrypt spoza serwisu ${m[1]}`);
     }
+    return bledy;
+  },
+
+  // Granica między objaśnieniem a źródłem. Objaśnienie mówi, CZYM jest rzecz
+  // wspomniana w zdaniu; źródło mówi, CZYM to zdanie jest poparte. Serwis stoi
+  // na rozróżnieniu „co ze źródła, co nasze", więc encyklopedia nie może wejść
+  // do rejestru źródeł ani podszyć się pod odnośnik do skanu — a odnośnik do
+  // skanu nie może udawać objaśnienia.
+  objasnienia() {
+    const bledy = [];
+    const ENCYKLOPEDIE = ["wikipedia.org", "wikidata.org", "britannica.com"];
+    for (const [id, z] of Object.entries(zrodla)) {
+      if (!z.url) continue;
+      for (const e of ENCYKLOPEDIE)
+        if (z.url.includes(e))
+          bledy.push(`${id}: encyklopedia „${e}" w rejestrze źródeł — to objaśnienie, nie źródło`);
+    }
+    for (const p of zbudowane()) {
+      const t = czytaj(p);
+      for (const m of t.matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"[^>]*>/g)) {
+        if (!/^https?:\/\//.test(m[1]))
+          bledy.push(`${p}: objaśnienie prowadzi w głąb serwisu (${m[1]}) — to nie objaśnienie`);
+        if (!/target="_blank"/.test(m[0]))
+          bledy.push(`${p}: objaśnienie nie otwiera się w nowej karcie (${m[1]})`);
+        if (!/rel="noopener"/.test(m[0]))
+          bledy.push(`${p}: objaśnienie bez rel="noopener" (${m[1]})`);
+        if (!/title="[^"]{10,}"/.test(m[0]))
+          bledy.push(`${p}: objaśnienie bez objaśnienia w tytule (${m[1]})`);
+      }
+      // Dwie klasy nie mogą się zejść na jednym odnośniku: czytelnik rozpoznaje
+      // rodzaj odnośnika po wyglądzie i ten wygląd musi znaczyć jedno.
+      for (const m of t.matchAll(/<a class="([^"]*)"/g)) {
+        const k = m[1].split(/\s+/);
+        if (k.includes("objasnienie") && k.includes("zrodlo"))
+          bledy.push(`${p}: odnośnik jest naraz źródłem i objaśnieniem`);
+      }
+    }
+    return bledy;
+  },
+
+  // Czy ktoś sprawdził, że te adresy w ogóle istnieją.
+  //
+  // W cyklu 57 agent wpisał osiem adresów encyklopedii z pamięci i dwa z nich
+  // okazały się nieistniejące. Kontener roboczy nie ma dostępu do sieci, więc
+  // agent nie jest w stanie tego sprawdzić sam — i właśnie dlatego nie wolno
+  // mu wierzyć na słowo. Sprawdzenie wykonuje człowiek, a jego wynik zapisuje
+  // się w „sprawdz/objasnienia-sprawdzone.json". Adres nieobecny w rejestrze
+  // jest tu zgłaszany jako nieprzejrzany.
+  //
+  // To ostrzeżenie, nie błąd: kontrola nie umie rozstrzygnąć sprawy sama,
+  // więc nie ma prawa zatrzymywać budowania. Ma za to prawo nie dać o sobie
+  // zapomnieć — wdrażać z nieprzejrzanym adresem nie wolno.
+  odnosnikiSprawdzone() {
+    const bledy = [];
+    const znane = new Set(Object.keys(sprawdzone.adresy || {}));
+    const czeka = sprawdzone.oczekuje || {};
+    const widziane = new Set();
+    for (const p of zbudowane()) {
+      for (const m of czytaj(p).matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"/g))
+        widziane.add(m[1]);
+    }
+    for (const u of [...widziane].sort()) {
+      if (znane.has(u)) continue;
+      bledy.push(czeka[u]
+        ? `nieprzejrzany adres: ${u} — ${czeka[u]}`
+        : `nieprzejrzany adres: ${u} — nikt nie potwierdził, że istnieje`);
+    }
+    // Rejestr nie ma puchnąć o adresy, których już nie używamy.
+    for (const u of znane)
+      if (!widziane.has(u)) bledy.push(`w rejestrze został adres, którego nikt już nie używa: ${u}`);
     return bledy;
   }
 };

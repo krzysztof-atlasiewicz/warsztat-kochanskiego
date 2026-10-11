@@ -57,15 +57,15 @@ export default {
       opisy: {
         dzien: "Przesuwa okręt wzdłuż trasy. Im dalej na południe, tym słabsze przyciąganie ziemskie i tym cieplej.",
         tempo: "Jak szybko przewija się rejs po naciśnięciu „Odbij od brzegu”.",
-        morze: "Przechył pokładu na fali. Rozhuśtane wahadło zatacza szerszy łuk i przez to chodzi wolniej.",
+        morze: "Przechył pokładu na fali, w stopniach: o tyle najwyżej odchyla się pokład od poziomu. Skala jest nasza, nie historyczna — cztery nazwy odpowiadają przedziałom co 3,5 stopnia, od gładkiego morza po sztorm powyżej 10,5. Rozhuśtane wahadło zatacza szerszy łuk i przez to chodzi wolniej.",
         kompensacja: "Dodaje do sprężyny układ znoszący wpływ temperatury — rozwiązanie, które pojawiło się dopiero u Harrisona, dziewięćdziesiąt lat później.",
         odbij: "Przewija cały rejs od wyjścia z portu do przybycia.",
         blad: "O ile kilometrów pomylisz się co do własnego położenia, licząc pozycję z takiego zegara."
       },
       napisy: {
         dobaRejsu: "doba {d} rejsu",
-        tempoSek: "{s} s",
-        tempoMin: "{m} min {s} s",
+        tempoSek: "{s}\u00a0s",
+        tempoMin: "{m}\u00a0min {s}\u00a0s",
         stanyMorza: ["gładkie", "lekka fala", "wzburzone", "sztorm"],
         laRochelle: "La Rochelle", kajenna: "Kajenna", tuJestes: "tu jesteś", skalaMil: "600 mil morskich",
         wahadlo: "wahadło", sprezyna: "sprężyna",
@@ -249,15 +249,15 @@ export default {
       opisy: {
         dzien: "Moves the ship along the route. The further south, the weaker gravity and the warmer it gets.",
         tempo: "How fast the voyage runs when you press Cast off.",
-        morze: "How far the deck rolls. A wider swing makes the pendulum run slower.",
+        morze: "How far the deck rolls from level, in degrees. The scale is ours, not historical — the four names mark bands of 3.5 degrees each, from a smooth sea to a storm above 10.5. A wider swing makes the pendulum run slower.",
         kompensacja: "Adds a mechanism cancelling the spring's temperature sensitivity — the solution that only arrived with Harrison, ninety years later.",
         odbij: "Runs the whole voyage from departure to arrival.",
         blad: "How far out your own position would be if you worked it out from this clock."
       },
       napisy: {
         dobaRejsu: "day {d} at sea",
-        tempoSek: "{s} s",
-        tempoMin: "{m} min {s} s",
+        tempoSek: "{s}\u00a0s",
+        tempoMin: "{m}\u00a0min {s}\u00a0s",
         stanyMorza: ["calm", "slight", "rough", "storm"],
         laRochelle: "La Rochelle", kajenna: "Cayenne", tuJestes: "you are here", skalaMil: "600 nautical miles",
         wahadlo: "pendulum", sprezyna: "spring",

@@ -7,9 +7,13 @@ const zrodla = JSON.parse(readFileSync("src/_data/zrodla.json", "utf8"));
 const ETYKIETY = {
   pl: { naglowek: "Pytanie otwarte", dotyczy: "dotyczy", zmieni: "Co się zmieni", gdzie: "Gdzie szukać", rejestr: "cała pozycja w rejestrze", url: "/pl/agenda/",
         rozstrzygniete: "Rozstrzygnięte tutaj", brakPytan: "Do tego przyrządu nie ma już pytań otwartych.",
+        otworzTutaj: "skan otwiera się tutaj", otworzUWydawcy: "tekst otwiera się u wydawcy, w nowej karcie",
+        objasnienieObca: "objaśnienie poza serwisem, otwiera się w nowej karcie",
         naglowekZ: "Pytanie rozstrzygnięte", zmienilo: "Co się zmieniło" },
   en: { naglowek: "Open question", dotyczy: "concerns", zmieni: "What will change", gdzie: "Where to look", rejestr: "full entry in the register", url: "/en/agenda/",
         rozstrzygniete: "Settled here", brakPytan: "No open questions remain for this instrument.",
+        otworzTutaj: "the scan opens here", otworzUWydawcy: "the text opens at the publisher, in a new tab",
+        objasnienieObca: "an explanation outside this site, opens in a new tab",
         naglowekZ: "Settled question", zmienilo: "What changed" }
 };
 
@@ -31,7 +35,7 @@ export default function (eleventyConfig) {
 
   // Odnośnik do źródła z rejestru. Bez ustalonego skanu zwraca sam tekst,
   // żeby nigdy nie powstał odnośnik prowadzący donikąd.
-  eleventyConfig.addShortcode("zrodlo", (id, tekst = null) => {
+  eleventyConfig.addShortcode("zrodlo", function (id, tekst = null) {
     const z = zrodla[id];
     if (!z) throw new Error(`Nieznane źródło: ${id}`);
     const napis = tekst || z.w || z.tytul;
@@ -40,10 +44,33 @@ export default function (eleventyConfig) {
       .filter(Boolean).join(", ");
     // Skan z ustalonym osadzeniem otwiera się w okienku nad stroną; źródło bez
     // osadzenia — w osobnej karcie, żeby czytelnik nie tracił miejsca w przyrządzie.
+    // Dwa rodzaje odnośnika do źródła wyglądały dotąd tak samo, a zachowują
+    // się inaczej: skan z ustalonym osadzeniem otwiera się w okienku nad
+    // stroną, a tekst u wydawcy — w osobnej karcie, bo polityka bezpieczeństwa
+    // serwisu dopuszcza w ramkach wyłącznie Archive, a i tak większość witryn
+    // zabrania osadzania u siebie. Czytelnik ma wiedzieć przed kliknięciem,
+    // która z tych dwóch rzeczy go czeka, więc odnośniki różnią się klasą
+    // i tytułem, a ten drugi niesie widoczny znak wyjścia na zewnątrz.
     const osadz = z.osadzenie
       ? ` data-osadzenie="${z.osadzenie}" data-opis="${opis}"`
       : ` target="_blank"`;
-    return `<a class="zrodlo" href="${z.url}" rel="noopener" title="${opis}"${osadz}>${napis}</a>`;
+    const klasa = z.osadzenie ? "zrodlo zrodlo-skan" : "zrodlo zrodlo-obca";
+    const e = ETYKIETY[this.ctx?.jezyk] || ETYKIETY.pl;
+    const tytul = z.osadzenie ? `${opis} — ${e.otworzTutaj}` : `${opis} — ${e.otworzUWydawcy}`;
+    return `<a class="${klasa}" href="${z.url}" rel="noopener" title="${tytul}"${osadz}>${napis}</a>`;
+  });
+
+  // Objaśnienie: odnośnik, który mówi, CZYM jest rzecz wspomniana w zdaniu,
+  // a nie CZYM to zdanie jest poparte. Kim był Huygens, co to perpetuum
+  // mobile, czym jest wahacz. To nie jest źródło i celowo nie trafia do
+  // rejestru źródeł — serwis stoi na rozróżnieniu „co ze źródła, co nasze",
+  // a wpuszczenie encyklopedii do rejestru rozmyłoby je do zera. Kontrola
+  // „objasnienia" pilnuje, żeby żaden z tych adresów nie wszedł do rejestru.
+  eleventyConfig.addShortcode("objasnij", function (tekst, url, czym = "") {
+    const e = ETYKIETY[this.ctx?.jezyk] || ETYKIETY.pl;
+    const tytul = [czym, e.objasnienieObca].filter(Boolean).join(" — ");
+    return `<a class="objasnienie" href="${url}" target="_blank" rel="noopener"` +
+      ` title="${tytul}">${tekst}</a>`;
   });
 
   // Automatyczne podlinkowanie wzmianek w tekście pochodzącym z danych.

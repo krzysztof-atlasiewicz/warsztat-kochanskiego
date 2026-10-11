@@ -147,7 +147,22 @@ export default function init(root) {
     $("dzienO").textContent = dzien;
 
     // okręt i fale
-    $("kolysanieO").textContent = `${kolysanie}° · ${(n.stanyMorza || [])[Math.min(Math.floor(kolysanie / 3.5), 3)] || ""}`;
+    // Dwa wiersze, bez separatora w środku. Przy „14° · sztorm" w jednym
+    // ciągu wiersz łamał się tam, gdzie wypadło, i kropka zostawała samotnie
+    // na końcu pierwszego wiersza. Liczba i nazwa to i tak dwie różne rzeczy:
+    // pierwsza jest odczytem, druga nazwą przedziału, w który odczyt wpada.
+    const stanMorza = (n.stanyMorza || [])[Math.min(Math.floor(kolysanie / 3.5), 3)] || "";
+    const wyjscieMorza = $("kolysanieO");
+    wyjscieMorza.replaceChildren();
+    const stopnie = document.createElement("span");
+    stopnie.className = "odczyt-stopnie";
+    // Spacja na końcu nie rysuje się w bloku, ale czytnik ekranu czyta wtedy
+    // „pięć stopni, lekka fala", a nie „pięć stopnilekka fala".
+    stopnie.textContent = `${kolysanie}° `;
+    const nazwa = document.createElement("span");
+    nazwa.className = "odczyt-nazwa";
+    nazwa.textContent = stanMorza;
+    wyjscieMorza.append(stopnie, nazwa);
     fale(kolysanie);
     root.querySelector(".okret")?.style.setProperty("--rk", String(Math.max(0.5, kolysanie)));
     root.querySelector(".wahadlo")?.style.setProperty("--sw", String(3 + kolysanie));

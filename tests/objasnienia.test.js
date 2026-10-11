@@ -1,0 +1,144 @@
+// Objaśnienie kontra źródło — i dwa rodzaje odnośnika do źródła.
+//
+// Serwis stoi na jednym rozróżnieniu: co pochodzi z przekazu, a co dopowiadamy
+// od siebie. Odnośnik do encyklopedii nie popiera niczego, tylko mówi, czym
+// jest rzecz wspomniana w zdaniu — i jeśli wygląda tak samo jak odnośnik do
+// skanu, rozróżnienie przestaje działać na poziomie, na którym czytelnik je
+// widzi. Te testy pilnują, żeby trzy rodzaje odnośnika dało się odróżnić
+// wzrokiem, zanim się w nie kliknie.
+import { describe, it, expect } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
+
+const arkusz = readFileSync("src/assets/css/site.css", "utf8");
+const zrodla = JSON.parse(readFileSync("src/_data/zrodla.json", "utf8"));
+const zbudowane = existsSync("_site");
+
+const STRONY = ["_site/pl/biografia/index.html", "_site/en/biography/index.html",
+                "_site/pl/wahadlo/index.html", "_site/en/pendulum/index.html",
+                "_site/pl/gnomon/index.html", "_site/en/gnomon/index.html"];
+
+describe("rejestr źródeł nie wpuszcza encyklopedii", () => {
+  it("żadne źródło nie prowadzi do Wikipedii ani podobnych", () => {
+    for (const [id, z] of Object.entries(zrodla)) {
+      if (!z.url) continue;
+      for (const e of ["wikipedia.org", "wikidata.org", "britannica.com"])
+        expect(z.url.includes(e), `${id} prowadzi do ${e}`).toBe(false);
+    }
+  });
+});
+
+describe("trzy rodzaje odnośnika wyglądają inaczej", () => {
+  it("arkusz odróżnia skan, tekst u wydawcy i objaśnienie", () => {
+    expect(arkusz, "skan nie ma własnego stylu").toMatch(/a\.zrodlo-skan\{/);
+    expect(arkusz, "tekst u wydawcy bez znaku wyjścia").toMatch(/a\.zrodlo-obca::after\{[^}]*content/);
+    expect(arkusz, "objaśnienie bez własnego stylu").toMatch(/a\.objasnienie\{/);
+    expect(arkusz, "objaśnienie bez własnego znaku").toMatch(/a\.objasnienie::after\{[^}]*content/);
+  });
+
+  it("objaśnienie nie ma barwy źródła", () => {
+    const o = arkusz.match(/a\.objasnienie\{[^}]*\}/)[0];
+    expect(o, "objaśnienie w barwie źródła — nie da się ich odróżnić").not.toContain("var(--verd)");
+  });
+});
+
+describe.skipIf(!zbudowane)("odnośniki na zbudowanych stronach", () => {
+  for (const plik of STRONY) {
+    const html = existsSync(plik) ? readFileSync(plik, "utf8") : "";
+
+    it(`${plik}: każde objaśnienie wychodzi na zewnątrz, w nowej karcie`, () => {
+      for (const m of html.matchAll(/<a class="objasnienie"[^>]*>/g)) {
+        expect(m[0], "objaśnienie nie prowadzi poza serwis").toMatch(/href="https?:\/\//);
+        expect(m[0], "objaśnienie nie otwiera się w nowej karcie").toContain('target="_blank"');
+        expect(m[0], "objaśnienie bez rel=noopener").toContain('rel="noopener"');
+        expect(m[0], "objaśnienie nie mówi, czego dotyczy").toMatch(/title="[^"]{10,}"/);
+      }
+    });
+
+    it(`${plik}: żaden odnośnik nie jest naraz źródłem i objaśnieniem`, () => {
+      for (const m of html.matchAll(/<a class="([^"]*)"/g)) {
+        const k = m[1].split(/\s+/);
+        expect(k.includes("objasnienie") && k.includes("zrodlo"),
+          "odnośnik udaje dwie rzeczy naraz").toBe(false);
+      }
+    });
+
+    it(`${plik}: odnośnik do źródła mówi w tytule, gdzie się otworzy`, () => {
+      // Skan otwiera się w okienku nad stroną, tekst u wydawcy w nowej karcie.
+      // Dotąd oba wyglądały tak samo i czytelnik dowiadywał się po kliknięciu.
+      for (const m of html.matchAll(/<a class="zrodlo (zrodlo-skan|zrodlo-obca)"[^>]*title="([^"]*)"/g)) {
+        const [, rodzaj, tytul] = m;
+        expect(tytul, `${rodzaj} bez zapowiedzi w tytule`).toMatch(/ — .+$/);
+        if (rodzaj === "zrodlo-skan")
+          expect(tytul).toMatch(/(otwiera się tutaj|opens here)/);
+        else
+          expect(tytul).toMatch(/(u wydawcy|at the publisher)/);
+      }
+    });
+
+    it(`${plik}: skan osadza się, a tekst u wydawcy nie`, () => {
+      for (const m of html.matchAll(/<a class="zrodlo zrodlo-skan"[^>]*>/g))
+        expect(m[0], "skan bez adresu osadzenia").toContain("data-osadzenie=");
+      for (const m of html.matchAll(/<a class="zrodlo zrodlo-obca"[^>]*>/g)) {
+        expect(m[0], "tekst u wydawcy z adresem osadzenia").not.toContain("data-osadzenie=");
+        expect(m[0], "tekst u wydawcy nie otwiera się w nowej karcie").toContain('target="_blank"');
+      }
+    });
+  }
+
+  it("biografia niesie objaśnienia w obu wersjach językowych", () => {
+    for (const plik of ["_site/pl/biografia/index.html", "_site/en/biography/index.html"]) {
+      const n = [...readFileSync(plik, "utf8").matchAll(/<a class="objasnienie"/g)].length;
+      expect(n, `${plik}: brak objaśnień`).toBeGreaterThanOrEqual(5);
+    }
+  });
+
+  it("wersja polska prowadzi do polskiej encyklopedii, angielska do angielskiej", () => {
+    const pl = readFileSync("_site/pl/biografia/index.html", "utf8");
+    const en = readFileSync("_site/en/biography/index.html", "utf8");
+    for (const m of pl.matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"/g))
+      expect(m[1], "polska strona prowadzi do obcojęzycznej encyklopedii").toMatch(/^https:\/\/pl\./);
+    for (const m of en.matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"/g))
+      expect(m[1], "angielska strona prowadzi do obcojęzycznej encyklopedii").toMatch(/^https:\/\/en\./);
+  });
+
+  it("zdanie o porażkach nazywa rzecz po imieniu", () => {
+    expect(readFileSync("_site/pl/biografia/index.html", "utf8"))
+      .toContain("apologią i ubrązawianiem postaci");
+    expect(readFileSync("_site/en/biography/index.html", "utf8"))
+      .toContain("would be hagiography");
+  });
+});
+
+// Rejestr sprawdzonych adresów. Agent nie ma dostępu do sieci, więc nie jest
+// w stanie potwierdzić, że adres objaśnienia w ogóle istnieje — i właśnie
+// dlatego nie wolno mu wierzyć na słowo. W cyklu 57 wpisał osiem adresów
+// z pamięci i dwa okazały się nieistniejące.
+describe("rejestr sprawdzonych adresów", () => {
+  const rejestr = JSON.parse(readFileSync("sprawdz/objasnienia-sprawdzone.json", "utf8"));
+
+  it("każdy sprawdzony adres niesie datę sprawdzenia", () => {
+    for (const [url, data] of Object.entries(rejestr.adresy))
+      expect(data, `${url} bez daty sprawdzenia`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  });
+
+  it("adres nie może być naraz sprawdzony i oczekujący", () => {
+    for (const u of Object.keys(rejestr.oczekuje || {}))
+      expect(rejestr.adresy[u], `${u} stoi w obu wykazach`).toBeUndefined();
+  });
+
+  it("każdy oczekujący adres mówi, dlaczego czeka", () => {
+    for (const [url, powod] of Object.entries(rejestr.oczekuje || {}))
+      expect(powod.length, `${url} czeka bez podanego powodu`).toBeGreaterThan(10);
+  });
+
+  it.skipIf(!zbudowane)("żaden adres ze stron nie jest nieznany rejestrowi", () => {
+    // Nieznany to taki, którego nie ma ani wśród sprawdzonych, ani wśród
+    // oczekujących — czyli dopisany bez żadnej próby sprawdzenia.
+    const znane = new Set([...Object.keys(rejestr.adresy), ...Object.keys(rejestr.oczekuje || {})]);
+    for (const plik of STRONY) {
+      if (!existsSync(plik)) continue;
+      for (const m of readFileSync(plik, "utf8").matchAll(/<a class="objasnienie"[^>]*href="([^"]+)"/g))
+        expect(znane.has(m[1]), `${plik}: adres ${m[1]} dopisany bez próby sprawdzenia`).toBe(true);
+    }
+  });
+});

@@ -127,6 +127,24 @@ h2 .licznik{font-family:var(--mono);font-size:.62em;color:var(--ink-soft);border
 .pytanie-stopka a{color:var(--verd)}
 .agenda-miejsca a{color:var(--verd);font-size:.9rem}
 a.zrodlo{color:var(--verd);text-decoration-style:dotted;text-underline-offset:.2em}
+/* Dwa rodzaje odnośnika do źródła zachowują się inaczej i mają się inaczej
+   zapowiadać. Skan otwiera się w okienku nad stroną — kreska ciągła, bo
+   czytelnik nigdzie nie wychodzi. Tekst u wydawcy otwiera się w nowej karcie
+   — kreska kropkowana i strzałka wyjścia. */
+a.zrodlo-skan{text-decoration-style:solid}
+a.zrodlo-obca::after{content:" ↗";font-size:.85em;text-decoration:none;display:inline-block}
+/* Objaśnienie to nie źródło i nie wolno ich mylić. Źródło popiera twierdzenie
+   i stoi w rejestrze; objaśnienie tylko mówi, czym jest rzecz wspomniana
+   w zdaniu — kim był Huygens, co to perpetuum mobile. Stąd inna barwa, inny
+   znak i nieobecność w rejestrze źródeł, czego pilnuje kontrola. */
+a.objasnienie{color:var(--ink-soft);text-decoration-style:dashed;text-underline-offset:.2em}
+a.objasnienie::after{content:" ?";font-family:var(--mono);font-size:.78em;
+  vertical-align:.25em;text-decoration:none;display:inline-block}
+a.objasnienie:hover{color:var(--ink)}
+/* Dymek przy słowie w zdaniu, bez wyprowadzania czytelnika ze strony: tam,
+   gdzie wyjaśnienie jest krótkie i dotyczy samego tekstu, a nie rzeczy
+   w świecie. Kreska kropkowana, bo to nie jest odnośnik. */
+.dymek-w-tekscie{border-bottom:1px dotted var(--rule-ster);cursor:help;font-style:inherit}
 svg.duza{max-width:none;width:100%}
 .kroki-sterowanie button[disabled]{opacity:.4;cursor:default;border-color:var(--rule-soft)}
 .kroki-sterowanie button[disabled]:hover{border-color:var(--rule-soft);color:var(--ink)}
@@ -263,12 +281,19 @@ math{font-size:1.05em}
 }
 /* „flex:0 0 150px" w kolumnie ustawiało wysokość, nie szerokość: kartka
    dusiła się do kwadratu i rysunek chował się w nim pomniejszony. */
-.kartka{width:150px;max-width:100%;height:auto;flex:0 0 auto}
-/* Na wąskim ekranie kolumny pulpitu i tak stoją jedna pod drugą, więc kartka
-   nie musi się już równać wysokością z zegarkiem — a każdy punkt szerokości
-   powiększa groty wyboru daty, najtrudniejszy do trafienia sterownik serwisu.
-   150 → 190 punktów to skala 1,19 i groty 43 × 52 zamiast 34 × 41. */
-@media (max-width:58rem){ .kartka{width:190px} }
+/* Kartka i zegarek rosną razem i w tej samej proporcji, bo stoją w jednym
+   rzędzie i mają kończyć się na tej samej wysokości: 180 × 269 przy viewBoksie
+   160 × 239 i 240 × 269 przy 200 × 224. Powiększenie daje większe cyfry daty
+   i większe groty, a nie kosztuje nic poza miejscem, które w tym rzędzie jest.
+   Na wąskim ekranie kolumny i tak stoją jedna pod drugą, więc kartka nie musi
+   się już z niczym równać i rośnie jeszcze o dwadzieścia punktów. */
+.kartka{width:180px;max-width:100%;height:auto;flex:0 0 auto}
+@media (max-width:58rem){ .kartka{width:200px} }
+/* Wiersze o długości dnia i nocy sięgały przy jedenastu punktach od krawędzi
+   do krawędzi kartki: „dzień: 14 godz 21 min" to dwadzieścia jeden znaków
+   pisma o stałej szerokości, czyli 139 ze 140 jednostek wnętrza. Dziesięć
+   punktów zostawia po siedem jednostek luzu z każdej strony. */
+.kartka-pora{font-size:10px}
 .kartka-liczba{font-family:var(--serif);font-size:54px;fill:var(--ink)}
 .kalendarz-sterowanie{flex:1 1 18rem;min-width:16rem}
 .galeon{max-width:520px}
@@ -361,7 +386,7 @@ svg.sciana{max-width:none;width:100%}
 
 /* ── zegarek kieszonkowy: tarcza, koronka, dwie pary wskazówek ─────────── */
 .blok-daty,.blok-zegara{margin:0;display:flex;flex-direction:column;align-items:center;gap:.55rem}
-.blok-daty{flex:0 0 160px}
+.blok-daty{flex:0 0 190px}
 .blok-okretu{margin:0;display:flex;flex-direction:column;gap:.5rem}
 .blok-okretu .galeon{max-width:100%}
 .nastawniki{width:100%}
@@ -375,11 +400,27 @@ svg.sciana{max-width:none;width:100%}
 /* ── wykres w wolnym polu pod kalendarzem i okrętem ────────────────────── */
 /* Rozmieszczenie podane wprost: przy samym rozpływie siatki blok objaśnień
    z narzuconym wierszem wskakiwał na pierwszą kolumnę i wypychał kalendarz. */
-.przyrzady-rejs .pulpit-sterowniki{grid-template-columns:minmax(14rem,16rem) 7rem minmax(15rem,1fr) minmax(11rem,14rem)}
+/* Pierwsza kolumna urosła z 14–16 do 16–18 rem, bo mieści teraz szerszą
+   kartkę i odczyt tempa w jednym wierszu. Bez tego suwak dnia kurczył się
+   do pięćdziesięciu punktów i nie dawał się już sensownie przeciągnąć. */
+.przyrzady-rejs .pulpit-sterowniki{grid-template-columns:minmax(16rem,18rem) 7rem minmax(15rem,1fr) minmax(11rem,14rem)}
 .przyrzady-rejs .nastawniki .ctl label{flex:0 0 5.6rem}
 /* Odczyt stanu morza bywa dwuwierszowy, a przed startem modulu jest kreska.
    Rezerwujemy dwa wiersze, zeby rzad nie urosl pod widzem. */
-.przyrzady-rejs .nastawniki .ctl output{flex:0 0 4.6rem;min-height:3.8em}
+/* 5,8 rem zamiast 4,6: „1 min 45 s" to dziesięć znaków pisma o stałej
+   szerokości i w węższym polu łamało się na dwa wiersze. Dwa wiersze
+   rezerwujemy nadal, bo odczyt stanu morza jest dwuwierszowy z założenia. */
+.przyrzady-rejs .nastawniki .ctl output{flex:0 0 5.8rem;min-height:3.8em}
+/* Odczyt stanu morza to dwie różne rzeczy: liczba i nazwa przedziału, w który
+   ta liczba wpada. Stoją więc w dwóch wierszach, bez separatora, który przy
+   łamaniu zostawał samotny na końcu pierwszego z nich. */
+.odczyt-stopnie,.odczyt-nazwa{display:block}
+.odczyt-nazwa{font-family:var(--serif);font-size:.86em;color:var(--ink-soft)}
+/* Zastrzeżenie o zgubionym impulsie pojawia się dopiero powyżej jedenastu
+   stopni, ale miejsce trzyma zawsze: bez tego jego pojawienie się spychało
+   kartę kursową i całą resztę strony w dół pod ręką widza, który właśnie
+   przesuwał suwak. Ta sama zasada, co przy opisie kroku cyrkla. */
+html.js #stop.hide{display:block;visibility:hidden}
 .przyrzady-rejs .blok-daty{grid-column:1}
 .przyrzady-rejs .blok-kola{grid-column:2;align-self:center;justify-self:center}
 .przyrzady-rejs .blok-okretu{grid-column:3}
@@ -426,7 +467,7 @@ svg.sciana{max-width:none;width:100%}
   .przyrzady-rejs .blok-daty,.przyrzady-rejs .blok-okretu,
   .przyrzady-rejs .blok-objasnien,.przyrzady-rejs .blok-kola{grid-column:auto;grid-row:auto}
 }
-.blok-zegara{flex:0 0 250px}
+.blok-zegara{flex:0 0 290px}
 /* Data na kartce nastawia się bębenkami, jak w starym liczniku: walec obraca
    się o jedną pozycję, sąsiednie wartości widać przez okienko. Rozwijana lista
    byłaby tu obcym ciałem — przyrząd ma nastawniki, nie formularze. Pola
@@ -434,7 +475,7 @@ svg.sciana{max-width:none;width:100%}
    po zbudowaniu bębenków chowa je klasa .z-bebnami.
    Kartka ma wysokość zegarka (150 × 224 px przy proporcji viewBoksa 160:239),
    więc oba nastawniki stoją w rzędzie równo. */
-.blok-daty{flex:0 0 160px;gap:0;position:relative}
+.blok-daty{flex:0 0 190px;gap:0;position:relative}
 .pola-daty{display:flex;gap:.3rem;justify-content:center;margin:.3rem 0 0}
 .pola-daty select{font-size:.8rem}
 .przyrzad.z-bebnami .pola-daty{display:none}
@@ -460,7 +501,7 @@ html.js .pola-daty{display:none}
 #bebenMiesiaca,#bebenDnia{cursor:grab;touch-action:none;user-select:none}
 #bebenMiesiaca.beben-obracany,#bebenDnia.beben-obracany{cursor:grabbing}
 #bebenMiesiaca:focus-visible,#bebenDnia:focus-visible{outline:2px solid var(--verd);outline-offset:2px}
-.tarcza-mechaniczna{max-width:200px;touch-action:none;user-select:none}
+.tarcza-mechaniczna{max-width:240px;touch-action:none;user-select:none}
 .tarcza-mechaniczna .cyfra-zegara{font-family:var(--serif);font-size:15px;fill:var(--ink)}
 .tarcza-mechaniczna .kreska-godzin{stroke:var(--ink);stroke-width:1.4}
 .tarcza-mechaniczna .kreska-minut{stroke:var(--rule);stroke-width:.7}

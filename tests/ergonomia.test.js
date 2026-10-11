@@ -117,13 +117,63 @@ describe("pole przewijane w poziomie", () => {
   });
 });
 
-describe("kartka kalendarza na wąskim ekranie", () => {
-  it("rośnie tam, gdzie nie musi się już równać z zegarkiem", () => {
+describe("kartka kalendarza", () => {
+  it("rośnie jeszcze bardziej tam, gdzie nie musi się równać z zegarkiem", () => {
     // Przy wąskim oknie kolumny pulpitu stoją jedna pod drugą, więc kartka
     // może być szersza — a szerokość kartki to wielkość grotów wyboru daty.
     expect(arkusz, "brak szerszej kartki na wąskim ekranie")
-      .toMatch(/@media \(max-width:58rem\)\{ \.kartka\{width:190px\} \}/);
-    expect(arkusz, "podstawowa szerokość kartki zmieniona bez potrzeby")
-      .toMatch(/\.kartka\{width:150px/);
+      .toMatch(/@media \(max-width:58rem\)\{ \.kartka\{width:200px\} \}/);
+    expect(arkusz, "podstawowa szerokość kartki nie została powiększona")
+      .toMatch(/\.kartka\{width:180px/);
+  });
+
+  it("kartka i zegarek kończą się na tej samej wysokości", () => {
+    // Stoją w jednym rzędzie, więc muszą rosnąć w tej samej proporcji.
+    // Kartka: viewBox 160 × 239. Zegarek: 200 × 224. Przy 180 i 240 punktach
+    // szerokości oba mają 269 punktów wysokości — stąd te, a nie inne liczby.
+    const szerKartki = Number(arkusz.match(/\.kartka\{width:(\d+)px/)[1]);
+    const szerZegarka = Number(arkusz.match(/\.tarcza-mechaniczna\{max-width:(\d+)px/)[1]);
+    const wysKartki = szerKartki * 239 / 160;
+    const wysZegarka = szerZegarka * 224 / 200;
+    expect(Math.abs(wysKartki - wysZegarka), "kartka i zegarek rozjechały się wysokością")
+      .toBeLessThan(2);
+  });
+
+  it("wiersze dnia i nocy nie dochodzą do ramki kartki", () => {
+    // „dzień: 14 godz 21 min" to 21 znaków pisma o stałej szerokości, którego
+    // znak ma około 0,6 firetu. Wnętrze kartki ma 140 jednostek, więc przy
+    // 11 punktach tekst zajmował 139 z nich i dotykał obu krawędzi.
+    const m = arkusz.match(/\.kartka-pora\{font-size:(\d+(?:\.\d+)?)px\}/);
+    expect(m, "wiersze dnia i nocy nie mają własnego kroju").not.toBeNull();
+    const szerokoscTekstu = 21 * Number(m[1]) * 0.6;
+    expect(140 - szerokoscTekstu, "za mało luzu między tekstem a ramką").toBeGreaterThan(10);
+  });
+});
+
+describe("odczyty wahadła", () => {
+  it("liczba nie rozstaje się z jednostką przy łamaniu wiersza", () => {
+    const i18n = readFileSync("src/_data/i18n.js", "utf8");
+    for (const wzor of [/tempoSek: "\{s\}\\u00a0s"/, /tempoMin: "\{m\}\\u00a0min \{s\}\\u00a0s"/])
+      expect(i18n, "jednostka może zostać sama na końcu wiersza").toMatch(wzor);
+  });
+
+  it("stan morza stoi w dwóch wierszach, bez separatora w środku", () => {
+    const modul = readFileSync("src/assets/js/modules/rejs.js", "utf8");
+    expect(modul, "separator wrócił do odczytu stanu morza").not.toMatch(/\$\{kolysanie\}° ·/);
+    expect(arkusz, "brak układu dwuwierszowego").toMatch(/\.odczyt-stopnie,\.odczyt-nazwa\{display:block\}/);
+  });
+
+  it("zastrzeżenie o zgubionym impulsie trzyma miejsce, zanim się pojawi", () => {
+    // Bez tego jego pojawienie się spychało kartę kursową i resztę strony
+    // w dół pod ręką widza, który właśnie przesuwał suwak stanu morza.
+    expect(arkusz, "zastrzeżenie wciąż rozpycha stronę")
+      .toMatch(/html\.js #stop\.hide\{display:block;visibility:hidden\}/);
+  });
+
+  it("skala wzburzenia jest nazwana i przypisana nam, nie epoce", () => {
+    const i18n = readFileSync("src/_data/i18n.js", "utf8");
+    expect(i18n, "polski opis nie mówi, czyja jest skala").toMatch(/Skala jest nasza, nie historyczna/);
+    expect(i18n, "angielski opis nie mówi, czyja jest skala").toMatch(/scale is ours, not historical/);
+    expect(i18n, "opis nie podaje progu sztormu").toMatch(/10,5|10\.5/);
   });
 });
