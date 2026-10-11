@@ -157,23 +157,57 @@ describe.skipIf(!zbudowane)("poprawki czytelności", () => {
           g.previousElementSibling
         );
       }
-      // Jedna strzała po lewej stronie okienka, druga po prawej.
+      // Rysunek strzały i jej pole chwytu to dwie różne rzeczy i mierzy się je
+      // osobno: strzała ma stać tam, gdzie się jej szuka, a pole chwytu ma być
+      // na tyle duże, żeby palec w nie trafił. Dawniej jeden test pilnował
+      // obojga przez położenie prostokąta — i przez to nie pozwalał go
+      // powiększyć, bo każde powiększenie wyglądało jak przesunięcie strzały.
       const beben = root.querySelector("#bebenDnia");
       const okno = beben.querySelector("rect");
       const x0 = Number(okno.getAttribute("x")), szer = Number(okno.getAttribute("width"));
-      const strzaly = [...root.querySelectorAll("#bebenDnia + .beben-groty .beben-grot")]
-        .map((s) => Number(s.querySelector("rect.pole-chwytu").getAttribute("x")));
-      expect(strzaly.length, "bębenek dnia nie ma dwóch strzał").toBe(2);
-      expect(Math.min(...strzaly), "brak strzały po lewej stronie okienka").toBeLessThan(x0);
-      expect(Math.max(...strzaly), "brak strzały po prawej stronie okienka").toBeGreaterThan(x0 + szer);
-      // Strzały mają mieścić się w kartce, a nie wystawać poza jej krawędź.
       const kartka = root.querySelector("svg.kartka");
       const [, , szerKartki] = kartka.getAttribute("viewBox").split(" ").map(Number);
+
+      // Jedna strzała narysowana po lewej stronie okienka, druga po prawej.
+      const srodkiStrzal = [...root.querySelectorAll("#bebenDnia + .beben-groty .beben-grot")]
+        .map((s) => {
+          const l = s.querySelector(".strzala-drzewce");
+          return (Number(l.getAttribute("x1")) + Number(l.getAttribute("x2"))) / 2;
+        });
+      expect(srodkiStrzal.length, "bębenek dnia nie ma dwóch strzał").toBe(2);
+      expect(Math.min(...srodkiStrzal), "strzała nie stoi po lewej stronie okienka").toBeLessThan(x0);
+      expect(Math.max(...srodkiStrzal), "strzała nie stoi po prawej stronie okienka")
+        .toBeGreaterThan(x0 + szer);
+
+      // Pole chwytu: dość duże, nie zachodzące na bębenek, w granicach kartki.
+      // Kartka ma 160 jednostek szerokości i rysuje się na 150 punktach przy
+      // szerokim oknie oraz na 190 przy wąskim, więc jednostka to 0,94 albo
+      // 1,19 punktu. Progi 32 × 40 jednostek dają najmniej 30 × 38 punktów —
+      // powyżej wymaganych 24 w obu wymiarach, a na telefonie 43 × 52.
       for (const s of root.querySelectorAll(".beben-groty .beben-grot")) {
         const r = s.querySelector("rect.pole-chwytu");
         const x = Number(r.getAttribute("x")), w = Number(r.getAttribute("width"));
-        expect(x, "strzała wychodzi poza lewą krawędź kartki").toBeGreaterThan(10);
-        expect(x + w, "strzała wychodzi poza prawą krawędź kartki").toBeLessThan(szerKartki - 10);
+        const y = Number(r.getAttribute("y")), h = Number(r.getAttribute("height"));
+        expect(w, "pole chwytu strzały za wąskie na palec").toBeGreaterThanOrEqual(32);
+        expect(h, "pole chwytu strzały za niskie na palec").toBeGreaterThanOrEqual(40);
+        expect(x, "pole chwytu wychodzi poza lewą krawędź kartki").toBeGreaterThanOrEqual(0);
+        expect(x + w, "pole chwytu wychodzi poza prawą krawędź kartki")
+          .toBeLessThanOrEqual(szerKartki);
+        // Zachodząc na okienko, pole chwytu zabierałoby bębenkowi ciągnięcie.
+        const nachodzi = x < x0 + szer && x + w > x0;
+        expect(nachodzi, "pole chwytu zachodzi na okienko bębenka").toBe(false);
+        expect(y, "pole chwytu wychodzi ponad kartkę").toBeGreaterThanOrEqual(0);
+        expect(h, "pole chwytu nie jest wyższe niż rysunek strzały").toBeGreaterThan(14);
+      }
+      // Pola chwytu obu bębenków nie mogą na siebie nachodzić — inaczej
+      // strzałka miesiąca zabierałaby kliknięcia strzałce dnia.
+      const pola = [...root.querySelectorAll(".beben-groty .beben-grot rect.pole-chwytu")]
+        .map((r) => ({ y: Number(r.getAttribute("y")), h: Number(r.getAttribute("height")),
+                       x: Number(r.getAttribute("x")) }));
+      for (const a of pola) for (const b of pola) {
+        if (a === b || a.x !== b.x) continue;
+        const nachodzi = a.y < b.y + b.h && a.y + a.h > b.y;
+        if (a.y !== b.y) expect(nachodzi, "pola chwytu obu bębenków nachodzą na siebie").toBe(false);
       }
       // Strzała ma być strzałą: drzewce, grot i lotki.
       for (const s of root.querySelectorAll("#bebenDnia + .beben-groty .beben-grot")) {

@@ -317,7 +317,17 @@ export default function init(root) {
       // lotki
       grot.append(zrob("path", { d: `M ${ax - 7 * s} ${cy - 3.4} L ${ax - 3 * s} ${cy} L ${ax - 7 * s} ${cy + 3.4}`,
         class: "strzala-lotki" }));
-      grot.append(zrob("rect", { x: ax - 10, y: cy - 10, width: 20, height: 20, class: "pole-chwytu" }));
+      // Pole chwytu, nie rysunek. Strzała ma 14 jednostek rozpiętości, ale
+      // palec nie trafia w kreskę: 20 × 20 jednostek dawało na telefonie
+      // 19 × 19 punktów, czyli poniżej wymaganych 24 i daleko od wygodnych 44.
+      // Rozpychamy je do krawędzi okienka bębenka i ani jednostki dalej —
+      // zachodząc na bębenek, zabierałoby mu ciągnięcie i obrót kółkiem.
+      const CHWYT_SZER = 36;   // 38 jednostek wolnego pola po każdej stronie
+      const CHWYT_WYS = 44;
+      grot.append(zrob("rect", {
+        x: bok < 0 ? geo.x - CHWYT_SZER : geo.x + geo.w,
+        y: cy - CHWYT_WYS / 2, width: CHWYT_SZER, height: CHWYT_WYS,
+        class: "pole-chwytu" }));
       grot.addEventListener("click", (e) => { e.stopPropagation(); obroc(kierunek); });
       groty.append(grot);
     }
