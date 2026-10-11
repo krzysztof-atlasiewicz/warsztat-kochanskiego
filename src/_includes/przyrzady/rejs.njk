@@ -29,10 +29,6 @@
         <text id="kalDoba" class="t" x="80" y="156" text-anchor="middle">—</text>
         </g>
       </svg>
-      <figcaption class="nastawniki">
-        <div class="ctl"><label for="dzien" title="{{ s.rejs.opisy.dzien }}">{{ s.rejs.dzien }}</label><input type="range" id="dzien" min="0" max="74" step="1" value="74"><output id="dzienO">74</output></div>
-        <div class="ctl"><label for="tempo" title="{{ s.rejs.opisy.tempo }}">{{ s.rejs.tempo }}</label><input type="range" id="tempo" min="1" max="10" step="1" value="3"><output id="tempoO">—</output></div>
-      </figcaption>
     </figure>
 
     <div class="blok-kola">
@@ -117,11 +113,6 @@
         </g>
         <g id="fale"></g>
       </svg>
-      <figcaption class="nastawniki">
-        <div class="ctl"><label for="kolysanie" title="{{ s.rejs.opisy.morze }}">{{ s.rejs.morze }}</label><input type="range" id="kolysanie" min="0" max="14" step="1" value="5"><output id="kolysanieO">—</output></div>
-        <p class="row"><label title="{{ s.rejs.opisy.kompensacja }}"><input type="checkbox" id="kompensacja"> {{ s.rejs.kompensacja }}</label></p>
-        <p id="stop" class="note uwaga hide">{{ s.rejs.stop }}</p>
-      </figcaption>
     </figure>
 
     <div class="blok-objasnien">
@@ -129,6 +120,21 @@
       <p>{{ s.rejs.mapaOpis }}</p>
     </div>
 
+  </div>
+
+  <!-- Wszystkie nastawniki w jednej listwie pod rysunkami. Dotąd każdy
+       wisiał pod swoim rysunkiem, a że rysunki mają różne wysokości,
+       suwaki stały na trzech różnych poziomach i pulpit nie czytał się
+       jako pulpit. Rysunki są teraz tym, czym są — rysunkami — a to,
+       czym się je nastawia, stoi w jednym rzędzie pod nimi. -->
+  <div class="listwa-nastawnikow">
+    <div class="ctl"><label for="dzien" title="{{ s.rejs.opisy.dzien }}">{{ s.rejs.dzien }}</label><input type="range" id="dzien" min="0" max="74" step="1" value="74"><output id="dzienO">74</output></div>
+    <div class="ctl"><label for="tempo" title="{{ s.rejs.opisy.tempo }}">{{ s.rejs.tempo }}</label><input type="range" id="tempo" min="1" max="10" step="1" value="3"><output id="tempoO">—</output></div>
+    <div class="ctl"><label for="kolysanie" title="{{ s.rejs.opisy.morze }}">{{ s.rejs.morze }}</label><input type="range" id="kolysanie" min="0" max="14" step="1" value="5"><output id="kolysanieO">—</output></div>
+    <div class="listwa-dopiski">
+      <p class="row"><label title="{{ s.rejs.opisy.kompensacja }}"><input type="checkbox" id="kompensacja"> {{ s.rejs.kompensacja }}</label></p>
+      <p id="stop" class="note uwaga hide">{{ s.rejs.stop }}</p>
+    </div>
   </div>
 
   <div class="rzad-mapy">

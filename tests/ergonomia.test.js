@@ -288,3 +288,47 @@ describe("rejestr decyzji nie opisuje narzędzi", () => {
       .toMatch(/nie rozstrzyga się bez decyzji|zamknięcie należy do kierownika projektu/);
   });
 });
+
+describe("pulpit rejsu czyta się jak pulpit", () => {
+  const szablon = readFileSync("src/_includes/przyrzady/rejs.njk", "utf8");
+
+  it("wszystkie nastawniki stoją w jednej listwie, nie pod swoimi rysunkami", () => {
+    // Kartka ma 248 punktów wysokości, okręt 138. Dopóki suwaki wisiały pod
+    // rysunkami, stały na dwóch różnych poziomach i pulpit rozpadał się na
+    // trzy niezależne widżety.
+    const listwa = szablon.match(/<div class="listwa-nastawnikow">[\s\S]*?\n  <\/div>/);
+    expect(listwa, "brak listwy nastawników").not.toBeNull();
+    for (const id of ["dzien", "tempo", "kolysanie"])
+      expect(listwa[0], `nastawnik „${id}" stoi poza listwą`).toContain(`id="${id}"`);
+    const rzadRysunkow = szablon.match(/<div class="pulpit-sterowniki">[\s\S]*?\n  <\/div>/)[0];
+    for (const id of ["dzien", "tempo", "kolysanie"])
+      expect(rzadRysunkow, `nastawnik „${id}" wrócił pod rysunek`).not.toContain(`id="${id}"`);
+  });
+
+  it("nazwa i wartość stoją nad suwakiem, nie obok ani pod nim", () => {
+    const r = arkusz.match(/\.listwa-nastawnikow \.ctl\{[^}]*\}/)[0];
+    expect(r, "nastawnik nie jest siatką dwuwierszową").toContain("grid-template-columns:1fr auto");
+    const etykieta = arkusz.match(/\.listwa-nastawnikow \.ctl label\{[^}]*\}/)[0];
+    const odczyt = arkusz.match(/\.listwa-nastawnikow \.ctl output\{[^}]*\}/)[0];
+    const suwak = arkusz.match(/\.listwa-nastawnikow \.ctl input\[type=range\]\{[^}]*\}/)[0];
+    expect(etykieta, "nazwa poza pierwszym wierszem").toContain("grid-area:1 / 1");
+    expect(odczyt, "wartość poza pierwszym wierszem").toContain("grid-area:1 / 2");
+    expect(suwak, "suwak nie zajmuje całej szerokości drugiego wiersza")
+      .toContain("grid-area:2 / 1 / 3 / 3");
+  });
+
+  it("listwa ma tyle kolumn, ile nastawników, i zwęża się na telefonie", () => {
+    // „auto-fit" na szerokim ekranie mieścił czwartą kolumnę i zostawiał puste
+    // miejsce obok ostatniego suwaka; trzy sztywne kolumny nie mieściły się
+    // z kolei na telefonie i dawały przewijanie w poziomie.
+    // Reguły z zapytań o szerokość są w arkuszu wcięte, zwykłe stoją od lewej
+    // krawędzi — po tym je tu rozróżniamy, bo zapytań o 58 rem jest kilka
+    // i cięcie arkusza na pierwszym z nich trafiało nie tam, gdzie trzeba.
+    const zwykla = arkusz.match(/^\.listwa-nastawnikow\{[^}]*\}/m);
+    expect(zwykla, "brak zwykłej reguły listwy").not.toBeNull();
+    expect(zwykla[0], "listwa nie ma trzech kolumn").toContain("repeat(3,1fr)");
+    const wcieta = arkusz.match(/^ +\.listwa-nastawnikow\{[^}]*\}/m);
+    expect(wcieta, "listwa nie zwęża się na telefonie").not.toBeNull();
+    expect(wcieta[0], "zwężenie nie jest płynne").toContain("auto-fit");
+  });
+});

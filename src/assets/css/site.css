@@ -415,23 +415,38 @@ svg.sciana{max-width:none;width:100%}
 /* Pierwsza kolumna urosła z 14–16 do 16–18 rem, bo mieści teraz szerszą
    kartkę i odczyt tempa w jednym wierszu. Bez tego suwak dnia kurczył się
    do pięćdziesięciu punktów i nie dawał się już sensownie przeciągnąć. */
-.przyrzady-rejs .pulpit-sterowniki{grid-template-columns:minmax(16rem,18rem) 7rem minmax(15rem,1fr) minmax(11rem,14rem)}
-.przyrzady-rejs .nastawniki .ctl label{flex:0 0 5.6rem}
+.przyrzady-rejs .pulpit-sterowniki{grid-template-columns:auto 7rem minmax(13rem,1fr) minmax(11rem,15rem);align-items:center}
 /* Odczyt stanu morza bywa dwuwierszowy, a przed startem modulu jest kreska.
    Rezerwujemy dwa wiersze, zeby rzad nie urosl pod widzem. */
-/* 5,8 rem zamiast 4,6: „1 min 45 s" to dziesięć znaków pisma o stałej
-   szerokości i w węższym polu łamało się na dwa wiersze. Dwa wiersze
-   rezerwujemy nadal, bo odczyt stanu morza jest dwuwierszowy z założenia. */
-/* „margin-left:auto" po złamaniu wiersza dosuwa odczyt do prawej krawędzi,
-   czyli pod koniec suwaka, a nie pod etykietę. Wszystkie trzy odczyty rejsu
-   stoją wtedy w jednej pionowej linii. */
-.przyrzady-rejs .nastawniki .ctl output{flex:0 0 5.8rem;min-height:3.8em;margin-left:auto;
-  display:flex;flex-direction:column;justify-content:center;align-items:flex-end}
-/* Suwak nie może zejść poniżej ośmiu firetów: w wąskiej kolumnie okrętu
-   zostawały mu trzydzieści cztery punkty i nie dawał się przeciągnąć.
-   Zamiast ściskać go dalej, wiersz się łamie i suwak dostaje całą szerokość. */
-.przyrzady-rejs .nastawniki .ctl{flex-wrap:wrap}
-.przyrzady-rejs .nastawniki .ctl input[type=range]{flex:1 1 8rem;min-width:8rem}
+/* Listwa nastawników: wszystko, czym się rejs nastawia, w jednym rzędzie pod
+   rysunkami. Dotąd każdy suwak wisiał pod swoim rysunkiem, a że kartka ma 248
+   punktów wysokości, a okręt 138, suwaki stały na dwóch różnych poziomach —
+   pulpit nie czytał się jako pulpit, tylko jako trzy niezależne widżety.
+   W każdym nastawniku nazwa stoi po lewej, wartość po prawej, a suwak pod
+   nimi na całą szerokość: wartość jest wtedy tam, gdzie zatrzymuje się wzrok
+   po przesunięciu guzika, a suwak dostaje tyle miejsca, ile kolumna ma. */
+/* Trzy kolumny podane wprost, bo nastawniki są trzy. „auto-fit" mieścił
+   na szerokim ekranie czwartą kolumnę i zostawiał puste miejsce obok
+   ostatniego suwaka. Zwężenie opisuje osobna reguła przy wąskim oknie. */
+.listwa-nastawnikow{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:.9rem 1.6rem;margin:1.6rem 0 .2rem;padding-top:1.1rem;
+  border-top:1px solid var(--rule-soft)}
+.listwa-nastawnikow .ctl{display:grid;grid-template-columns:1fr auto;
+  align-items:baseline;gap:.15rem .6rem;margin:0}
+.listwa-nastawnikow .ctl label{grid-area:1 / 1;flex:none;font-size:.85rem;line-height:1.3}
+.listwa-nastawnikow .ctl output{grid-area:1 / 2;flex:none;margin:0;min-height:0;
+  text-align:right;font-size:.8rem;line-height:1.3;display:block;white-space:nowrap}
+.listwa-nastawnikow .ctl input[type=range]{grid-area:2 / 1 / 3 / 3;
+  flex:none;min-width:0;width:100%;margin-top:.1rem}
+/* Dopiski — kompensacja i zastrzeżenie o zgubionym impulsie — idą pod listwą
+   na całą jej szerokość. Zastrzeżenie trzyma miejsce, zanim się pojawi. */
+.listwa-dopiski{grid-column:1 / -1;display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));
+  gap:.2rem 1.6rem;align-items:start;margin-top:.2rem}
+.listwa-dopiski p{margin:0}
+.listwa-dopiski .note{margin:0}
+/* Odczyt stanu morza ma dwa człony; w wierszu nagłówkowym stoją obok siebie. */
+.przyrzady-rejs .odczyt-stopnie,.przyrzady-rejs .odczyt-nazwa{display:inline}
+.przyrzady-rejs .odczyt-nazwa::before{content:"· "}
 /* Odczyt stanu morza to dwie różne rzeczy: liczba i nazwa przedziału, w który
    ta liczba wpada. Stoją więc w dwóch wierszach, bez separatora, który przy
    łamaniu zostawał samotny na końcu pierwszego z nich. */
@@ -485,6 +500,9 @@ html.js #stop.hide{display:block;visibility:hidden}
   .rzad-mapy{grid-template-columns:1fr}
   .wskazniki-boczne{flex-direction:row;justify-content:center}
   .przyrzady-rejs .pulpit-sterowniki{grid-template-columns:1fr}
+  /* Trzy razy 11 rem nie mieści się na telefonie — listwa schodzi wtedy
+     do tylu kolumn, ile wejdzie, a w ostateczności do jednej. */
+  .listwa-nastawnikow{grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))}
   .przyrzady-rejs .blok-daty,.przyrzady-rejs .blok-okretu,
   .przyrzady-rejs .blok-objasnien,.przyrzady-rejs .blok-kola{grid-column:auto;grid-row:auto}
 }

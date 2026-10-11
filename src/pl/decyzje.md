@@ -838,3 +838,17 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **Dwa nowe testy** (248 zamiast 246): regulamin prac bez nazwy wykonawcy w treści i w nazwie pliku, z osobnym sprawdzeniem, że cztery kluczowe reguły przetrwały przepisanie i że dokument nie przemilcza istnienia automatyzacji; oraz przegląd wszystkich tekstów w repozytorium.
 
 **Czego ten wpis nie rozstrzyga.** Commity sprzed przepisania historii nadal leżą na serwerze GitHuba — nieosiągalne przez żadną gałąź, ale dostępne dla kogoś, kto zna skrót. Usunięcie ich wymaga prośby do pomocy technicznej GitHuba albo założenia repozytorium od nowa. Przy publicznym repozytorium jest to różnica realna, nie teoretyczna, i zostaje do rozstrzygnięcia.
+
+## 2026-10-11 — Cykl 60: pulpit rejsu przestawiony na jedną listwę nastawników
+
+**Zgłoszenie dotyczyło estetyki, ale wada była układowa.** Każdy suwak wisiał pod swoim rysunkiem, a rysunki mają różne wysokości: kartka kalendarza 248 punktów, okręt 138. Suwak dnia i tempa zaczynały się więc 248 punktów od góry rzędu, a suwak stanu morza 146 — trzy sterowniki na dwóch poziomach, każdy wyglądający na przypadkowo doczepiony do sąsiedniego obrazka. Do tego nastawniki pod kartką były od niej szersze, więc kolumna miała dwie różne szerokości.
+
+**Próba poprawiania tego po kawałku nie wyszła i warto zapisać dlaczego.** Wyrównanie przez dosunięcie grup do dołu rzędu niczego nie dało: grupa okrętu zawiera oprócz suwaka jeszcze pole wyboru i zastrzeżenie, więc jest wyższa, i jej suwak zaczyna się wyżej mimo wspólnej dolnej krawędzi. **Trzech suwaków w kolumnach o różnej zawartości nie da się ustawić w jednej linii żadnym wyrównaniem** — trzeba zmienić układ, a nie dociskać go regułami.
+
+**Nowy układ: rysunki osobno, nastawniki osobno.** Rząd górny to kartka, koło sterowe, okręt i objaśnienie — same rysunki i tekst. Pod nimi, za cienką kreską, listwa z trzema nastawnikami w trzech równych kolumnach. Pole wyboru kompensacji i zastrzeżenie o zgubionym impulsie idą pod listwą na całą jej szerokość. Wszystkie trzy suwaki stoją teraz na jednej wysokości i mają po 287 punktów długości zamiast 78, 78 i 137.
+
+**W każdym nastawniku nazwa stoi po lewej, wartość po prawej, suwak pod nimi na całą szerokość kolumny.** To naprawia drugą wadę z poprzedniego cyklu: łamanie wiersza odsuwało wartość pod suwak, przez co liczba przestawała się czytać jako nastawa, a zaczynała jako osobny odczyt stojący nie wiadomo przy czym. Nad suwakiem i przy jego prawym końcu wartość jest tam, gdzie zatrzymuje się wzrok po przesunięciu guzika w prawo.
+
+**Trzy kolumny podane wprost, bo nastawniki są trzy.** Pierwsza wersja używała automatycznego dopasowania liczby kolumn i na szerokim ekranie mieściła czwartą, zostawiając puste miejsce obok ostatniego suwaka. Zwężanie opisuje osobna reguła przy wąskim oknie — trzy razy jedenaście firetów nie mieści się na telefonie i strona dostawała pasek przewijania w poziomie. Obie rzeczy wyszły z pomiaru po zmianie, nie z oględzin.
+
+**Trzy nowe testy** (251 zamiast 248): wszystkie trzy nastawniki w listwie i żadnego w rzędzie rysunków; nazwa, wartość i suwak na swoich miejscach w siatce; trzy kolumny przy szerokim oknie i płynne zwężenie przy wąskim. Ostatni test rozróżnia reguły zwykłe od tych z zapytań o szerokość po wcięciu w arkuszu — cięcie arkusza na pierwszym zapytaniu o 58 firetów trafiało nie tam, gdzie trzeba, bo takich zapytań jest w arkuszu kilka.
