@@ -58,6 +58,6 @@ Projekt działa w pętli PDCA z automatycznym krokiem kontrolnym:
 
     npm run cykl
 
-Uruchamia testy, budowę i pięć kontroli treści, ocenia warunki bieżącej bramki i zapisuje raport do `pdca/cykle/`. Szczegóły w `pdca/README.md`, zakres uprawnień automatyzacji w `pdca/agent.md`.
+Uruchamia testy, budowę i pięć kontroli treści, ocenia warunki bieżącej bramki i zapisuje raport do `pdca/cykle/`. Szczegóły w `pdca/README.md`, zakres prac wykonywanych bez decyzji merytorycznej w `pdca/zakres-prac.md`.
 
 Warunki bramek oznaczone jako ludzkie nigdy nie są odhaczane automatycznie. Pozycję agendy badawczej zamyka wyłącznie człowiek, wpisem do `src/pl/decyzje.md`.

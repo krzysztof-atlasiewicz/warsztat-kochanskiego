@@ -428,10 +428,10 @@ const KONTROLE = {
 
   // Czy ktoś sprawdził, że te adresy w ogóle istnieją.
   //
-  // W cyklu 57 agent wpisał osiem adresów encyklopedii z pamięci i dwa z nich
+  // W cyklu 57 osiem adresów encyklopedii wpisano z pamięci i dwa z nich
   // okazały się nieistniejące. Kontener roboczy nie ma dostępu do sieci, więc
-  // agent nie jest w stanie tego sprawdzić sam — i właśnie dlatego nie wolno
-  // mu wierzyć na słowo. Sprawdzenie wykonuje człowiek, a jego wynik zapisuje
+  // nie da się tego sprawdzić na miejscu — i właśnie dlatego nie wolno
+  // przyjmować takiego adresu na słowo. Sprawdzenie wykonuje człowiek, a jego wynik zapisuje
   // się w „sprawdz/objasnienia-sprawdzone.json". Adres nieobecny w rejestrze
   // jest tu zgłaszany jako nieprzejrzany.
   //
@@ -461,26 +461,49 @@ const KONTROLE = {
 
   // Decyzja redakcyjna kierownika projektu z 11 października: strony serwisu
   // nie opisują narzędzi, którymi je zrobiono. Rejestr decyzji mówi, co i
-  // dlaczego zmieniono, a nie czyją ręką — zdania w rodzaju „agent tego nie
-  // rusza" zamieniono na bezosobowe. Reguła nie dotyczy repozytorium, tylko
+  // dlaczego zmieniono, a nie czyją ręką — zdania wskazujące wykonawcę
+  // zamieniono na bezosobowe. Reguła nie dotyczy repozytorium, tylko
   // tego, co trafia do czytelnika, więc kontrola patrzy na zbudowane strony.
   redakcja() {
     const bledy = [];
-    // „(?<![-\\w])" nie daje się złapać na „User-agent" w robots.txt ani na
-    // zdaniu rejestru, które o tym polu protokołu mówi. Łącznik jest dla
-    // „\\b" granicą słowa, więc sam „\\bagent" dawał fałszywy alarm.
     const SLOWA = [/(?<![-\w])agent(a|owi|em|ach|ów|y)?\b/i, /\bsztuczn\w* inteligencj\w*/i,
                    /\bmodel\w* językow\w*/i, /\bLLM\b/, /\bChatGPT\b/i, /\bClaude\b/i,
-                   /\bCopilot\b/i, /\bpdca\/agent/i];
-    for (const p of zbudowane()) {
-      // Sam znacznik „User-agent" w robots.txt to nazwa pola protokołu,
-      // nie wzmianka o narzędziu — tam ta kontrola nie sięga.
-      if (p.endsWith("robots.txt")) continue;
-      const tekst = czytaj(p).replace(/<[^>]+>/g, " ");
+                   /\bCopilot\b/i, /\bagent\.md\b/i];
+
+    const zbadaj = (sciezka, tekst) => {
       for (const w of SLOWA) {
-        const m = tekst.match(w);
-        if (m) bledy.push(`${p}: wzmianka o narzędziu — „${m[0]}"`);
+        const dop = tekst.match(w);
+        if (dop) bledy.push(`${sciezka}: wzmianka o narzędziu — „${dop[0]}"`);
       }
+    };
+
+    // Strony: to, co czyta odbiorca serwisu. „User-agent" w robots.txt jest
+    // nazwą pola protokołu, nie wzmianką o narzędziu.
+    for (const p of zbudowane()) {
+      if (p.endsWith("robots.txt")) continue;
+      zbadaj(p, czytaj(p).replace(/<[^>]+>/g, " "));
+    }
+
+    // Repozytorium jest publiczne, więc reguła sięga także tekstów, które w nim
+    // leżą: dokumentacji, regulaminu prac, raportów cyklu. Nie sięga kodu —
+    // tam nazwy są identyfikatorami, a nie wypowiedzią projektu — i nie sięga
+    // tego pliku, który z natury rzeczy musi te słowa wymienić, żeby ich
+    // pilnować. Obie granice są świadome i obie są tu zapisane.
+    const POMIJANE = new Set(["node_modules", "_site", "_podglad", ".git"]);
+    const proza = (katalog, zebrane = []) => {
+      for (const w of readdirSync(katalog, { withFileTypes: true })) {
+        if (POMIJANE.has(w.name)) continue;
+        const sciezka = join(katalog, w.name);
+        if (w.isDirectory()) proza(sciezka, zebrane);
+        else if (/\.(md|njk|txt)$/.test(w.name)) zebrane.push(sciezka);
+      }
+      return zebrane;
+    };
+    for (const p of proza(".")) {
+      zbadaj(p, czytaj(p));
+      // Nazwa pliku też jest wypowiedzią: „agent.md" mówi swoje, zanim ktoś
+      // go otworzy.
+      zbadaj(p, p.split("/").pop().replace(/\.[^.]+$/, ""));
     }
     return bledy;
   }

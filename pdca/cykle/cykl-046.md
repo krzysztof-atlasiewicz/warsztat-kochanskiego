@@ -32,7 +32,7 @@ Brak.
 
 1. Naprawić usterki powyżej przed dodawaniem nowej treści. Kontrole automatyczne mają priorytet nad rozwojem funkcji.
 2. Agenda badawcza: 3 pozycji otwartych (A1, A3, A4).
-3. Żadna pozycja agendy nie może zostać zamknięta przez agenta. Zamyka ją człowiek, wpisem do rejestru decyzji.
+3. Pozycji agendy nie zamyka się bez decyzji kierownika projektu, wnoszonej wpisem do rejestru decyzji.
 
 ## Ślad
 

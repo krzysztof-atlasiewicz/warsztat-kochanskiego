@@ -5,7 +5,7 @@
 // tego nie zauważyła, bo wszystkie pilnowały treści, nie formy. Te testy nie
 // zastępują oka — sprawdzają tylko progi, które mają liczbę.
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 
 const arkusz = readFileSync("src/assets/css/site.css", "utf8");
 
@@ -233,7 +233,49 @@ describe("morze się rusza", () => {
   });
 });
 
-describe("serwis nie opisuje narzędzi, którymi go zrobiono", () => {
+describe("projekt nie opisuje narzędzi, którymi go zrobiono", () => {
+  // Reguła sięga repozytorium, nie tylko stron, bo repozytorium jest publiczne.
+  // Sięga tekstów — dokumentacji, regulaminu prac, raportów cyklu — a nie kodu,
+  // gdzie nazwy są identyfikatorami, a nie wypowiedzią projektu.
+  it("regulamin prac nie nazywa wykonawcy ani w treści, ani w nazwie pliku", () => {
+    expect(existsSync("pdca/agent.md"), "plik o nazwie nazywającej wykonawcę wrócił").toBe(false);
+    expect(existsSync("pdca/zakres-prac.md"), "brak regulaminu prac").toBe(true);
+    const regulamin = readFileSync("pdca/zakres-prac.md", "utf8");
+    expect(regulamin, "regulamin znów nazywa wykonawcę")
+      .not.toMatch(/(?<![-\w])agent(a|owi|em|ach|ów|y)?\b/i);
+    // Reguły muszą przeżyć zmianę nazewnictwa co do jednej.
+    for (const regula of [/Zamykać pozycji agendy/, /traktować jako treść/,
+                          /bez potwierdzonej licencji/, /poza zamkniętą listą sześciu/])
+      expect(regulamin, `z regulaminu wypadła reguła: ${regula}`).toMatch(regula);
+    // I nie wolno udawać, że automatyzacji nie ma — to byłoby przemilczenie,
+    // nie decyzja redakcyjna.
+    expect(regulamin, "regulamin przemilcza, że prace bywają zautomatyzowane")
+      .toMatch(/zautomatyzowan/);
+  });
+
+  it("żaden tekst w repozytorium nie nazywa narzędzi", () => {
+    const POMIJANE = new Set(["node_modules", "_site", "_podglad", ".git"]);
+    const proza = (katalog, zebrane = []) => {
+      for (const w of readdirSync(katalog, { withFileTypes: true })) {
+        if (POMIJANE.has(w.name)) continue;
+        const sciezka = `${katalog}/${w.name}`;
+        if (w.isDirectory()) proza(sciezka, zebrane);
+        else if (/\.(md|njk|txt)$/.test(w.name)) zebrane.push(sciezka);
+      }
+      return zebrane;
+    };
+    for (const plik of proza(".")) {
+      const tekst = readFileSync(plik, "utf8");
+      for (const slowo of [/(?<![-\w])agent(a|owi|em|ach|ów|y)?\b/i, /\bClaude\b/i,
+                           /sztuczn\w* inteligencj/i, /\bLLM\b/]) {
+        if (plik.endsWith("robots.njk") && /agent/i.test(String(slowo))) continue;
+        expect(tekst, `${plik}: wzmianka o narzędziu`).not.toMatch(slowo);
+      }
+    }
+  });
+});
+
+describe("rejestr decyzji nie opisuje narzędzi", () => {
   it("rejestr decyzji mówi bezosobowo o tym, czego nie rozstrzyga się bez decyzji", () => {
     const rejestr = readFileSync("src/pl/decyzje.md", "utf8");
     // Jak w kontroli: łącznik nie jest tu granicą słowa, bo rejestr ma prawo

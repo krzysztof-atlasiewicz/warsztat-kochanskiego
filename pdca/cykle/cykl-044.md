@@ -36,7 +36,7 @@ Brak. Wszystkie kontrole automatyczne przechodzą.
 
 1. Kontrole automatyczne czyste. Bramka GA czeka na: GA1, GA2. To decyzje ludzkie — eskalacja do kierownika projektu.
 2. Agenda badawcza: 3 pozycji otwartych (A1, A3, A4).
-3. Żadna pozycja agendy nie może zostać zamknięta przez agenta. Zamyka ją człowiek, wpisem do rejestru decyzji.
+3. Pozycji agendy nie zamyka się bez decyzji kierownika projektu, wnoszonej wpisem do rejestru decyzji.
 
 ## Ślad
 

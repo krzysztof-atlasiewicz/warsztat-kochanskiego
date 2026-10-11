@@ -8,7 +8,7 @@ Jeden cykl to tydzień.
 
 **Planuj** — otwarcie cyklu. Wybór zadań z usterek poprzedniego raportu i z agendy badawczej. Usterki mają pierwszeństwo przed nową funkcjonalnością; to reguła, nie preferencja.
 
-**Wykonaj** — praca. Agent autonomiczny może wykonywać zadania z listy dozwolonej (patrz `agent.md`), człowiek resztę.
+**Wykonaj** — praca. Zadania z listy dozwolonej wykonuje się bez pytania o zdanie (patrz `zakres-prac.md`); reszta wymaga decyzji kierownika projektu.
 
 **Sprawdź** — `npm run cykl`. Uruchamia testy, budowę i pięć kontroli treści, ocenia warunki bieżącej bramki i zapisuje raport do `pdca/cykle/`. Krok w pełni automatyczny.
 

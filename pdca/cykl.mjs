@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Jeden obrót pętli PDCA. Planuj → Wykonaj są pracą człowieka lub agenta;
+// Jeden obrót pętli PDCA. Planuj → Wykonaj to praca wykonawcza;
 // ten skrypt realizuje Sprawdź i przygotowuje Popraw, zapisując ślad.
 import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
@@ -59,7 +59,7 @@ ${usterki.length
     ? `1. Kontrole automatyczne czyste. Bramka ${stan.bramka.id} czeka na: ${blokady.map((b) => b.id).join(", ")}. To decyzje ludzkie — eskalacja do kierownika projektu.`
     : `1. Bramka ${stan.bramka.id} spełniona w całości. Przejście do kolejnej fazy wymaga formalnej decyzji, nie automatu.`}
 2. Agenda badawcza: ${otwarte.length} pozycji otwartych (${otwarte.map((p) => p.id).join(", ") || "brak"}).
-${otwarte.length ? "3. Żadna pozycja agendy nie może zostać zamknięta przez agenta. Zamyka ją człowiek, wpisem do rejestru decyzji." : ""}
+${otwarte.length ? "3. Pozycji agendy nie zamyka się bez decyzji kierownika projektu, wnoszonej wpisem do rejestru decyzji." : ""}
 
 ## Ślad
 
