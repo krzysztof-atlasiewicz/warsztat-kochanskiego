@@ -209,3 +209,40 @@ describe.skipIf(!zbudowane)("cel konstrukcji cyklometrycznej", () => {
       expect(repertuar, `znak „${znak}" poza repertuarem`).toContain(znak);
   });
 });
+
+// Trzy rachuby mają od cyklu 62 źródło, a nasze uproszczenie stoi tam, gdzie
+// opisujemy model, nie tam, gdzie opisujemy zabytek. Granica między jednym
+// a drugim przebiega tu między akapitami, nie tylko między oznaczeniami.
+describe.skipIf(!zbudowane)("zegar wilanowski: zabytek osobno, model osobno", () => {
+  for (const [plik, wskazowki, uproszczenie] of [
+    ["_site/pl/gnomon/index.html", ["kłos", "Saturn", "putta"], "Model upraszcza zabytek w trzech miejscach"],
+    ["_site/en/gnomon/index.html", ["ear of grain", "Saturn", "putti"], "The model simplifies the monument in three ways"]
+  ]) {
+    const html = existsSync(plik) ? readFileSync(plik, "utf8") : "";
+    const zabytek = html.slice(0, html.indexOf("note uwaga"));
+
+    it(`${plik}: opis zabytku podaje trzy wskazówki, nie jeden pręt`, () => {
+      for (const s of wskazowki) expect(zabytek, `brak wzmianki o „${s}"`).toContain(s);
+      for (const s of ["jeden pręt, jeden cień", "One sun, one rod, one shadow"])
+        expect(zabytek, `w opisie zabytku wróciło „${s}"`).not.toContain(s);
+    });
+
+    it(`${plik}: uproszczenie stoi w zastrzeżeniu o modelu`, () => {
+      expect(html, "zastrzeżenie nie nazywa uproszczeń").toContain(uproszczenie);
+    });
+
+    it(`${plik}: podział na trzy rachuby ma odnośnik do źródła`, () => {
+      // Dotąd zdanie o trzech tarczach stało bez przypisu, choć jest
+      // twierdzeniem o zabytku, a nie o naszym modelu.
+      expect(zabytek, "akapit o trzech tarczach bez odnośnika do źródła")
+        .toMatch(/<a class="zrodlo[^"]*"[^>]*>/);
+    });
+  }
+
+  it("źródło opisujące trzy tarcze jest w rejestrze i nie jest osadzane", () => {
+    const z = JSON.parse(readFileSync("src/_data/zrodla.json", "utf8"))["milewska-2010"];
+    expect(z, "brak wpisu w rejestrze źródeł").toBeTruthy();
+    expect(z.osadzenie, "tekst nie na wolnej licencji nie może być osadzany").toBeUndefined();
+    expect(z.uwaga, "wpis nie mówi, czego źródło NIE podaje").toMatch(/nie podaje/);
+  });
+});

@@ -17,7 +17,12 @@
         "Typ wskazówki rozstrzyga się z fotografii i dokumentacji, nie z obliczeń: zdjęcie Hanny Widackiej (Pasaż Wiedzy muzeum), dokumentacja konserwatorska Muzeum Pałacu Króla Jana III, zbiory Muzeum im. Przypkowskich w Jędrzejowie, Fijałkowski 1989. Pręt prostopadły do ściany i pręt równoległy do osi świata dają cienie, które na zdjęciu z dołu różnią się kierunkiem w południe.",
         "Deklinację ściany mierzy się z danych geodezyjnych, nigdy kompasem: ortofotomapa geoportal.gov.pl daje azymut elewacji z dokładnością około ±0,5°, a wektorowe obrysy budynku z EGiB albo BDOT10k (pliki GML) — około ±0,2°. Kompas magnetyczny jest wykluczony: w pobliżu murów i zbrojenia błąd przekracza spodziewaną wielkość mierzoną.",
         "Próg przydatności: ±1°. Poniżej tego progu geometria krzywych na ścianie zmienia się mniej niż grubość rysowanej linii, więc wynik dokładniejszy niż ±1° nie zmieni już modelu. Powyżej — zmienia, i wtedy trzeba przeliczyć siatki.",
-        "Dopóki oba pytania nie są rozstrzygnięte, model zostaje przy ścianie dokładnie południowej i pręcie prostopadłym, z zastrzeżeniem widocznym na stronie i przy oznaczeniu „nasze: uproszczona geometria”."
+        "Dopóki oba pytania nie są rozstrzygnięte, model zostaje przy ścianie dokładnie południowej i pręcie prostopadłym, z zastrzeżeniem widocznym na stronie i przy oznaczeniu „nasze: uproszczona geometria”.",
+        "Kwerenda 11 października 2026 w Pasażu Wiedzy muzeum, artykuł „Godzina za godziną niepojęcie chodzi”. Tekst opisuje wszystkie trzy zegary na elewacji ogrodowej i rozstrzyga pytanie o wskazówkę inaczej, niż było postawione.",
+        "ZEGAR NIE MA PRĘTA. Wskazówką tarczy środkowej jest kłos trzymany przez postać: „w prawym kłos służący jednocześnie za wskazówkę środkowego zegara”. Dwie tarcze boczne mają własne wskazówki, również trzymane przez figury: „Wskazówki dwóch bocznych zegarów trzymają putta”.",
+        "Wynika z tego, że pytanie „pręt prostopadły czy biegunowy” jest dla tego zegara źle postawione: wskazówki są trzy, nie jedna, i każda jest elementem rzeźbiarskim, nie prętem. Przed dalszą pracą pytanie A1 wymaga przeformułowania — czym geometrycznie jest każda z trzech wskazówek: punktem rzucającym cień (nodus) czy krawędzią rzucającą linię (styl).",
+        "Czego artykuł nie podaje: deklinacji ściany ani kąta nachylenia którejkolwiek wskazówki. Elewację nazywa po prostu południową. Pomiar deklinacji z danych geodezyjnych pozostaje do wykonania i jego sposób opisano w ustaleniach wcześniejszych.",
+        "ROZBIEŻNOŚĆ Z TREŚCIĄ SERWISU, do rozstrzygnięcia przez kierownika projektu. Strona gnomonu mówi: „Jedno Słońce, jeden pręt, jeden cień — i trzy różne godziny, zależnie od tego, na którą siatkę ten cień padnie”. Według muzeum każda z trzech tarcz ma własną wskazówkę. Zdanie opisuje nasz model, a stoi w akapicie opisującym zabytek."
       ]
     },
     {
@@ -104,7 +109,8 @@
       "ustalenia": [
         "Artykuł muzealny Hanny Widackiej (Pasaż Wiedzy, 2008) opisuje medalion tak: brodaty mężczyzna trzyma złoty kłos zboża, za nim szare skrzydła, przed nim tarcza słoneczna; po bokach putta podtrzymują draperię z miesiącami i znakami zodiaku. To przemawia za kłosem, nie kosą.",
         "Ten sam artykuł nie nazywa postaci Chronosem. Identyfikacja ikonograficzna pozostaje więc osobnym pytaniem — kłos i skrzydła pasują równie dobrze do Saturna i do personifikacji Czasu.",
-        "Opis pochodzi z jednego ujęcia fotograficznego, nie z oględzin ani z dokumentacji konserwatorskiej. Atrybut trzymany w dłoni bywa na fotografii z dołu nieczytelny, więc rozstrzygnięcie wymaga zdjęcia z bliska albo karty konserwatorskiej."
+        "Opis pochodzi z jednego ujęcia fotograficznego, nie z oględzin ani z dokumentacji konserwatorskiej. Atrybut trzymany w dłoni bywa na fotografii z dołu nieczytelny, więc rozstrzygnięcie wymaga zdjęcia z bliska albo karty konserwatorskiej.",
+        "Kwerenda 11 października 2026: drugi, niezależny od Widackiej tekst muzealny („Godzina za godziną niepojęcie chodzi”) również mówi o kłosie, nie o kosie — i dodatkowo nazywa postać: to Saturn, nie Chronos. Kłos pełni przy tym funkcję wskazówki tarczy środkowej. Dwa teksty muzealne zgodnie podają kłos; identyfikacja postaci jako Saturna pochodzi wprost z drugiego z nich."
       ]
     },
     {
@@ -143,7 +149,8 @@
         "Kochański był, według Fijałkowskiego, głównym autorem programu ideowego dekoracji elewacji i wnętrz pałacu. To przemawia za tym, że warstwa ikonograficzna zegara — postać z atrybutem, zodiak, putta — jest jego pomysłem, a nie samego sztukatora. Wiąże się z pozycją A6.",
         "Przybycie na dwór Jana III: 1677, gdy pałac był w budowie. Usługi przy dekoracji rezydencji: 1681–1686. Pierwsza data nie zgadza się z żadnym z trzech wariantów w pozycji A5.",
         "Budowniczym pałacu artykuł nazywa Agostina Locciego, nie Augustyna — to ta sama osoba, ale nasze notatki używają spolszczenia.",
-        "Pozostaje otwarte: skąd pochodzi przypisanie zegara Heweliuszowi i czy monografia Starzyńskiego mówi o zegarze słonecznym więcej niż Fijałkowski."
+        "Pozostaje otwarte: skąd pochodzi przypisanie zegara Heweliuszowi i czy monografia Starzyńskiego mówi o zegarze słonecznym więcej niż Fijałkowski.",
+        "Kwerenda 11 października 2026: artykuł Hanny Widackiej w Pasażu Wiedzy przypisuje zegar współpracy z Heweliuszem wprost — „Razem z astronomem Janem Heweliuszem wykonał stiukowy zegar słoneczny”. To lokalizuje przypisanie w opracowaniu muzealnym; pozostaje pytanie, na czym opiera je sam artykuł, bo przypisu w tym miejscu nie podaje."
       ]
     }
   ]

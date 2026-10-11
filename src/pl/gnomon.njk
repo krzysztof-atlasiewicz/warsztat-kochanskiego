@@ -8,8 +8,8 @@ modul: gnomon
 para: gnomon
 permalink: /pl/gnomon/
 tagi:
-  - { typ: zrodlo, etykieta: ze źródła, opis: "Oznaczenie mówi, że zegar na ścianie pałacu w Wilanowie istnieje i jest opisany w literaturze; odnośniki do zdjęcia i do opracowań są w zakładce „Skąd to wiemy”." }
-  - { typ: rekonstrukcja, etykieta: "nasze: uproszczona geometria", opis: "Model zakłada ścianę dokładnie południową i pręt prostopadły do niej, a rysunek nie odtwarza stiukowej dekoracji zachowanego zegara — pokazuje samą geometrię trzech rachub. Rzeczywista deklinacja ściany i typ wskazówki zegara to pozycja A1 w zakładce „Pytania otwarte”." }
+  - { typ: zrodlo, etykieta: ze źródła, opis: "Oznaczenie mówi, że ze źródła pochodzi sam zegar i podział na trzy rachuby: opracowanie muzealne opisuje trzy osobne tarcze — godziny równe pośrodku, włoskie po lewej, babilońskie po prawej — oraz to, czym są ich wskazówki. Odnośniki są w zakładce „Skąd to wiemy”." }
+  - { typ: rekonstrukcja, etykieta: "nasze: uproszczona geometria", opis: "Nasze są trzy uproszczenia naraz: ściana dokładnie południowa, jeden pręt prostopadły do muru w miejsce trzech rzeźbionych wskazówek, i rysunek bez stiukowej dekoracji. Rzeczywista deklinacja ściany oraz to, czym geometrycznie jest każda z trzech wskazówek, to pozycja A1 w zakładce „Pytania otwarte”." }
 rownowaznik: "<p>Zegar wilanowski podaje trzy odczyty z jednego cienia: godziny równe, godziny włoskie liczone od ostatniego zachodu Słońca i babilońskie liczone od wschodu. Czas słoneczny prawdziwy rozmija się w Wilanowie z zegarem mechanicznym przez cały rok — o około dziesięciu do czterdziestu minut, w zależności od daty. Przyrząd pozwala ustawić datę i godzinę zegara — albo chwycić Słońce i przesunąć je po niebie — a następnie odczytać położenie cienia na trzech siatkach linii. Położenie Słońca liczone jest dla roku przestępnego 2028, więc 29 lutego jest dostępne; ta sama data w cyklu czteroletnim przesuwa cień o mniej niż grubość wykreślonej linii.</p>"
 ---
 {% karta "przyrzad", i18n[jezyk].zakladki.przyrzad %}
@@ -17,7 +17,8 @@ rownowaznik: "<p>Zegar wilanowski podaje trzy odczyty z jednego cienia: godziny 
 {% endkarta %}
 
 {% karta "wiemy", i18n[jezyk].zakladki.wiemy %}
-<p>Na elewacji ogrodowej pałacu w Wilanowie, na alkierzu południowo-wschodnim, około 1684 roku stanął stiukowy zegar słoneczny. Nie jedna tarcza, lecz trzy niezależne: godziny równe pośrodku, po lewej zegar włoski liczony od ostatniego zachodu Słońca, po prawej babiloński liczony od wschodu. Jedno Słońce, jeden pręt, jeden cień — i trzy różne godziny, zależnie od tego, na którą siatkę ten cień padnie.</p>
+<p>Na elewacji ogrodowej pałacu w Wilanowie, na alkierzu południowo-wschodnim, około 1684 roku stanął stiukowy zegar słoneczny. {% zrodlo "milewska-2010", "Opracowanie muzealne" %} opisuje nie jedną tarczę, lecz trzy niezależne: pośrodku zegar słoneczny z cyframi rzymskimi, wskazujący godziny równe, po lewej zegar włoski liczony od ostatniego zachodu Słońca, po prawej babiloński liczony od wschodu. Trzy rachuby tej samej chwili, każda zaczynająca dobę gdzie indziej.</p>
+<p>Wskazówki są przy tym częścią rzeźby, nie prętami wbitymi w mur: wskazówką tarczy środkowej jest kłos trzymany przez Saturna, a wskazówki obu tarcz bocznych trzymają putta.</p>
 
 {{ rownowaznik | safe }}
 
@@ -26,7 +27,7 @@ rownowaznik: "<p>Zegar wilanowski podaje trzy odczyty z jednego cienia: godziny 
 <p class="note">Fotografia zachowanego zegara wraz z opisem medalionu: {% zrodlo "widacka-2008", "artykuł Hanny Widackiej w Pasażu Wiedzy muzeum" %}. Zdjęcie nie jest na wolnej licencji, więc otwiera się u wydawcy, w osobnej karcie.</p>
 
 
-<p class="note uwaga">Model zakłada ścianę dokładnie południową i pręt prostopadły do niej. Rysunek nie odtwarza stiukowej dekoracji zachowanego zegara — pokazuje samą geometrię trzech rachub.</p>
+<p class="note uwaga">Model upraszcza zabytek w trzech miejscach naraz. Zakłada ścianę dokładnie południową, zastępuje trzy rzeźbione wskazówki jednym prętem prostopadłym do muru — jedno Słońce, jeden cień, trzy siatki, na które ten cień pada — i nie odtwarza stiukowej dekoracji. Rzeczywista deklinacja ściany oraz to, czym geometrycznie jest każda z trzech wskazówek, to pozycja A1 w zakładce „Pytania otwarte”.</p>
 
 <h3>{{ i18n[jezyk].gnomon.rozbieznoscTytul }}</h3>
 <p>{{ i18n[jezyk].gnomon.rozbieznoscOpis }}</p>
