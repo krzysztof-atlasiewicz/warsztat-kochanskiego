@@ -1,4 +1,5 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { gzipSync } from "node:zlib";
 import { join } from "node:path";
 import { ZNAKI, POZA_KROJEM, KATALOG, PLIK_CSS } from "../scripts/kroje-dane.mjs";
@@ -7,12 +8,51 @@ const czytaj = (p) => readFileSync(p, "utf8");
 const agenda = JSON.parse(czytaj("pdca/agenda.json"));
 const zrodla = JSON.parse(czytaj("src/_data/zrodla.json"));
 const sprawdzone = JSON.parse(czytaj("sprawdz/objasnienia-sprawdzone.json"));
+const pokrycie = JSON.parse(czytaj("sprawdz/pokrycie-przejrzane.json"));
 const STATUSY = ["otwarta", "w toku", "zamknięta", "nierozstrzygalna"];
 const ZAMKNIETE = ["zamknięta", "nierozstrzygalna"];
 // Kontrole, których niespełnienie jest zgłaszane, ale nie zatrzymuje cyklu.
 // Kontrola, której wynik jest ostrzeżeniem, nie błędem: nie potrafi
 // rozstrzygnąć sprawy sama, bo kontener roboczy nie ma dostępu do sieci.
-export const OSTRZEZENIA = new Set(["odnosnikiSprawdzone"]);
+export const OSTRZEZENIA = new Set(["odnosnikiSprawdzone", "pokrycieZrodlami"]);
+
+// ── znamiona twierdzenia o przeszłości ────────────────────────────────────
+// Maszyna nie odróżni twierdzenia historycznego od zdania o układzie strony.
+// Potrafi za to rozpoznać ślady, które twierdzenie o przeszłości zwykle za
+// sobą zostawia: datę roczną, numer strony w cudzej książce, cytat łaciński,
+// nazwisko osoby z epoki lub badacza, odwołanie do rozprawy. Rozpoznanie jest
+// zgrubne z założenia — stąd ta kontrola jest ostrzeżeniem, a rozstrzyga
+// człowiek. Granica czułości: akapit sprzed cyklu 62, w którym stało zdanie
+// o trzech rachubach bez żadnej podstawy, niósł rok „1684” i zostałby złapany.
+export const ZNAMIONA = [
+  [/\b1[5-8]\d{2}\b/, "rok"],
+  [/\b(?:s\.|str\.|page|pp?\.)\s*\d{2,4}\b/i, "numer strony"],
+  [/lang="la"/, "cytat łaciński"],
+  [/\b(?:Kochańsk|Kochansk|Huygens|Heweliusz|Hevelius|Leibniz|Richer|Sobiesk|Schott|Starzyńsk|Fijałkowsk|Widack|Milewsk)/, "nazwisko"],
+  [/\b(?:rozpraw|traktat|opracowani|monografi|treatise|monograph)/i, "odwołanie do tekstu"]
+];
+// Blok jawnie oznaczony jako nasze dopowiedzenie nie udaje twierdzenia
+// o przeszłości i nie potrzebuje przypisu — mówi to o sobie sam.
+const NASZE = /\b(?:uwaga|dim)\b/;
+
+// Znacznik zamienia się na spację, żeby „a<br>b” nie sklejało się w jedno
+// słowo — ale wtedy wytłuszczenie ostatniego słowa zdania zostawia odstęp
+// przed kropką i odcisk zmienia się od samej typografii. Akceptacja ma
+// wygasać, gdy zmienia się twierdzenie, a nie gdy ktoś pochyli nazwę.
+export const odciskAkapitu = (tresc) =>
+  createHash("sha256").update(
+    tresc.replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .replace(/ ([.,;:!?)»”])/g, "$1")
+      .replace(/([(«„]) /g, "$1")
+      .trim()
+  ).digest("hex").slice(0, 12);
+
+export const znamionaAkapitu = (klasa, tresc) => {
+  if (/\{% *zrodlo/.test(tresc)) return [];
+  if (NASZE.test(klasa || "")) return [];
+  return ZNAMIONA.filter(([re]) => re.test(tresc)).map(([, n]) => n);
+};
 const stronyZ = (kat) => readdirSync(kat).filter((f) => /\.(njk|md)$/.test(f)).map((f) => join(kat, f));
 const stronyZrodlowe = stronyZ("src/pl").map((p) => p.replace("src/pl/", ""));
 const zbudowane = () => {
@@ -505,6 +545,50 @@ const KONTROLE = {
       // go otworzy.
       zbadaj(p, p.split("/").pop().replace(/\.[^.]+$/, ""));
     }
+    return bledy;
+  },
+
+  // Czy twierdzenie o przeszłości ma na czym stać.
+  //
+  // Szesnaście kontroli pilnowało oznaczeń, statusów, odsyłaczy i wagi stron,
+  // a żadna nie pytała o rzecz najprostszą: skąd wiadomo to, co strona mówi.
+  // W cyklu 62 okazało się, że zdanie o trzech rachubach zegara wilanowskiego
+  // stało na stronie od pierwszego dnia bez żadnego przypisu, a znaleziono je
+  // przypadkiem, szukając czegoś innego. Serwis, którego osią jest podział na
+  // to, co ze źródła, i to, co nasze, nie może zostawiać tej granicy
+  // przypadkowi.
+  //
+  // Kontrola nie rozstrzyga — zgłasza. Akapit niosący znamiona twierdzenia
+  // o przeszłości, bez własnego przypisu i poza blokiem oznaczonym jako nasz,
+  // trafia na listę do przejrzenia. Człowiek orzeka raz, na czym ten akapit
+  // stoi, i wpisuje to do „sprawdz/pokrycie-przejrzane.json”. Kluczem jest
+  // odcisk treści: przeredagowany akapit traci akceptację, bo przejrzano
+  // tamto brzmienie, a nie to miejsce w dokumencie. To jest ta część, która
+  // właściwie pracuje — reszta tylko liczy.
+  pokrycieZrodlami() {
+    const bledy = [];
+    const przejrzane = pokrycie.przejrzane || {};
+    const widziane = new Set();
+    for (const katalog of ["src/pl", "src/en"]) {
+      for (const sciezka of stronyZ(katalog)) {
+        const tekst = czytaj(sciezka);
+        for (const m of tekst.matchAll(/<p(?: class="([^"]*)")?>([\s\S]*?)<\/p>/g)) {
+          const znaki = znamionaAkapitu(m[1], m[2]);
+          if (!znaki.length) continue;
+          const odcisk = odciskAkapitu(m[2]);
+          widziane.add(odcisk);
+          if (przejrzane[odcisk]) continue;
+          const poczatek = m[2].replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 60);
+          bledy.push(`${sciezka}: akapit bez przypisu [${znaki.join(", ")}] ${odcisk} — „${poczatek}…”`);
+        }
+      }
+    }
+    // Rejestr nie ma puchnąć o akapity, których już nie ma — a wpis, który
+    // przestał do czegokolwiek pasować, znaczy, że tekst zmieniono po
+    // przejrzeniu i że nikt tej zmiany nie przejrzał.
+    for (const odcisk of Object.keys(przejrzane))
+      if (!widziane.has(odcisk))
+        bledy.push(`w rejestrze został akapit, którego nie ma już w tym brzmieniu: ${odcisk} — „${przejrzane[odcisk].akapit || ""}…”`);
     return bledy;
   }
 };

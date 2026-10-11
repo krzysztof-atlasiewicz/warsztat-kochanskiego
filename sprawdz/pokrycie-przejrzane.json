@@ -1,0 +1,4 @@
+{
+  "_opis": "Rejestr akapitów, o których ktoś rozstrzygnął, na czym stoją. Kontrola „pokrycieZrodlami” zgłasza akapit, który nosi znamiona twierdzenia o przeszłości — rok, numer strony, cytat łaciński, nazwisko, odwołanie do rozprawy — a nie ma własnego przypisu ani nie stoi w bloku oznaczonym jako nasze dopowiedzenie. Maszyna nie umie rozstrzygnąć, czy taki akapit opiera się na źródle wskazanym w sąsiednim zdaniu, czy na niczym; rozstrzyga to człowiek, raz, i zapis trafia tutaj. Kluczem jest odcisk treści akapitu, nie jego numer: przeredagowany akapit traci akceptację i wraca do przejrzenia, bo przejrzano tamto brzmienie, nie to miejsce. Powód powstania: w cyklu 62 okazało się, że zdanie o trzech rachubach zegara wilanowskiego stało na stronie od początku bez żadnej podstawy, a znaleziono je przypadkiem.",
+  "przejrzane": {}
+}
