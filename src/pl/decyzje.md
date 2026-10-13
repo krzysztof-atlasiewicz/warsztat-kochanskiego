@@ -1020,3 +1020,23 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **Akapity szyfru wypadły z listy kontroli całkiem**, bo dostały własny przypis. Akapity wprowadzające zostały w niej, z nowym odciskiem i wpisem mówiącym, że teza jest nazwana w samym zdaniu. Rejestr przejrzanych ma dziewiętnaście wpisów, zgłoszeń zostaje **cztery**: Harrison i akapit o ostatnich latach, w dwóch wersjach językowych.
 
 **Cztery nowe testy** (305 zamiast 301), wszystkie zapory. Akapit wprowadzający musi mówić „ten serwis czyta"; strona szyfru nie może wrócić do domysłu o intencji i musi podawać fakt, który go zastąpił.
+
+## 2026-10-13 — Cykl 71: ostatnie dwa twierdzenia, bramka otwarta
+
+**Rozstrzygnięcie kierownika projektu: oba pozostałe twierdzenia zamknięte, kontrola pokrycia źródłami schodzi do zera.**
+
+**Zamiast oceny — to, co autor napisał sam.** Akapit „Czego ta oś nie mówi" twierdził, że zegarek z wahaczem magnetycznym był ślepą uliczką. To była nasza ocena bez podstawy. Tymczasem Kochański **wylicza wady swojego wahadła magnetycznego sam, w tym samym artykule, w którym je ogłasza** — na stronie 431 rocznika 1685. Blaszka stalowa zakrywająca magnes przyspiesza albo opóźnia chód. Byle większy kawałek żelaza przy zegarku — *„lamina, gladius, claves"* — odciąga siłę magnesu i zegar zwalnia; autor nazywa to wprost *alterum incommodum*. I nie wątpi, że samo położenie magnesu względem biegunów ma znaczenie, bo *„telluris, tanquam grandis magnetis"* — Ziemia jest wielkim magnesem. Akapit podaje teraz to, z przypisem, zamiast wyroku.
+
+**Twierdzenie przeczące przeniesione do stanu naszej wiedzy.** „Zegar morski nigdy nie powstał" brzmi teraz: *zegara morskiego jego konstrukcji nie znamy*. Mówi czytelnikowi to samo, a nie udaje, że przeszukaliśmy świat.
+
+**Perpetuum mobile dostało przypis.** Nowy wpis w rejestrze źródeł: Bogdan Lisiak i Monika Szabłowska-Zaremba, „Matematyk i konstruktor zegarów", „Forum Akademickie" 2007. Opracowanie, nie źródło pierwotne, i tak jest opisane — podaje wprost, że po wyjeździe do Cieplic w 1695 roku Kochański pracował nad perpetuum mobile.
+
+**Harrison wycięty.** Zdanie „Na kompensację trzeba było czekać do Harrisona, dziewięćdziesiąt lat po propozycji Kochańskiego" niosło liczbę, której żadne nasze źródło nie podpiera, i dotyczyło osoby, której serwis poza tym nie opisuje. Dziewięćdziesiąt lat od czego — od pomysłu z 1659 czy od spostrzeżenia z 1672? Przy tej nieokreśloności liczba nic nie ważyła. Pierwsza część zdania została, bo jest prawdziwa i **pokazuje ją sam przyrząd**.
+
+**Przy okazji znaleziono lukę w kontroli i to jest ważniejsze od samej poprawki.** Harrison przetrwał wycięcie — w dymku przy przełączniku kompensacji, w obu wersjach językowych. Kontrola `pokrycieZrodlami` czyta akapity w szablonach stron i **nie ogląda napisów interfejsu**: dymków, etykiet, równoważników tekstowych. Twierdzenie o przeszłości schowane w `title` przechodzi przez nią bez śladu. Napis poprawiono — mówi teraz, że kompensacja jest naszym dopowiedzeniem do modelu, bo zegar z epoki takiego układu nie miał — ale **sama luka zostaje otwarta i warto ją zamknąć osobnym cyklem**.
+
+**Potwierdziło się zastrzeżenie o paginacji.** Wpis rejestru źródeł dla relacji z 1685 ostrzega, że egzemplarz ma błąd paginacji i otwarcie odnośnika trzeba sprawdzać wzrokowo. Nagłówek strony 431 odczytuje się w warstwie tekstowej jako „451". Zastrzeżenie nie było formalnością.
+
+**Sześć nowych testów** (311 zamiast 305), wszystkie zapory: oba życiorysy mają cytować wyliczenie wad za autorem i nie mogą wrócić do oceny ani do twierdzenia przeczącego, a na stronach rejsu nazwisko Harrisona nie może pojawić się nigdzie — łącznie z napisami interfejsu, bo właśnie tam przetrwało.
+
+**Kontrola pokrycia źródłami zgłasza zero akapitów. Wdrożenie jest odblokowane po raz pierwszy od cyklu 64.**

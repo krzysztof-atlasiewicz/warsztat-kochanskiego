@@ -856,3 +856,39 @@ describe("dwa twierdzenia bez podstawy, zamienione na uczciwsze", () => {
     });
   }
 });
+
+describe("ostatnie dwa twierdzenia bez podstawy", () => {
+  // Akapit „Czego ta oś nie mówi” oceniał zamiast opisywać: zegarek był
+  // „ślepą uliczką”, zegar morski „nigdy nie powstał”. Pierwsze zastąpiono
+  // tym, co autor napisał o wadach sam; drugie przeniesiono z faktu do stanu
+  // naszej wiedzy. Na stronie rejsu wycięto Harrisona, bo liczba lat nie
+  // miała oparcia w żadnym źródle serwisu.
+  const OSIE = ["_site/pl/biografia/index.html", "_site/en/biography/index.html"];
+  const REJSY = ["_site/pl/wahadlo/index.html", "_site/en/pendulum/index.html"];
+
+  for (const plik of OSIE) {
+    it.skipIf(!existsSync(plik))(`${plik}: wady wyliczone za autorem, nie ocenione za niego`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "brak cytatu o Ziemi jako wielkim magnesie")
+        .toContain("telluris, tanquam grandis magnetis");
+      expect(html, "wróciła ocena zamiast opisu")
+        .not.toMatch(/ślepą uliczką|a dead end/i);
+    });
+
+    it.skipIf(!existsSync(plik))(`${plik}: zegar morski jako stan wiedzy, nie fakt`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "wróciło twierdzenie przeczące podane jako fakt")
+        .not.toMatch(/nigdy nie powstał|was never built/i);
+      expect(html, "brak sformułowania o granicy naszej wiedzy")
+        .toMatch(/nie znamy|is known to us/);
+    });
+  }
+
+  for (const plik of REJSY) {
+    it.skipIf(!existsSync(plik))(`${plik}: bez Harrisona i bez liczby lat bez oparcia`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "wrócił Harrison wraz z nieopartą liczbą lat")
+        .not.toMatch(/Harrison/);
+    });
+  }
+});
