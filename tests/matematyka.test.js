@@ -94,3 +94,53 @@ describe("narzędzie szyfrujące", () => {
     expect(ocenyPrzesuniec("ABC", "pl")).toHaveLength(26);
   });
 });
+
+describe("klucz anagramu z „Technica curiosa”", () => {
+  // Kochański podał klucz do własnego zapisu dopiero dwadzieścia jeden lat po
+  // druku Schotta, w liście ogłoszonym w „Acta Eruditorum” 1685 (s. 428):
+  // „si dispositis 21 punctis, tertio cuique, inchoata a primo numeratione,
+  // characteres, ut jacent, adscribantur” — rozmieściwszy 21 punktów, co
+  // trzeciemu, licząc od pierwszego, przypisuje się znaki tak, jak leżą.
+  //
+  // Ten test odtwarza tę instrukcję i sprawdza ją na literach wydrukowanych
+  // u Schotta na stronie 692. Jest testem wartości historycznej: gdy zacznie
+  // nie przechodzić, znaczy to, że zmieniono odczyt druku albo rozumienie
+  // klucza — a nie że popsuł się kod.
+  const LITERY = "RGTTCOMMERIPNAEINSATE";   // RGT. TCO. MME. RIp. NAE. INS. ATE-
+  const ODCZYT = "PERMAGNETISTRACTIONEM";   // per magnetis tractionem
+
+  const rozmiesc = (ciag) => {
+    const wolne = [...Array(21).keys()];
+    const miejsca = [];
+    let poz = 2;                            // pierwszy skok: co trzecie, od pierwszego
+    for (let i = 0; i < 21; i += 1) {
+      if (i > 0) poz = (poz + 3) % wolne.length;
+      miejsca.push(wolne.splice(poz, 1)[0]);
+      poz -= 1;
+      if (wolne.length) poz = ((poz % wolne.length) + wolne.length) % wolne.length;
+    }
+    const wynik = Array(21);
+    [...ciag].forEach((znak, i) => { wynik[miejsca[i]] = znak; });
+    return { miejsca, tekst: wynik.join("") };
+  };
+
+  it("ciąg z druku ma dokładnie dwadzieścia jeden liter", () => {
+    expect(LITERY).toHaveLength(21);
+  });
+
+  it("instrukcja z 1685 roku daje „per magnetis tractionem”", () => {
+    expect(rozmiesc(LITERY).tekst).toBe(ODCZYT);
+  });
+
+  it("kolejność miejsc jest tą, którą opisuje instrukcja", () => {
+    // Numeracja od jedynki, bo tak liczy druk.
+    expect(rozmiesc(LITERY).miejsca.map((m) => m + 1))
+      .toEqual([3, 6, 9, 12, 15, 18, 21, 4, 8, 13, 17, 1, 7, 14, 20, 10, 19, 11, 5, 16, 2]);
+  });
+
+  it("odczyt mówi o magnetyzmie, a nie o samym wahadle", () => {
+    // Strona szyfru twierdziła przez rok, że zapis magnetyzmu nie dotyczy.
+    // Ten test jest tamtą pomyłką, zamienioną w zaporę.
+    expect(rozmiesc(LITERY).tekst).toContain("MAGNETIS");
+  });
+});

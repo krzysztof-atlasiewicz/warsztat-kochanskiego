@@ -29,7 +29,7 @@
     "uwaga": "Równoległy tekst łaciński i przekład angielski z przypisami. Gotowa warstwa transkrypcji dla modułu cyrkla — do wykorzystania po ustaleniu warunków licencyjnych."
   },
   "technica-curiosa": {
-    "autor": "Caspar Schott (księgę IX opracowania przypisują Adamowi Adamandemu Kochańskiemu; w druku mowa wyłącznie o bezimiennym „Amicusie”)",
+    "autor": "Caspar Schott (księgę IX przypisał sobie Adam Adamandy Kochański w liście ogłoszonym w „Acta Eruditorum” 1685; w druku z 1664 mowa wyłącznie o bezimiennym „Amicusie”)",
     "tytul": "Technica curiosa, sive Mirabilia artis, libris XII comprehensa",
     "w": null,
     "rok": 1664,
@@ -42,7 +42,7 @@
     "frazy": [
       "Technica curiosa"
     ],
-    "uwaga": "Pełny skan tomu, egzemplarz Getty Research Institute. Druk ukazał się w Norymberdze u Endterów, choć Schott pracował w Würzburgu. Księga IX „Mirabilia Chronometrica\" zaczyna się na stronie drukowanej 620. Zapis szyfrowy odnaleziony: strona 692, Propositio XXXI — anagram z dwudziestu jeden liter, nie szyfr podstawieniowy; odnośnik otwiera się na tej stronie. Przypisanie księgi IX Kochańskiemu pochodzi z opracowań — w druku mowa wyłącznie o bezimiennym „Amicusie\". Szczegóły w pozycji A2 agendy."
+    "uwaga": "Pełny skan tomu, egzemplarz Getty Research Institute. Druk ukazał się w Norymberdze u Endterów, choć Schott pracował w Würzburgu. Księga IX „Mirabilia Chronometrica\" zaczyna się na stronie drukowanej 620. Zapis szyfrowy odnaleziony: strona 692, Propositio XXXI — anagram z dwudziestu jeden liter, nie szyfr podstawieniowy; odnośnik otwiera się na tej stronie. W druku autora nie nazwano, ale Kochański przypisał sobie całą księgę IX w liście ogłoszonym w „Acta Eruditorum\" w 1685 roku, a klucz podany w tym liście rozwiązuje anagram jako „per magnetis tractionem\". Szczegóły w pozycji A2 agendy."
   },
   "richer-1729": {
     "autor": "Jean Richer",
@@ -96,5 +96,21 @@
     "licencja": "tekst muzeum — wszystkie prawa zastrzeżone, wolno tylko odsyłać",
     "frazy": [],
     "uwaga": "Jedyne znane nam opracowanie opisujące wszystkie trzy tarcze zegara wilanowskiego z osobna: środkową z cyframi rzymskimi jako zegar słoneczny godzin równych, lewą jako zegar włoski liczony od ostatniego zachodu, prawą jako babiloński liczony od wschodu. Podaje też, czym są wskazówki: środkową jest kłos trzymany przez Saturna, boczne trzymają putta. Deklinacji ściany ani nachylenia wskazówek artykuł nie podaje. Tekst nie jest na wolnej licencji, więc zostaje odnośnik bez osadzenia."
+  },
+  "acta-1685-perpendiculum": {
+    "autor": "Adam Adamandy Kochański",
+    "tytul": "Novum genus Perpendiculi pro Horologiis Rotatis portatilibus",
+    "w": "Acta Eruditorum",
+    "rok": 1685,
+    "tom": 4,
+    "strony": "428–433; daty i klucz szyfrowy 428–429, relacja o wykonaniu 429–430",
+    "instytucja": "Wellcome Library / Internet Archive",
+    "url": "https://archive.org/details/s1id13206510/page/428/mode/2up",
+    "licencja": "Public Domain Mark 1.0",
+    "frazy": [
+      "Novum genus Perpendiculi"
+    ],
+    "uwaga": "List Kochańskiego do redakcji „Acta Eruditorum” z 8 sierpnia 1685, ogłoszony w części wrześniowej rocznika. Ten sam skan, co przy „Observationes cyclometricae”, tylko otwarty dalej. Odczytano warstwę tekstową skanu; obrazów stron nie kolacjonowano. Egzemplarz ma odnotowany błąd paginacji w dalszej części tomu, więc otwarcie odnośnika trzeba sprawdzić wzrokowo. Tekst rozstrzyga dwie rzeczy, co do których strona szyfru twierdziła wcześniej co innego, i datuje pomysł regulatora magnetycznego na 1659 rok, a sprężynę osobno na około 1672.",
+    "osadzenie": "https://archive.org/embed/s1id13206510/page/428/mode/2up"
   }
 }

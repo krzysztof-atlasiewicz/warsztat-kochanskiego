@@ -725,16 +725,18 @@ describe.skipIf(!zbudowane)("kwerendy źródłowe", () => {
   });
 });
 
-// Rozbieżności między przekazem a drukiem mają stać na stronie szyfru, wypisane,
-// a nie zniknąć przy następnym porządkowaniu tekstu.
-describe.skipIf(!zbudowane)("rozbieżności w module szyfru", () => {
+// Cztery punkty kwerendy mają stać na stronie szyfru, wypisane, a nie zniknąć
+// przy następnym porządkowaniu tekstu. Dwa z nich rozstrzygnął list autora
+// z 1685 roku — przeciwko wcześniejszemu wnioskowi serwisu — i naprawa ma być
+// widoczna razem z pomyłką, nie zamiast niej.
+describe.skipIf(!zbudowane)("cztery punkty w module szyfru", () => {
   for (const [plik, naglowek, slowa] of [
-    ["_site/pl/szyfr/index.html", "rozbieżności z drukiem",
+    ["_site/pl/szyfr/index.html", "Cztery punkty, dwa rozstrzygnięte przez autora",
      ["692", "Anagramma", "Amicus", "587", "dignitas"]],
-    ["_site/en/cipher/index.html", "discrepancies with the printed book",
+    ["_site/en/cipher/index.html", "Four points, two settled by the author",
      ["692", "Anagramma", "Amicus", "587", "dignitas"]]
   ]) {
-    it(`${plik} — cztery rozbieżności wypisane wraz z drugim zapisem`, () => {
+    it(`${plik} — cztery punkty wypisane wraz z drugim zapisem`, () => {
       const h = readFileSync(plik, "utf8");
       expect(h, "brak wykazu rozbieżności").toContain(naglowek);
       for (const s of slowa) expect(h, `brak „${s}" w wykazie`).toContain(s);
@@ -757,4 +759,32 @@ describe.skipIf(!zbudowane)("rozbieżności w module szyfru", () => {
         .toMatch(/decyzją kierownika projektu/);
     }
   });
+});
+
+describe("strona szyfru po liście z 1685 roku", () => {
+  // Przez rok strona twierdziła dwie rzeczy, które list Kochańskiego do
+  // redakcji „Acta Eruditorum” obalił: że zapis szyfrowy nie dotyczy
+  // magnetyzmu i że utożsamienie bezimiennego Amicusa z Kochańskim pochodzi
+  // wyłącznie z opracowań. Te testy są tamtymi zdaniami zamienionymi w zapory.
+  const STRONY_SZYFRU = ["_site/pl/szyfr/index.html", "_site/en/cipher/index.html"];
+
+  for (const plik of STRONY_SZYFRU) {
+    it.skipIf(!existsSync(plik))(`${plik}: powołuje się na list z 1685 roku`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "brak odwołania do relacji z 1685").toContain("qui totus a me");
+      expect(html, "brak rozwiązania anagramu").toMatch(/per magnetis tractionem/i);
+    });
+
+    it.skipIf(!existsSync(plik))(`${plik}: nie twierdzi już, że zapis magnetyzmu nie dotyczy`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "wróciło zdanie obalone przez źródło")
+        .not.toMatch(/Nie dotyczy wahaczy magnetycznych|It is not about magnetic balances/);
+    });
+
+    it.skipIf(!existsSync(plik))(`${plik}: nie odsyła utożsamienia Amicusa do samych opracowań`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "wróciło zdanie o opracowaniach jako jedynej podstawie")
+        .not.toMatch(/pochodzi z opracowań, nie z druku|comes from the scholarship, not from the print/);
+    });
+  }
 });
