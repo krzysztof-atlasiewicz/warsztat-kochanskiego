@@ -6,7 +6,8 @@
 // niepostrzeżenie — w którąkolwiek stronę.
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
-import { OSTRZEZENIA, ZNAMIONA, odciskAkapitu, znamionaAkapitu } from "../sprawdz/kontrole.mjs";
+import { OSTRZEZENIA, ZNAMIONA, odciskAkapitu, znamionaAkapitu,
+  napisyZSzablonu, napisyZDanych } from "../sprawdz/kontrole.mjs";
 
 describe("pokrycie twierdzeń źródłami", () => {
   it("jest ostrzeżeniem, nie błędem", () => {
@@ -77,5 +78,32 @@ describe("pokrycie twierdzeń źródłami", () => {
         .toBeGreaterThan(20);
       expect(w.przejrzal, `${odcisk}: wpis bez wskazania, kto przejrzał`).toBeTruthy();
     }
+  });
+  it("widzi twierdzenie schowane w dymku", () => {
+    // Zapora na wypadek, który zdarzył się naprawdę. W cyklu 71 wycięto ze
+    // strony rejsu zdanie o Harrisonie, a ono przeżyło w atrybucie „title”
+    // przy przełączniku kompensacji — bo kontrola oglądała tylko akapity.
+    const szablon = '<label title="Dodaje do spr\u0119\u017cyny uk\u0142ad znosz\u0105cy wp\u0142yw temperatury — '
+      + 'rozwi\u0105zanie, kt\u00f3re pojawi\u0142o si\u0119 dopiero u Harrisona, dziewi\u0119\u0107dziesi\u0105t lat p\u00f3\u017aniej."><input></label>';
+    const napisy = napisyZSzablonu(szablon);
+    expect(napisy, "dymek w ogóle nie został wydobyty").toHaveLength(1);
+    expect(znamionaAkapitu("", napisy[0].tresc), "twierdzenie w dymku przeszło niezauważone")
+      .not.toHaveLength(0);
+  });
+
+  it("widzi twierdzenie schowane w napisie wspólnym", () => {
+    const dane = '    kiedyUwaga: "Zegar mechaniczny chodzi wed\u0142ug dzisiejszego czasu. Kocha\u0144ski takiego nie mia\u0142.",';
+    const napisy = napisyZDanych(dane);
+    expect(napisy, "napis z pliku danych nie został wydobyty").toHaveLength(1);
+    expect(napisy[0].klucz, "zgubiono nazwę napisu, bez niej zgłoszenie jest nieczytelne")
+      .toBe("kiedyUwaga");
+    expect(znamionaAkapitu("", napisy[0].tresc), "twierdzenie w napisie przeszło niezauważone")
+      .toContain("nazwisko");
+  });
+
+  it("nie zgłasza napisu, który o przeszłości nie mówi", () => {
+    const szablon = '<label title="Przesuwa Sło\u0144ce po niebie i pokazuje poło\u017cenie cienia."><input></label>';
+    expect(znamionaAkapitu("", napisyZSzablonu(szablon)[0].tresc),
+      "zwykła instrukcja obsługi zgłoszona jako twierdzenie").toHaveLength(0);
   });
 });

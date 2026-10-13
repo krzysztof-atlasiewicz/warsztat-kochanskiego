@@ -1040,3 +1040,17 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **Sześć nowych testów** (311 zamiast 305), wszystkie zapory: oba życiorysy mają cytować wyliczenie wad za autorem i nie mogą wrócić do oceny ani do twierdzenia przeczącego, a na stronach rejsu nazwisko Harrisona nie może pojawić się nigdzie — łącznie z napisami interfejsu, bo właśnie tam przetrwało.
 
 **Kontrola pokrycia źródłami zgłasza zero akapitów. Wdrożenie jest odblokowane po raz pierwszy od cyklu 64.**
+
+## 2026-10-13 — Cykl 72: kontrola zagląda tam, gdzie przeżył Harrison
+
+**Kontrola pokrycia źródłami czyta teraz także napisy interfejsu** — dymki i tytuły w szablonach, równoważniki tekstowe oraz napisy wspólne z pliku danych. Powód jest konkretny: w cyklu 71 wycięto ze strony rejsu zdanie o Harrisonie, a ono przeżyło wycięcie w atrybucie `title` przy przełączniku kompensacji, w obu wersjach językowych. Twierdzenie o przeszłości nie staje się mniej twierdzeniem przez to, że siedzi w dymku.
+
+**Przy pisaniu testu wyszło, że luka była głębsza, niż ją wczoraj opisano.** Wpis cyklu 71 mówi, że kontrola nie oglądała napisów. To prawda, ale nie cała prawda: **tego dymka nie złapałaby nawet patrząc**. Zdanie „na kompensację trzeba było czekać do Harrisona, dziewięćdziesiąt lat później" nie zawiera ani roku zapisanego cyfrą, ani żadnego nazwiska z naszej listy — bo lista nazwisk jest zamknięta i obejmuje osoby, o których już wiemy. **Twierdzenie o kimś nowym przechodziło przez tę kontrolę bez śladu.**
+
+**Stąd nowe znamię: odstęp czasu zapisany słownie.** „Dziewięćdziesiąt lat", „szesnaście lat", „ninety years" — twierdzenie o odstępie między zdarzeniami jest twierdzeniem o przeszłości niezależnie od tego, czy liczba stoi cyfrą, czy słowem. Znamię nie dołożyło ani jednego zgłoszenia do bieżącej treści, bo zdania, dla którego powstało, już nie ma. Jest zaporą na przyszłość, nie zaległością.
+
+**Czego to nie naprawia i trzeba powiedzieć wprost.** Zamknięta lista nazwisk nadal jest zamknięta. Jeżeli ktoś wpisze do serwisu twierdzenie o osobie spoza niej i nie poda przy tym ani roku, ani odstępu, ani cytatu łacińskiego — kontrola to przepuści. Rozpoznawanie dowolnych nazwisk dałoby się zrobić, ale kosztem fałszywych trafień przy każdej nazwie miejscowości i każdym tytule. Granica zostaje opisana, nie zamaskowana.
+
+**Wydobywanie napisów wydzielono do osobnych funkcji**, żeby dało się je sprawdzić testem na przykładzie, a nie tylko na bieżącej treści serwisu. Trzy nowe testy (314 zamiast 311): dymek z twierdzeniem ma być wydobyty i zgłoszony; napis wspólny ma być wydobyty razem ze swoją nazwą, bo bez niej zgłoszenie jest nieczytelne; zwykła instrukcja obsługi ma nie być zgłaszana. Pierwszy z nich odtwarza dokładnie ten dymek, który przeżył wycięcie.
+
+**Jedenaście zgłoszeń czeka na przegląd** — sześć różnych napisów w dwóch wersjach językowych, wszystkie w pliku danych. Dopóki nie zostaną przejrzane, wdrożenie jest zablokowane. Nic nie czeka w kolejce, bo cykle 65–71 wdrożono przed chwilą.

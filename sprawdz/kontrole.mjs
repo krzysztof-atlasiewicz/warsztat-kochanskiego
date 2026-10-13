@@ -29,7 +29,15 @@ export const ZNAMIONA = [
   [/\b(?:s\.|str\.|page|pp?\.)\s*\d{2,4}\b/i, "numer strony"],
   [/lang="la"/, "cytat łaciński"],
   [/\b(?:Kochańsk|Kochansk|Huygens|Heweliusz|Hevelius|Leibniz|Richer|Sobiesk|Schott|Starzyńsk|Fijałkowsk|Widack|Milewsk)/, "nazwisko"],
-  [/\b(?:rozpraw|traktat|opracowani|monografi|treatise|monograph)/i, "odwołanie do tekstu"]
+  [/\b(?:rozpraw|traktat|opracowani|monografi|treatise|monograph)/i, "odwołanie do tekstu"],
+  // Odstęp czasu zapisany słownie. Dołożone w cyklu 72, bo zdanie
+  // „na kompensację trzeba było czekać do Harrisona, dziewięćdziesiąt lat
+  // później” nie miało ani roku cyfrą, ani nazwiska z naszej listy — i nie
+  // zostałoby złapane nawet wtedy, gdyby kontrola zaglądała do dymków.
+  // Twierdzenie o odstępie między zdarzeniami jest twierdzeniem o przeszłości
+  // niezależnie od tego, czy liczba stoi cyfrą, czy słowem.
+  [/\b\w*(?:naście|dziesiąt|dziesiąt\w*|set|sta)\s+lat\b/i, "odstęp czasu słowny"],
+  [/\b(?:ten|eleven|twelve|thir|four|fif|six|seven|eigh|nine)\w*\s+years\b/i, "odstęp czasu słowny"]
 ];
 // Blok jawnie oznaczony jako nasze dopowiedzenie nie udaje twierdzenia
 // o przeszłości i nie potrzebuje przypisu — mówi to o sobie sam.
@@ -47,6 +55,26 @@ export const odciskAkapitu = (tresc) =>
       .replace(/([(«„]) /g, "$1")
       .trim()
   ).digest("hex").slice(0, 12);
+
+// Napisy interfejsu w szablonie strony: dymki, tytuły i równoważnik tekstowy.
+// Wydzielone osobno, bo to właśnie ich kontrola nie oglądała do cyklu 72.
+export const napisyZSzablonu = (tekst) => {
+  const out = [];
+  for (const m of tekst.matchAll(/(?:title|data-dymek)="([^"]{15,})"/g))
+    out.push({ rodzaj: "napis interfejsu", tresc: m[1] });
+  for (const m of tekst.matchAll(/^rownowaznik:\s*"((?:[^"\\]|\\.)*)"/gm))
+    out.push({ rodzaj: "równoważnik tekstowy", tresc: m[1] });
+  return out;
+};
+
+// Napisy wspólne dla całego serwisu, czytane z pliku danych: na zbudowanych
+// stronach są już wmieszane w znaczniki i nie da się ich odróżnić od treści.
+export const napisyZDanych = (tekst) => {
+  const out = [];
+  for (const m of tekst.matchAll(/^\s*([A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż0-9_]+):\s*"((?:[^"\\]|\\.)*)"/gm))
+    out.push({ klucz: m[1], rodzaj: "napis interfejsu", tresc: m[2] });
+  return out;
+};
 
 export const znamionaAkapitu = (klasa, tresc) => {
   if (/\{% *zrodlo/.test(tresc)) return [];
@@ -569,20 +597,35 @@ const KONTROLE = {
     const bledy = [];
     const przejrzane = pokrycie.przejrzane || {};
     const widziane = new Set();
+
+    // Jedno miejsce zgłoszenia, żeby akapit i napis interfejsu traktować tak
+    // samo. Twierdzenie o przeszłości nie staje się mniej twierdzeniem przez
+    // to, że siedzi w atrybucie „title” zamiast w akapicie.
+    const zbadaj = (gdzie, rodzaj, klasa, tresc) => {
+      const znaki = znamionaAkapitu(klasa, tresc);
+      if (!znaki.length) return;
+      const odcisk = odciskAkapitu(tresc);
+      widziane.add(odcisk);
+      if (przejrzane[odcisk]) return;
+      const poczatek = tresc.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 60);
+      bledy.push(`${gdzie}: ${rodzaj} bez przypisu [${znaki.join(", ")}] ${odcisk} — „${poczatek}…”`);
+    };
+
     for (const katalog of ["src/pl", "src/en"]) {
       for (const sciezka of stronyZ(katalog)) {
         const tekst = czytaj(sciezka);
-        for (const m of tekst.matchAll(/<p(?: class="([^"]*)")?>([\s\S]*?)<\/p>/g)) {
-          const znaki = znamionaAkapitu(m[1], m[2]);
-          if (!znaki.length) continue;
-          const odcisk = odciskAkapitu(m[2]);
-          widziane.add(odcisk);
-          if (przejrzane[odcisk]) continue;
-          const poczatek = m[2].replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim().slice(0, 60);
-          bledy.push(`${sciezka}: akapit bez przypisu [${znaki.join(", ")}] ${odcisk} — „${poczatek}…”`);
-        }
+        for (const m of tekst.matchAll(/<p(?: class="([^"]*)")?>([\s\S]*?)<\/p>/g))
+          zbadaj(sciezka, "akapit", m[1], m[2]);
+        // W cyklu 71 twierdzenie o Harrisonie przeżyło wycięcie właśnie tutaj.
+        for (const n of napisyZSzablonu(tekst)) zbadaj(sciezka, n.rodzaj, "", n.tresc);
       }
     }
+
+    // Napisy wspólne dla całego serwisu. Czytane z pliku danych, bo na
+    // zbudowanych stronach są już wmieszane w znaczniki i nie da się ich
+    // odróżnić od treści.
+    for (const n of napisyZDanych(czytaj("src/_data/i18n.js")))
+      zbadaj(`src/_data/i18n.js (${n.klucz})`, n.rodzaj, "", n.tresc);
     // Rejestr nie ma puchnąć o akapity, których już nie ma — a wpis, który
     // przestał do czegokolwiek pasować, znaczy, że tekst zmieniono po
     // przejrzeniu i że nikt tej zmiany nie przejrzał.
