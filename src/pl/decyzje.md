@@ -1054,3 +1054,15 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **Wydobywanie napisów wydzielono do osobnych funkcji**, żeby dało się je sprawdzić testem na przykładzie, a nie tylko na bieżącej treści serwisu. Trzy nowe testy (314 zamiast 311): dymek z twierdzeniem ma być wydobyty i zgłoszony; napis wspólny ma być wydobyty razem ze swoją nazwą, bo bez niej zgłoszenie jest nieczytelne; zwykła instrukcja obsługi ma nie być zgłaszana. Pierwszy z nich odtwarza dokładnie ten dymek, który przeżył wycięcie.
 
 **Jedenaście zgłoszeń czeka na przegląd** — sześć różnych napisów w dwóch wersjach językowych, wszystkie w pliku danych. Dopóki nie zostaną przejrzane, wdrożenie jest zablokowane. Nic nie czeka w kolejce, bo cykle 65–71 wdrożono przed chwilą.
+
+## 2026-10-13 — Cykl 73: jedenaście napisów przejrzanych, kontrola znów na zerze
+
+**Rozstrzygnięcie kierownika projektu: dziewięć napisów zamknięto wpisem do rejestru, jeden poprawiono.** Były to zgłoszenia kontroli rozszerzonej w poprzednim cyklu na napisy interfejsu — sześć różnych tekstów w dwóch wersjach językowych.
+
+**Opisy rejsu Richera** opierają się na „richer-1729", przypisanym na stronie, na której stoją. **Etykieta przycisku „Wczytaj zapis z 1664"** wskazuje druk, do którego moduł się odnosi; sam zapis na tarczy jest rekonstrukcją oznaczoną jako nasza. **Zdanie o zegarze urzędowym** samo mówi, że jest naszym punktem odniesienia, więc nie udaje twierdzenia o przeszłości. **Opis serwisu** w wersji angielskiej odsyła do czterech przyrządów, z których każdy ma własne oznaczenia i źródła.
+
+**Jeden z tych napisów wart jest osobnej wzmianki.** Dymek przy przycisku mówi: „Wstawia zapis odtwarzający ten, który Kochański ukrył w księdze IX z 1664 roku". To prawdziwe twierdzenie — ale **do wczoraj stało bez żadnej podstawy**, przez rok, w miejscu, którego żadna kontrola nie oglądała. Podstawę ma od cyklu 67: Kochański pisze w liście z 1685 roku, że całą księgę IX napisał sam, a wahadło magnetyczne było tam *indicatum sub facili steganographia*. Rejestr odsyła teraz do obu źródeł.
+
+**Jedno zdanie ucięto zamiast wpisywać.** Opis rozbieżności czasu kończył się słowami: „godzina czasu letniego — wynalazek XX-wieczny, którego Kochański nie znał". Reszta napisu to rachunek, który moduł wykonuje: równanie czasu, długość geograficzna Wilanowa, przesunięcie strefowe. Ten człon był twierdzeniem o przeszłości bez źródła i **wpisanie go do rejestru z powodem „wiadomo powszechnie" otworzyłoby furtkę, przez którą przeszłoby wszystko**. Był ozdobnikiem; moduł działa bez niego, a czytelnik i tak wie swoje, skoro zdanie wyżej mówi, że zegar urzędowy jest naszym punktem odniesienia. Zapora w testach pilnuje, żeby nie wrócił.
+
+**Osiemnaście kontroli bez zastrzeżeń, 315 testów, rejestr przejrzanych ma 28 wpisów.** Wdrożenie odblokowane.

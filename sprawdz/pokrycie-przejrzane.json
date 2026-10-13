@@ -114,6 +114,60 @@
       "plik": "src/en/index.njk",
       "opiera": "nasze odczytanie jego pracy, nazwane w samym zdaniu — lede mówi „ten serwis czyta”, więc teza nie udaje faktu biograficznego ani cudzej własności",
       "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "b3d9ebd3ff34": {
+      "akapit": "Richer wyszedł z La Rochelle 8 lutego 1672 i dobił do Kajenn",
+      "plik": "src/_data/i18n.js (kalendarzOpis)",
+      "opiera": "opiera się na „richer-1729”, przypisanym na stronie, na której ten napis występuje",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "9cc8f58cff07": {
+      "akapit": "Wczytaj zapis z 1664",
+      "plik": "src/_data/i18n.js (historyczny)",
+      "opiera": "etykieta przycisku — rok wskazuje druk, do którego odnosi się moduł, a sam zapis na tarczy jest rekonstrukcją oznaczoną jako nasza",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "5cf030efffa4": {
+      "akapit": "Wstawia zapis odtwarzający ten, który Kochański ukrył w księ",
+      "plik": "src/_data/i18n.js (historyczny)",
+      "opiera": "opiera się na „acta-1685-perpendiculum” i „technica-curiosa”: Kochański sam pisze w liście z 1685, że całą księgę IX napisał, a wahadło magnetyczne było tam indicatum sub facili steganographia",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "029fd0053594": {
+      "akapit": "Zegar mechaniczny chodzi według dzisiejszego czasu urzędoweg",
+      "plik": "src/_data/i18n.js (kiedyUwaga)",
+      "opiera": "nie jest twierdzeniem o przeszłości — zdanie mówi, że zegar urzędowy jest naszym punktem odniesienia, i samo się jako nasze oznacza",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "7123ae265827": {
+      "akapit": "Four instruments Adam Adamandy Kochański worked on, built to",
+      "plik": "src/_data/i18n.js (opis)",
+      "opiera": "opis serwisu — każdy z czterech przyrządów ma własne oznaczenia i źródła na swojej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "5ff5eeb92980": {
+      "akapit": "Richer sailed from La Rochelle on 8 February 1672 and reache",
+      "plik": "src/_data/i18n.js (kalendarzOpis)",
+      "opiera": "opiera się na „richer-1729”, przypisanym na stronie, na której ten napis występuje",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "ef78c8598e56": {
+      "akapit": "Load the 1664 record",
+      "plik": "src/_data/i18n.js (historyczny)",
+      "opiera": "etykieta przycisku — rok wskazuje druk, do którego odnosi się moduł, a sam zapis na tarczy jest rekonstrukcją oznaczoną jako nasza",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "196e6ea14133": {
+      "akapit": "Inserts a record reconstructing the one Kochański hid in boo",
+      "plik": "src/_data/i18n.js (historyczny)",
+      "opiera": "opiera się na „acta-1685-perpendiculum” i „technica-curiosa”: Kochański sam pisze w liście z 1685, że całą księgę IX napisał, a wahadło magnetyczne było tam indicatum sub facili steganographia",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "2afa561abd36": {
+      "akapit": "The mechanical clock keeps today's civil time. Kochański had",
+      "plik": "src/_data/i18n.js (kiedyUwaga)",
+      "opiera": "nie jest twierdzeniem o przeszłości — zdanie mówi, że zegar urzędowy jest naszym punktem odniesienia, i samo się jako nasze oznacza",
+      "przejrzal": "kierownik projektu, 13 października 2026"
     }
   }
 }

@@ -106,4 +106,14 @@ describe("pokrycie twierdzeń źródłami", () => {
     expect(znamionaAkapitu("", napisyZSzablonu(szablon)[0].tresc),
       "zwykła instrukcja obsługi zgłoszona jako twierdzenie").toHaveLength(0);
   });
+  it("ozdobnik o czasie letnim nie wraca do napisu", () => {
+    // Zdanie "wynalazek XX-wieczny, którego Kochański nie znał" było
+    // twierdzeniem o przeszłości bez źródła, w napisie, którego kontrola
+    // nie oglądała do cyklu 72. Ucięto je zamiast wpisywać do rejestru
+    // z powodem "wiadomo powszechnie" — taki powód otworzyłby furtkę
+    // dla wszystkiego.
+    const i18n = readFileSync("src/_data/i18n.js", "utf8");
+    expect(i18n, "wrócił ozdobnik bez źródła")
+      .not.toMatch(/wynalazek XX-wieczny|twentieth-century invention/);
+  });
 });
