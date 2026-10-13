@@ -1006,3 +1006,17 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 4. „Szyfr miał zabezpieczyć pierwszeństwo do chwili, w której autor zechce je ujawnić" — przypisanie intencji, znowu w sprawie pierwszeństwa.
 
 **Przy liczeniu tej grupy popełniono pomyłkę wartą odnotowania.** Wieczorem zapisano, że w grupie zostają dwa twierdzenia. Zostały cztery: akapit o celu szyfru przeoczono, a akapit o ostatnich latach policzono jako jedno twierdzenie, choć niesie trzy. Pomyłka wzięła się z liczenia z pamięci zamiast z odczytania akapitów w całości — ta sama przyczyna, dla której w ogóle powstała ta kontrola.
+
+## 2026-10-13 — Cykl 70: teza przestaje udawać fakt, domysł ustępuje czynności
+
+**Rozstrzygnięcie kierownika projektu: dwa z czterech pozostałych twierdzeń zamknięto, każde inaczej.** Oba były bez podstawy, ale z różnych powodów i leczy się je różnie.
+
+**Teza serwisu nazwana jako nasza.** Strona główna otwierała się zdaniem „Adam Adamandy Kochański przez czterdzieści lat wracał do jednego pytania…". Arytmetyka się broni — od Moguncji po Cieplice jest czterdzieści kilka lat — ale „wracał do jednego pytania" to nasze odczytanie jego pracy, nie jego słowa ani cudze ustalenie. Zdanie brzmi teraz: **„Ten serwis czyta pracę Adama Adamandego Kochańskiego jako czterdzieści lat wracania do jednego pytania"**. Nie traci siły, a przestaje udawać cudzą własność. To ta sama operacja, którą serwis wykonuje przy każdym przyrządzie oznaczeniem „nasze" — tyle że wpisana w zdanie, bo akapit wprowadzający nie ma miejsca na znacznik.
+
+**Domysł o intencji zastąpiony czynnością z datą.** Strona szyfru twierdziła: „Dla Kochańskiego i jego korespondentów szyfr miał nie ukryć wynalazku na zawsze, tylko zabezpieczyć pierwszeństwo do chwili, w której autor zechce je ujawnić". Przypisywaliśmy mu intencję, której nikt nie poświadcza. Tymczasem wiadomo coś lepszego i od wczoraj mamy na to źródło: **klucz do własnego zapisu ujawnił sam, dwadzieścia jeden lat po druku Schotta, w liście z 1685 roku**. Zdanie podaje teraz tę czynność z przypisem, a wniosek o tym, jak długo taki sposób zabezpieczania mógł wystarczać, czytelnik wyciąga sam.
+
+**Różnica między tymi dwiema naprawami jest warta zapamiętania.** Pierwszego twierdzenia nie dało się uźródłowić, bo jest nasze — i wtedy jedyną uczciwą drogą jest powiedzieć, że jest nasze. Drugie dało się zastąpić faktem, i wtedy oznaczanie domysłu byłoby gorsze niż jego usunięcie: po co pisać „sądzimy, że", skoro można napisać, co się wydarzyło i kiedy.
+
+**Akapity szyfru wypadły z listy kontroli całkiem**, bo dostały własny przypis. Akapity wprowadzające zostały w niej, z nowym odciskiem i wpisem mówiącym, że teza jest nazwana w samym zdaniu. Rejestr przejrzanych ma dziewiętnaście wpisów, zgłoszeń zostaje **cztery**: Harrison i akapit o ostatnich latach, w dwóch wersjach językowych.
+
+**Cztery nowe testy** (305 zamiast 301), wszystkie zapory. Akapit wprowadzający musi mówić „ten serwis czyta"; strona szyfru nie może wrócić do domysłu o intencji i musi podawać fakt, który go zastąpił.

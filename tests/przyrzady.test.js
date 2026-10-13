@@ -828,3 +828,31 @@ describe("rok 1659 po odczytaniu relacji z 1685", () => {
     });
   }
 });
+
+describe("dwa twierdzenia bez podstawy, zamienione na uczciwsze", () => {
+  // Teza serwisu i domysł o intencji szyfru stały na stronach jako fakty.
+  // Pierwsza mówi teraz, czyje to odczytanie; drugi zastąpiono czynnością
+  // z datą i źródłem. Te testy pilnują, żeby żadne nie wróciło.
+  const GLOWNE = ["_site/pl/index.html", "_site/en/index.html"];
+  const SZYFRY = ["_site/pl/szyfr/index.html", "_site/en/cipher/index.html"];
+
+  for (const plik of GLOWNE) {
+    it.skipIf(!existsSync(plik))(`${plik}: teza nazwana jako nasze odczytanie`, () => {
+      const html = readFileSync(plik, "utf8");
+      const lede = html.match(/<p class="lede">([\s\S]*?)<\/p>/)?.[1] || "";
+      expect(lede, "brak akapitu wprowadzającego").toBeTruthy();
+      expect(lede, "teza znów podana jako fakt biograficzny")
+        .toMatch(/Ten serwis czyta|This site reads/);
+    });
+  }
+
+  for (const plik of SZYFRY) {
+    it.skipIf(!existsSync(plik))(`${plik}: intencja zastąpiona czynnością z datą`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "wrócił domysł o tym, po co był szyfr")
+        .not.toMatch(/miał nie ukryć wynalazku|was never meant to hide the invention/);
+      expect(html, "brak faktu, który zastąpił domysł")
+        .toMatch(/dwadzieścia jeden lat po druku|twenty-one years after Schott/);
+    });
+  }
+});

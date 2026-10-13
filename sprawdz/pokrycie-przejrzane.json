@@ -102,6 +102,18 @@
       "plik": "src/en/pendulum.njk",
       "opiera": "opiera się na „richer-1729”, przypisanym w akapicie wyżej na tej samej stronie",
       "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "8bc5845bb010": {
+      "akapit": "Ten serwis czyta pracę Adama Adamandego Kochańskiego jako cz",
+      "plik": "src/pl/index.njk",
+      "opiera": "nasze odczytanie jego pracy, nazwane w samym zdaniu — lede mówi „ten serwis czyta”, więc teza nie udaje faktu biograficznego ani cudzej własności",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "ebaa60aa4b59": {
+      "akapit": "This site reads the work of Adam Adamandy Kochański as forty",
+      "plik": "src/en/index.njk",
+      "opiera": "nasze odczytanie jego pracy, nazwane w samym zdaniu — lede mówi „ten serwis czyta”, więc teza nie udaje faktu biograficznego ani cudzej własności",
+      "przejrzal": "kierownik projektu, 13 października 2026"
     }
   }
 }
