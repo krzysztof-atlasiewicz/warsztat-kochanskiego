@@ -788,3 +788,43 @@ describe("strona szyfru po liście z 1685 roku", () => {
     });
   }
 });
+
+describe("rok 1659 po odczytaniu relacji z 1685", () => {
+  // Przez rok oś czasu i strona rejsu przypisywały Kochańskiemu propozycję
+  // sprężyny regulującej w 1659 roku i pierwszeństwo szesnastu lat przed
+  // Huygensem. Relacja autora z 1685 roku mówi co innego: rok 1659 dotyczy
+  // wahadła magnetycznego, sprężyna jest datowana osobno na około 1672,
+  // a sam Kochański zasługi się wyrzeka. Te testy są tamtym błędem zamienionym
+  // w zaporę — razem z twierdzeniem o pierwszeństwie, którego bramka GA2
+  // zakazuje bez zastrzeżenia.
+  const OSIE = ["_site/pl/biografia/index.html", "_site/en/biography/index.html"];
+  const REJSY = ["_site/pl/wahadlo/index.html", "_site/en/pendulum/index.html"];
+
+  for (const plik of OSIE) {
+    it.skipIf(!existsSync(plik))(`${plik}: wiersz 1659 mówi o wahadle magnetycznym, nie o sprężynie`, () => {
+      const html = readFileSync(plik, "utf8");
+      const wiersz = html.split(/<li[^>]*>/).find((w) => /<strong>1659<\/strong>/.test(w));
+      expect(wiersz, "brak wiersza 1659 na osi").toBeTruthy();
+      expect(wiersz, "wiersz 1659 nie nazywa wahadła magnetycznego")
+        .toMatch(/magnetyczn|magnetic/);
+      expect(wiersz, "sprężyna wróciła do wiersza 1659")
+        .not.toMatch(/sprężyn|regulating spring|hairspring/i);
+    });
+  }
+
+  for (const plik of REJSY) {
+    it.skipIf(!existsSync(plik))(`${plik}: przytacza wyrzeczenie się zasługi`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "brak cytatu, w którym autor odmawia sobie zasługi")
+        .toContain("laudem in me transferre velim");
+    });
+  }
+
+  for (const plik of [...OSIE, ...REJSY]) {
+    it.skipIf(!existsSync(plik))(`${plik}: nie wraca twierdzenie o pierwszeństwie`, () => {
+      const html = readFileSync(plik, "utf8");
+      expect(html, "wróciło niepoparte twierdzenie o pierwszeństwie wobec Huygensa")
+        .not.toMatch(/szesnaście lat przed|sixteen years before/i);
+    });
+  }
+});
