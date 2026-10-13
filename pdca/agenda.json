@@ -152,6 +152,40 @@
         "Pozostaje otwarte: skąd pochodzi przypisanie zegara Heweliuszowi i czy monografia Starzyńskiego mówi o zegarze słonecznym więcej niż Fijałkowski.",
         "Kwerenda 11 października 2026: artykuł Hanny Widackiej w Pasażu Wiedzy przypisuje zegar współpracy z Heweliuszem wprost — „Razem z astronomem Janem Heweliuszem wykonał stiukowy zegar słoneczny”. To lokalizuje przypisanie w opracowaniu muzealnym; pozostaje pytanie, na czym opiera je sam artykuł, bo przypisu w tym miejscu nie podaje."
       ]
+    },
+    {
+      "id": "A9",
+      "pytanie": "Czy istnieje jakikolwiek wizerunek Adama Adamandego Kochańskiego, a jeśli nie — czy brak ten jest gdzieś stwierdzony wprost?",
+      "dlaczego": "Strona biografii nie pokazuje twarzy, bo żadnej nie znamy. Dopóki nie wiadomo, czy wizerunek nie istnieje, czy tylko go nie znaleźliśmy, brak jest naszym brakiem, a nie faktem o przeszłości — i tak musi być opisany.",
+      "zmieni": "Miejsce wizerunku na stronie biografii, którego dziś nie ma wcale. Opublikowana identyfikacja pozwoli je wypełnić podobizną i podać, kto tę identyfikację postawił. Potwierdzony brak pozwoli postawić tam ramę pustą i podpisać ją stanowczo, zamiast milczeć.",
+      "zrodlo": "Zbiory cyfrowe i katalogi: Polona, Federacja Bibliotek Cyfrowych, Cyfrowe MNW, zbiory Muzeum Pałacu Króla Jana III, Europeana, zbiory grafiki Rijksmuseum i British Museum; encyklopedyczne opracowania o jezuitach w Polsce; katalogi malarstwa wilanowskiego z identyfikacją postaci",
+      "status": "otwarta",
+      "miejsca": [
+        "biografia"
+      ],
+      "dotyczy": "miejsce wizerunku na stronie biografii",
+      "ustalenia": [
+        "Zwykłe przeszukanie sieci nie znalazło żadnego portretu ani ryciny z jego podobizną. Hasła encyklopedyczne, biografie muzealne i dwa opracowania Bogdana Lisiaka obywają się bez wizerunku i żadne nie wspomina, by jakiś istniał. To brak znaleziska, nie dowód nieistnienia.",
+        "Kwerenda ma szukać opublikowanej identyfikacji, nie podobieństwa. Postać w stroju duchownego na scenie dworskiej pasuje do kilkunastu osób tego dworu naraz; wskazanie jej jako Kochańskiego byłoby naszym domysłem postawionym w miejscu twierdzenia o przeszłości.",
+        "W zbiorach siedemnastowiecznych rycin nazwisko występuje w postaci łacińskiej. Szukać trzeba form: Adamandus, Adam Adamandus Kochanski, Kochanski, Cochanski — polska pisownia sama w sobie niczego tam nie znajdzie.",
+        "Wynik przeczący jest wynikiem. Jeżeli standardowe opracowanie o jezuitach w Polsce nie podaje wizerunku, a katalogi malarstwa wilanowskiego nie identyfikują żadnej postaci jako Kochańskiego, pozycję można zamknąć jako nierozstrzygalną z wykazem sprawdzonych miejsc."
+      ]
+    },
+    {
+      "id": "A10",
+      "pytanie": "Która data śmierci jest poprawna: 17 czy 19 maja 1700 roku?",
+      "dlaczego": "Oś czasu w tym serwisie podaje 17 maja. Opracowanie Bogdana Lisiaka i Moniki Szabłowskiej-Zaremby podaje 19 maja. Obie daty krążą po literaturze i żadna ze stron nie wskazuje, skąd ją bierze.",
+      "zmieni": "Ostatni wiersz osi czasu w biografii. Do czasu rozstrzygnięcia wiersz ma mówić, że opracowania podają dwie daty — tak samo jak przy dacie przybycia na dwór.",
+      "zrodlo": "Nekrologi prowincji jezuickiej (catalogi defunctorum), metryki zgonów parafii w Cieplicach, Polski Słownik Biograficzny, Encyklopedia wiedzy o jezuitach w Polsce",
+      "status": "otwarta",
+      "miejsca": [
+        "biografia"
+      ],
+      "dotyczy": "wiersz osi czasu z datą śmierci",
+      "ustalenia": [
+        "Rozbieżność zauważono 13 października przy czytaniu artykułu „Matematyk i konstruktor zegarów” („Forum Akademickie” 2007), który podaje 19 maja. Oś czasu podawała 17 maja od początku i nie miała przy tej dacie przypisu.",
+        "Rozstrzyga zapis zgonu, nie opracowanie. Zakon prowadził nekrologi prowincji, a zgon odnotowywała parafia miejsca — w tym wypadku w czeskich Cieplicach. Dopóki któregoś z tych dwóch nie widziano, mamy dwie daty z drugiej ręki, a nie jedną z pierwszej."
+      ]
     }
   ]
 }
