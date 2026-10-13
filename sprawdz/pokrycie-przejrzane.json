@@ -168,6 +168,18 @@
       "plik": "src/_data/i18n.js (kiedyUwaga)",
       "opiera": "nie jest twierdzeniem o przeszłości — zdanie mówi, że zegar urzędowy jest naszym punktem odniesienia, i samo się jako nasze oznacza",
       "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "46aca4ab5825": {
+      "akapit": "Zbiorem działających przyrządów i tekstów o pracy Adama Adam",
+      "plik": "src/pl/regulamin.njk",
+      "opiera": "opis serwisu, nie twierdzenie o przeszłości — zdanie mówi, czym jest ta strona, a praca Kochańskiego ma własne oznaczenia i źródła przy każdym przyrządzie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "9a454aab9eb0": {
+      "akapit": "A set of working instruments and texts about the work of Ada",
+      "plik": "src/en/terms.njk",
+      "opiera": "opis serwisu, nie twierdzenie o przeszłości — zdanie mówi, czym jest ta strona, a praca Kochańskiego ma własne oznaczenia i źródła przy każdym przyrządzie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
     }
   }
 }

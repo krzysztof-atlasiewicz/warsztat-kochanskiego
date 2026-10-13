@@ -50,7 +50,10 @@
 <footer>
   <p>{{ i18n[jezyk].stopka | safe }}</p>
   <p><a href="{{ i18n[jezyk].agendaUrl }}">{{ i18n[jezyk].zrodlaLink }}</a>
-  {%- if jezyk == "pl" %} · <a href="/pl/zrodla/">źródła</a> · <a href="/pl/decyzje/">rejestr decyzji</a> · <a href="/pl/zmiany/">rejestr zmian</a>{% endif %}</p>
+  {%- if jezyk == "pl" %} · <a href="/pl/zrodla/">źródła</a> · <a href="/pl/decyzje/">rejestr decyzji</a> · <a href="/pl/zmiany/">rejestr zmian</a>
+  · <a href="/pl/regulamin/">regulamin</a> · <a href="/pl/prywatnosc/">prywatność</a>
+  {%- else %} · <a href="/en/sources/">sources</a> · <a href="/en/changes/">changes</a>
+  · <a href="/en/terms/">terms</a> · <a href="/en/privacy/">privacy</a>{% endif %}</p>
 </footer>
 {% endif %}
 </div>

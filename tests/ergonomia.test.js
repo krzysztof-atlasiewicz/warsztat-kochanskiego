@@ -437,3 +437,48 @@ describe("adres do korespondencji", () => {
     }
   });
 });
+
+describe("strony prawne", () => {
+  // Serwis publiczny z adresem do korespondencji musi powiedzieć, kto go
+  // prowadzi, czyje są skany i co się dzieje z nadesłaną uwagą. Te testy
+  // pilnują rzeczy, których nie wolno zgubić przy redakcji — zwłaszcza
+  // obietnicy, że nadawca poprawki nie trafia do publicznego rejestru
+  // z nazwiska.
+  const STRONY = [
+    ["_site/pl/prywatnosc/index.html", "_site/pl/regulamin/index.html", "/pl/"],
+    ["_site/en/privacy/index.html", "_site/en/terms/index.html", "/en/"]
+  ];
+
+  for (const [prywatnosc, regulamin, prefiks] of STRONY) {
+    it.skipIf(!existsSync(prywatnosc))(`${prywatnosc}: mówi, czego serwis nie zbiera`, () => {
+      const html = readFileSync(prywatnosc, "utf8");
+      expect(html, "brak zdania o ciasteczkach").toMatch(/ciastecz|cookies/i);
+      expect(html, "brak zdania o pamięci przeglądarki").toMatch(/localStorage/);
+      expect(html, "brak wzmianki o połączeniu z archiwum przy otwarciu skanu")
+        .toMatch(/archive\.org/);
+    });
+
+    it.skipIf(!existsSync(prywatnosc))(`${prywatnosc}: obiecuje, że nadawca nie trafia do rejestru`, () => {
+      // To jest rozstrzygnięcie kierownika projektu z 13 października:
+      // nazwisko zgłaszającego nigdy bez jego zgody.
+      const html = readFileSync(prywatnosc, "utf8");
+      expect(html, "zniknęła obietnica nieujawniania nadawcy")
+        .toMatch(/nie zostaniesz tam wymieniony|will not be named there/i);
+    });
+
+    it.skipIf(!existsSync(regulamin))(`${regulamin}: mówi, czyje są skany i czego serwis nie obiecuje`, () => {
+      const html = readFileSync(regulamin, "utf8");
+      expect(html, "brak zdania o tym, że skany należą do instytucji")
+        .toMatch(/nie należą do serwisu|do not belong to the site/i);
+      expect(html, "brak zastrzeżenia o błędach")
+        .toMatch(/nie obiecuje, że jest wolny od błędów|does not promise to be free of error/i);
+    });
+
+    it.skipIf(!existsSync(`_site${prefiks}index.html`))(`${prefiks}: obie strony prawne wpięte w stopkę`, () => {
+      const html = readFileSync(`_site${prefiks}index.html`, "utf8");
+      const cele = prefiks === "/pl/" ? ["/pl/regulamin/", "/pl/prywatnosc/"] : ["/en/terms/", "/en/privacy/"];
+      for (const cel of cele)
+        expect(html, `stopka nie prowadzi do ${cel}`).toContain(`href="${cel}"`);
+    });
+  }
+});

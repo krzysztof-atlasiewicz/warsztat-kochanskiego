@@ -1066,3 +1066,23 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **Jedno zdanie ucięto zamiast wpisywać.** Opis rozbieżności czasu kończył się słowami: „godzina czasu letniego — wynalazek XX-wieczny, którego Kochański nie znał". Reszta napisu to rachunek, który moduł wykonuje: równanie czasu, długość geograficzna Wilanowa, przesunięcie strefowe. Ten człon był twierdzeniem o przeszłości bez źródła i **wpisanie go do rejestru z powodem „wiadomo powszechnie" otworzyłoby furtkę, przez którą przeszłoby wszystko**. Był ozdobnikiem; moduł działa bez niego, a czytelnik i tak wie swoje, skoro zdanie wyżej mówi, że zegar urzędowy jest naszym punktem odniesienia. Zapora w testach pilnuje, żeby nie wrócił.
 
 **Osiemnaście kontroli bez zastrzeżeń, 315 testów, rejestr przejrzanych ma 28 wpisów.** Wdrożenie odblokowane.
+
+## 2026-10-13 — Cykl 74: regulamin i polityka prywatności
+
+**Pozycja B-1 wykonana.** Cztery nowe strony — `/pl/regulamin/`, `/pl/prywatnosc/`, `/en/terms/`, `/en/privacy/` — wpięte w stopkę w obu wersjach językowych. Przy okazji stopka angielska dostała odnośniki do źródeł i rejestru zmian, których dotąd nie miała; miała je tylko polska.
+
+**Polityka prywatności mogła powiedzieć rzecz, której mało kto może powiedzieć uczciwie, i sprawdzono to przed napisaniem.** Serwis nie ustawia ciasteczek i nie zapisuje niczego w pamięci przeglądarki — przeszukanie kodu nie znalazło ani jednego odwołania do `localStorage`, `sessionStorage` ani `document.cookie`. Nie ma analityki, kont ani formularzy.
+
+**Ważniejsze: wczytanie strony nie powoduje żadnego połączenia z serwerem trzecim.** Sprawdzono to w zbudowanych stronach: nie ma w nich ani jednej ramki wstawionej na stałe. Ramka ze skanem powstaje dopiero w obsłudze kliknięcia i znika przy zamknięciu okna. Dopóki czytelnik nie kliknie w skan, archiwum nie wie o jego obecności. Polityka bezpieczeństwa treści wymusza to po stronie przeglądarki, bo dopuszcza ramki wyłącznie z jednego adresu. Gdyby tego nie sprawdzić, naturalne byłoby napisanie „serwis nie zbiera danych" i przemilczenie osadzeń — a osadzenie jest połączeniem i czytelnik ma prawo wiedzieć, kiedy ono następuje.
+
+**Rozstrzygnięcie kierownika projektu dotyczące korespondencji: nadawca poprawki nie trafia do rejestru z nazwiska, chyba że sam o to poprosi.** Rejestry tego serwisu są jawne, więc rzeczowe zgłoszenie trafia do rejestru decyzji albo do agendy — ale zapisuje się w nich ustalenie i jego podstawę, nie nadawcę. Kto pisze do nieznajomego z uwagą, nie spodziewa się trafić pod nazwiskiem do publicznego dokumentu. Serwis, który prowadzi jawne rejestry, nie może robić tego cudzym kosztem — i byłoby to tym bardziej rażące, że ta sama strona chwali się polityką prywatności akapit wyżej. Podziękowanie z nazwiska zawsze można dodać później, za zgodą; odwrotnie się nie da.
+
+**Regulamin mówi, czego serwis o sobie nie obiecuje, i mówi to mocniej niż zwykła klauzula.** Nie obiecuje, że jest wolny od błędów — przeciwnie, zakłada, że błędy w nim są, i wskazuje rejestry jako dowód, że się je naprawia. Przywołuje wprost przypadek, w którym twierdzenie stało na stronie miesiącami, zanim ktoś sięgnął do druku i okazało się nietrafne, bo to jest prawda o tym serwisie, a nie hipoteza.
+
+**Skany należą do instytucji, nie do serwisu**, i regulamin kieruje do nich po zgodę. Osadzanie przyrządów na cudzych stronach jest dozwolone pod jednym warunkiem: osadzenie nie może usuwać oznaczeń „ze źródła" i „nasze". Bez nich przyrząd twierdzi więcej, niż wolno mu twierdzić.
+
+**Dwa akapity trafiły do rejestru przejrzanych** — zdanie opisujące, czym serwis jest, w obu wersjach. Nazwisko Kochańskiego pada w nim jako temat strony, nie jako twierdzenie o przeszłości.
+
+**Osiem nowych testów** (323 zamiast 315). Polityka ma wymieniać ciasteczka, pamięć przeglądarki i połączenie z archiwum; ma zawierać obietnicę nieujawniania nadawcy — ta akurat jest zaporą wokół decyzji, a nie wokół sformułowania. Regulamin ma mówić, czyje są skany i że serwis nie obiecuje bezbłędności. Obie strony mają być wpięte w stopkę.
+
+**Zastrzeżenie, które należy się czytelnikowi tego rejestru:** teksty obu stron opisują stan faktyczny serwisu i zostały napisane po sprawdzeniu go w kodzie, a nie na podstawie wzorca. Nie są opinią prawną i nie zastępują jej tam, gdzie byłaby potrzebna.
