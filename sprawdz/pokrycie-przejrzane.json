@@ -1,4 +1,107 @@
 {
   "_opis": "Rejestr akapitów, o których ktoś rozstrzygnął, na czym stoją. Kontrola „pokrycieZrodlami” zgłasza akapit, który nosi znamiona twierdzenia o przeszłości — rok, numer strony, cytat łaciński, nazwisko, odwołanie do rozprawy — a nie ma własnego przypisu ani nie stoi w bloku oznaczonym jako nasze dopowiedzenie. Maszyna nie umie rozstrzygnąć, czy taki akapit opiera się na źródle wskazanym w sąsiednim zdaniu, czy na niczym; rozstrzyga to człowiek, raz, i zapis trafia tutaj. Kluczem jest odcisk treści akapitu, nie jego numer: przeredagowany akapit traci akceptację i wraca do przejrzenia, bo przejrzano tamto brzmienie, nie to miejsce. Powód powstania: w cyklu 62 okazało się, że zdanie o trzech rachubach zegara wilanowskiego stało na stronie od początku bez żadnej podstawy, a znaleziono je przypadkiem.",
-  "przejrzane": {}
+  "przejrzane": {
+    "0daad3a06408": {
+      "akapit": "Biografia jest tu warstwą poboczną, nie osią. Serwis opowiad",
+      "plik": "src/pl/biografia.njk",
+      "opiera": "nie jest twierdzeniem o przeszłości — zdanie o układzie serwisu, złapane na nazwisku",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "4df6099a880f": {
+      "akapit": "Rozprawa nie zostawia tego domysłowi. Cel stoi już w jej tyt",
+      "plik": "src/pl/cyrkiel.njk",
+      "opiera": "opiera się na „acta-1685”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "a32e1d70f919": {
+      "akapit": "Sekcja, w której stoi ta właśnie konstrukcja, ma na stronie ",
+      "plik": "src/pl/cyrkiel.njk",
+      "opiera": "opiera się na „acta-1685”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "b7fca56574f4": {
+      "akapit": "Tamże rozważa granicę dokładności tak, jak rozważa ją warszt",
+      "plik": "src/pl/cyrkiel.njk",
+      "opiera": "opiera się na „acta-1685”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "e885068caf34": {
+      "akapit": "Nie są to ilustracje do tekstu. Cyrkiel kreśli konstrukcję k",
+      "plik": "src/pl/index.njk",
+      "opiera": "nie jest twierdzeniem o przeszłości — opis działania czterech przyrządów",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "fbf8e6114c26": {
+      "akapit": "Życiorys jest tu warstwą poboczną i tak jest pomyślany: serw",
+      "plik": "src/pl/index.njk",
+      "opiera": "nie jest twierdzeniem o przeszłości — zdanie o układzie serwisu, złapane na nazwisku",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "e91e14f6f308": {
+      "akapit": "Richer podaje liczbę. Miarę wahadła sekundowego odmierzono w",
+      "plik": "src/pl/rejs.njk",
+      "opiera": "opiera się na „richer-1729”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "91382e2b04ee": {
+      "akapit": "Tarcza poniżej jest narzędziem, nie pokazem. Obracaj pierści",
+      "plik": "src/pl/szyfr.njk",
+      "opiera": "nie jest twierdzeniem o przeszłości — instrukcja obsługi tarczy; wczytany zapis jest rekonstrukcją oznaczoną jako nasza",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "25afaab983f4": {
+      "akapit": "W tym samym tomie jest jeszcze jeden zapis szyfrowy — i ten ",
+      "plik": "src/pl/szyfr.njk",
+      "opiera": "opiera się na „technica-curiosa”, księga VIII, s. 587–588 — źródło przypisane wyżej na tej samej stronie. Uwaga: najbliższy przypis powyżej wskazuje „acta-1685-perpendiculum”, ale podstawą tego akapitu jest druk Schotta",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "d93aba84c339": {
+      "akapit": "The dial below is a tool, not a demonstration. Turn the ring",
+      "plik": "src/en/cipher.njk",
+      "opiera": "nie jest twierdzeniem o przeszłości — instrukcja obsługi tarczy; wczytany zapis jest rekonstrukcją oznaczoną jako nasza",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "1055a2c15b9a": {
+      "akapit": "The same volume holds a second cryptogram — and that one com",
+      "plik": "src/en/cipher.njk",
+      "opiera": "opiera się na „technica-curiosa”, księga VIII, s. 587–588 — źródło przypisane wyżej na tej samej stronie. Uwaga: najbliższy przypis powyżej wskazuje „acta-1685-perpendiculum”, ale podstawą tego akapitu jest druk Schotta",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "0b97f85deb6e": {
+      "akapit": "The treatise leaves nothing to guesswork. The purpose stands",
+      "plik": "src/en/compass.njk",
+      "opiera": "opiera się na „acta-1685”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "63d732122993": {
+      "akapit": "The section holding this very construction carries its own h",
+      "plik": "src/en/compass.njk",
+      "opiera": "opiera się na „acta-1685”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "1816fca811b2": {
+      "akapit": "There too he weighs the limit of accuracy as a workshop weig",
+      "plik": "src/en/compass.njk",
+      "opiera": "opiera się na „acta-1685”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "9d86cb6601e8": {
+      "akapit": "They are not illustrations to a text. The compass strikes th",
+      "plik": "src/en/index.njk",
+      "opiera": "nie jest twierdzeniem o przeszłości — opis działania czterech przyrządów",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "6c5b6fb2f977": {
+      "akapit": "The life is a secondary layer here, and deliberately so: thi",
+      "plik": "src/en/index.njk",
+      "opiera": "nie jest twierdzeniem o przeszłości — zdanie o układzie serwisu, złapane na nazwisku",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    },
+    "3173999fc1f1": {
+      "akapit": "Richer gives the figure. The length of the seconds pendulum ",
+      "plik": "src/en/pendulum.njk",
+      "opiera": "opiera się na „richer-1729”, przypisanym w akapicie wyżej na tej samej stronie",
+      "przejrzal": "kierownik projektu, 13 października 2026"
+    }
+  }
 }

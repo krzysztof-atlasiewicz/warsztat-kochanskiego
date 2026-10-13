@@ -985,3 +985,24 @@ Wady wyszły z przeglądu, który poprzedził cykl 55: serwis podano lokalnie i 
 **A3 pozostaje otwarta do Twojej decyzji.** Odpowiedź na pytanie pozycji — czego dotyczyła propozycja z 1659 roku — jest w ustaleniach wraz z cytatami i granicą odczytu: przeczytano warstwę tekstową skanu, bez kolacji obrazów stron. Dla zdania ciągłego to wystarcza, ale status zamyka człowiek, nie kontrola.
 
 **Granica, która zostaje.** Pozycja GA2 bramki — „żadne twierdzenie o pierwszeństwie bez zastrzeżenia" — była naruszona od pierwszego dnia i nie zauważyła tego żadna kontrola. Znalazł to dopiero przegląd pokrycia źródłami z cyklu 65, i to nie wprost: kontrola zgłosiła akapit bez przypisu, a dopiero czytanie źródła pokazało, że rzecz jest gorsza niż brak przypisu.
+
+## 2026-10-13 — Cykl 69: siedemnaście akapitów przejrzanych, osiem zostaje
+
+**Rozstrzygnięcie kierownika projektu: siedemnaście z dwudziestu pięciu zgłoszeń kontroli pokrycia źródłami zamknięto wpisem do rejestru.** Dzielą się na dwie grupy i żadna z nich nie wymagała kwerendy — wymagała tylko tego, żeby ktoś popatrzył i orzekł.
+
+**Grupa pierwsza, siedem zgłoszeń: zdania o serwisie, nie o przeszłości.** „Biografia jest tu warstwą poboczną", „Nie są to ilustracje do tekstu", „Tarcza poniżej jest narzędziem, nie pokazem". Złapały się na nazwisku albo na roczniku stojącym w zdaniu o układzie strony lub o obsłudze przyrządu. Kontrola jest zgrubna z założenia i takie trafienia są wliczone w jej cenę.
+
+**Grupa druga, dziesięć zgłoszeń: opierają się na źródle wskazanym wyżej na tej samej stronie.** Trzy akapity cyrkla i trzy kompasu cytujące strony 394 i 397 — na „acta-1685". „Richer podaje liczbę" w obu wersjach — na „richer-1729". Akapit o drugim zapisie szyfrowym z księgi VIII — na „technica-curiosa".
+
+**Przy tym ostatnim maszyna podpowiedziała źle i warto to zapisać.** Automat wskazywał jako najbliższy przypis powyżej „acta-1685-perpendiculum", bo wpis ten dołożono dzień wcześniej. Podstawą akapitu jest jednak druk Schotta, nie list Kochańskiego. Sąsiedztwo nie jest podstawą i rejestr mówi o tym wprost przy obu wersjach językowych.
+
+**Nowy test broni rejestru przed uciszeniem.** Każdy wpis musi podawać, na czym akapit stoi, i kto to orzekł — a powód krótszy niż dwadzieścia znaków test odrzuca. Bez tego rejestr dałoby się wyciszyć samym wklejeniem odcisków, co byłoby obejściem kontroli zamiast jej spełnienia. Sprawdzono na próbę: powód „bo tak" psuje test.
+
+**Zostaje osiem zgłoszeń, czyli cztery twierdzenia w dwóch wersjach językowych.** Każde wymaga osobnej decyzji, bo każde jest innego rodzaju:
+
+1. Akapit o ostatnich latach łączy trzy twierdzenia: poszukiwania perpetuum mobile, ślepą uliczkę zegarka z wahaczem magnetycznym i to, że zegar morski nigdy nie powstał. Pierwsze ma wskazaną podstawę. Drugie prawdopodobnie też, w druku z 1687 roku, którego nie mamy w rejestrze. Trzecie jest twierdzeniem przeczącym.
+2. „Przez czterdzieści lat wracał do jednego pytania" — teza serwisu podana jako fakt; rzecz do oznaczenia, nie do uźródłowienia.
+3. „Na kompensację trzeba było czekać do Harrisona" — żadne z naszych źródeł o Harrisonie nie mówi.
+4. „Szyfr miał zabezpieczyć pierwszeństwo do chwili, w której autor zechce je ujawnić" — przypisanie intencji, znowu w sprawie pierwszeństwa.
+
+**Przy liczeniu tej grupy popełniono pomyłkę wartą odnotowania.** Wieczorem zapisano, że w grupie zostają dwa twierdzenia. Zostały cztery: akapit o celu szyfru przeoczono, a akapit o ostatnich latach policzono jako jedno twierdzenie, choć niesie trzy. Pomyłka wzięła się z liczenia z pamięci zamiast z odczytania akapitów w całości — ta sama przyczyna, dla której w ogóle powstała ta kontrola.

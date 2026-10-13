@@ -5,6 +5,7 @@
 // tego, żeby trafiała zawsze, tylko tego, żeby jej czułość nie zmieniła się
 // niepostrzeżenie — w którąkolwiek stronę.
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
 import { OSTRZEZENIA, ZNAMIONA, odciskAkapitu, znamionaAkapitu } from "../sprawdz/kontrole.mjs";
 
 describe("pokrycie twierdzeń źródłami", () => {
@@ -63,6 +64,18 @@ describe("pokrycie twierdzeń źródłami", () => {
     for (const [wzorzec, nazwa] of ZNAMIONA) {
       expect(wzorzec, "znamię bez wzorca").toBeInstanceOf(RegExp);
       expect(nazwa, "znamię bez nazwy — komunikat kontroli byłby nieczytelny").toBeTruthy();
+    }
+  });
+  it("każdy wpis w rejestrze mówi, na czym akapit stoi i kto to orzekł", () => {
+    // Bez tego rejestr dałoby się uciszyć samym wklejeniem odcisków.
+    // Wpis bez powodu nie jest przejrzeniem, tylko zamknięciem oczu.
+    const rejestr = JSON.parse(readFileSync("sprawdz/pokrycie-przejrzane.json", "utf8"));
+    const wpisy = Object.entries(rejestr.przejrzane || {});
+    for (const [odcisk, w] of wpisy) {
+      expect(w.opiera, `${odcisk}: wpis bez podania, na czym akapit stoi`).toBeTruthy();
+      expect(String(w.opiera).length, `${odcisk}: powód zbyt krótki, by cokolwiek znaczył`)
+        .toBeGreaterThan(20);
+      expect(w.przejrzal, `${odcisk}: wpis bez wskazania, kto przejrzał`).toBeTruthy();
     }
   });
 });
